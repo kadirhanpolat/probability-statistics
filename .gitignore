@@ -1,0 +1,35 @@
+# Kaynak PDF'ler — büyük ikili dosyalar, telif haklarına tabi
+kaynaklar/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# LaTeX derleme çıktıları
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.pdf
+!README.pdf
+
+# Editör
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
