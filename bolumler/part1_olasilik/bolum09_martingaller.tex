@@ -1,0 +1,277 @@
+% =====================================================================
+%  BÖLÜM 9: Koşullu Beklenti ve Martingaller  [OPSİYONEL / İLERİ]
+%  Kaynak: Williams; Durrett Böl.4; Klenke Böl.9-12; Shiryaev Böl.VII
+% =====================================================================
+\chapter{Koşullu Beklenti ve Martingaller}
+\label{chp:martingaller}
+
+\bolumalinti{%
+  Martingal, dürüst bir oyunun matematiksel modelidir.%
+}{Joseph Leo Doob, \textit{Stochastic Processes}}
+
+% ---- Kazanımlar (TYMM) ----
+\begin{kazanimlar}
+Bu bölümün sonunda öğrenci:
+\begin{itemize}[leftmargin=1.8em]
+  \item Koşullu beklentinin Radon-Nikodym tanımını ve temel özelliklerini açıklayabilir.
+  \item Martingal, süpmartingal ve altmartingal kavramlarını tanımlayabilir; örnekler verebilir.
+  \item Durma zamanı ve isteğe bağlı durma teoremini ifade edebilir.
+  \item Doob'un ayrışım ve yakınsama teoremlerini kullanabilir.
+  \item Martingal yakınsamasının GBSK ile bağlantısını açıklayabilir.
+\end{itemize}
+\end{kazanimlar}
+
+\begin{motivasyon}
+Bölüm~\ref{sec:kosullu_beklenti}'de koşullu beklentiyi $L^2$ projeksiyon olarak tanımladık.
+Bu bölümde \emph{bilgi akışı} boyutunu ekliyoruz: zamanla biriken gözlemler $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \cdots$
+bir filtrasyon oluşturur. Martingal, "dürüst oyun" sezgisini bu dil ile yakalar:
+geçmişi bilince gelecekteki beklenti bugünkü değere eşit.
+
+\medskip
+\textbf{Köprü.} Bölüm~\ref{sec:kosullu_beklenti}'deki koşullu beklenti ve
+Bölüm~\ref{chp:buyuk_sayilar}'daki Borel-Cantelli bu bölümün araçlarıdır.
+Martingal yakınsaması, Güçlü BSK'nın zarif bir genellemesidir.
+\end{motivasyon}
+
+% =====================================================================
+\section{Filtrasyon ve Uyum}
+\label{sec:filtrasyon}
+% =====================================================================
+
+\begin{tanim}[Filtrasyon]
+\label{def:filtrasyon}
+$(\Omega,\mathcal{F},P)$ olasılık uzayı üzerinde \textbf{filtrasyon}
+$\mathbb{F} = (\mathcal{F}_n)_{n\geq0}$; $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \cdots \subseteq \mathcal{F}$
+artan σ-cebirleri dizisi. $\mathcal{F}_n$, zaman $n$'deki bilgiyi temsil eder.
+
+Dizi $(X_n)_{n\geq0}$ filtrasyona \textbf{uyumlu} (adapted) dır:
+her $n$ için $X_n$ $\mathcal{F}_n$-ölçülebilir.
+\end{tanim}
+
+\begin{tanim}[Doğal Filtrasyon]
+$X_0, X_1, \ldots$ dizisi için \textbf{doğal filtrasyon}:
+$\mathcal{F}_n = \sigma(X_0, X_1, \ldots, X_n)$ — "ilk $n+1$ gözlemden üretilen bilgi".
+\end{tanim}
+
+% =====================================================================
+\section{Martingal Tanımı ve Örnekler}
+\label{sec:martingal_tanim}
+% =====================================================================
+
+\begin{tanim}[Martingal]
+\label{def:martingal}
+$(\mathbb{F},P)$-uyumlu ve $E[|X_n|]<\infty$ olan $(X_n)$ dizisi \textbf{martingal}dır, eğer
+\[
+  E[X_{n+1} \mid \mathcal{F}_n] = X_n \quad \text{n.k., her } n\geq0.
+\]
+\begin{itemize}
+  \item \textbf{Süpmartingal (supermartingale):} $E[X_{n+1}\mid\mathcal{F}_n] \leq X_n$.
+  \item \textbf{Altmartingal (submartingale):} $E[X_{n+1}\mid\mathcal{F}_n] \geq X_n$.
+\end{itemize}
+Sezgi: martingal $\equiv$ dürüst oyun; süpmartingal $\equiv$ oyuncuya karşı oyun.
+\end{tanim}
+
+\begin{ornek}[Temel Martingal Örnekleri]
+\begin{enumerate}[(1)]
+  \item \textbf{Kümülatif toplam:} $X_i$ bağımsız, $E[X_i]=0$; $S_n = \sum_{i=1}^n X_i$ martingal.
+        $E[S_{n+1}\mid\mathcal{F}_n] = S_n + E[X_{n+1}\mid\mathcal{F}_n] = S_n + 0 = S_n$.
+
+  \item \textbf{Ürün martingali:} $X_i$ bağımsız, $E[X_i]=1$; $M_n = \prod_{i=1}^n X_i$ martingal.
+
+  \item \textbf{Koşullu beklenti:} $Y \in L^1$; $M_n = E[Y\mid\mathcal{F}_n]$ martingal
+        (kule özelliği: $E[M_{n+1}\mid\mathcal{F}_n] = E[E[Y\mid\mathcal{F}_{n+1}]\mid\mathcal{F}_n]
+        = E[Y\mid\mathcal{F}_n] = M_n$).
+
+  \item \textbf{Doğrusal kazanç:} $M_n = S_n^2 - n\sigma^2$ ($X_i$ bağımsız, $E[X_i]=0$, $\mathrm{Var}(X_i)=\sigma^2$) martingal.
+\end{enumerate}
+\end{ornek}
+
+\begin{onerme}[Jensen — Martingalden Altmartingale]
+$M_n$ martingal ve $\varphi$ konveks ise $\varphi(M_n)$ altmartingal:
+$E[\varphi(M_{n+1})\mid\mathcal{F}_n] \geq \varphi(E[M_{n+1}\mid\mathcal{F}_n]) = \varphi(M_n)$.
+Özel: $|M_n|$ altmartingal ($\varphi = |\cdot|$).
+\end{onerme}
+
+% =====================================================================
+\section{Durma Zamanları}
+\label{sec:durma_zamani}
+% =====================================================================
+
+\begin{tanim}[Durma Zamanı]
+\label{def:durma_zamani}
+$\tau : \Omega \to \{0,1,2,\ldots\} \cup \{\infty\}$ rasgele değişkeni
+\textbf{durma zamanı} (stopping time) dır, eğer her $n$ için
+$\{\tau \leq n\} \in \mathcal{F}_n$ ise (durma kararı geleceği gerektirmez).
+\end{tanim}
+
+\begin{ornek}[Durma Zamanı Örnekleri]
+\begin{itemize}
+  \item İlk geçiş zamanı: $\tau_a = \inf\{n \geq 0 : S_n \geq a\}$ durma zamanıdır.
+  \item Sabit $\tau = n_0$: her sabit zaman durma zamanıdır.
+  \item "Son $n$ için $X_n > a$": bu gelecek bilgisi gerektirir — durma zamanı \emph{değildir}.
+\end{itemize}
+\end{ornek}
+
+% =====================================================================
+\section{İsteğe Bağlı Durma Teoremi}
+\label{sec:ibd_teoremi}
+% =====================================================================
+
+\begin{teorem}[Doob'un İsteğe Bağlı Durma Teoremi]
+\label{thm:ibd}
+$(M_n)$ martingal, $\tau$ durma zamanı. Aşağıdaki koşullardan biri sağlanırsa
+$E[M_\tau] = E[M_0]$:
+\begin{enumerate}[(i)]
+  \item $\tau$ sınırlı: $\tau \leq N$ sabit $N$ için.
+  \item $\tau < \infty$ n.k.\ ve $|M_n|$ düzgün integrallenebilir.
+  \item $E[\tau] < \infty$ ve $|M_{n+1}-M_n| \leq C$ sabit $C$.
+\end{enumerate}
+\end{teorem}
+
+\begin{proof}[Sınırlı Durum İspat]
+$\tau \leq N$. $M_\tau = M_N - \sum_{k=\tau}^{N-1}(M_{k+1}-M_k) \cdot \mathbf{1}_{\tau \leq k}$...
+Alternatif: dürztaması takası.
+$E[M_\tau] = \sum_{n=0}^N E[M_n \mathbf{1}_{\tau=n}] = \sum_{n=0}^N E[E[M_N\mid\mathcal{F}_n]\mathbf{1}_{\tau=n}]
+= E[M_N] = E[M_0]$.
+($\{\tau=n\} \in \mathcal{F}_n$; martingal özelliği ve kule.)
+\end{proof}
+
+\begin{ornek}[Gamblerın İflası]
+Simetrik yürüyüş: $S_n = \sum_{i=1}^n \xi_i$ ($\xi_i = \pm1$ eşit olasılıkla).
+$\tau = \inf\{n: S_n = a \text{ veya } S_n = -b\}$ ($a,b > 0$).
+$M_n = S_n$ martingal; IBD: $E[S_\tau] = S_0 = 0$.
+$E[S_\tau] = a \cdot P(S_\tau=a) - b \cdot P(S_\tau=-b) = 0$.
+$P(S_\tau=a) = b/(a+b)$, $P(S_\tau=-b) = a/(a+b)$.
+Başlangıç $S_0 = 0$: $a$ liraya ulaşma olasılığı $= b/(a+b)$.
+\end{ornek}
+
+% =====================================================================
+\section{Doob'un Yakınsama Teoremi}
+\label{sec:doob_yaklinsama}
+% =====================================================================
+
+\begin{tanim}[Yukarı Geçiş Sayısı]
+$[a,b]$ aralığı için $(X_n)$'nin $n$ adımda $[a,b]$'yi \emph{aşağıdan yukarıya}
+kaç kez geçtiği sayısına $U_n(a,b)$ denir (upcrossing number).
+\end{tanim}
+
+\begin{lemma}[Doob Yukarı Geçiş Lemması]
+\label{lem:doob_upcrossing}
+$(X_n)$ altmartingal ve $a < b$. O zaman:
+$(b-a) E[U_n(a,b)] \leq E[(X_n-a)^+] - E[(X_0-a)^+]$.
+\end{lemma}
+
+\begin{teorem}[Doob Martingal Yakınsama Teoremi]
+\label{thm:doob_yaklinsama}
+$(X_n)$ altmartingal, $\sup_n E[X_n^+] < \infty$. O zaman
+$X_\infty = \lim_{n\to\infty} X_n$ n.k.\ var ve $E[|X_\infty|] < \infty$.
+\end{teorem}
+
+\begin{proof}
+Her $a < b$ için yukarı geçiş lemması:
+$(b-a)E[U_\infty(a,b)] \leq \sup_n E[(X_n-a)^+] < \infty$.
+$P(U_\infty(a,b) = \infty) = 0$ her rasyonel $a < b$ için.
+$P(\liminf X_n < a < b < \limsup X_n) = 0$ tüm rasyonel çiftlerde.
+Sayılabilir birleşim: $P(\liminf X_n < \limsup X_n) = 0$,
+yani $X_n$ her yerde limit sahibi (sonsuz olabilir).
+$\sup E[X_n^+] < \infty$ $\Rightarrow$ $E[X_\infty^+] < \infty$; monoton sınır $\Rightarrow$ sonlu.
+\end{proof}
+
+\begin{onerme}[GBSK — Martingal İspatı]
+$X_i$ i.i.d., $E[|X_1|] < \infty$. $S_n = \sum X_i$.
+$M_n = E[S_N/N \mid \mathcal{F}_n]$ (geri-martingal argümanıyla) $\to E[X_1]$ n.k.
+Bu, GBSK'nın martingal teorisi aracılığıyla zarif alternatif ispatıdır.
+\end{onerme}
+
+% =====================================================================
+\section{$L^2$ Martingalleri}
+\label{sec:l2_martingal}
+% =====================================================================
+
+\begin{teorem}[$L^2$ Martingal Yakınsaması]
+\label{thm:l2_martingal}
+$(M_n)$ martingal, $\sup_n E[M_n^2] < \infty$. O zaman
+$M_\infty$ mevcut, $E[M_\infty^2] < \infty$, ve $M_n \xrightarrow{L^2} M_\infty$.
+\end{teorem}
+
+\begin{proof}
+$M_n^2$ altmartingal (Jensen); $\sup E[M_n^2] < \infty$ $\Rightarrow$ Doob yakınsama teoremi.
+$L^2$ yakınsama: Doob'un eşitsizliği $E[\sup_n M_n^2] \leq 4\sup E[M_n^2]$;
+DCT ile $L^2$ yakınsama.
+\end{proof}
+
+\begin{ornek}[Rassal Yürüyüş — $L^2$ Martingal]
+$S_n = \sum_{i=1}^n \xi_i$ ($E[\xi_i]=0$, $E[\xi_i^2]=\sigma^2$).
+$M_n = S_n/\sqrt{n}$: $E[M_n^2] = \sigma^2$ sınırlı.
+Ama $M_n/\sqrt{\ln n} \to 0$ n.k.\ (YLK'nın sonucu),
+$M_n$ ise $\Normal(0,\sigma^2)$'e dağılımla yakınsar (MLT).
+$L^2$ sınırlılık n.k.\ yakınsamayı garanti etmez (sınır değişkenlik gösterebilir).
+\end{ornek}
+
+% ---- Öz-Yansıtma ----
+\begin{ozyansima}
+\begin{itemize}[leftmargin=1.8em]
+  \item "Martingal = dürüst oyun" metaforunu iki farklı örnekle somutlaştırın.
+  \item IBD teoremi neden durma zamanının sınırlı olmasını (veya başka bir koşul) gerektiriyor?
+  \item GBSK'nın martingal ispatı neden daha "zarif"tir?
+\end{itemize}
+\end{ozyansima}
+
+% ---- Köprü Notu ----
+\begin{kopru}
+\textbf{Önceki:} Bölüm~\ref{sec:kosullu_beklenti} koşullu beklenti; Böl.~\ref{chp:buyuk_sayilar} BSK.\\
+\textbf{Sonraki (opsiyonel):} Bölüm~\ref{chp:stokastik} — Stokastik Süreçler.\\
+\textbf{Uygulamalar:} Finansta martingal fiyatlama; sıralı analizde isteğe bağlı durma.
+\defterbaglantisi{bolum09\_martingaller.ipynb}{Martingal simülasyonu, gamblerın iflası}
+\end{kopru}
+
+% =====================================================================
+%  ALIŞTIRMALAR
+% =====================================================================
+
+\cozumlualistirmalar
+
+\begin{alistirma}[Al.9.1]{A}{Martingal Doğrulama}
+$X_i$ bağımsız, $E[X_i]=1$, $M_n = \prod_{i=1}^n X_i$.
+$E[M_{n+1}\mid\mathcal{F}_n] = M_n$ olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+$E[M_{n+1}\mid\mathcal{F}_n] = E[M_n X_{n+1}\mid\mathcal{F}_n] = M_n E[X_{n+1}\mid\mathcal{F}_n]
+= M_n E[X_{n+1}] = M_n \cdot 1 = M_n$.
+(Bağımsızlık: $X_{n+1}$ $\mathcal{F}_n$'den bağımsız.)}
+
+\begin{alistirma}[Al.9.2]{B}{Gamblerın İflası — Varyans Martingali}
+$S_n$ simetrik rassal yürüyüş ($\xi_i = \pm1$, $\sigma^2=1$). $M_n = S_n^2 - n$.
+(a) $M_n$'nin martingal olduğunu gösterin.
+(b) $\tau = \inf\{n: S_n = a\}$ ($a > 0$) için $E[\tau] = a^2$ olduğunu IBD ile bulun.
+\end{alistirma}
+\alcozum{%
+(a) $E[M_{n+1}\mid\mathcal{F}_n] = E[(S_n+\xi_{n+1})^2 - (n+1)\mid\mathcal{F}_n]
+= S_n^2 + 2S_n E[\xi_{n+1}] + E[\xi_{n+1}^2] - n - 1 = S_n^2 - n = M_n$. ✓\\
+(b) IBD ($\tau$ sınırsız ama Koşul (iii) çalışır — artışlar $\leq 1+1+1$):
+$E[M_\tau] = E[S_\tau^2 - \tau] = E[M_0] = 0$.
+$S_\tau = a$ (emici bariyer): $a^2 - E[\tau] = 0$. $E[\tau] = a^2$.}
+
+% ---
+
+\alistirmalar
+
+\begin{alistirma}[Al.9.3]{A}{Altmartingal}
+$(X_n)$ martingal. $\varphi(x) = x^2$ için $\varphi(X_n)$'nin altmartingal
+olduğunu Jensen'i kullanarak gösterin.
+\end{alistirma}
+\alcozum{%
+$E[X_{n+1}^2\mid\mathcal{F}_n] \geq (E[X_{n+1}\mid\mathcal{F}_n])^2 = X_n^2$. (Jensen, $\varphi$ konveks.)}
+
+\begin{alistirma}[Al.9.4]{B}{Doob Yakınsama Uygulaması}
+$X_i \geq 0$ bağımsız, $E[X_i] = 1$. $M_n = \prod_{i=1}^n X_i$.
+$\sup_n E[M_n] = 1 < \infty$ ise $M_n$ n.k.\ yakınsar.
+$M_\infty = 0$ n.k.\ olduğunu BSK ile gösterin.
+\end{alistirma}
+\alcozum{%
+$\ln M_n = \sum \ln X_i$. BSK: $(\ln M_n)/n \to E[\ln X_1]$.
+Jensen: $E[\ln X_1] \leq \ln E[X_1] = 0$; genellikle $< 0$.
+$\ln M_n / n \to c < 0$ $\Rightarrow$ $M_n = e^{n \cdot c+o(n)} \to 0$ n.k.}
+
+% =====================================================================
+\endinput
