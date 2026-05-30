@@ -857,6 +857,136 @@ $L^1$ koşulu olmadan sıra değiştirme yanlış sonuç verebilir.
 
 
 % =====================================================================
+\section{$L^p$ Uzayları ve İntegral Eşitsizlikleri}
+\label{sec:lp_uzaylari}
+% =====================================================================
+
+\begin{tanim}[$L^p$ Uzayı]
+\label{def:lp_uzay}
+$(\Omega, \mathcal{F}, \mu)$ ölçüm uzayı, $1 \leq p < \infty$.
+\[
+  L^p(\mu) = \{f \text{ ölçülebilir} : \|f\|_p := \left(\int |f|^p \, d\mu\right)^{1/p} < \infty\}.
+\]
+$L^\infty(\mu)$: $\|f\|_\infty = \inf\{M : \mu(\{|f| > M\}) = 0\}$ (esansiyel üst sınır).
+Teknik olarak $L^p$ sınıfları: eşdeğer fonksiyonlar (n.k.\ eşit) aynı sınıfa.
+\end{tanim}
+
+\begin{teorem}[Hölder Eşitsizliği]
+\label{thm:holder}
+$1/p + 1/q = 1$ ($p,q > 1$), $f \in L^p$, $g \in L^q$. O zaman $fg \in L^1$ ve
+\[
+  \int |fg| \, d\mu \leq \|f\|_p \, \|g\|_q.
+\]
+Özel durum $p = q = 2$: Cauchy-Schwarz eşitsizliği $\int|fg| \leq \|f\|_2\|g\|_2$.
+\end{teorem}
+
+\begin{proof}
+Young eşitsizliği: $ab \leq a^p/p + b^q/q$ ($a,b \geq 0$, $1/p+1/q=1$).
+$a = |f|/\|f\|_p$, $b = |g|/\|g\|_q$ koy; $\mu$-integral al:
+$\int |fg|/(\|f\|_p\|g\|_q) \leq \int |f|^p/(p\|f\|_p^p) + \int|g|^q/(q\|g\|_q^q) = 1/p + 1/q = 1$.
+\end{proof}
+
+\begin{teorem}[Minkowski Eşitsizliği]
+\label{thm:minkowski}
+$1 \leq p \leq \infty$, $f, g \in L^p$. O zaman $f + g \in L^p$ ve
+\[
+  \|f + g\|_p \leq \|f\|_p + \|g\|_p.
+\]
+\end{teorem}
+
+\begin{proof}
+$p=1$: üçgen eşitsizliği, $|f+g| \leq |f| + |g|$.
+$1 < p < \infty$: $\|f+g\|_p^p = \int|f+g|^p \leq \int|f+g|^{p-1}|f| + \int|f+g|^{p-1}|g|$.
+Her terime Hölder ($|f+g|^{p-1} \in L^q$ çünkü $(p-1)q = p$):
+$\leq \|f+g\|_p^{p-1}(\|f\|_p + \|g\|_p)$. $\|f+g\|_p^{p-1}$'e bölme ile sonuç.
+\end{proof}
+
+\begin{teorem}[$L^p$ Uzayı Tamlığı — Riesz-Fischer]
+\label{thm:riesz_fischer}
+$L^p(\mu)$ ($1 \leq p \leq \infty$) Minkowski normuyla tam metrize edilebilir uzaydır
+(Banach uzayı). $p = 2$: Hilbert uzayı (iç çarpım $\langle f,g\rangle = \int fg$).
+\end{teorem}
+
+\begin{teorem}[$L^p$ Dahil Olma İlişkisi]
+\label{thm:lp_dahil}
+$\mu(\Omega) < \infty$ ise $1 \leq p \leq q \leq \infty$ için $L^q \subseteq L^p$.
+\end{teorem}
+
+\begin{proof}
+Hölder: $\|f\|_p^p = \int|f|^p \cdot 1 \leq \|f^p\|_{q/p} \cdot \|1\|_{q/(q-p)} = \|f\|_q^p \cdot \mu(\Omega)^{1-p/q}$.
+\end{proof}
+
+\begin{ornek}[$L^p$ Farklılıkları]
+$\Omega = (0,1)$, $\lambda$ Lebesgue. $f(x) = x^{-\alpha}$ ($0 < \alpha < 1$):
+$\int_0^1 x^{-\alpha p} \, dx < \infty \Leftrightarrow \alpha p < 1 \Leftrightarrow p < 1/\alpha$.
+Yani $f \in L^p$ ancak $p < 1/\alpha$ için. Küçük $p$'ler için $f \in L^p$, büyük $p$'ler için değil.
+\end{ornek}
+
+\begin{mikroozet}
+$L^p$: $p$-inci mutlak moment sonlu fonksiyonlar. Hölder: $\int|fg| \leq \|f\|_p\|g\|_q$.
+Minkowski: $\|f+g\|_p \leq \|f\|_p + \|g\|_p$ (üçgen). $L^p$ Banach; $L^2$ Hilbert.
+\end{mikroozet}
+
+% =====================================================================
+\section{Radon-Nikodym Teoremi}
+\label{sec:radon_nikodym}
+% =====================================================================
+
+\begin{tanim}[Mutlak Süreklilik]
+\label{def:mutlak_sureklilik}
+$\mu$ ve $\nu$ aynı $(\Omega, \mathcal{F})$ üzerinde ölçüler.
+$\nu$, $\mu$'ya göre \textbf{mutlak sürekli} ($\nu \ll \mu$) denir, eğer
+her $A \in \mathcal{F}$ için $\mu(A) = 0 \Rightarrow \nu(A) = 0$.
+\end{tanim}
+
+\begin{ornek}[Mutlak Süreklilik]
+$f \geq 0$, $\int f \, d\mu = 1$. $\nu(A) = \int_A f \, d\mu$: o zaman $\nu \ll \mu$.
+$\mu(A) = 0 \Rightarrow \int_A f \, d\mu = 0 \Rightarrow \nu(A) = 0$.
+\end{ornek}
+
+\begin{teorem}[Radon-Nikodym Teoremi]
+\label{thm:radon_nikodym}
+$(\Omega, \mathcal{F})$ üzerinde $\sigma$-sonlu $\mu$ ve $\nu$ ölçüleri, $\nu \ll \mu$.
+O zaman tek türlü ($\mu$-n.k.) ölçülebilir $f \geq 0$ ($\mu$-n.k.) fonksiyon vardır:
+\[
+  \nu(A) = \int_A f \, d\mu \quad \text{her } A \in \mathcal{F} \text{ için.}
+\]
+$f = d\nu/d\mu$: \textbf{Radon-Nikodym türevi} (yoğunluk / Nikodym türevi).
+\end{teorem}
+
+\begin{proof}[İspat Taslağı (Hilbert Uzayı Argümanı)]
+$\rho = \mu + \nu$. $\ell(g) = \int g \, d\nu$ ($g \in L^2(\rho)$) sınırlı lineer fonksiyonel.
+Riesz temsil: $\ell(g) = \int gh \, d\rho$ olan $h \in L^2(\rho)$ var.
+$0 \leq h \leq 1$ $\rho$-n.k.\ gösterilebilir. $f = h/(1-h)$ ($h < 1$ üzerinde) $\mu$-n.k.\ tanımlı;
+$\nu(A) = \int_A f \, d\mu$ doğrulanır. $f$ benzersizliği: iki RN türevi $f_1, f_2$
+ise $\int_A(f_1-f_2)d\mu = 0$ her $A$'da; $f_1 = f_2$ $\mu$-n.k.
+\end{proof}
+
+\begin{onerme}[Zincir Kuralı]
+$\nu \ll \mu \ll \lambda$ ise $d\nu/d\lambda = (d\nu/d\mu)(d\mu/d\lambda)$ ($\lambda$-n.k.).
+\end{onerme}
+
+\begin{ornek}[Olasılıkta Önemi]
+$X$ rasgele değişken, $P_X$ görüntü ölçüsü (dağılımı). $P_X \ll \lambda$ ise
+RN türevi $f = dP_X/d\lambda$: bu tam olarak $X$'in PDF'sidir.
+\emph{Koşullu beklenti} $E[X \mid \mathcal{G}]$ Radon-Nikodym teoreminden doğar
+(Bölüm~\ref{chp:beklenti}'de ayrıntılı işlendi).
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{İstatistik:} Olabilirlik oranı (likelihood ratio) $d\nu/d\mu$ Radon-Nikodym türevidir;
+Neyman-Pearson lemması ve yeterli istatistik teorisi bu çerçevede kurulur.\\
+\textbf{Bayesçi çıkarım:} Sonsal dağılım, önsel üzerine olabilirlik oranı ile Radon-Nikodym güncellemesidir.\\
+\textbf{Stokastik kalkülüs:} Girsanov teoremi, olasılık ölçüsü değiştirmeyi Radon-Nikodym teoremiyle gerçekleştirir.
+\end{disiplinlerarasibaglan}
+
+\begin{mikroozet}
+$\nu \ll \mu$: sıfır $\mu$-ölçülü kümeler sıfır $\nu$-ölçülü.
+Radon-Nikodym: $\nu \ll \mu$ ve $\sigma$-sonlu $\Rightarrow$ $\nu(A) = \int_A f\,d\mu$ olan $f = d\nu/d\mu$ var.
+$f$: koşullu beklenti ve PDF'nin ölçüm teorisi temeli.
+\end{mikroozet}
+
+% =====================================================================
 %  BÖLÜM SONU ÖZETİ
 % =====================================================================
 \section*{Bölüm Özeti}
@@ -1127,3 +1257,28 @@ Sonsuz ölçüde $L^p \not\subseteq L^1$: $f(x) = (1+x)^{-1/p}$ üzerinde $[0,\i
 $\int f^p = \infty$... daha dikkatli: $f(x) = x^{-1/2} \gostf{(0,1]} \in L^1 \setminus L^2$
 ve $g(x) = (1+x)^{-1} \in L^2(\mathbb{R}) \setminus L^1(\mathbb{R})$. $\blacksquare$%
 }
+
+\begin{alistirma}[Al.1.14]{B}{Radon-Nikodym Türevi}
+$\Omega = \{1, 2, 3, 4\}$, $\mathcal{F} = \mathcal{P}(\Omega)$.
+$\mu(\{k\}) = 1/4$ (uniform), $\nu(\{1\}) = 1/2$, $\nu(\{2\}) = 1/4$, $\nu(\{3\}) = 1/8$, $\nu(\{4\}) = 1/8$.
+(a) $\nu \ll \mu$ olduğunu doğrulayın. (b) Radon-Nikodym türevi $f = d\nu/d\mu$'yu bulun.
+(c) $\nu(A) = \int_A f \, d\mu$ olduğunu $A = \{1,3\}$ için doğrulayın.
+\end{alistirma}
+\alcozum{%
+(a) $\mu(A) = 0 \Rightarrow A = \emptyset \Rightarrow \nu(A) = 0$. Evet, $\nu \ll \mu$.\\
+(b) RN türevi: $f(\omega) = \nu(\{\omega\})/\mu(\{\omega\})$ (ayrık durumda).
+$f(1) = (1/2)/(1/4) = 2$; $f(2) = 1$; $f(3) = 1/2$; $f(4) = 1/2$.\\
+(c) $\nu(\{1,3\}) = 1/2 + 1/8 = 5/8$.
+$\int_{\{1,3\}} f \, d\mu = f(1)\mu(\{1\}) + f(3)\mu(\{3\}) = 2\cdot(1/4) + (1/2)\cdot(1/4) = 1/2 + 1/8 = 5/8$. \checkmark}
+
+\begin{alistirma}[Al.1.15]{B}{$L^p$ Norm Hesabı}
+$f(x) = e^{-x}$, $x \geq 0$; Lebesgue ölçüsü.
+(a) $\|f\|_p = (\int_0^\infty e^{-px} dx)^{1/p}$'yi hesaplayın.
+(b) $p \to \infty$ limitinde $\|f\|_p$'nin ne olduğunu yorumlayın.
+(c) Hölder eşitsizliğiyle $\int_0^\infty e^{-x}\cos x \, dx \leq \|f\|_2\|\cos\|_{L^2([0,\infty))}$
+    üst sınırını verin (dikkat: $\|\cos\|_{L^2([0,\infty))} = \infty$; bu ne anlama gelir?).
+\end{alistirma}
+\alcozum{%
+(a) $\|f\|_p^p = \int_0^\infty e^{-px} dx = 1/p$. $\|f\|_p = p^{-1/p}$.\\
+(b) $\|f\|_\infty = \sup_{x \geq 0} |e^{-x}| = e^0 = 1$. $\lim_{p\to\infty} p^{-1/p} = 1$ (çünkü $\ln(p^{-1/p}) = -\ln p/p \to 0$). $L^\infty$ normu esansiyel supremum.\\
+(c) $\cos \notin L^2([0,\infty))$ çünkü $\int_0^\infty \cos^2 x \, dx = \infty$ (yarı-periyot toplamı ıraksak). Hölder uygulanamaz — $g \in L^q$ gerektirir. Bu, Hölder'in koşulsuz uygulanamayacağını gösterir.}
