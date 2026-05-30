@@ -317,6 +317,151 @@ Genelleşmiş delta yöntemi: $T(\mathbf{X})=g(\bar{X})$ biçimindeyse, $T^* - T
 \end{disiplinlerarasibaglan}
 
 %% ============================================================
+\section{Kendall'ın $\tau$ Korelasyonu}
+\label{sec:kendall_tau}
+%% ============================================================
+
+\begin{tanim}[Uyumlu ve uyumsuz çift]\label{def:uyumlu_cift}
+$(X_i,Y_i)$ ve $(X_j,Y_j)$ çiftleri \textbf{uyumlu} \emph{(concordant)} ise $(X_i-X_j)(Y_i-Y_j)>0$; \textbf{uyumsuz} \emph{(discordant)} ise çarpım negatiftir.
+\end{tanim}
+
+\begin{tanim}[Kendall $\tau$ istatistiği]\label{def:kendall_tau}
+$n$ çift gözlemde $P$ = uyumlu çift sayısı, $Q$ = uyumsuz çift sayısı.
+\[
+  \tau = \frac{P - Q}{\binom{n}{2}} = \frac{P-Q}{n(n-1)/2}.
+\]
+$\tau\in[-1,1]$; $\tau=1$: tam monotonik artış, $\tau=-1$: tam monotonik azalış.
+\end{tanim}
+
+\begin{teorem}[Kendall $\tau$ asimptotik dağılımı]\label{thm:kendall_asimptotik}
+$H_0: X$ ve $Y$ bağımsız altında:
+\[
+  \Beklenti[\tau] = 0, \qquad \Var(\tau) = \frac{2(2n+5)}{9n(n-1)}.
+\]
+$Z = \tau\,/\,\sqrt{\Var(\tau)} \dto \Normal(0,1)$.
+\end{teorem}
+
+\begin{proof}[Proof — beklenti]
+$H_0$ altında herhangi $(i,j)$ çifti için $\Prob(\text{uyumlu})=\Prob(\text{uyumsuz})=1/2$ (bağımsızlık + süreklilik). Dolayısıyla her $\mathbf{1}[\text{uyumlu}]-\mathbf{1}[\text{uyumsuz}]$ terimi sıfır beklentilidir; toplam üzerinden $\Beklenti[P-Q]=0$, yani $\Beklenti[\tau]=0$.
+\end{proof}
+
+\begin{ispatiskele}
+Varyans: $P-Q = \sum_{i<j} h_{ij}$ ($h_{ij}=\pm1$). $\Var(P-Q)=\sum_{i<j}\Var(h_{ij})+2\sum_{i<j<k}\Cov(h_{ij},h_{ik})$. $\Var(h_{ij})=1$; $\Cov(h_{ij},h_{ik})$ üç değişken bağımsızlığından hesaplanınca $\Var(\tau)=2(2n+5)/(9n(n-1))$ elde edilir.
+\end{ispatiskele}
+
+\begin{ornek}[Kendall $\tau$ hesabı]
+$(X,Y)$: $(1,2),(2,4),(3,1),(4,3)$. Çiftler:
+\begin{itemize}
+  \item $(1,2)$–$(2,4)$: $(+)(+)$ uyumlu.
+  \item $(1,2)$–$(3,1)$: $(+)(-)$ uyumsuz.
+  \item $(1,2)$–$(4,3)$: $(+)(+)$ uyumlu.
+  \item $(2,4)$–$(3,1)$: $(+)(-)$ uyumsuz.
+  \item $(2,4)$–$(4,3)$: $(+)(-)$ uyumsuz.
+  \item $(3,1)$–$(4,3)$: $(+)(+)$ uyumlu.
+\end{itemize}
+$P=3$, $Q=3$, $\tau=0$. Bağımsızlık reddedilemez.
+\end{ornek}
+
+\begin{hataanalizi}
+Spearman $r_S$ ve Kendall $\tau$ her zaman aynı işareti verir; fakat değerleri farklıdır (genellikle $|\tau|<|r_S|$). $r_S\approx\sin(\pi\tau/2)$ yaklaşımı geçerlidir. İkisi arasında seçim: $\tau$ daha yorumlanabilir (uyumlu çift oranı farkı); $r_S$ daha yaygın raporlanır.
+\end{hataanalizi}
+
+%% ============================================================
+\section{Çekirdek Yoğunluk Tahmini}
+\label{sec:kde}
+%% ============================================================
+
+\begin{kesif}
+Bir histogramın kutu genişliği (bin width) yoğunluk tahminini etkiler. Daha pürüzsüz bir alternatif: her gözlemin çevresine küçük bir çekirdek (kernel) yerleştir; bu çekirdeklerin toplamı yoğunluk tahmini olur.
+\end{kesif}
+
+\begin{tanim}[Çekirdek yoğunluk tahmincisi]\label{def:kde}
+$X_1,\ldots,X_n\iid f$ sürekli. $K:\mathbb{R}\to[0,\infty)$ simetrik yoğunluk (çekirdek), $h>0$ bant genişliği \emph{(bandwidth)}. \textbf{Çekirdek yoğunluk tahmincisi (KDE)}:
+\[
+  \hat{f}_h(x) = \frac{1}{nh}\sum_{i=1}^n K\!\left(\frac{x-X_i}{h}\right).
+\]
+Yaygın çekirdekler: Gaussian $K(u)=\phi(u)$, Epanechnikov $K(u)=\tfrac{3}{4}(1-u^2)\mathbf{1}[|u|\leq1]$.
+\end{tanim}
+
+\begin{teorem}[KDE beklenti ve varyansı]\label{thm:kde_beklenti_varyans}
+$\mu_2(K)=\int u^2 K(u)\,du$, $R(K)=\int K(u)^2\,du$ olsun. Yeterli pürüzsüzlük altında:
+\begin{align*}
+  \Beklenti[\hat{f}_h(x)] &= f(x) + \frac{h^2}{2}\mu_2(K)f''(x) + O(h^4), \\
+  \Var(\hat{f}_h(x)) &= \frac{R(K)}{nh}f(x) + O\!\left(\frac{1}{n}\right).
+\end{align*}
+\end{teorem}
+
+\begin{proof}
+$\Beklenti[\hat{f}_h(x)] = \frac{1}{h}\Beklenti[K((x-X_1)/h)] = \frac{1}{h}\int K\!\left(\frac{x-t}{h}\right)f(t)\,dt$. $u=(t-x)/h$ dönüşümüyle $= \int K(u)f(x+uh)\,du$. Taylor: $f(x+uh)=f(x)+uhf'(x)+u^2h^2f''(x)/2+\cdots$ Entegrasyon: $K$ simetrik olduğundan $\int uK(u)\,du=0$; dolayısıyla beklenti $f(x)+h^2\mu_2(K)f''(x)/2+O(h^4)$.
+
+Varyans: $\Var(\hat{f}_h)=\frac{1}{nh^2}\Var(K((x-X_1)/h))=\frac{1}{nh^2}[\Beklenti K^2(\cdot)-(\Beklenti K(\cdot))^2]$. $\Beklenti K^2((x-X_1)/h)=h\int K(u)^2 f(x+uh)\,du\approx hR(K)f(x)$; dolayısıyla $\Var\approx R(K)f(x)/(nh)$.
+\end{proof}
+
+\begin{teorem}[Optimal bant genişliği]\label{thm:optimal_bandwidth}
+Ortalama tümleşik karesel hata (MISE) minimizasyonu:
+\[
+  h^* = \left(\frac{R(K)}{\mu_2(K)^2\int (f''(x))^2\,dx}\right)^{1/5} n^{-1/5}.
+\]
+Gaussian çekirdek ve normal $f$ için Silverman kuralı: $h^* \approx 1.06\,\hat\sigma\,n^{-1/5}$.
+\end{teorem}
+
+\begin{ispatiskele}
+MISE $=\int\!\left[\text{Bias}^2(\hat{f}_h(x))+\Var(\hat{f}_h(x))\right]\!dx$. Bias terimi $\sim h^4\mu_2(K)^2\int(f'')^2/4$; varyans terimi $\sim R(K)/(nh)$. MISE'i $h$'ye göre türev alınca $h^*$ elde edilir; $h^*\sim n^{-1/5}$.
+\end{ispatiskele}
+
+\begin{ornek}[Gaussian KDE — basit hesap]
+$n=3$, $X_1=0$, $X_2=1$, $X_3=2$; $h=0.5$. Gaussian KDE:
+\[
+  \hat{f}_{0.5}(x) = \frac{1}{3\cdot0.5}\bigl[\phi\!\left(\frac{x}{0.5}\right)+\phi\!\left(\frac{x-1}{0.5}\right)+\phi\!\left(\frac{x-2}{0.5}\right)\bigr].
+\]
+$x=1$: $\phi(2)+\phi(0)+\phi(-2)=0.054+0.399+0.054=0.507$; $\hat{f}(1)=0.507/(1.5)=0.338$.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Makine öğrenmesi:} KDE-tabanlı anomali tespiti ve yoğunluk tahmini. \textbf{Ekonometri:} Gelir dağılımı, ücret yoğunluğu tahminleri. \textbf{Sinyel işleme:} Spektral yoğunluk tahmini (pencere fonksiyonları çekirdekle eşdeğer).
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
+\section{Theil-Sen Eğim Tahmincisi}
+\label{sec:theil_sen}
+%% ============================================================
+
+\begin{tanim}[Theil-Sen tahmincisi]\label{def:theil_sen}
+$(x_1,y_1),\ldots,(x_n,y_n)$ çiftleri. Her iki nokta çifti $(i<j)$ için eğim: $s_{ij}=(y_j-y_i)/(x_j-x_i)$.
+
+\textbf{Theil-Sen eğim tahmincisi:} $\hat\beta_1 = \operatorname{med}\{s_{ij}: i<j\}$ (tüm çift eğimlerinin medyanı).
+
+\textbf{Kesişim tahmincisi:} $\hat\beta_0 = \operatorname{med}\{y_i - \hat\beta_1 x_i\}$.
+\end{tanim}
+
+\begin{teorem}[Theil-Sen tutarlılık ve verimlilik]\label{thm:theil_sen}
+$Y_i = \beta_0 + \beta_1 x_i + \varepsilon_i$, $\varepsilon_i\iid F$ simetrik sürekli. O zaman $\hat\beta_1\asto\beta_1$.
+
+Normal hatalar altında ARE(Theil-Sen, EKK) $= 3/\pi \approx 0.955$.
+\end{teorem}
+
+\begin{proof}[Proof — tutarlılık]
+$s_{ij} = \beta_1 + (\varepsilon_j-\varepsilon_i)/(x_j-x_i)$. Medyanın tutarlılığı: $s_{ij}$'nin yığılma noktası $\beta_1$'dir ($\varepsilon_j-\varepsilon_i$ simetrik olduğundan $(\varepsilon_j-\varepsilon_i)/(x_j-x_i)$'nin medyanı sıfırdır). Büyük sayılar yasası ve medyan sürekliliği argümanıyla $\hat\beta_1\asto\beta_1$.
+\end{proof}
+
+\begin{ispatiskele}
+ARE hesabı: Theil-Sen, bir $U$-istatistiğidir. Asimptotik varyansı Hajek yansıtması ile EKK varyansına oranlanınca, normal dağılım altında $3/\pi$ elde edilir — Wilcoxon-$t$ ARE ile örtüşür (her ikisi de sıra-tabanlı).
+\end{ispatiskele}
+
+\begin{ornek}[Theil-Sen uygulaması]
+$(x,y)$: $(1,2),(2,5),(3,6),(4,7)$. Tüm $\binom{4}{2}=6$ eğim:
+$s_{12}=(5-2)/1=3$, $s_{13}=(6-2)/2=2$, $s_{14}=(7-2)/3=1.67$,
+$s_{23}=(6-5)/1=1$, $s_{24}=(7-5)/2=1$, $s_{34}=(7-6)/1=1$.
+Medyan: $\{1,1,1,1.67,2,3\}$'ün ortası $=(1+1.67)/2=1.33$.
+$\hat\beta_0=\operatorname{med}\{2-1.33,5-2.67,6-4,7-5.33\}=\operatorname{med}\{0.67,2.33,2,1.67\}=1.83$.
+Regresyon: $\hat{y}=1.83+1.33x$.
+\end{ornek}
+
+\begin{hataanalizi}
+Theil-Sen'i EKK ile karıştırmayın: EKK aykırı değerlere duyarlıdır (her noktanın etkisi kareli hataya orantılı). Theil-Sen'de bir aykırı değer en fazla $n-1$ eğim çiftini etkiler ve medyan sağlamlığı korur. Veri aykırı değersiz ve normal dağılımlıysa EKK hafif daha verimlidir.
+\end{hataanalizi}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
@@ -324,6 +469,9 @@ Genelleşmiş delta yöntemi: $T(\mathbf{X})=g(\bar{X})$ biçimindeyse, $T^* - T
   \item İşaret: medyan testi; Wilcoxon: simetri testi; Mann-Whitney: iki örneklem; KW/Friedman: çok grup.
   \item KS testi: ampirik ile teorik KDF farkı; $\sqrt{n}D_n\to$ Kolmogorov.
   \item Bootstrap: yeniden örnekleme ile standart hata ve GA; dağılım varsayımı gerektirmez.
+  \item Kendall $\tau$: uyumlu-uyumsuz çift farkı; Spearman $r_S$ ile aynı işaret, farklı büyüklük.
+  \item KDE: $\hat{f}_h$ bias $\sim h^2$, varyans $\sim 1/(nh)$; optimal $h^*\sim n^{-1/5}$.
+  \item Theil-Sen: eğim medyanı; aykırı değerlere sağlamlı; ARE $=3/\pi\approx0.955$ (normal altında).
 \end{itemize}
 \end{mikroozet}
 
@@ -371,6 +519,27 @@ $n=6$ gözlem: $\{2,4,5,7,9,12\}$. Medyanın bootstrap standart hatasını $B=5$
 \end{alistirma}
 \alcozum{%
 Medyan(orijinal)$=6$. Bootstrap medyanları: $m_1=(4+7)/2=5.5$, $m_2=(7+7)/2=7$, $m_3=(5+9)/2=7$, $m_4=(7+9)/2=8$, $m_5=(5+5)/2=5$. $\bar{m}^*=6.5$. $\hat{SE}=\sqrt{[(5.5-6.5)^2+(7-6.5)^2+(7-6.5)^2+(8-6.5)^2+(5-6.5)^2]/4}=\sqrt{(1+0.25+0.25+2.25+2.25)/4}=\sqrt{1.5}=1.22$.%
+}
+
+\begin{alistirma}[Al.17.6]{A}{Kendall $\tau$ hesabı}
+$(X,Y)$ çiftleri: $(2,3),(4,1),(6,5),(8,4),(10,7)$. Kendall $\tau$'yu hesapla ve $H_0:\tau=0$'ı $\alpha=0.05$'te test et.
+\end{alistirma}
+\alcozum{%
+$\binom{5}{2}=10$ çift. Uyumlu $(+)$ / uyumsuz $(-)$: $(1\text{–}2):(+)$, $(1\text{–}3):(+)$, $(1\text{–}4):(+)$, $(1\text{–}5):(+)$, $(2\text{–}3):(+)$, $(2\text{–}4):(-)$, $(2\text{–}5):(+)$, $(3\text{–}4):(-)$, $(3\text{–}5):(+)$, $(4\text{–}5):(+)$. $P=8$, $Q=2$, $\tau=(8-2)/10=0.6$. $\Var(\tau)=2(15)/9\cdot20=30/180=1/6$. $Z=0.6/\sqrt{1/6}=0.6\cdot2.449=1.47<1.96$. $H_0$ reddedilemez.%
+}
+
+\begin{alistirma}[Al.17.7]{B}{Optimal bant genişliği}
+$n=100$, $\hat\sigma=2$. Gaussian çekirdek için Silverman kuralını kullanarak $h^*$'ı hesapla. Bu $h^*$ ile $\hat{f}_{h^*}$ tahmincisinin $x=0$'daki varyansını yaklaşık olarak ver ($R(\phi)=1/(2\sqrt{\pi})$, $f(0)\approx0.2$).
+\end{alistirma}
+\alcozum{%
+Silverman: $h^*=1.06\cdot2\cdot100^{-1/5}=2.12\cdot0.398=0.844$. Varyans: $R(\phi)/(nh^*)f(0)=[1/(2\sqrt{\pi})]/(100\cdot0.844)\cdot0.2=0.2821/(84.4)\cdot0.2=0.000669$.%
+}
+
+\begin{alistirma}[Al.17.8]{B}{Theil-Sen vs EKK}
+$(x,y)$: $(1,1),(2,3),(3,2),(10,20)$. (a) EKK eğimini bul. (b) Theil-Sen eğimini bul. (c) Neden farklılar?
+\end{alistirma}
+\alcozum{%
+(a) EKK: $\bar{x}=4, \bar{y}=6.5$. $S_{xx}=81-(16)^2/4=...$; EKK hesabı: $\hat\beta_1=\sum(x_i-\bar{x})(y_i-\bar{y})/\sum(x_i-\bar{x})^2=(0\cdot(-5.5)+(-2)(-4.5)+(- 1)(-4.5)+6\cdot13.5)/(0+4+1+36)=(-5.5+9+4.5+81)/41=89/41\approx2.17$. (b) Theil-Sen: $s_{12}=2, s_{13}=0.5, s_{14}=19/9=2.11, s_{23}=-1, s_{24}=17/8=2.125, s_{34}=18/7=2.57$. Med$\{-1,0.5,2,2.11,2.125,2.57\}=(2+2.11)/2=2.055$. (c) $(10,20)$ aykırı değeri EKK'yi yukarı çeker; Theil-Sen medyan tabanlı olduğundan daha az etkilenir.%
 }
 
 \begin{alistirma}[Al.17.5]{C}{Glivenko-Cantelli hızı}
