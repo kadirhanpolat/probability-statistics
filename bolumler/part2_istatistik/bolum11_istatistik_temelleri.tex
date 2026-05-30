@@ -395,6 +395,91 @@ $\to$ UMVUE; Fisher bilgisi + Cramér-Rao $\to$ verimlilik alt sınırı; MLE.\\
 \end{kopru}
 
 % =====================================================================
+\section{Sıra İstatistikleri}
+\label{sec:sira_istatistik}
+% =====================================================================
+
+\begin{tanim}[Sıra istatistikleri]\label{def:sira_ist}
+$X_1,\ldots,X_n\iid F$ sürekli dağılım. Sıralı değerler $X_{(1)}\leq X_{(2)}\leq\cdots\leq X_{(n)}$ \textbf{sıra istatistikleri} \emph{(order statistics)}, toplu vektörü $(X_{(1)},\ldots,X_{(n)})$ \textbf{sıralanmış örneklem} adını alır.
+\end{tanim}
+
+\begin{teorem}[Sıra istatistiği yoğunluğu]\label{thm:sira_yogunluk}
+$X_{(k)}$'nın yoğunluğu:
+\[
+  f_{X_{(k)}}(x) = \frac{n!}{(k-1)!(n-k)!}[F(x)]^{k-1}[1-F(x)]^{n-k}f(x).
+\]
+$X_{(1)}$ için $k=1$: $f_{X_{(1)}}(x) = n[1-F(x)]^{n-1}f(x)$.
+$X_{(n)}$ için $k=n$: $f_{X_{(n)}}(x) = n[F(x)]^{n-1}f(x)$.
+\end{teorem}
+
+\begin{proof}
+Kombinatorik argüman: $P(X_{(k)}\in[x,x+dx])$ = $\binom{n}{1}\binom{n-1}{k-1}$ yolu ile $k-1$ gözlem $<x$, bir gözlem $\in[x,x+dx]$, $n-k$ gözlem $>x$.
+\end{proof}
+
+\begin{teorem}[Min-max için özel formüller]\label{thm:min_max}
+$X_i\iid F$ bağımsız.
+\begin{enumerate}[(a)]
+  \item $F_{X_{(1)}}(x) = 1-[1-F(x)]^n$ (minimum KDF).
+  \item $F_{X_{(n)}}(x) = [F(x)]^n$ (maksimum KDF).
+  \item Aralık (range): $R_n=X_{(n)}-X_{(1)}$.
+\end{enumerate}
+\end{teorem}
+
+\begin{ornek}[Uniform sıra istatistikleri]\label{ex:uniform_sira}
+$X_i\iid\Uniform[0,1]$. $X_{(k)}\sim\mathrm{Beta}(k,n-k+1)$; $E[X_{(k)}]=k/(n+1)$. Dolayısıyla sıra istatistiklerinin beklentileri $[0,1]$'i eşit aralıklara böler.
+\end{ornek}
+
+% =====================================================================
+\section{Ampirik Dağılım Fonksiyonu}
+\label{sec:ampirik_dagilim}
+% =====================================================================
+
+\begin{tanim}[Ampirik dağılım fonksiyonu]\label{def:edf}
+$X_1,\ldots,X_n\iid F$. \textbf{Ampirik dağılım fonksiyonu} \emph{(empirical distribution function, EDF)}:
+\[
+  F_n(x) = \frac{1}{n}\sum_{i=1}^n\mathbf{1}[X_i\leq x].
+\]
+$F_n$ sıra istatistiklerinin basamak fonksiyonu: $F_n(X_{(k)}) = k/n$.
+\end{tanim}
+
+\begin{teorem}[Glivenko-Cantelli]\label{thm:glivenko_cantelli}
+$\|F_n - F\|_\infty = \sup_x|F_n(x)-F(x)|\asto0$.
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+Her sabit $x$ için $F_n(x)\asto F(x)$ (GBSK). Süreklilik + sonlu sayıda bölüm argümanıyla süpremum kontrolü sağlanır. Detay: Bölüm~\ref{chp:buyuk_sayilar}.
+\end{proof}
+
+\begin{teorem}[Kolmogorov-Smirnov]\label{thm:ks_istatistik}
+$F$ sürekli altında $\sqrt{n}\|F_n-F\|_\infty\dto\|\mathbb{B}\|_\infty$ (Bölüm~\ref{chp:asimptotik}, Donsker teoremi). $H_0:F=F_0$ testi:
+\[
+  D_n = \sqrt{n}\sup_x|F_n(x)-F_0(x)|.
+\]
+$\alpha=0.05$ kritik değeri $\approx1.36$.
+\end{teorem}
+
+% =====================================================================
+\section{Neyman-Fisher Çarpanlaştırma — Daha Fazla Örnek}
+\label{sec:carpanlastirma_ornekler}
+% =====================================================================
+
+\begin{ornek}[İki parametreli Normal — $\mu$ bilinmiyor, $\sigma^2$ sabit]\label{ex:normal_mu_yeterli}
+$X_i\iid\Normal(\mu,\sigma_0^2)$. Fisher-Neyman:
+\[
+  f(\mathbf{x}|\mu) = (2\pi\sigma_0^2)^{-n/2}\exp\!\left(-\frac{\sum x_i^2}{2\sigma_0^2}+\frac{\mu\sum x_i}{\sigma_0^2}-\frac{n\mu^2}{2\sigma_0^2}\right).
+\]
+$g(T,\mu)=\exp(\mu T/\sigma_0^2-n\mu^2/(2\sigma_0^2))$ ($T=\sum X_i$), $h=$ sabit çarpan. $\bar{X}_n$ yeterli.
+\end{ornek}
+
+\begin{ornek}[Çift parametreli üstel aile]\label{ex:cift_param_ustel}
+Normal$(\mu,\sigma^2)$ her iki bilinmeyen: $\eta_1(\theta)=\mu/\sigma^2$, $\eta_2(\theta)=-1/(2\sigma^2)$. Doğal yeterli istatistik: $(\sum X_i, \sum X_i^2)$; tam rankli — tamamlayıcı.
+\end{ornek}
+
+\begin{teorem}[Yeterli istatistik ve bağımsızlık]\label{thm:yeterli_bagimsizlik}
+$T$ yeterli ve $V$ herhangi bir istatistik. Eğer $\Prob_\theta(V\leq v\mid T=t)$ $\theta$'dan bağımsız ise, $V$'nin dağılımı yalnızca $T$'nin değerine bağlıdır. Özellikle $V$ bir pivot seçilirse çıkarım $T$ aracılığıyla yapılır.
+\end{teorem}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
@@ -503,6 +588,27 @@ $(x_1,\ldots,x_n)$ ve $(y_1,\ldots,y_n)$'nin aynı sıra istatistiklerine sahip 
 (çünkü Cauchy simetrik; terimlerin $\theta$-bağımlılığı birbirini ancak permütasyonla götürür).
 En az yeterli istatistik: $(X_{(1)},\ldots,X_{(n)})$ — tam sıralı vektör.
 Bu, Cauchy'de boyut azaltılmış bir özet olmamasını gösterir.}
+
+\begin{alistirma}[Al.11.9]{A}{Sıra istatistiği dağılımı}
+$X_1,\ldots,X_5\iid\Uniform[0,1]$. (a) $X_{(3)}$'ün yoğunluğunu yaz. (b) $E[X_{(3)}]$'ü bul. (c) $\Prob(X_{(5)}>0.9)$'u hesapla.
+\end{alistirma}
+\alcozum{%
+(a) $f_{X_{(3)}}(x)=5!/(2!\cdot2!)x^2(1-x)^2\cdot1=30x^2(1-x)^2$ ($0<x<1$). (b) $E[X_{(3)}]=3/(5+1)=1/2$ (Uniform sıra istatistiği beklentisi $k/(n+1)$). (c) $F_{X_{(5)}}(x)=x^5$; $\Prob(X_{(5)}>0.9)=1-0.9^5=1-0.5905=0.4095$.%
+}
+
+\begin{alistirma}[Al.11.10]{B}{Ampirik dağılım ve KS testi}
+$n=5$ gözlem: $1.2, 2.5, 0.8, 3.1, 1.7$. $H_0: F=\mathrm{Exp}(1)$ (yani $F_0(x)=1-e^{-x}$) için KS istatistiğini hesapla.
+\end{alistirma}
+\alcozum{%
+Sıralı: $0.8,1.2,1.7,2.5,3.1$. $F_n(x_k)=k/5$. $F_0$: $F_0(0.8)=0.551$, $F_0(1.2)=0.699$, $F_0(1.7)=0.817$, $F_0(2.5)=0.918$, $F_0(3.1)=0.955$. $|F_n-F_0|$: $|0.2-0.551|=0.351$, $|0.4-0.699|=0.299$, $|0.6-0.817|=0.217$, $|0.8-0.918|=0.118$, $|1-0.955|=0.045$. $D_5=0.351$; $\sqrt{5}\cdot0.351=0.785<1.36$: $H_0$ reddedilemez.%
+}
+
+\begin{alistirma}[Al.11.11]{B}{Min için $n$ belirleme}
+$X_i\iid\Exp(\lambda)$. $P(X_{(1)}>1)=0.9$ olmasını istiyorsunuz. $n$ kaç olmalı?
+\end{alistirma}
+\alcozum{%
+$X_{(1)}\sim\Exp(n\lambda)$ (minimum üstel i.i.d. bağımsızsa). $P(X_{(1)}>1)=e^{-n\lambda}=0.9$; $n=-\log(0.9)/\lambda$. $\lambda=1$: $n=-\log(0.9)\approx0.105$; yani $n=1$ yetmez, tam tam değil — düz: $e^{-n}=0.9$; $n=0.105$ gerçek sayı. Yani tek gözlemde $\lambda=0.105$ ya da $n=1$, $\lambda=0.105$. Pratik: $\lambda=1$ ise $P(X_{(1)}>1)=e^{-n}=0.9$ için $n=\lceil-\log0.9\rceil=1$.%
+}
 
 % =====================================================================
 \endinput
