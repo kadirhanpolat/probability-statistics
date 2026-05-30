@@ -604,6 +604,127 @@ istatistik; Böl.~\ref{chp:hipotez_testi}'nde $\chi^2$, $t$, $F$ test istatistik
 \end{kopru}
 
 % =====================================================================
+\section{Weibull ve Pareto Dağılımları}
+\label{sec:weibull_pareto}
+% =====================================================================
+
+\begin{motivasyon}[Üstel Ötesi: Esnek Ömür Modelleri]
+Üstel dağılım "bellek yoksunluğu" ile idealdir — ama gerçek cihaz ömürleri çoğunlukla
+bunu sağlamaz: eskiyen sistemlerde arıza oranı zamanla \emph{artar}.
+Weibull dağılımı bu esnekliği sağlar; şekil parametresi $k > 1$ azalan,
+$k < 1$ artan, $k = 1$ sabit arıza oranını modeller.
+\end{motivasyon}
+
+\begin{tanim}[Weibull Dağılımı]
+\label{def:weibull}
+$X \sim \mathrm{Weibull}(k, \lambda)$ ($k, \lambda > 0$):
+\[
+  f(x) = \frac{k}{\lambda}\left(\frac{x}{\lambda}\right)^{k-1} e^{-(x/\lambda)^k}, \quad x > 0.
+\]
+\textbf{KDF:} $F(x) = 1 - e^{-(x/\lambda)^k}$.
+\textbf{Beklenti:} $E[X] = \lambda\,\Gamma(1+1/k)$.
+\textbf{Varyans:} $\mathrm{Var}(X) = \lambda^2\bigl[\Gamma(1+2/k) - \Gamma(1+1/k)^2\bigr]$.
+
+Özel durum: $k = 1$ ise $X \sim \Exp(1/\lambda)$.
+\end{tanim}
+
+\begin{onerme}[Weibull — Gama İlişkisi]
+$X \sim \mathrm{Weibull}(k, \lambda)$ ise $Y = (X/\lambda)^k \sim \Exp(1)$.
+Ters: $X = \lambda Y^{1/k}$. Bu dönüşüm simülasyonda kullanılır.
+\end{onerme}
+
+\begin{proof}
+$P(Y \leq y) = P((X/\lambda)^k \leq y) = P(X \leq \lambda y^{1/k}) = 1 - e^{-y}$. \checkmark
+\end{proof}
+
+\begin{tanim}[Pareto Dağılımı]
+\label{def:pareto}
+$X \sim \mathrm{Pareto}(\alpha, x_m)$ ($\alpha, x_m > 0$):
+\[
+  f(x) = \frac{\alpha x_m^\alpha}{x^{\alpha+1}}, \quad x \geq x_m.
+\]
+\textbf{KDF:} $F(x) = 1 - (x_m/x)^\alpha$.
+\textbf{Beklenti:} $E[X] = \alpha x_m/(\alpha-1)$ ($\alpha > 1$; yoksa $\infty$).
+\textbf{Varyans:} $\mathrm{Var}(X) = \alpha x_m^2/[(\alpha-1)^2(\alpha-2)]$ ($\alpha > 2$).
+\end{tanim}
+
+\begin{ornek}[Pareto — Güç Yasası]
+$\alpha = 1.16$: Gelir dağılımı (80-20 kuralı — Pareto ilkesi).
+$P(X > x) = (x_m/x)^\alpha$: "ağır kuyruk" (heavy tail) — olasılık polinomik azalır.
+Üstel dağılımda $P(X > x) = e^{-\lambda x}$: üstel azalır.
+Pareto'da $\alpha < 2$: sonsuz varyans; $\alpha < 1$: sonsuz beklenti.
+\end{ornek}
+
+\begin{hataanalizi}
+"Pareto dağılımlı veriler için MLT'yi uygulayabilirim."
+Yanlış: $\alpha \leq 2$ ise sonlu varyans yok; MLT'nin koşulu bozulur.
+$\alpha \in (1,2)$: sonlu beklenti var ama sonlu varyans yok — GBSK geçerli, MLT geçersiz.
+$\alpha \in (0,1]$: sonlu beklenti bile yok — GBSK bile çöker.
+Ağır kuyruklu dağılımlarda istatistiksel yöntemler dikkatle seçilmelidir.
+\end{hataanalizi}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Güvenilirlik mühendisliği:} Weibull, ömür veri analizinde standart model;
+şekil parametresi $k$ "arıza hızı profili"ni tam belirler.\\
+\textbf{Finansal risk:} Pareto ve Fréchet dağılımları uç değer teorisinin
+(Extreme Value Theory) temelini oluşturur; büyük kayıpların modellemesinde kullanılır.\\
+\textbf{Sosyal bilimler:} Zipf yasası (kelime frekansı, şehir nüfusu) Pareto ile eşdeğerdir.
+\end{disiplinlerarasibaglan}
+
+% =====================================================================
+\section{Karışım Dağılımları}
+\label{sec:karisim_dagilim}
+% =====================================================================
+
+\begin{tanim}[Sonlu Karışım]
+\label{def:karisim}
+$f_1, \ldots, f_K$ PDF'ler, $\pi_k > 0$, $\sum_{k=1}^K \pi_k = 1$.
+\textbf{Karışım dağılımı} (mixture distribution):
+\[
+  f(x) = \sum_{k=1}^K \pi_k f_k(x).
+\]
+$\pi_k$: karışım ağırlıkları. Beklenti: $E[X] = \sum_k \pi_k E_k[X]$.
+Varyans: $\mathrm{Var}(X) = \sum_k \pi_k [\mathrm{Var}_k(X) + (E_k[X] - E[X])^2]$ (bileşke formülü).
+\end{tanim}
+
+\begin{proof}[Varyans Formülü]
+$E[X^2] = \sum_k \pi_k E_k[X^2]$; $\mathrm{Var}(X) = E[X^2] - (E[X])^2$.
+$\mathrm{Var}_k(X) = E_k[X^2] - (E_k[X])^2$, dolayısıyla $E_k[X^2] = \mathrm{Var}_k(X) + (E_k[X])^2$.
+$\mathrm{Var}(X) = \sum_k\pi_k[\mathrm{Var}_k(X) + (E_k[X])^2] - (\sum_k\pi_k E_k[X])^2$;
+son iki terimi toplama: $\sum_k\pi_k(E_k[X])^2 - (\sum_k\pi_k E_k[X])^2 = \sum_k\pi_k(E_k[X]-E[X])^2$.
+\end{proof}
+
+\begin{ornek}[Gaussian Karışımı]
+$K=2$: $f(x) = \pi_1 \phi_{\mu_1,\sigma_1^2}(x) + \pi_2 \phi_{\mu_2,\sigma_2^2}(x)$.
+Parametre: $(\pi_1, \mu_1, \sigma_1^2, \mu_2, \sigma_2^2)$.
+İki tepe oluşturabilir — tek Normal'in modelleyemediği bimodal veri.
+Örnek: erkek-kadın boy dağılımı (iki normal, farklı ortalama).
+\end{ornek}
+
+\begin{ornek}[Negatif Binom — Poisson Karışımı]
+$X \mid \Lambda = \lambda \sim \Pois(\lambda)$, $\Lambda \sim \Gama(\alpha, \beta)$.
+Marjinal: $P(X = k) = \int_0^\infty e^{-\lambda}\lambda^k/k! \cdot f_\Gamma(\lambda;\alpha,\beta)\,d\lambda$.
+Hesap sonucu: $X \sim \mathrm{NegBinom}(\alpha, \beta/(1+\beta))$.
+Bu "Negatif Binom = Poisson + Gama karışımı" yorumu, aşırı dağılımlı sayım verilerini açıklar.
+\end{ornek}
+
+\begin{teorem}[Karışım KDF'si]
+$F(x) = \sum_k \pi_k F_k(x)$ (bileşen KDF'lerinin ağırlıklı ortalaması).
+\end{teorem}
+
+\begin{kritiksorgu}
+Karışım dağılımı neden tek bileşenden daha esnek? Neden gerçek hayatta
+karışım modelleri yaygın kullanılır? Karışımların MLE tahmini neden standart yöntemlerle
+doğrudan yapılamaz? (İpucu: EM algoritması bu soruyu yanıtlar.)
+\end{kritiksorgu}
+
+\begin{mikroozet}
+Weibull: esnek ömür modeli; $k=1$ üstel, $k>1$ artan arıza oranı.
+Pareto: ağır kuyruk (heavy tail); $\alpha \leq 2$ sonsuz varyans.
+Karışım: $f = \sum\pi_k f_k$; bileşke varyans = içsel + dışsal.
+\end{mikroozet}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
@@ -748,6 +869,45 @@ Teorem~\ref{thm:binom_poisson}'in ispatında kullanılan iki limiti kesin biçim
 (b) $\ln(1-\lambda_n/n)^n = n\ln(1-\lambda_n/n)$. Taylor: $\ln(1-x) = -x - x^2/2 - \cdots$,
 $n \cdot (-\lambda_n/n + O(1/n^2)) = -\lambda_n + O(1/n) \to -\lambda$.
 Dolayısıyla $(1-\lambda_n/n)^n \to e^{-\lambda}$.}
+
+\begin{alistirma}[Al.5.13]{B}{Weibull Dağılımı}
+$X \sim \mathrm{Weibull}(k, \lambda)$.
+(a) $Y = (X/\lambda)^k$ dönüşümünün dağılımını bulun.
+(b) $k = 2$, $\lambda = 1$ için $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayın
+    ($\Gamma(1/2) = \sqrt{\pi}$, $\Gamma(3/2) = \sqrt{\pi}/2$, $\Gamma(2) = 1$).
+(c) $P(X > 2)$'yi kapalı formda yazın.
+\end{alistirma}
+\alcozum{%
+(a) $P(Y \leq y) = P((X/\lambda)^k \leq y) = 1 - e^{-y}$: $Y \sim \Exp(1)$.\\
+(b) $k=2$, $\lambda=1$: $E[X] = \Gamma(1+1/2) = \Gamma(3/2) = \sqrt{\pi}/2 \approx 0.886$.
+$E[X^2] = \Gamma(1+1) = \Gamma(2) = 1$. $\mathrm{Var}(X) = 1 - \pi/4 \approx 0.215$.\\
+(c) $P(X > 2) = e^{-(2/\lambda)^k} = e^{-4}$ ($k=2$, $\lambda=1$).}
+
+\begin{alistirma}[Al.5.14]{B}{Pareto Beklentisi ve Varyansı}
+$X \sim \mathrm{Pareto}(\alpha, x_m)$.
+(a) $\alpha = 3$, $x_m = 1$ için $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayın.
+(b) $P(X > 2x_m)$'yi $\alpha$ cinsinden yazın.
+(c) "80-20 kuralı": $\alpha = \log 5/\log 4 \approx 1.16$ ise nüfusun üst \%20'si
+    toplam gelirin \%80'ini elde eder. $P(X > x_m \cdot 5^{1/\alpha})$'yi hesaplayın.
+\end{alistirma}
+\alcozum{%
+(a) $E[X] = \alpha x_m/(\alpha-1) = 3/2$ ($\alpha=3$, $x_m=1$).
+$\mathrm{Var}(X) = \alpha x_m^2/[(\alpha-1)^2(\alpha-2)] = 3/(4\cdot1) = 3/4$.\\
+(b) $P(X > 2x_m) = (x_m/(2x_m))^\alpha = (1/2)^\alpha = 2^{-\alpha}$.\\
+(c) $P(X > x_m \cdot 5^{1/\alpha}) = (1/5^{1/\alpha})^\alpha = 1/5 = 0.20$.
+Nüfusun \%20'si bu eşiğin üzerinde: 80-20 kuralı.}
+
+\begin{alistirma}[Al.5.15]{A}{Gaussian Karışımı}
+$f(x) = 0.3\,\phi(x+2) + 0.7\,\phi(x-1)$ ($\phi$ standart normal).
+(a) $E[X]$'i hesaplayın. (b) $\mathrm{Var}(X)$'i bileşke formülle hesaplayın.
+(c) PDF'nin tek modlu mu çift modlu mu olduğunu söyleyin.
+\end{alistirma}
+\alcozum{%
+(a) $E[X] = 0.3 \cdot (-2) + 0.7 \cdot 1 = -0.6 + 0.7 = 0.1$.\\
+(b) Bileşke: $\mathrm{Var}(X) = \sum_k\pi_k[\sigma_k^2 + (\mu_k - E[X])^2]$.
+$= 0.3[1 + (-2-0.1)^2] + 0.7[1 + (1-0.1)^2]$
+$= 0.3[1 + 4.41] + 0.7[1 + 0.81] = 0.3(5.41) + 0.7(1.81) = 1.623 + 1.267 = 2.890$.\\
+(c) Modlar: $\mu_1 = -2$, $\mu_2 = 1$; fark $= 3 > 2\sigma = 2$. Çift modlu (bimodal).}
 
 % =====================================================================
 \endinput
