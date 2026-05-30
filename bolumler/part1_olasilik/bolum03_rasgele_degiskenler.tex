@@ -823,10 +823,78 @@ $X \sim F_X$, $Y \sim F_Y$. $Y \overset{d}{=} F_Y^{-1}(F_X(X))$.
 \emph{QQ-plot} prensibi: $X$ örneklemi ile $F_Y^{-1}$ karşılaştırılarak $F_Y$ uyumu test edilir.
 \end{teorem}
 
+% =====================================================================
+\section{Ölçüm Teorisi Temelleri: Rasgele Değişkenler Açısından}
+\label{sec:olcum_temelleri}
+% =====================================================================
+
+\begin{tanim}[Ölçülebilir fonksiyon]\label{def:olculebilir}
+$(\Omega,\mathcal{F})$ ve $(\mathbb{R},\mathcal{B})$ ölçülebilir uzaylar. $X:\Omega\to\mathbb{R}$ \emph{ölçülebilir} (\emph{measurable}) denir: her $B\in\mathcal{B}$ için $X^{-1}(B)=\{\omega:X(\omega)\in B\}\in\mathcal{F}$.
+Rasgele değişken: olasılık uzayı $(\Omega,\mathcal{F},P)$ üzerinde ölçülebilir fonksiyon.
+\end{tanim}
+
+\begin{teorem}[Ölçülebilirlik kriteri]\label{thm:olculebilirlik}
+$X$ ölçülebilir $\iff$ her $a\in\mathbb{R}$ için $\{X\leq a\}\in\mathcal{F}$. (Borel kümelerini üretmek için sadece yarı-açık aralıklar yeterli.)
+\end{teorem}
+
+\begin{teorem}[Ölçülebilir fonksiyonların kapalılığı]\label{thm:olculebilir_kapali}
+$X,Y$ ölçülebilir ve $g:\mathbb{R}^2\to\mathbb{R}$ sürekli. O zaman $g(X,Y)$ de ölçülebilirdir. Özellikle: $X+Y$, $XY$, $X/Y$ ($Y\neq0$), $|X|$, $\max(X,Y)$ ölçülebilirdir.
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+$\{g(X,Y)\in B\}=\{(X,Y)\in g^{-1}(B)\}$. $g$ sürekli olduğundan $g^{-1}(B)$ açık kümelerin sonlu/sayılabilir birleşimleriyle üretilir. Kartezyensel çarpım $\sigma$-cebiri: $\{X\in A\}\cap\{Y\in B\}\in\mathcal{F}$ her $A,B\in\mathcal{B}$ için.
+\end{proof}
+
+\begin{tanim}[Dağılım (image measure)]\label{def:dagilim_olcum}
+$X:(\Omega,\mathcal{F},P)\to(\mathbb{R},\mathcal{B})$ ölçülebilir. \emph{Dağılım ölçüsü} $\mu_X:\mathcal{B}\to[0,1]$:
+\[
+  \mu_X(B) = P(X^{-1}(B)) = P(X\in B).
+\]
+Bu, $P$'nin $X$ altında görüntüsüdür (pushforward/image measure). KDF: $F(x)=\mu_X((-\infty,x])$.
+\end{tanim}
+
+\begin{ornek}[Gösterge fonksiyonu]\label{ex:gosterge_olcum}
+$A\in\mathcal{F}$, $X=\gostf{A}$. $\mu_X(\{0\})=P(A^c)$, $\mu_X(\{1\})=P(A)$. $\Beklenti[\gostf{A}]=P(A)$: olasılık, beklentinin özel halidir. Bu, integrasyon kuramının olasılığı kapsadığını gösterir.
+\end{ornek}
+
+% =====================================================================
+\section{Yakınsama Dağılımda: Karakterizasyon ve Eşdeğerlik}
+\label{sec:yakin_dagilimdaki}
+% =====================================================================
+
+\begin{tanim}[Dağılımda yakınsama]\label{def:dagilimda_yakin}
+$X_n\dto X$: her süreklilik noktası $x\in\mathbb{R}$ için $F_{X_n}(x)\to F_X(x)$.
+Eşdeğer: $\Beklenti[f(X_n)]\to\Beklenti[f(X)]$ her sınırlı, sürekli $f$ için.
+\end{tanim}
+
+\begin{teorem}[Prokhorov teoremi]\label{thm:prokhorov}
+$\{\mu_n\}$ olasılık ölçümleri dizisi. Her $\mu_n$'in göreli sıkı (\emph{tight}) olması, zayıf yakınsamalı (dağılımda yakınsamalı) alt dizi içermesine eşdeğerdir.
+
+Sıkılık (\emph{tightness}): her $\varepsilon>0$ için kompakt $K_\varepsilon\subset\mathbb{R}$ mevcut, her $n$ için $\mu_n(K_\varepsilon^c)<\varepsilon$.
+\end{teorem}
+
+\begin{teorem}[Helly seçim teoremi]\label{thm:helly}
+Her sınırlı KDF dizisi $\{F_n\}$, monoton artan, sağdan sürekli limiti olan bir alt diziye sahiptir. (Bu limit bir KDF olmayabilir — kitle kaybolabilir.)
+\end{teorem}
+
+\begin{ornek}[Dağılımda yakınsama örnekleri]\label{ex:dagilimda_ornekler}
+\begin{enumerate}
+  \item $X_n\sim\Binom(n,\lambda/n)\dto\Pois(\lambda)$ (Poisson yakınsaması).
+  \item $X_n\sim\Normal(0,1+1/n)\dto\Normal(0,1)$ (parametre yakınsaması).
+  \item $X_n=n$ (deterministik): $P(X_n\leq x)=0$ için her $x<n$; $F_{X_n}\to0$ — kitle kaçışı.
+\end{enumerate}
+\end{ornek}
+
+\begin{kritiksorgu}
+Dağılımda yakınsama neden n.k.\ yakınsamadan zayıftır? $X_n\overset{d}{\to}X$ ama $X_n\not\to X$ n.k.\ olan bir örnek veriniz. ($X_n\iid\Normal(0,1)$: dağılımda $\Normal(0,1)$'e yakınsadı ama her $\omega$ için $X_n(\omega)$ yakınsama başarısız olabilir.)
+\end{kritiksorgu}
+
 \begin{mikroozet}
 $F^{-1}(u) = \inf\{x: F(x)\geq u\}$: kuantil fonksiyon.
 OID: $F(X)\sim\Uniform$; $F^{-1}(U)\sim F$.
 Simülasyon: her sürekli dağılım $\Uniform(0,1)$'den üretilir.
+Rasgele değişken = ölçülebilir fonksiyon; ölçüm teorisinin sağladığı kesinlik.
+Dağılımda yakınsama $\iff$ zayıf yakınsama; Prokhorov sıkılık koşulu.
 \end{mikroozet}
 
 % =====================================================================
