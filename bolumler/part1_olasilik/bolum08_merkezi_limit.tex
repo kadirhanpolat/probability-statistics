@@ -616,6 +616,42 @@ $\sqrt{n}(\sqrt{\bar{X}_n}-\sqrt{\lambda})\xrightarrow{d}\Normal(0,\lambda/(4\la
 (c) Varyans $1/4$ artık $\lambda$'ya bağlı değil: güven aralığı $\sqrt{\hat\lambda}\pm z_{\alpha/2}/(2\sqrt{n})$.
 Bilinmeyen parametre ile güven aralığı genişliğini kontrol etmek mümkün.}
 
+\begin{alistirma}[Al.8.4b]{B}{Çok Boyutlu Delta Yöntemi}
+$X_1,\ldots,X_n$ i.i.d.\ $\Normal(\mu,\sigma^2)$ (her ikisi bilinmiyor). $\mathbf{T}_n=(\bar X_n, S_n^2)$.
+(a) $\sqrt{n}(\mathbf{T}_n-\boldsymbol\theta)$ ($\boldsymbol\theta=(\mu,\sigma^2)$) için asimptotik kovaryans matrisini bulun.
+(b) $g(\mu,\sigma^2)=\mu/\sigma$ (varyasyon katsayısı) için çok boyutlu delta yöntemini uygulayın.
+(c) Elde ettiğiniz asimptotik varyansı yorumlayın.
+\end{alistirma}
+\alcozum{%
+(a) $\bar X_n\xrightarrow{d}\Normal(\mu,\sigma^2/n)$; $(n-1)S_n^2/\sigma^2\sim\chi^2_{n-1}$ dolayısıyla $S_n^2\xrightarrow{d}\Normal(\sigma^2,2\sigma^4/(n-1))$. $\bar X_n$ ile $S_n^2$ Normal ailesinde bağımsız. Asimptotik kovaryans matrisi:
+\[
+  \Sigma = \begin{pmatrix}\sigma^2 & 0 \\ 0 & 2\sigma^4\end{pmatrix}.
+\]
+
+(b) $g(\mu,\sigma^2)=\mu/\sigma=\mu(\sigma^2)^{-1/2}$. Gradyan:
+\[
+  \nabla g = \left(\frac{\partial g}{\partial\mu},\frac{\partial g}{\partial\sigma^2}\right) = \left(\frac{1}{\sigma},\,-\frac{\mu}{2\sigma^3}\right).
+\]
+Asimptotik varyans: $\nabla g^\top\Sigma\,\nabla g = \frac{\sigma^2}{\sigma^2}+\frac{\mu^2}{4\sigma^6}\cdot2\sigma^4 = 1+\frac{\mu^2}{2\sigma^2}$.
+
+(c) $\sqrt{n}(S_n/\bar X_n - \sigma/\mu)\xrightarrow{d}\Normal(0,\,1+\text{CV}^2/2)$ burada CV$=\sigma/\mu$ varyasyon katsayısı. CV büyükse (yüksek değişkenlik), katsayının kendisini tahmin etmek de daha belirsiz — sezgisel olarak tutarlı.}
+
+\begin{alistirma}[Al.8.4c]{C}{Karakteristik Fonksiyon ve Süreklilik Teoremi}
+$X_1,X_2,\ldots$ i.i.d., $\varphi(t)=E[e^{itX_1}]$.
+(a) $\bar X_n$'nin karakteristik fonksiyonu $\varphi_{\bar X_n}(t)=\varphi(t/n)^n$ olduğunu gösterin.
+(b) $E[X_1]=\mu$, $\Var(X_1)=\sigma^2<\infty$ varsayımında $\log\varphi(t)\approx i\mu t - \sigma^2t^2/2+o(t^2)$ açılımını kullanarak $\sqrt{n}(\bar X_n-\mu)/\sigma\xrightarrow{d}\Normal(0,1)$'i türetin.
+(c) Bu yaklaşım Lindeberg koşuluna neden gerek duymaz?
+\end{alistirma}
+\alcozum{%
+(a) Bağımsız ve aynı dağılımlı $X_i$ için $\varphi_{S_n}(t)=\varphi(t)^n$. $\bar X_n=S_n/n$ dolayısıyla $\varphi_{\bar X_n}(t)=E[e^{it\bar X_n}]=E[e^{i(t/n)S_n}]=\varphi(t/n)^n$.
+
+(b) $Y_n=\sqrt{n}(\bar X_n-\mu)/\sigma$. $\varphi_{Y_n}(t)=e^{-it\mu\sqrt{n}/\sigma}\cdot\varphi(t/(\sigma\sqrt{n}))^n$.
+$\log\varphi(s) = i\mu s - \sigma^2 s^2/2 + o(s^2)$ ($s=t/(\sigma\sqrt{n})$, $s\to0$).
+$n\log\varphi(t/(\sigma\sqrt{n})) = n\!\left[i\mu\frac{t}{\sigma\sqrt{n}}-\frac{\sigma^2 t^2}{2\sigma^2 n}+o(1/n)\right] = i\mu\frac{t\sqrt{n}}{\sigma}-\frac{t^2}{2}+o(1)$.
+$\log\varphi_{Y_n}(t)\to-t^2/2$. Süreklilik teoremi: $Y_n\xrightarrow{d}\Normal(0,1)$.
+
+(c) Bu türetme \emph{yalnızca} $E[X^2]<\infty$ gerektirir; Lindeberg koşulu çok daha zayıf bir koşul gerektiren \emph{bağımsız ama aynı dağılımlı olmayan} diziler için gereklidir. i.i.d.\ durumunda Lindeberg kendiliginden sağlanır.}
+
 % ---
 
 \alistirmalar

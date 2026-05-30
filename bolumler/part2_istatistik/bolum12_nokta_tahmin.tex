@@ -601,6 +601,43 @@ Düzenlilik koşulları (R1) ihlal edilirse MLE ne olur? Örnek: $X_i\iid\Unifor
 \end{ispatiskele}
 
 %% ============================================================
+\section{Semiparametrik Etkinlik ve Etkili Skor}
+\label{sec:semiparametrik}
+%% ============================================================
+
+Klasik CR alt sınırı, tam parametrik model varsayar. Semiparametrik istatistikte modelin bir kısmı bilinsiz bırakılır; bu durumda CR sınırı genişler.
+
+\begin{tanim}[Etkili skor]\label{def:etkili_skor}
+Parametrik model $\{p_{\theta,\eta}:\theta\in\mathbb{R},\,\eta\in\mathcal{H}\}$; $\theta$ ilgi parametresi, $\eta$ bozulma parametresi (sonsuz boyutlu olabilir). Etkili skor $\tilde\ell_\theta = \ell_\theta - \Pi(\ell_\theta|\mathcal{T})$; burada $\Pi$ projeksiyon $\ell_\eta$'nın oluşturduğu $\mathcal{T}$ uzayına.
+\end{tanim}
+
+\begin{teorem}[Semiparametrik CR alt sınırı]\label{thm:semi_cr}
+$\tilde I(\theta)=E[\tilde\ell_\theta^2]$ etkili Fisher bilgisi. $\theta$'nın yansız tahmincisi için:
+\[
+  \Var(\hat\theta) \geq \frac{1}{n\tilde I(\theta)}.
+\]
+$\tilde I(\theta)\leq I(\theta)$: semiparametrik sınır, parametrik sınırdan daha zayıf (daha geniş).
+\end{teorem}
+
+\begin{ornek}[Konum-ölçek modeli]\label{ex:konum_olcek}
+$X_i=\theta+\sigma\varepsilon_i$ ($\varepsilon_i$ bilinmeyen, simetrik yoğunluklu). Konum $\theta$ için etkili skor hesaplanır: $\tilde\ell_\theta=-f'(x-\theta)/f(x-\theta)$ (skor orijini). Kapalı form: $\tilde I(\theta)=\int[f'(x)/f(x)]^2f(x)dx$ — bu tam olarak $f$ biliniyorsa parametrik bilgidir. Bilinmiyorsa $\tilde I<I$ — belirsizlik kaybı.
+\end{ornek}
+
+\subsection{Adaptif Tahmin}
+
+\begin{tanim}[Adaptif tahmin edici]\label{def:adaptif}
+$\hat\theta_n$ adaptiftir (\emph{adaptive}): $\sqrt{n}(\hat\theta_n-\theta)\xrightarrow{d}\Normal(0,1/I(\theta))$ — yani bozulma parametresi bilinmeseydi de aynı sınıra ulaşılır.
+\end{tanim}
+
+Stein (1956): simetrik yoğunluklar için adaptif tahmin edici mevcuttur. Bickel (1982): konum ailesi için kaçınılmaz koşullar.
+
+\begin{teorem}[Adaptivite koşulu]\label{thm:adaptivite}
+$f$ simetrik ve iki kez türevlenebilir olsun. Konum parametresi için adaptif tahmin edici mevcuttur $\iff$ $f$ belirli düzgünlük koşullarını sağlar (tipik olarak: $f\in C^2$, kuyruğun davranışı düzenli).
+\end{teorem}
+
+\noindent Bu, semiparametrik teorinin en çarpıcı sonuçlarından biridir: bilinmeyen hata dağılımı, asimptotik olarak hiçbir kayba yol açmaz.
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}

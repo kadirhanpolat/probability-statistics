@@ -416,6 +416,66 @@ Güven aralığından $\sqrt{1+1/n}$ faktörü kadar geniş (yeni gözlem belirs
 \end{disiplinlerarasibaglan}
 
 %% ============================================================
+\section{Güven Aralıklarında Asimptotik Doğruluk: Edgeworth Düzeltmesi}
+\label{sec:edgeworth_ga}
+%% ============================================================
+
+Standart Wald güven aralığı $\bar X_n \pm z_{\alpha/2}\sigma/\sqrt{n}$ adı altında kapsama olasılığı $\Phi(z_{\alpha/2})-\Phi(-z_{\alpha/2})$'ye yaklaşır; ancak bu yaklaşımın hata mertebesi $O(n^{-1/2})$'dir. Bartlett ve diğerleri, Edgeworth açılımı kullanarak daha kesin kapsama olasılığı hesaplamıştır.
+
+\begin{teorem}[Edgeworth düzeltmesi]\label{thm:edgeworth_ga}
+$X_i$ i.i.d., sonlu 4. momenti var, $\gamma_1=\mu_3/\sigma^3$ (çarpıklık). Wald güven aralığının gerçek kapsama olasılığı:
+\[
+  P\!\left(\theta\in\bar X_n\pm\frac{z_{\alpha/2}\sigma}{\sqrt{n}}\right)
+  = (1-\alpha) + \frac{\gamma_1}{6\sqrt{n}}[z_{\alpha/2}^2-1]\cdot2\phi(z_{\alpha/2}) + O(n^{-1}).
+\]
+Çarpıklık terimi $\gamma_1\neq0$ ise kapsama olasılığını $(1-\alpha)$'dan saptırır.
+\end{teorem}
+
+\begin{proof}[Taslak]
+$W_n=\sqrt{n}(\bar X_n-\mu)/\sigma$ için Edgeworth açılımı:
+\[
+  F_{W_n}(w) = \Phi(w) - \frac{\gamma_1}{6\sqrt{n}}(w^2-1)\phi(w) + O(n^{-1}).
+\]
+Kapsama olasılığını $F_{W_n}(z_{\alpha/2})-F_{W_n}(-z_{\alpha/2})$ olarak yazıp Edgeworth açılımını yerine koy; $\phi$ simetrik, $(w^2-1)$ anti-simetrik olmadığından fark birinci terimde sıfırlanmaz; teoremde verilen düzeltme elde edilir.
+\end{proof}
+
+\begin{ornek}[Üstel dağılımda kapsama hatası]
+$X_i\sim\mathrm{Exp}(\lambda)$: $\gamma_1=2$. $n=20$, $1-\alpha=0.95$ ($z_{0.025}=1.96$).
+Edgeworth düzeltmesi:
+\[
+  \Delta = \frac{2}{6\sqrt{20}}(1.96^2-1)\cdot2\phi(1.96) = \frac{2}{6\cdot4.47}(2.842)(0.584)\approx0.0124.
+\]
+Gerçek kapsama $\approx0.95+0.012=0.962$ (aşırı kapsama) — sağa çarpık dağılımda normal yaklaşım tutucu davranır.
+\end{ornek}
+
+\begin{teorem}[Bootstrap-t güven aralığının kapsama doğruluğu]\label{thm:bootstrap_kapsama}
+Double bootstrap güven aralığı (Beran 1987), kapsama hatasını $O(n^{-1})$'den $O(n^{-3/2})$'ye indirger. Percentile-t bootstrap $O(n^{-1})$ doğruluk sağlar; basit yüzdelik bootstrap ise yalnızca $O(n^{-1/2})$.
+\end{teorem}
+
+\noindent\textbf{Sonuç:} Asimetrik dağılımlarda veya küçük $n$'de, double-bootstrap veya profil olabilirlik aralıkları, Wald aralığından belirgin şekilde üstündür.
+
+%% ============================================================
+\section{Adaptif Güven Aralıkları: Stein Küçültmesi ve SURE}
+\label{sec:adaptif_ga}
+%% ============================================================
+
+$p\geq3$ parametreli $\boldsymbol\mu\in\mathbb{R}^p$ tahmininde, James-Stein tahminedici MLE'nin OKH'sini düşürür; bu fenomen güven bölgeleri için de paralel sonuçlar doğurur.
+
+\begin{tanim}[SURE — Stein'ın hesapsız risk tahmincisi]
+$\mathbf{X}\sim\Normal_p(\boldsymbol\mu,\sigma^2I)$, yansız risk tahmincisi:
+\[
+  \widehat{R}(\delta,\boldsymbol\mu) = p\sigma^2 + \sum_{i=1}^p\left[\left(\frac{\partial\delta_i}{\partial X_i}\right)^2\sigma^4 - 2\sigma^2\frac{\partial\delta_i}{\partial X_i}\right].
+\]
+Stein lemması ile beklenti $\boldsymbol\mu$'ya bağlı değildir; böylece risk veri gözlemlenerek tahmin edilebilir.
+\end{tanim}
+
+\begin{teorem}[James-Stein güven küresi]
+$\mathbf{X}\sim\Normal_p(\boldsymbol\mu,I)$ ($p\geq3$), $\delta^{JS}=\left(1-\frac{p-2}{\|\mathbf{X}\|^2}\right)\mathbf{X}$ James-Stein tahminedici. Standart güven küresi $\{\boldsymbol\mu:\|\boldsymbol\mu-\mathbf{X}\|\leq c\}$'in kapsama olasılığı $(1-\alpha)$; James-Stein merkezli küre \emph{daha küçük} ama \emph{aynı ya da daha yüksek} kapsama sağlar (Stein 1981).
+\end{teorem}
+
+Bu, yüksek boyutlu istatistikte güven kümelerinin, doğal kayıp (Öteki yöntem: Bayes HPD bölgesi) ile tanımlandığında, sezgilerin aksine davranabileceğini gösterir.
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}

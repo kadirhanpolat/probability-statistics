@@ -705,6 +705,43 @@ $g(x) = 1/x$, $g'(x) = -1/x^2$, $g'(\mu) = -1/\mu^2$.
 Delta yöntemi: $\sqrt{n}(g(\bar{X}_n)-g(\mu)) \xrightarrow{d} \Normal(0, \sigma^2/\mu^4)$.
 $\sqrt{n}(1/\bar{X}_n - 1/\mu) \xrightarrow{d} \Normal(0, \sigma^2/\mu^4)$.}
 
+\begin{alistirma}[Al.6.4b]{B}{İki Boyutlu Jacobian — Polar Dönüşüm}
+$(X,Y)\iid\Normal(0,1)$ bağımsız. $R=\sqrt{X^2+Y^2}$, $\Theta=\arctan(Y/X)$ polar dönüşümü.
+(a) $(R,\Theta)$'nın birleşik yoğunluğunu Jacobian yöntemiyle bulun.
+(b) $R$ ve $\Theta$'nın marjinal dağılımlarını yazın. $R$'nin adı ne?
+(c) Bu sonucu Box-Muller dönüşümüyle ilişkilendirin.
+\end{alistirma}
+\alcozum{%
+(a) Ters dönüşüm: $X=R\cos\Theta$, $Y=R\sin\Theta$. Jacobian:
+\[
+  J = \begin{vmatrix}\cos\Theta & -R\sin\Theta \\ \sin\Theta & R\cos\Theta\end{vmatrix} = R.
+\]
+Birleşik yoğunluk: $f_{X,Y}(x,y)=\frac{1}{2\pi}e^{-(x^2+y^2)/2}$.
+$f_{R,\Theta}(r,\theta) = f_{X,Y}(r\cos\theta, r\sin\theta)\cdot|J|^{-1} = \frac{1}{2\pi}e^{-r^2/2}\cdot r$, $r>0$, $\theta\in[0,2\pi)$.
+
+(b) $f_\Theta(\theta)=\frac{1}{2\pi}$ (Uniform$[0,2\pi)$); $f_R(r)=re^{-r^2/2}$ ($r>0$): Rayleigh dağılımı. $R^2\sim\chi^2_2=\mathrm{Exp}(1/2)$.
+
+(c) Box-Muller: $U_1,U_2\iid\Uniform[0,1]$'den $X=\sqrt{-2\log U_1}\cos(2\pi U_2)$, $Y=\sqrt{-2\log U_1}\sin(2\pi U_2)$ bağımsız standart normaldir. Burada $R=\sqrt{-2\log U_1}\sim$ Rayleigh ve $\Theta=2\pi U_2\sim\Uniform[0,2\pi)$; bu tam olarak $(R,\Theta)$'nın dağılımıdır.}
+
+\begin{alistirma}[Al.6.4c]{C}{Konvolüsyon ve Toplam Dağılımı}
+$X\sim\Gama(\alpha,1)$, $Y\sim\Gama(\beta,1)$ bağımsız.
+(a) MÜF yöntemiyle $Z=X+Y$'nin dağılımını bulun.
+(b) $W=X/(X+Y)$'nin dağılımını konvolüsyon + Jacobian ile türetin.
+(c) $\alpha=\beta=1$ durumunda (yani $X,Y\iid\mathrm{Exp}(1)$): $W$'nin dağılımını yazın ve sezgisel yorumunu verin.
+\end{alistirma}
+\alcozum{%
+(a) $M_X(t)=(1-t)^{-\alpha}$, $M_Y(t)=(1-t)^{-\beta}$ (t<1). $M_Z(t)=(1-t)^{-(\alpha+\beta)}$; dolayısıyla $Z\sim\Gama(\alpha+\beta,1)$.
+
+(b) Değişken dönüşümü: $(X,Y)\mapsto(Z=X+Y,W=X/(X+Y))$. Ters: $X=WZ$, $Y=(1-W)Z$. Jacobian: $|J|=Z$. Birleşik: $f_{Z,W}(z,w)=f_X(wz)f_Y((1-w)z)\cdot z$.
+\[
+  f_X(x)f_Y(y) = \frac{x^{\alpha-1}e^{-x}}{\Gamma(\alpha)}\cdot\frac{y^{\beta-1}e^{-y}}{\Gamma(\beta)}.
+\]
+$f_{Z,W}(z,w)=\frac{(wz)^{\alpha-1}((1-w)z)^{\beta-1}e^{-z}}{\Gamma(\alpha)\Gamma(\beta)}\cdot z = \frac{z^{\alpha+\beta-1}e^{-z}}{\Gamma(\alpha+\beta)}\cdot\frac{w^{\alpha-1}(1-w)^{\beta-1}}{B(\alpha,\beta)}$.
+
+Marjinal $w$: $f_W(w)=\frac{w^{\alpha-1}(1-w)^{\beta-1}}{B(\alpha,\beta)}$; yani $W\sim\Beta(\alpha,\beta)$.
+
+(c) $\alpha=\beta=1$: $W\sim\Beta(1,1)=\Uniform[0,1]$. Yorum: İki bağımsız Üstel sürenin toplamındaki birincinin oranı, tüm $[0,1]$'de eşit olasılıklı. Yenileme teorisi: bekleme kesiri üniform.}
+
 % ---
 
 \alistirmalar

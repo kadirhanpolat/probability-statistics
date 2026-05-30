@@ -420,6 +420,58 @@ Tüm permütasyonlar hesaplanamıyorsa: $B$ rasgele permütasyon üret; $p\appro
 \end{disiplinlerarasibaglan}
 
 %% ============================================================
+\section{Koşullu Test ve Benzer Testler}
+\label{sec:benzer_test}
+%% ============================================================
+
+\begin{tanim}[Benzer test]\label{def:benzer_test}
+$H_0:\theta\in\Theta_0$ için test $\phi$ \textbf{benzerdir} (\emph{similar}, boyut $\alpha$): $E_\theta[\phi(X)]=\alpha$ tüm $\theta\in\Theta_0$ için. Benzer testler, sabit (saplamalı) istatistiklerin varlığında anlam taşır.
+\end{tanim}
+
+\begin{tanim}[Tamamlayıcılık ve benzerlik]\label{def:tamamlayici_benzer}
+$T$ yeterli istatistik, $S=h(\mathbf{X})$ saplamalı (\emph{ancillary}). $T$'ye koşullu güç sabit $\alpha$'ya eşit olan test \textbf{koşullu benzer} testtir; bu, $T$ tamamlayıcı ise benzer test koşulunu karşılar.
+\end{tanim}
+
+\begin{teorem}[Benzer testlerin karakterizasyonu]\label{thm:benzer_karakter}
+$T$ tamamlayıcı yeterli istatistik. $\phi$ benzer test $\iff$ $E[\phi\mid T]=\alpha$ n.k.
+\end{teorem}
+
+\begin{proof}[Proof]
+$(\Rightarrow)$: $E_\theta[\phi]=\alpha$ her $\theta$'da. $T$ tamamlayıcı: $E[E[\phi|T]-\alpha]=0$ tüm $\theta$'da $\Rightarrow$ $E[\phi|T]=\alpha$ n.k. (tamamlayıcılık tanımı).\\
+$(\Leftarrow)$: $E[\phi|T]=\alpha$ ise $E_\theta[\phi]=E_\theta[E[\phi|T]]=E_\theta[\alpha]=\alpha$.
+\end{proof}
+
+\begin{ornek}[Normal ortalama testi — koşullu yaklaşım]
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$; $\mu,\sigma^2$ bilinmiyor; $H_0:\mu=\mu_0$.
+$T=S^2$ yeterli (sigma için koşullanmak anlamında) ve saplamalı ($\mu$'dan bağımsız dağılım). Koşullu test: verilen $S^2$ için $t=\sqrt{n}(\bar X-\mu_0)/S$ istatistiği. $t$-testi zaten $T=S^2$'ye koşullu benzer testtir; bu yüzden $\sigma^2$ bilinmeden tam boyutu korur.
+\end{ornek}
+
+%% ============================================================
+\section{İnanç Fonksiyonu ve Güvenilirlik: p-değeri Ötesi}
+\label{sec:p_otesi}
+%% ============================================================
+
+$p$-değeri eleştirisi (Wasserstein et al. 2019) sonrasında istatistik camiası alternatif yaklaşımlar geliştirmektedir:
+
+\begin{tanim}[$s$-değeri]\label{def:s_degeri}
+Shannon bilgi birimi: $s = -\log_2(p)$. $p=0.05$ ise $s\approx4.32$ bit: bu veri, $H_0$ doğruysa $2^{4.32}\approx20$ kez atılmış yazı-turayı hep aynı görme kadar "sürpriz".
+\end{tanim}
+
+\begin{tanim}[İnanç fonksiyonu]\label{def:inanc_fonksiyonu}
+Fraser (2019): $\pi(\theta;\mathbf{x})=1-p(\theta)$; $p(\theta)$ yönlü $p$-değeri. Her $\theta$ için $H_0:\vartheta=\theta$ testinin $p$-değerine dayalı sürekli bir inanç (güven) ölçüsü.
+\end{tanim}
+
+\noindent\textbf{Güven dağılımı} (\emph{confidence distribution}): $p(\theta)=P_\theta(T\geq t_{\mathrm{gözlem}})$ bir KDF olarak görülürse, $\theta$ üzerinde bir "dağılım" sağlar; Bayes sonsal dağılımının sıklıkçı karşılığı.
+
+\begin{teorem}[Neyman-Scott paradoksu]\label{thm:neyman_scott}
+$X_{ij}\iid\Normal(\mu_i,\sigma^2)$ ($i=1,\ldots,n$; $j=1,2$). $n\to\infty$'da $\hat\sigma^2_{\mathrm{MLE}}\to\sigma^2/2$ (tutarsız). Anlık parametre sayısı $n$ ile büyüyünce MLE bozulabilir; koşullu MLE (yeterli istatistike koşullama) tutarlıdır.
+\end{teorem}
+
+\begin{proof}[Proof — kısa]
+$\hat\mu_i=\bar X_{i.}$; $\hat\sigma^2_{\mathrm{MLE}}=\frac{1}{2n}\sum_{i,j}(X_{ij}-\bar X_{i.})^2$. $E[\hat\sigma^2_{\mathrm{MLE}}]=\sigma^2/2$. Yanlılık $\sigma^2/2$ sabit kalır, $n\to\infty$'da kaybolmaz.
+\end{proof}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
