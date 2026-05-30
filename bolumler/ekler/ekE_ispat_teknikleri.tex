@@ -231,3 +231,78 @@ Dağılımda yakınsama ($X_n\dto X$) ispatlarında:
 \end{enumerate}
 
 \noindent\textbf{Uygulama:} MLE dağılımda yakınsama ispatı; ampirik süreç teorisi.
+
+%% ============================================================
+\section{Birleşik Süreklilik ve Slutsky Teoremi}
+\label{app:slutsky}
+%% ============================================================
+
+Asimptotik istatistikte en sık kullanılan araçlardan biri Slutsky tüneli ve birleşik süreklilik türevidir.
+
+\begin{teorem}[Slutsky Teoremi]\label{app:thm:slutsky}
+$X_n\dto X$, $Y_n\pto c$ (sabit). O zaman:
+\begin{enumerate}[(a)]
+  \item $X_n+Y_n\dto X+c$.
+  \item $X_nY_n\dto cX$.
+  \item $X_n/Y_n\dto X/c$ ($c\neq0$).
+\end{enumerate}
+\end{teorem}
+
+\begin{ornek}[Öğrenci $t$ dağılımı]\label{app:ex:t_slutsky}
+$\bar X_n\sim\Normal(\mu,\sigma^2/n)$ normallik ile $Z_n=\sqrt{n}(\bar X_n-\mu)/\sigma\dto\Normal(0,1)$.
+$S_n\pto\sigma$: Slutsky $\Rightarrow$ $T_n=\sqrt{n}(\bar X_n-\mu)/S_n=Z_n\cdot(\sigma/S_n)\dto\Normal(0,1)$.
+Sonlu $n$ için $T_n\sim t_{n-1}$ — ama büyük $n$ için normal.
+\end{ornek}
+
+\begin{teorem}[Birleşik Süreklilik Haritası]\label{app:thm:cont_mapping}
+$h:\mathbb{R}\to\mathbb{R}$ sürekli (veya $h$-süreksizlik noktalarının kümesi $P_X$-ölçüsü sıfır). $X_n\dto X\Rightarrow h(X_n)\dto h(X)$.
+\end{teorem}
+
+\noindent\textbf{Uygulama:} $X_n\dto\Normal(0,1)\Rightarrow X_n^2\dto\chi^2_1$ (çünkü $x\mapsto x^2$ sürekli).
+
+%% ============================================================
+\section{Büyük Örneklem Teknikler: Kararlılık ve $o_P / O_P$ Sembolleri}
+\label{app:op_sembolleri}
+%% ============================================================
+
+\begin{tanim}[$o_P$ ve $O_P$]\label{app:def:op}
+\begin{align*}
+  X_n = o_P(1) &\iff X_n\pto0.\\
+  X_n = o_P(r_n) &\iff X_n/r_n = o_P(1).\\
+  X_n = O_P(1) &\iff \forall\varepsilon>0,\exists M_\varepsilon>0: P(|X_n|>M_\varepsilon)<\varepsilon \text{ for all }n.\\
+  X_n = O_P(r_n) &\iff X_n/r_n = O_P(1).
+\end{align*}
+\end{tanim}
+
+\begin{teorem}[Cebirsel kurallar]\label{app:thm:op_algebra}
+\begin{enumerate}[(a)]
+  \item $o_P(1)+o_P(1)=o_P(1)$; $o_P(1)\cdot O_P(1)=o_P(1)$.
+  \item $O_P(1)+O_P(1)=O_P(1)$; $O_P(1)\cdot O_P(1)=O_P(1)$.
+  \item $X_n\pto0\iff X_n=o_P(1)$; $X_n\dto X$ (sınırlı) $\Rightarrow X_n=O_P(1)$.
+\end{enumerate}
+\end{teorem}
+
+\noindent\textbf{Uygulama — Taylor açılımı:}
+$g(X_n)=g(\theta)+g'(\theta)(X_n-\theta)+\frac12g''(\xi_n)(X_n-\theta)^2$, ikinci terim $o_P(|X_n-\theta|)$.
+$X_n=\theta+O_P(n^{-1/2})$: ikinci terim $O_P(n^{-1})$; birinci terim $O_P(n^{-1/2})$ — delta yönteminin temeli.
+
+%% ============================================================
+\section{Çok Boyutlu Delta Yöntemi ve Hessian Kullanımı}
+\label{app:delta_cok}
+%% ============================================================
+
+\begin{teorem}[Çok boyutlu delta yöntemi — genişletilmiş]\label{app:thm:delta_cok}
+$\sqrt{n}(\hat{\boldsymbol\theta}_n-\boldsymbol\theta_0)\dto\Normal_p(\mathbf{0},\boldsymbol\Sigma)$ ve $g:\mathbb{R}^p\to\mathbb{R}^q$ $C^1$. O zaman:
+\[
+  \sqrt{n}(g(\hat{\boldsymbol\theta}_n)-g(\boldsymbol\theta_0))\dto\Normal_q(\mathbf{0},\mathbf{D}_g\boldsymbol\Sigma\mathbf{D}_g^\top),
+\]
+burada $\mathbf{D}_g=\partial g/\partial\boldsymbol\theta^\top\big|_{\boldsymbol\theta_0}$ ($q\times p$) Jacobi matrisidir.
+
+İkinci dereceden delta ($q=1$, $\mathbf{D}_g=\mathbf{0}$):
+\[
+  n(g(\hat{\boldsymbol\theta}_n)-g(\boldsymbol\theta_0))\dto\frac12\boldsymbol\xi^\top\mathbf{H}_g\boldsymbol\xi,
+\]
+$\boldsymbol\xi\sim\Normal_p(\mathbf{0},\boldsymbol\Sigma)$ ve $\mathbf{H}_g=\partial^2g/\partial\boldsymbol\theta\partial\boldsymbol\theta^\top|_{\boldsymbol\theta_0}$ Hessian matrisi.
+\end{teorem}
+
+\noindent\textbf{Uygulama:} MLE varyans-kovaryans matrisi $\hat{\boldsymbol\Sigma}=\mathcal{I}(\hat{\boldsymbol\theta})^{-1}$; fonksiyon güven aralığı $g(\hat{\boldsymbol\theta})\pm z_{\alpha/2}\sqrt{\mathbf{D}_g\hat{\boldsymbol\Sigma}\mathbf{D}_g^\top/n}$.
