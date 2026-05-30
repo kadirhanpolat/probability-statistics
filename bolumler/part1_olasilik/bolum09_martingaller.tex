@@ -539,5 +539,31 @@ $\ln M_n = \sum \ln X_i$. BSK: $(\ln M_n)/n \to E[\ln X_1]$.
 Jensen: $E[\ln X_1] \leq \ln E[X_1] = 0$; genellikle $< 0$.
 $\ln M_n / n \to c < 0$ $\Rightarrow$ $M_n = e^{n \cdot c+o(n)} \to 0$ n.k.}
 
+\begin{alistirma}[Al.9.7]{B}{Doob Durma Zamanı}
+$(S_n)$ simetrik basit rassal yürüyüş, $S_0=0$. $T=\min(T_a,T_{-b})$ ($a,b>0$) ilk çıkış zamanı. Opsiyonel örnekleme ile $E[S_T]=0$ ve $E[T]=ab$ olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+$S_n$ ve $S_n^2-n$ martingaller. $T$ n.k.\ sonlu (rassal yürüyüş geri döner). Opsiyonel örnekleme: $E[S_T]=E[S_0]=0$; $P(S_T=a)=b/(a+b)$, $P(S_T=-b)=a/(a+b)$.
+$E[S_T]=a\cdot\frac{b}{a+b}+(-b)\cdot\frac{a}{a+b}=0$. \\
+$E[S_T^2-T]=0$: $E[S_T^2]=E[T]$. $E[S_T^2]=a^2\cdot\frac{b}{a+b}+b^2\cdot\frac{a}{a+b}=\frac{ab(a+b)}{a+b}=ab$. Dolayısıyla $E[T]=ab$.}
+
+\begin{alistirma}[Al.9.8]{B}{Üstel Martingal}
+$X_1,X_2,\ldots\iid$, $E[e^{\theta X_1}]=M(\theta)<\infty$. $Z_n=\exp(\theta S_n)/M(\theta)^n$ martingal olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+$E[Z_{n+1}\mid\mathcal{F}_n]=\frac{\exp(\theta S_n)}{M(\theta)^n}\cdot\frac{E[\exp(\theta X_{n+1})]}{M(\theta)}=Z_n\cdot\frac{M(\theta)}{M(\theta)}=Z_n$. Üstel martingal, Chernoff sınırının ispat aracıdır.}
+
+\begin{alistirma}[Al.9.9]{C}{Levy Martingali}
+$X\in L^1(\Omega,\mathcal{F},P)$ ve $\mathcal{F}_n\nearrow\mathcal{F}$. $M_n=E[X|\mathcal{F}_n]$ martingal olduğunu ve $M_n\to E[X|\mathcal{F}_\infty]=X$ n.k.\ yakınsadığını gösterin ($\mathcal{F}_\infty=\sigma(\bigcup\mathcal{F}_n)$).
+\end{alistirma}
+\alcozum{%
+Martingal özelliği: $E[M_{n+1}|\mathcal{F}_n]=E[E[X|\mathcal{F}_{n+1}]|\mathcal{F}_n]=E[X|\mathcal{F}_n]=M_n$ (kulesi kuralı). $\sup E[|M_n|]\leq E[|X|]<\infty$: Doob $L^1$ yakınsama teoremi $M_n\to M_\infty$ n.k.\ verir. Ölçülebilirlik + tutarlılık: $M_\infty=E[X|\mathcal{F}_\infty]$.}
+
+\begin{alistirma}[Al.9.10]{C}{Submartingal Maksimum Eşitsizliği}
+$(X_n)$ altmartingal, $X_n\geq0$. $M_n^*=\max_{0\leq k\leq n}X_k$. $P(M_n^*\geq\lambda)\leq E[X_n]/\lambda$ ($\lambda>0$) Doob maksimal eşitsizliğini ispatlayın.
+\end{alistirma}
+\alcozum{%
+$A=\{M_n^*\geq\lambda\}$. $T=\min\{k:X_k\geq\lambda\}$ ($T=n$ eğer hiç gerçekleşmezse). $A=\{T\leq n\}$ üzerinde $X_T\geq\lambda$. Opsiyonel örnekleme + altmartingal: $E[X_T\cdot\mathbf{1}_A]\leq E[X_n\cdot\mathbf{1}_A]\leq E[X_n]$. $\lambda P(A)\leq E[X_T\cdot\mathbf{1}_A]\leq E[X_n]$.}
+
 % =====================================================================
 \endinput

@@ -481,3 +481,27 @@ $\sum\alpha_i^2=36+0+36=72$. $\lambda=n\cdot72/64=9n/8$. Hedef: $\Prob(F_{2,3n-3
 \alcozum{%
 (a) Varyanslar farklı görünüyor ($9,25,16$); standart ANOVA tip I hatası şişirebilir; Welch daha sağlam. (b) $w_1=10/9=1.111$, $w_2=15/25=0.600$, $w_3=8/16=0.500$; $w=2.211$. $\tilde\mu=(1.111\cdot15+0.6\cdot18+0.5\cdot12)/2.211=(16.67+10.8+6)/2.211=33.47/2.211=15.14$. (c) Pay: $\sum w_i(\bar Y_i-\tilde\mu)^2/(k-1)=[1.111(15-15.14)^2+0.6(18-15.14)^2+0.5(12-15.14)^2]/2=[0.022+4.907+4.940]/2=4.935$.%
 }
+
+\begin{alistirma}[Al.16.10]{A}{İki-Yönlü ANOVA Serbestlik Derecesi}
+$a=3$ faktör A düzeyi, $b=4$ faktör B düzeyi, $n=2$ tekrar. (a) Ana etkiler ve etkileşim için serbestlik derecelerini yaz. (b) Hata SS'nin serbestlik derecesini hesapla. (c) Toplam gözlem sayısı?
+\end{alistirma}
+\alcozum{%
+(a) $\mathrm{SS}_A$: $a-1=2$; $\mathrm{SS}_B$: $b-1=3$; $\mathrm{SS}_{AB}$: $(a-1)(b-1)=6$.
+(b) $\mathrm{SS}_E$: $ab(n-1)=3\cdot4\cdot1=12$.
+(c) Toplam: $abn=3\cdot4\cdot2=24$ gözlem. Toplam SD: $abn-1=23$. Kontrol: $2+3+6+12=23$. \checkmark}
+
+\begin{alistirma}[Al.16.11]{B}{Tekrarlı Ölçüm ANOVA — Tüm Etkileri}
+$n=10$ denek, $k=4$ zaman noktası, ölçümlerin ANOVA tablosunu kurun. (a) Denekler arası ve içi kaynak ayrımını açıklayın. (b) $\mathrm{SS}_\mathrm{total}=240$, $\mathrm{SS}_\mathrm{subjects}=80$, $\mathrm{SS}_\mathrm{time}=90$ ise $\mathrm{SS}_\mathrm{error}$'ü hesaplayın. (c) $F$-istatistiğini bulun.
+\end{alistirma}
+\alcozum{%
+(a) Denekler arası: bireyler arası fark ($\mathrm{df}=n-1=9$). Denekler içi: zaman etkisi + hata ($\mathrm{df}=(n-1)(k-1)=27$).
+(b) $\mathrm{SS}_E=\mathrm{SS}_\mathrm{within}-\mathrm{SS}_\mathrm{time}=(240-80)-90=70$.
+(c) $\mathrm{MS}_\mathrm{time}=90/(k-1)=90/3=30$. $\mathrm{MS}_E=70/27\approx2.593$.
+$F=30/2.593\approx11.57$. $F_{3,27,0.05}=2.96$: zaman etkisi anlamlı.}
+
+\begin{alistirma}[Al.16.12]{B}{ANCOVA — Kovaryatın Giderilmesi}
+$k=2$ tedavi grubu, $n=20$ kişi her grupta. Ön-test puanı $X$ (kovaryat), son-test $Y$ bağımlı. $\mathrm{SS}_\mathrm{res}$(ANCOVA)$=280$, $\mathrm{SS}_\mathrm{res}$(ANOVA)$=340$. (a) Kovaryatın açıkladığı ek varyansı hesapla. (b) ANCOVA'nın güce katkısını yorumlayın.
+\end{alistirma}
+\alcozum{%
+(a) $\Delta\mathrm{SS}=340-280=60$: kovaryat $X$ dahil edilince artık SS 60 birim azaldı. Bu, $X$'in $Y$'nin bir kısmını açıkladığını gösterir.
+(b) Hata terimi küçülünce $F=\mathrm{MS}_\mathrm{tedavi}/\mathrm{MS}_E$ büyür; güç artar. ANCOVA, tedavi etkisini kontrol edilmemiş bireysel farklardan arındırır.}

@@ -493,3 +493,31 @@ $n=20$, $p=2$ regresyon; 3 gözlem için $(h_{ii}, r_i)$: A$(0.15, 2.1)$, B$(0.7
 \alcozum{%
 $D_i=r_i^2 h_{ii}/[(p+1)(1-h_{ii})]$. A: $D=4.41\cdot0.15/(3\cdot0.85)=0.662/2.55=0.26$ (orta). B: $D=0.09\cdot0.7/(3\cdot0.3)=0.063/0.9=0.07$ (yüksek leverage ama küçük artık — etkisiz). C: $D=6.25\cdot0.6/(3\cdot0.4)=3.75/1.2=3.125$ — $D>1$; en etkili nokta. A normal, B leverage var ama etkisiz, C hem leverage hem büyük artık: kaldırılması modeli önemli değiştirir.%
 }
+
+\begin{alistirma}[Al.15.10]{A}{Basit Regresyon — Skor Fonksiyonu}
+$Y_i=\alpha+\beta x_i+\varepsilon_i$, $\varepsilon_i\iid\Normal(0,\sigma^2)$. (a) Log-olabilirlik $\ell(\alpha,\beta,\sigma^2)$'yi yaz. (b) $\partial\ell/\partial\alpha=0$, $\partial\ell/\partial\beta=0$ denklemlerini çözerek $\hat\alpha,\hat\beta$ EKK formüllerine ulaşın.
+\end{alistirma}
+\alcozum{%
+(a) $\ell=-\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum(Y_i-\alpha-\beta x_i)^2$.
+(b) $\partial\ell/\partial\alpha=\frac{1}{\sigma^2}\sum(Y_i-\alpha-\beta x_i)=0\Rightarrow\bar Y=\hat\alpha+\hat\beta\bar x$. $\partial\ell/\partial\beta=\frac{1}{\sigma^2}\sum x_i(Y_i-\alpha-\beta x_i)=0\Rightarrow\hat\beta=S_{xy}/S_{xx}$, $\hat\alpha=\bar Y-\hat\beta\bar x$. EKK = MLE ($\Normal$ hatası altında).}
+
+\begin{alistirma}[Al.15.11]{B}{Lojistik Regresyon — Newton-Raphson}
+$Y\sim\mathrm{Bernoulli}(p)$, $\log\frac{p}{1-p}=\beta_0+\beta_1 x$. $n=5$ gözlem: $(x,y)$: $(0,0),(1,0),(2,1),(3,1),(4,1)$. (a) Log-olabilirliği yaz. (b) $\beta_0=0,\beta_1=1$ başlangıcından Newton adımı için skor $\mathbf{s}$ ve Hessian $\mathbf{H}$'yi numerik hesaplayın.
+\end{alistirma}
+\alcozum{%
+(a) $\ell(\beta)=\sum_{i:y_i=1}(\beta_0+\beta_1x_i)-\sum_{i=1}^5\log(1+e^{\beta_0+\beta_1 x_i})$.
+(b) $\hat p_i(0,1)$: $x=0,1,2,3,4$ için $p_i=\sigma(x_i)=1/(1+e^{-x_i})$:
+$p_0=0.5,p_1=0.731,p_2=0.880,p_3=0.952,p_4=0.982$.
+$s_0=\sum(y_i-p_i)=(0-0.5)+(0-0.731)+1(1-0.880)+(1-0.952)+(1-0.982)=-0.5-0.731+0.12+0.048+0.018=-1.045$.
+$s_1=\sum x_i(y_i-p_i)=0\cdot(-0.5)+1(-0.731)+2(0.12)+3(0.048)+4(0.018)=-0.731+0.24+0.144+0.072=-0.275$.
+Newton adımı: $\boldsymbol\beta^{(1)}=\boldsymbol\beta^{(0)}-H^{-1}\mathbf{s}$ (nümerik hesap gerektirdiğinden IRLS kullanılır).}
+
+\begin{alistirma}[Al.15.12]{C}{Ridge Regresyon — Bias-Variance}
+$\hat{\boldsymbol\beta}_{\mathrm{ridge}}=(\mathbf{X}^\top\mathbf{X}+\lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{Y}$. (a) $E[\hat{\boldsymbol\beta}_\mathrm{ridge}]$'i hesapla ve yanlılığını göster. (b) $\lambda\to\infty$ ve $\lambda\to0$ limitlerinde ne olur? (c) $\mathbf{X}^\top\mathbf{X}=\mathbf{I}$ basit durumunda MSE$({\hat\beta_j})$'yi $\lambda$ cinsinden ifade et ve minimize et.
+\end{alistirma}
+\alcozum{%
+(a) $E[\hat{\boldsymbol\beta}_\mathrm{ridge}]=(\mathbf{X}^\top\mathbf{X}+\lambda\mathbf{I})^{-1}\mathbf{X}^\top\mathbf{X}\boldsymbol\beta_0\neq\boldsymbol\beta_0$: yanlı.
+(b) $\lambda\to0$: OLS'ye yaklaşır; $\lambda\to\infty$: $\hat{\boldsymbol\beta}_\mathrm{ridge}\to\mathbf{0}$.
+(c) $\mathbf{X}^\top\mathbf{X}=\mathbf{I}$: $\hat\beta_j=Y_j/(1+\lambda)$, $E[\hat\beta_j]=\beta_j/(1+\lambda)$.
+$\mathrm{bias}^2=\beta_j^2\lambda^2/(1+\lambda)^2$, $\Var=\sigma^2/(1+\lambda)^2$.
+MSE $=[\sigma^2+\beta_j^2\lambda^2]/(1+\lambda)^2$. $\partial\mathrm{MSE}/\partial\lambda=0$: $\lambda^*=\sigma^2/\beta_j^2$.}

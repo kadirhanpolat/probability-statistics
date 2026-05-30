@@ -548,3 +548,36 @@ $X_1,\ldots,X_n\iid\Uniform[0,1]$. $\Beklenti[\sup_x|F_n(x)-x|]$'in üst sınır
 \alcozum{%
 DKW'den $\Prob(D_n>\varepsilon)\leq2e^{-2n\varepsilon^2}$. $\Beklenti[D_n]=\int_0^\infty\Prob(D_n>t)\,dt\leq\int_0^\infty2e^{-2nt^2}\,dt=2\cdot\frac{\sqrt{\pi}}{2\sqrt{2n}}=\sqrt{\pi/(2n)}$. Dolayısıyla $\Beklenti[D_n]=O(1/\sqrt{n})$.%
 }
+
+\begin{alistirma}[Al.17.9]{A}{İşaret Testi}
+$n=15$ gözlem, $H_0:\tilde\mu=10$ vs $H_1:\tilde\mu>10$. Gözlemlerden 11'i 10'un üzerinde. (a) Test istatistiğini belirtin. (b) $p$-değerini Binom$(15,0.5)$ kullanarak hesaplayın.
+\end{alistirma}
+\alcozum{%
+(a) $B=$ "10'un üzerindeki gözlem sayısı" = 11. $H_0$ altında $B\sim\Binom(15,1/2)$.
+(b) $p=P(B\geq11)=\sum_{k=11}^{15}\binom{15}{k}(1/2)^{15}$.
+$=\binom{15}{11}+\binom{15}{12}+\binom{15}{13}+\binom{15}{14}+\binom{15}{15}$ kez $(1/2)^{15}$.
+$=1365+455+105+15+1=1941$; $p=1941/32768\approx0.059$. $\alpha=0.05$'te $H_0$ reddedilmez.}
+
+\begin{alistirma}[Al.17.10]{B}{Wilcoxon Rütbe Toplamı Testi}
+İki bağımsız grup: $X$: $\{3,7,5,11,9\}$, $Y$: $\{1,4,8,2,6\}$. $H_0$: iki grup dağılımı aynı. Wilcoxon-Mann-Whitney istatistiğini hesaplayın ve $n_1=n_2=5$ için kritik değerle karşılaştırın.
+\end{alistirma}
+\alcozum{%
+Birleşik rütbeler (küçükten büyüğe): $1(Y),2(Y),3(X),4(Y),5(X),6(Y),7(X),8(Y),9(X),11(X)$.
+$W_X=3+5+7+9+10=34$ (X'lerin rütbe toplamı, $X=11$ 10. sırada).
+$E[W_X]=n_1(n_1+n_2+1)/2=5\cdot11/2=27.5$.
+$U=W_X-n_1(n_1+1)/2=34-15=19$.
+$n_1=n_2=5$, $\alpha=0.05$ (iki kuyruk) için kritik $U^*=2$: $U=19>2$, $H_0$ reddedilmez.}
+
+\begin{alistirma}[Al.17.11]{B}{Permütasyon Testi Mantığı}
+$\bar X-\bar Y=2.4$ gözlendi; $n_1=n_2=4$. Tüm permütasyonların sayısı $\binom{8}{4}=70$. Bu 70 permütasyon altında $|\bar X-\bar Y|\geq2.4$ olan permütasyon sayısı 6 ise $p$-değerini (iki kuyruk) ve yorumunu veriniz.
+\end{alistirma}
+\alcozum{%
+İki kuyruk $p$-değeri: $p=6/70\approx0.086$. $\alpha=0.05$ için $H_0$ reddedilmez; küçük örnekte anlamlı fark tespit edilemedi. Permütasyon testi dağılım varsayımı gerektirmez — Wilcoxon'un tam alternatifidir.}
+
+\begin{alistirma}[Al.17.12]{C}{Nükleer Tahminci Optimal Bant Genişliği}
+$X_1,\ldots,X_n\iid f$. $f$ iki kez türevlenebilir, $\|f''\|_2^2<\infty$. Gaussian çekirdeğiyle $\hat f_h$'nın MISE'sini $h$ cinsinden yaz ve optimal $h^*=O(n^{-1/5})$ olduğunu göster.
+\end{alistirma}
+\alcozum{%
+MISE $=\int\Beklenti[(\hat f_h(x)-f(x))^2]dx=$ Tümlev Varyans $+$ Tümlev Yanlılık$^2$.
+TV $\approx\frac{1}{nh}\int K^2(u)\,du=\frac{R(K)}{nh}$, TY $\approx\frac{h^4}{4}(\mu_2(K))^2\int(f''(x))^2dx$.
+MISE $\approx\frac{R(K)}{nh}+\frac{h^4}{4}\mu_2(K)^2\|f''\|_2^2$. Minimize: $h^*=\left(\frac{R(K)}{n\mu_2(K)^2\|f''\|_2^2}\right)^{1/5}=O(n^{-1/5})$.}
