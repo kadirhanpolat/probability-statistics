@@ -325,6 +325,97 @@ Bu, sonsuz sayıda kombinasyonu eşzamanlı kapsar; Bonferroni'den geniş ama ka
 \end{teorem}
 
 %% ============================================================
+\section{Güven Bölgeleri (Çok Parametreli)}
+\label{sec:guven_bolgesi}
+%% ============================================================
+
+\begin{tanim}[Güven bölgesi]\label{def:guven_bolgesi}
+$p$ boyutlu parametre $\boldsymbol\theta$. Rasgele küme $C(\mathbf{X})\subseteq\mathbb{R}^p$ için $(1-\alpha)$ \textbf{güven bölgesi} \emph{(confidence region)}:
+\[
+  \Prob_{\boldsymbol\theta}(\boldsymbol\theta\in C(\mathbf{X})) \geq 1-\alpha \quad \text{her } \boldsymbol\theta\in\Theta \text{ için.}
+\]
+\end{tanim}
+
+\begin{teorem}[Eliptik güven bölgesi]\label{thm:eliptik_bolge}
+$X_1,\ldots,X_n\iid\Normal(\boldsymbol\mu,\Sigma)$, $\Sigma$ bilinen. $(\bar{\mathbf{X}}-\boldsymbol\mu)^\top (n\Sigma^{-1})(\bar{\mathbf{X}}-\boldsymbol\mu)\sim\chi^2_p$ pivottur. $(1-\alpha)$ güven bölgesi:
+\[
+  C(\mathbf{X}) = \{\boldsymbol\mu: (\bar{\mathbf{X}}-\boldsymbol\mu)^\top (n\Sigma^{-1})(\bar{\mathbf{X}}-\boldsymbol\mu) \leq \chi^2_{p,\alpha}\}.
+\]
+Bu bir $p$-boyutlu elipsoittir; $\bar{\mathbf{X}}$ merkezi, $\Sigma/(n\chi^2_{p,\alpha})$ yarı-eksen uzunlukları.
+\end{teorem}
+
+\begin{proof}
+$\bar{\mathbf{X}}\sim\Normal(\boldsymbol\mu,\Sigma/n)$; standartlaştırarak $\mathbf{Z}=\Sigma^{-1/2}(\bar{\mathbf{X}}-\boldsymbol\mu)\sqrt{n}\sim\Normal(\mathbf{0},I_p)$. $\|\mathbf{Z}\|^2=(\bar{\mathbf{X}}-\boldsymbol\mu)^\top(n\Sigma^{-1})(\bar{\mathbf{X}}-\boldsymbol\mu)\sim\chi^2_p$ (standart Normal karelerinin toplamı).
+\end{proof}
+
+\begin{teorem}[Asimptotik güven bölgesi — genel]\label{thm:asimptotik_bolge}
+MLE $\hat{\boldsymbol\theta}_n$ için:
+\[
+  n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta)^\top I(\boldsymbol\theta) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta) \dto \chi^2_p.
+\]
+Büyük örneklem güven bölgesi: $\{\boldsymbol\theta: n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta)^\top \hat{I}(\hat{\boldsymbol\theta}_n)(\hat{\boldsymbol\theta}_n-\boldsymbol\theta)\leq\chi^2_{p,\alpha}\}$.
+\end{teorem}
+
+\begin{ornek}[İki parametreli Normal güven elipsi]
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$, ikisi bilinmiyor; ilgi parametresi $(\mu,\sigma^2)$. Fisher bilgisi diyagonal: $I_{11}=1/\sigma^2$, $I_{22}=1/(2\sigma^4)$. Elipsin eksenler $(\mu-\hat\mu)^2/(n\hat\sigma^2)$ ve $(\sigma^2-\hat\sigma^2)^2/(2\hat\sigma^4/n)$ yönünde. İki boyutlu elipsin alanı tek boyutlu aralıkların yüzey alanıyla değil yüzey dışıyla kıyaslanır (Bonferroni daha muhafazakâr).
+\end{ornek}
+
+\begin{kritiksorgu}
+Bireysel $p$ adet \%95 GA'yı oluşturmak yerine neden doğrudan güven bölgesi kurarız? Bireysel aralıkların kesişimi güven bölgesi değildir: iki \%95 aralığın kesişimi en az \%90 kapsama garantisi verir (Bonferroni). Eliptik güven bölgesi tam $1-\alpha$ garantisiyle daha verimli bilgi taşır.
+\end{kritiksorgu}
+
+%% ============================================================
+\section{Tolerans Aralıkları}
+\label{sec:tolerans_aralik}
+%% ============================================================
+
+\begin{tanim}[Tolerans aralığı]\label{def:tolerans_aralik}
+$(1-\alpha)$ güvenle popülasyonun en az $\gamma$ oranını kapsayan aralık \textbf{tolerans aralığı} \emph{(tolerance interval)}: $L,U$ rasgeleler; gözlemlenmemiş $X_{\text{yeni}}$ için
+\[
+  \Prob\!\bigl[\Prob(L\leq X_{\text{yeni}}\leq U\mid\mathbf{X})\geq\gamma\bigr]\geq1-\alpha.
+\]
+Tolerans aralığı, güven aralığından farklıdır: bireysel gözlemleri kapsar, parametreyi değil.
+\end{tanim}
+
+\begin{teorem}[Normal tolerans aralığı]\label{thm:normal_tolerans}
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$; $\mu,\sigma^2$ bilinmiyor. $(1-\alpha)$ güven ve $\gamma$ kapsama oranı için tolerans aralığı:
+\[
+  \bar{X} \pm k\,S,
+\]
+$k = k(n,\gamma,\alpha)$ tolerans çarpanı tablodan veya şu yaklaşımla: $k\approx\frac{z_{(1-\gamma)/2}}{\sqrt{1-z_\alpha^2/(2(n-1))}}\sqrt{1+\frac{1}{n}}$ (Wald-Wolfowitz yaklaşımı).
+\end{teorem}
+
+\begin{proof}[Proof — taslak]
+$X_{\text{yeni}}|\mu,\sigma\sim\Normal(\mu,\sigma^2)$; $\bar X|\mu,\sigma\sim\Normal(\mu,\sigma^2/n)$. $\Prob(|\bar X-X_{\text{yeni}}|>kS)$ ifadesi $\chi^2$ ve $t$ dağılımlarını içerir; integral kapalı formda değil. $k$ tablo değerleri Monte Carlo veya yaklaşımla hesaplanır.
+\end{proof}
+
+\begin{ornek}[Tolerans aralığı — vida uzunluğu]
+Makine $n=25$ vida üretti; $\bar{x}=50.2$ mm, $s=0.3$ mm. \%95 güvenle vidaların \%99'unu kapsayan tolerans aralığını bul. $k(25,0.99,0.05)\approx3.46$ (tablodan). Aralık: $50.2\pm3.46\cdot0.3=50.2\pm1.04=[49.16,\;51.24]$ mm.
+\end{ornek}
+
+\begin{hataanalizi}
+Üç farklı aralık türünü karıştırmayın:
+\begin{itemize}
+  \item \textbf{Güven aralığı}: $\mu$ gibi bir parametre için — aralık ortalamayı kapsar.
+  \item \textbf{Tahmin aralığı}: tek bir yeni gözlem için — $X_{\text{yeni}}\in[L,U]$.
+  \item \textbf{Tolerans aralığı}: popülasyonun $\gamma$ oranı için — hem gelecek hem geçmiş gözlemler.
+\end{itemize}
+Tolerans aralığı en geniş, güven aralığı en dar. Kalite güvencesinde tolerans aralığı standart.
+\end{hataanalizi}
+
+\begin{teorem}[Tahmin aralığı — tek yeni gözlem]\label{thm:tahmin_aralik}
+$X_{\text{yeni}}$ bağımsız, $\Normal(\mu,\sigma^2)$'dan. $\mu,\sigma^2$ bilinmiyor. $(1-\alpha)$ tahmin aralığı \emph{(prediction interval)}:
+\[
+  \bar X \pm t_{n-1,\alpha/2}\,S\sqrt{1+\frac{1}{n}}.
+\]
+Güven aralığından $\sqrt{1+1/n}$ faktörü kadar geniş (yeni gözlem belirsizliği ekstra).
+\end{teorem}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Kalite güvencesi:} Tolerans aralıkları üretim spesifikasyonu belirleme standardı (ISO 16269-6). \textbf{Tıbbi teşhis:} Referans aralıkları (sağlıklı popülasyonun \%95'ini kapsayan değerler) birer tolerans aralığıdır. \textbf{Çevre mühendisliği:} Kirletici konsantrasyonu için üst tolerans sınırı yasal düzenleme referansı.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
