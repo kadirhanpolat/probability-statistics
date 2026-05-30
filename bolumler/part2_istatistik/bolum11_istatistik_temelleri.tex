@@ -480,6 +480,84 @@ $T$ yeterli ve $V$ herhangi bir istatistik. Eğer $\Prob_\theta(V\leq v\mid T=t)
 \end{teorem}
 
 % =====================================================================
+\section{Bayes Çıkarımına Giriş}
+\label{sec:bayes_giris}
+% =====================================================================
+
+\begin{kesif}
+Frekansçı istatistikte $\theta$ sabit (bilinmeyen) bir değerdir; Bayesçi istatistikte ise $\theta$ da rasgele bir değişkendir ve ona dair önsel (prior) inancımızı bir olasılık dağılımı olarak ifade ederiz.
+\end{kesif}
+
+\begin{tanim}[Bayes teoremi — istatistik]\label{def:bayes_istatistik}
+$\theta$'nın önsel dağılımı $\pi(\theta)$, veri olabilirliği $f(\mathbf{x}|\theta)$. \textbf{Sonsal dağılım} \emph{(posterior distribution)}:
+\[
+  \pi(\theta|\mathbf{x}) = \frac{f(\mathbf{x}|\theta)\pi(\theta)}{m(\mathbf{x})}, \quad m(\mathbf{x}) = \int f(\mathbf{x}|\theta)\pi(\theta)\,d\theta.
+\]
+$m(\mathbf{x})$ marjinal olabilirlik \emph{(marginal likelihood)} veya kanıt \emph{(evidence)}.
+\end{tanim}
+
+\begin{tanim}[Konjugat önsel]\label{def:konjugat_onsel}
+$\pi(\theta)$ \textbf{konjugat önsel} \emph{(conjugate prior)}: sonsal $\pi(\theta|\mathbf{x})$ önsel ile aynı ailedendir. Hesap kolaylığı sağlar.
+\begin{itemize}
+  \item $\Binom(n,p)$ için $p\sim\Beta(\alpha,\beta)$: sonsal $\Beta(\alpha+\sum x_i, \beta+n-\sum x_i)$.
+  \item $\Pois(\lambda)$ için $\lambda\sim\Gama(\alpha,\beta)$: sonsal $\Gama(\alpha+n\bar x, \beta+n)$.
+  \item $\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinen) için $\mu\sim\Normal(\mu_0,\tau^2)$: sonsal $\Normal(\mu_1,\tau_1^2)$.
+\end{itemize}
+\end{tanim}
+
+\begin{teorem}[Normal konjugat güncelleme]\label{thm:normal_konjugat}
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinen); $\mu\sim\Normal(\mu_0,\tau^2)$. Sonsal:
+\[
+  \mu|\mathbf{X}\sim\Normal(\mu_1,\tau_1^2), \quad
+  \mu_1 = \frac{\mu_0/\tau^2 + n\bar{X}/\sigma^2}{1/\tau^2+n/\sigma^2}, \quad
+  \tau_1^2 = \frac{1}{1/\tau^2+n/\sigma^2}.
+\]
+\end{teorem}
+
+\begin{proof}
+$\pi(\mu|\mathbf{x})\propto\pi(\mu)f(\mathbf{x}|\mu)$. İkisi de Gaussian; çarpım da Gaussian (karede lineer). Üsteki $\exp[-(\mu-\mu_1)^2/(2\tau_1^2)+\text{sabit}]$ biçimine getirilince $\mu_1$ ve $\tau_1^2$ elde edilir.
+\end{proof}
+
+\begin{ornek}[Bayesçi ağırlıklı ortalama]
+$\mu_1 = w_0\mu_0 + w_1\bar{X}$ ($w_0=(\sigma^2/n)/(\tau^2+\sigma^2/n)$, $w_1=\tau^2/(\tau^2+\sigma^2/n)$). Sonsal ortalama, önsel ortalama ile örneklem ortalamasının ağırlıklı ortalamasıdır. $n\to\infty$: $\mu_1\to\bar{X}$ (veri öneli baskılar); $\tau\to\infty$: $\mu_1\to\bar{X}$ (bilgisiz önsel).
+\end{ornek}
+
+\begin{teorem}[Bayes tahmincisi ve OKH]\label{thm:bayes_tahmin}
+Karesel kayıp altında Bayes tahmincisi sonsal ortalama: $\hat\theta_{\text{Bayes}}=E[\theta|\mathbf{X}]$.
+
+Mutlak değer kaybında Bayes tahmincisi sonsal medyan.
+\end{teorem}
+
+\begin{proof}
+$E_{\theta|\mathbf{x}}[(\theta-d)^2]$ minimizasyonu: türev alıp sıfıra eşitle; $d^*=E[\theta|\mathbf{x}]$.
+\end{proof}
+
+\begin{kritiksorgu}
+Frekansçı ve Bayesçi yaklaşım ne zaman aynı sonucu verir? Büyük örneklemde (Bernstein-von Mises teoremi) sonsal $\Normal(\hat\theta_{\mathrm{MLE}}, I(\hat\theta)^{-1}/n)$'ye yakınsar — Bayes ve frekansçı güven aralıkları örtüşür. Küçük örneklemde önsel seçim kritik önem taşır.
+\end{kritiksorgu}
+
+% =====================================================================
+\section{Yeterli İstatistik ve Bayes}
+\label{sec:yeterli_bayes}
+% =====================================================================
+
+\begin{teorem}[Yeterlilik ve Bayes]\label{thm:yeterlilik_bayes}
+$T$ yeterli istatistik ise $\pi(\theta|\mathbf{x}) = \pi(\theta|T(\mathbf{x}))$. Yani Bayesçi güncelleme tamamen $T$ üzerinden gerçekleşir; orijinal verinin tüm $\theta$-ilgili bilgisi $T$'de toplanmıştır.
+\end{teorem}
+
+\begin{proof}
+$\pi(\theta|\mathbf{x})\propto f(\mathbf{x}|\theta)\pi(\theta) = g(T(\mathbf{x}),\theta)h(\mathbf{x})\pi(\theta)$. $h(\mathbf{x})$ $\theta$'dan bağımsız; normalleştirmede iptal olur. Dolayısıyla $\pi(\theta|\mathbf{x})\propto g(T,\theta)\pi(\theta)=\pi(\theta|T)$.
+\end{proof}
+
+\begin{ornek}[Bayes ve yeterlilik — Bernoulli]
+$X_i\iid\mathrm{Ber}(p)$; $T=\sum X_i$ yeterli. Sonsal $\pi(p|T=t)=\pi(p|\mathbf{x})$ — 100 gözlem yerine sadece $t=\sum x_i$ yeterli. Hiçbir ek bilgi kaybolmadı.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Makine öğrenmesi:} Bayesçi sinir ağları (BNN) belirsizlik tahmini için sonsal dağılımı öğrenir. \textbf{Tıbbi teşhis:} Ön-test/son-test olasılığı (Bayes güncellemesi) tanısal testlerin yorumunda temel. \textbf{Sinyal işleme:} Kalman filtresi Bayesçi güncellemeler zinciridir (Gaussian konjugat).
+\end{disiplinlerarasibaglan}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
