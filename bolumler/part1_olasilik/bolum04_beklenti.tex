@@ -683,6 +683,166 @@ Bölüm~\ref{chp:merkezi_limit}'te KF ile MLT kanıtı.
 \end{kopru}
 
 % =====================================================================
+\section{Olasılık Eşitsizlikleri}
+\label{sec:olasilik_esitsizlikleri}
+% =====================================================================
+
+\begin{motivasyon}[Neden Eşitsizlikler?]
+Bir dağılımı tam olarak bilmeden $P(|X - \mu| > \varepsilon)$ hakkında ne söyleyebiliriz?
+Bu soru yalnızca momentlere dayalı sınırlarla yanıtlanabilir.
+Markov, Chebyshev ve Jensen eşitsizlikleri bu sınırların sistematik kaynağıdır;
+Büyük Sayılar Kanunu ve Büyük Sapmalar teorisinin altyapısını oluştururlar.
+\end{motivasyon}
+
+\begin{teorem}[Markov Eşitsizliği]
+\label{thm:markov_beklenti}
+$X \geq 0$ ve $E[X] < \infty$. Her $a > 0$ için
+\[
+  P(X \geq a) \leq \frac{E[X]}{a}.
+\]
+\end{teorem}
+
+\begin{proof}
+$X \geq a\,\mathbf{1}_{\{X \geq a\}}$ (çünkü $X \geq 0$).
+Beklenti alınca: $E[X] \geq a\,P(X \geq a)$. Düzenlenince sonuç.
+\end{proof}
+
+\begin{teorem}[Chebyshev Eşitsizliği — Genelleştirilmiş]
+\label{thm:chebyshev_genellestirilmis}
+$\varphi : \mathbb{R} \to [0, \infty)$ simetrik ve artan ($|x|$'de) fonksiyon,
+$\varphi(a) > 0$. O zaman
+\[
+  P(|X - \mu| \geq a) \leq \frac{E[\varphi(X-\mu)]}{\varphi(a)}.
+\]
+Özel durum $\varphi(x) = x^2$: $P(|X-\mu|\geq a) \leq \mathrm{Var}(X)/a^2$.
+\end{teorem}
+
+\begin{proof}
+$\varphi(|X-\mu|) \geq \varphi(a)\,\mathbf{1}_{\{|X-\mu| \geq a\}}$ ($\varphi$ artan).
+Markov: $E[\varphi(|X-\mu|)] \geq \varphi(a)\,P(|X-\mu|\geq a)$.
+\end{proof}
+
+\begin{teorem}[Tek Taraflı Chebyshev (Cantelli Eşitsizliği)]
+\label{thm:cantelli}
+$E[X] = \mu$, $\mathrm{Var}(X) = \sigma^2 < \infty$. Her $\lambda > 0$ için
+\[
+  P(X - \mu \geq \lambda) \leq \frac{\sigma^2}{\sigma^2 + \lambda^2}.
+\]
+\end{teorem}
+
+\begin{proof}
+Her $t > 0$ için $P(X-\mu \geq \lambda) = P(X-\mu+t \geq \lambda+t)$.
+Markov ($X-\mu+t \geq 0$ değil; bunun yerine $(X-\mu+t)^2$ ile):
+$P((X-\mu+t)^2 \geq (\lambda+t)^2) \leq E[(X-\mu+t)^2]/(\lambda+t)^2 = (\sigma^2+t^2)/(\lambda+t)^2$.
+$t = \sigma^2/\lambda$'da minimize et: $(\sigma^2 + \sigma^4/\lambda^2)/(\lambda + \sigma^2/\lambda)^2 = \sigma^2/(\sigma^2+\lambda^2)$.
+\end{proof}
+
+\begin{ornek}[Eşitsizliklerin Karşılaştırması]
+$X \sim \Normal(0,1)$, $a = 3$.
+\begin{itemize}
+  \item Markov ($|X|$ ile): $P(|X| \geq 3) \leq E[|X|]/3 = \sqrt{2/\pi}/3 \approx 0.266$.
+  \item Chebyshev: $P(|X| \geq 3) \leq 1/9 \approx 0.111$.
+  \item Cantelli (tek taraf): $P(X \geq 3) \leq 1/(1+9) = 0.1$.
+  \item Gerçek değer: $P(|X| \geq 3) = 2(1-\Phi(3)) \approx 0.0027$.
+\end{itemize}
+Eşitsizlikler "kötü" ama dağılım bilgisi olmadan geçerlidir.
+\end{ornek}
+
+\begin{teorem}[Hoeffding Eşitsizliği]
+\label{thm:hoeffding}
+$X_1, \ldots, X_n$ bağımsız, $a_i \leq X_i \leq b_i$ n.k., $E[X_i] = \mu_i$.
+Her $t > 0$ için
+\[
+  P\!\left(\sum_{i=1}^n (X_i - \mu_i) \geq t\right) \leq \exp\!\left(-\frac{2t^2}{\sum_{i=1}^n(b_i-a_i)^2}\right).
+\]
+\end{teorem}
+
+\begin{proof}[İspat Taslağı]
+Hoeffding lemması: $E[X_i] = 0$, $a_i \leq X_i \leq b_i$ ise
+$E[e^{sX_i}] \leq e^{s^2(b_i-a_i)^2/8}$.
+(Konvekslik: $e^{sx} \leq \frac{b-x}{b-a}e^{sa} + \frac{x-a}{b-a}e^{sb}$;
+beklenti al, $f(u) = -su + e^u$'nun Taylor açılımıyla sınırla.)
+Markov + MÜF çarpımı: $P(\sum(X_i-\mu_i)\geq t) \leq e^{-st}\prod e^{s^2(b_i-a_i)^2/8}$.
+$s = 4t/\sum(b_i-a_i)^2$'de minimize et: istenen sınır.
+\end{proof}
+
+\begin{ornek}[Makine Öğrenmesi — Genelleme Hatası]
+$n$ bağımsız veri; her $X_i \in [0,1]$, $E[X_i] = \mu$.
+Hoeffding: $P(\bar{X}_n - \mu \geq \varepsilon) \leq e^{-2n\varepsilon^2}$.
+$n = 1000$, $\varepsilon = 0.05$: $P \leq e^{-5} \approx 0.007$.
+PAC öğrenmesinde bu tür sınırlar "garantili öğrenme" teorisinin temelidir.
+\end{ornek}
+
+\begin{mikroozet}
+Markov: $P(X \geq a) \leq E[X]/a$ ($X \geq 0$).
+Chebyshev: $P(|X-\mu|\geq a) \leq \sigma^2/a^2$.
+Cantelli: tek taraflı, $\sigma^2/(\sigma^2+\lambda^2)$.
+Hoeffding: sınırlı değişkenler için üstel sınır.
+\end{mikroozet}
+
+% =====================================================================
+\section{Değişim Katsayısı ve Standartlaştırma}
+\label{sec:degisim_katsayisi}
+% =====================================================================
+
+\begin{tanim}[Değişim Katsayısı]
+\label{def:degisim_katsayisi}
+$\mu = E[X] \neq 0$ ve $\sigma = \sqrt{\mathrm{Var}(X)}$ için
+\textbf{değişim katsayısı} (coefficient of variation):
+\[
+  \mathrm{CV}(X) = \frac{\sigma}{|\mu|}.
+\]
+Boyutsuz göreli değişkenlik ölçüsü; farklı birim veya ölçekteki verileri karşılaştırır.
+\end{tanim}
+
+\begin{ornek}[CV Karşılaştırması]
+İki yatırım:
+$X$: $\mu_X = 100$, $\sigma_X = 15$ $\Rightarrow$ $\mathrm{CV}(X) = 0.15$.
+$Y$: $\mu_Y = 1000$, $\sigma_Y = 120$ $\Rightarrow$ $\mathrm{CV}(Y) = 0.12$.
+Mutlak değişkenlik ($\sigma$) bakımından $Y$ daha değişken;
+göreli değişkenlik (CV) bakımından $X$ daha riskli.
+\end{ornek}
+
+\begin{tanim}[Çarpıklık ve Basıklık]
+\label{def:carpiklik_basiklik}
+$\mu_k' = E[(X-\mu)^k]$ $k$'ıncı merkezi moment.
+\[
+  \text{Çarpıklık (skewness):} \quad \gamma_1 = \frac{\mu_3'}{\sigma^3}.
+\]
+\[
+  \text{Basıklık (kurtosis):} \quad \gamma_2 = \frac{\mu_4'}{\sigma^4} - 3.
+\]
+$\gamma_2 = 0$: Normal dağılım. $\gamma_2 > 0$: ağır kuyruk (leptokurtik).
+$\gamma_2 < 0$: hafif kuyruk (platikurtik).
+\end{tanim}
+
+\begin{teorem}[Normal Dağılımın Momentleri]
+\label{thm:normal_momentler}
+$X \sim \Normal(0,1)$: tüm tek momentler sıfır;
+$E[X^{2k}] = (2k-1)!! = (2k)!/(2^k k!)$.
+Özellikle: $E[X^4] = 3$ $\Rightarrow$ $\gamma_2 = 3 - 3 = 0$.
+\end{teorem}
+
+\begin{proof}
+$E[X^{2k}] = \int_{-\infty}^\infty x^{2k} \phi(x) dx$.
+Parçalı integral: $u = x^{2k-1}$, $dv = x\phi(x)dx = -\phi'(x)dx$; $v = -\phi(x)$.
+$\int x^{2k}\phi(x)dx = [-x^{2k-1}\phi(x)]_{-\infty}^\infty + (2k-1)\int x^{2k-2}\phi(x)dx = (2k-1)E[X^{2k-2}]$.
+Yinelemeli: $E[X^{2k}] = (2k-1)(2k-3)\cdots 1 = (2k-1)!!$.
+\end{proof}
+
+\begin{ornek}[Çarpıklık Yorumu]
+$X \sim \Exp(\lambda)$: $\mu_3' = 2/\lambda^3$, $\sigma^3 = 1/\lambda^3$, $\gamma_1 = 2 > 0$: sağa çarpık.
+$X \sim \Beta(2,5)$: $\gamma_1 = 2(5-2)\sqrt{(2+5+1)/((2\cdot5)\cdot 1)} / (2+5+2) > 0$: sağa çarpık.
+Gelir dağılımları tipik olarak pozitif çarpık: kalabalık düşük-orta, seyrek yüksek gelirler.
+\end{ornek}
+
+\begin{mikroozet}
+CV: boyutsuz göreli değişkenlik; $\sigma/|\mu|$.
+Çarpıklık: $\mu_3'/\sigma^3$; yönsel asimetri.
+Basıklık fazlası: $\mu_4'/\sigma^4 - 3$; Normal'e göre kuyruk ağırlığı.
+\end{mikroozet}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
@@ -820,6 +980,43 @@ $E[\mathrm{Var}(X\mid\mathcal{G})] = E[E[X^2\mid\mathcal{G}] - (E[X\mid\mathcal{
 $\mathrm{Var}(E[X\mid\mathcal{G}]) = E[(E[X\mid\mathcal{G}])^2] - (E[E[X\mid\mathcal{G}]])^2
 = E[(E[X\mid\mathcal{G}])^2] - (E[X])^2$.
 Toplam: $E[X^2] - (E[X])^2 = \mathrm{Var}(X)$. \checkmark}
+
+\begin{alistirma}[Al.4.13]{A}{Chebyshev ve Cantelli Karşılaştırması}
+$X$ rasgele değişken, $E[X] = 2$, $\mathrm{Var}(X) = 1$.
+(a) Chebyshev ile $P(|X - 2| \geq 2)$ için üst sınır verin.
+(b) Cantelli ile $P(X - 2 \geq 2)$ için üst sınır verin.
+(c) Sonuçları karşılaştırın.
+\end{alistirma}
+\alcozum{%
+(a) Chebyshev: $P(|X-2|\geq2) \leq \mathrm{Var}(X)/4 = 1/4$.\\
+(b) Cantelli: $P(X-2\geq2) \leq \sigma^2/(\sigma^2+\lambda^2) = 1/(1+4) = 1/5$.\\
+(c) Cantelli tek taraflı sınır veriyor ve daha keskin: $1/5 < 1/4$.
+Chebyshev iki taraflı; tam $P(X-2\geq2)$ için Cantelli daha iyi.}
+
+\begin{alistirma}[Al.4.14]{B}{Hoeffding Uygulaması}
+$X_1, \ldots, X_{100}$ bağımsız, $X_i \in [0,1]$, $E[X_i] = 0.5$.
+(a) Hoeffding eşitsizliği ile $P(\bar{X}_{100} \geq 0.6)$ için üst sınır verin.
+(b) Chebyshev ile (varyanslı $\sigma^2 = 1/12$ alarak) karşılaştırın.
+(c) $P \leq 0.01$ için gereken minimum $n$'yi Hoeffding ile bulun ($\varepsilon = 0.1$).
+\end{alistirma}
+\alcozum{%
+(a) Hoeffding: $P(\bar{X}_n - 0.5 \geq 0.1) \leq e^{-2n(0.1)^2/1} = e^{-2(100)(0.01)} = e^{-2} \approx 0.135$.\\
+(b) Chebyshev: $P(|\bar{X}_{100}-0.5|\geq0.1) \leq \sigma^2/(n\varepsilon^2) = (1/12)/(100\cdot0.01) = 1/12 \approx 0.083$.
+Bu örnekte Chebyshev daha iyi — Hoeffding (sınırlı) avantajı daha büyük $n$'de belirginleşir.\\
+(c) $e^{-2n\varepsilon^2} \leq 0.01$: $-2n(0.01) \leq \ln(0.01) = -4.605$; $n \geq 230$.}
+
+\begin{alistirma}[Al.4.15]{B}{Çarpıklık ve Basıklık}
+$X \sim \Exp(1)$: $E[X] = 1$, $\mathrm{Var}(X) = 1$.
+(a) $E[X^3]$ ve $E[X^4]$'ü hesaplayın ($E[X^k] = k!$ Üstel için).
+(b) Çarpıklık $\gamma_1 = (E[(X-\mu)^3])/\sigma^3$'ü hesaplayın.
+(c) Basıklık fazlasını $\gamma_2 = E[(X-\mu)^4]/\sigma^4 - 3$ hesaplayın.
+\end{alistirma}
+\alcozum{%
+(a) $E[X^3] = 3! = 6$; $E[X^4] = 4! = 24$.\\
+(b) $\mu_3' = E[(X-1)^3] = E[X^3 - 3X^2 + 3X - 1] = 6 - 3(2) + 3(1) - 1 = 6-6+3-1 = 2$.
+$\gamma_1 = 2/1^3 = 2$: kuvvetli sağ çarpıklık.\\
+(c) $\mu_4' = E[(X-1)^4] = E[X^4 - 4X^3 + 6X^2 - 4X + 1] = 24 - 24 + 12 - 4 + 1 = 9$.
+$\gamma_2 = 9/1 - 3 = 6$: kuvvetli ağır kuyruk (Normal'den 6 kat fazla).}
 
 % =====================================================================
 \endinput
