@@ -180,8 +180,8 @@ Bölüm-kaynak eşlemesi: `02_KAYNAK_ANALIZI.md §8`
 - LaTeX altyapısı: `olasilik.sty`, `maarif.sty`, `main-ogrenci.tex`, `main-egitmen.tex`
 - Part I: Böl.0–8 (zorunlu) + Böl.9*, Böl.10* (opsiyonel) — 11 bölüm
 - Part II: Böl.11–16 (zorunlu) + Böl.17*, Böl.18* (opsiyonel) — 8 bölüm
-- Ekler A–F: ölçüm teorisi, dağılım tabloları, istatistik tabloları, terminoloji, ispat teknikleri, kaynakça
-- **LaTeX derleme: TAMAMLANDI** — `main-ogrenci.pdf` (168 sayfa, 0 hata) + `main-egitmen.pdf` (192 sayfa, 0 hata)
+- Ekler A–G: ölçüm teorisi, dağılım tabloları, istatistik tabloları, terminoloji, ispat teknikleri, kaynakça, kapsamlı örnekler
+- **LaTeX derleme: TAMAMLANDI** — `main-ogrenci.pdf` (300 sayfa, 0 hata) + `main-egitmen.pdf` (340 sayfa, 0 hata)
 
 **Çözülen derleme sorunları (commit 4ee4d2a):**
 - `bolumler/bblopts.cfg` eklendi — arabi paketinin enumitem'a müdahalesi önlendi
