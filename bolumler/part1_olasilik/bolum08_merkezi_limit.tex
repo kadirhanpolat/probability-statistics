@@ -1,0 +1,537 @@
+% =====================================================================
+%  BÖLÜM 8: Merkezi Limit Teoremi ve Asimptotik Teori
+%  Kaynak: Feller Vol.II; Billingsley; Durrett; Klenke; Gnedenko
+% =====================================================================
+\chapter{Merkezi Limit Teoremi ve Asimptotik Teori}
+\label{chp:merkezi_limit}
+
+\bolumalinti{%
+  Merkezi Limit Teoremi, olasılık teorisinin en güzel ve en derin sonuçlarından biridir.
+  Normal dağılım, sanki evrenin derinliklerine işlenmiş gibidir.%
+}{William Feller, \textit{An Introduction to Probability Theory and Its Applications}, Cilt II}
+
+% ---- Kazanımlar (TYMM) ----
+\begin{kazanimlar}
+Bu bölümün sonunda öğrenci:
+\begin{itemize}[leftmargin=1.8em]
+  \item Merkezi Limit Teoremi'ni (MLT) ifade edip karakteristik fonksiyon yöntemiyle ispatlayabilir;
+        De Moivre-Laplace özel durumunu tarihsel bağlamda açıklayabilir.
+  \item Lindeberg koşulunu tanımlayabilir; bağımsız ama özdeş dağılımlı olmayan
+        değişkenler için MLT'nin geçerli olduğu koşulları açıklayabilir.
+  \item Çok boyutlu MLT'yi ifade edip kovaryans yapısıyla ilişkilendirebilir.
+  \item Berry-Esseen teoremini kullanarak yakınsama hızına sayısal üst sınır verebilir.
+  \item Yinelenmiş logaritma kanununun MLT ile ilişkisini sezgisel düzeyde açıklayabilir.
+  \item Delta yöntemini büyük örneklem istatistiğine uygulayabilir;
+        normal yaklaşım kalitesini değerlendirebilir.
+\end{itemize}
+\end{kazanimlar}
+
+% ---- Motivasyon ----
+\begin{motivasyon}
+Büyük Sayılar Kanunu der ki: $\bar{X}_n \to \mu$. Soru şu: bu yakınsama \emph{ne kadar hızlı}
+gerçekleşir ve $\bar{X}_n$ ile $\mu$ arasındaki fark \emph{nasıl dağılır}?
+
+Merkezi Limit Teoremi yanıtlar: $\sqrt{n}(\bar{X}_n - \mu)/\sigma$ dağılımı,
+$X_i$'lerin dağılımından \emph{bağımsız} olarak Normal(0,1)'e yakınsar.
+Bu olağanüstü evrensellik, normal dağılımın olasılık ve istatistiğin merkezine
+yerleşmesinin matematiksel gerekçesidir.
+
+\medskip
+\textbf{Köprü.} Bölüm~\ref{chp:beklenti}'deki karakteristik fonksiyon,
+Bölüm~\ref{chp:donusumler}'deki delta yöntemi ve Bölüm~\ref{chp:buyuk_sayilar}'daki
+Slutsky teoremi bu bölümün araçlarıdır.
+Bölüm~\ref{chp:istatistik_temelleri}'nde büyük örneklem istatistiği bu sonuçlara dayanır.
+\end{motivasyon}
+
+% =====================================================================
+\section{De Moivre-Laplace Teoremi}
+\label{sec:demoivre_laplace}
+% =====================================================================
+
+\begin{tarihselnot}
+Abraham de Moivre (1733) binom dağılımının büyük $n$ için normale yakınsadığını
+fark etti. Pierre-Simon Laplace (1812) bunu daha geniş bir çerçevede ifade etti.
+Carl Friedrich Gauss ise normal dağılımı hata teorisi bağlamında bağımsız olarak geliştirdi.
+Genel i.i.d.\ versiyonu Aleksandr Lyapunov (1901) ve Jarl Waldemar Lindeberg (1922) tarafından
+ispatlandı.
+\end{tarihselnot}
+
+\begin{teorem}[De Moivre-Laplace]
+\label{thm:demoivre_laplace}
+$X_i \sim \mathrm{Bernoulli}(p)$ bağımsız, $S_n = \sum_{i=1}^n X_i \sim \Binom(n,p)$.
+$\mu = np$, $\sigma^2 = npq$. O zaman her $a < b$'de
+\[
+  P\!\left(a \leq \frac{S_n - np}{\sqrt{npq}} \leq b\right) \to \Phi(b) - \Phi(a) \quad (n\to\infty).
+\]
+\end{teorem}
+
+\begin{proof}[İskelet İspat — Stirling Yaklaşımı]
+Stirling formülü: $k! \approx \sqrt{2\pi k}(k/e)^k$.
+$P(S_n = k)$ için $\binom{n}{k}p^kq^{n-k}$'yi Stirling ile açarak
+$k = np + x\sqrt{npq}$ ($x$ sabit) için bu olasılığın
+$\phi(x)/\sqrt{npq}$'ya yakınsadığı gösterilir (yerel limit teoremi).
+Yerel limit toplamından dağılımla yakınsama elde edilir.
+\end{proof}
+
+\begin{ornek}[Binom Normal Yaklaşımı]
+$n = 100$, $p = 0.4$: $\mu = 40$, $\sigma = \sqrt{24} \approx 4.90$.
+$P(35 \leq S_{100} \leq 45) \approx \Phi\!\left(\frac{45.5-40}{4.90}\right) - \Phi\!\left(\frac{34.5-40}{4.90}\right)$
+$= \Phi(1.12) - \Phi(-1.12) \approx 0.7372$.
+(Süreklilik düzeltmesi: ayrık $\to$ sürekli, sınırlara $\pm 0.5$ eklenir.)
+\end{ornek}
+
+% =====================================================================
+\section{Genel Merkezi Limit Teoremi}
+\label{sec:genel_mlt}
+% =====================================================================
+
+\begin{teorem}[Merkezi Limit Teoremi — i.i.d.\ Durum]
+\label{thm:mlt}
+$X_1, X_2, \ldots$ i.i.d., $E[X_1] = \mu$, $\mathrm{Var}(X_1) = \sigma^2 \in (0,\infty)$. O zaman
+\[
+  Z_n = \frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} = \frac{\sum_{i=1}^n (X_i - \mu)}{\sigma\sqrt{n}}
+  \xrightarrow{d} \Normal(0,1).
+\]
+\end{teorem}
+
+\begin{proof}[Karakteristik Fonksiyon İspati]
+$Y_i = (X_i - \mu)/\sigma$ tanımı: $E[Y_i] = 0$, $E[Y_i^2] = 1$.
+$\varphi_Y(t) := E[e^{itY_1}]$ KF'si. Taylor açılımı ($E[Y_1]=0$, $E[Y_1^2]=1$):
+\[
+  \varphi_Y(t) = 1 - \frac{t^2}{2} + o(t^2) \quad (t\to 0).
+\]
+$Z_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n Y_i$; bağımsızlık + KF çarpım:
+\[
+  \varphi_{Z_n}(t) = \left[\varphi_Y\!\left(\frac{t}{\sqrt{n}}\right)\right]^n
+  = \left[1 - \frac{t^2}{2n} + o\!\left(\frac{1}{n}\right)\right]^n.
+\]
+$n\to\infty$ limiti: $\left(1 - \frac{t^2}{2n} + o(1/n)\right)^n \to e^{-t^2/2}$.
+(Temel limit: $(1+a_n/n)^n \to e^a$ eğer $na_n \to a$.)
+$e^{-t^2/2}$: standart normalin KF'si.
+Lévy süreklilik teoremi (Teorem~\ref{prop:kf_yaklinsama}): $Z_n \xrightarrow{d} \Normal(0,1)$.
+\end{proof}
+
+\begin{kritiksorgu}
+MLT hangi koşulları \emph{gerektirmez}?
+\begin{itemize}
+  \item $X_i$ normal olmak \emph{zorunda değil} (herhangi bir dağılım).
+  \item $E[X_i^3] < \infty$ \emph{gerekmez} — yalnızca $\sigma^2 < \infty$ yeterli.
+  \item $X_i$'lerin sürekli olması \emph{gerekmez} (kesikli dağılımlar da MLT'ye tabidir).
+\end{itemize}
+Ne gerekir: i.i.d. + sonlu varyans. Bunlar ortadan kalkarsa MLT bozulabilir
+(Cauchy: varyans yok; ağır kuyruklar: stabil dağılımlara yakınsama).
+\end{kritiksorgu}
+
+\begin{onerme}[Yararlı Eşdeğer Formlar]
+\label{prop:mlt_form}
+MLT'den türetilen ifadeler:
+\begin{align*}
+  \sqrt{n}(\bar{X}_n - \mu) &\xrightarrow{d} \Normal(0, \sigma^2), \\
+  \frac{S_n - n\mu}{\sigma\sqrt{n}} &\xrightarrow{d} \Normal(0,1), \\
+  P\!\left(\bar{X}_n \leq \mu + \frac{z_\alpha \sigma}{\sqrt{n}}\right) &\to \Phi(z_\alpha) = 1-\alpha.
+\end{align*}
+\end{onerme}
+
+% =====================================================================
+\section{Lindeberg-Feller Koşulları}
+\label{sec:lindeberg}
+% =====================================================================
+
+\begin{kesif}
+i.i.d.\ koşulunu kaldırırsak ne olur? $X_i$'lerin farklı dağılımları olsa bile
+toplamları normale yakınsar mı? Hangi koşul "hiçbir terim baskın değil"
+sezgisini matematiksel olarak yakalar?
+\end{kesif}
+
+\begin{tanim}[Lindeberg Koşulu]
+\label{def:lindeberg}
+$\{X_{ni}\}$ bağımsız, $E[X_{ni}] = 0$, $\sigma_{ni}^2 = \mathrm{Var}(X_{ni})$,
+$s_n^2 = \sum_{i=1}^n \sigma_{ni}^2$. \textbf{Lindeberg koşulu}: her $\varepsilon > 0$ için
+\[
+  L_n(\varepsilon) = \frac{1}{s_n^2} \sum_{i=1}^n E\!\left[X_{ni}^2 \mathbf{1}_{|X_{ni}|>\varepsilon s_n}\right] \to 0.
+\]
+\end{tanim}
+
+\begin{teorem}[Lindeberg-Feller MLT]
+\label{thm:lindeberg_feller}
+Lindeberg koşulu sağlanıyorsa
+$\frac{1}{s_n}\sum_{i=1}^n X_{ni} \xrightarrow{d} \Normal(0,1)$.
+Tersine (Feller): Lindeberg koşulu, $\max_i \sigma_{ni}/s_n \to 0$ ("ufaklık koşulu")
+altında MLT için zorunludur.
+\end{teorem}
+
+\begin{proof}[Ana Fikir]
+Lindeberg koşulu, her terimin katkısının $s_n$'e kıyasla küçük olmasını garantiler.
+KF ispatında $\varphi_{X_{ni}/s_n}(t) = 1 - t^2\sigma_{ni}^2/(2s_n^2) + R_{ni}(t)$;
+hata terimi $|R_{ni}(t)| \leq E[X_{ni}^2\mathbf{1}_{|X_{ni}|>\varepsilon s_n}] \cdot t^2/s_n^2$.
+Lindeberg koşulu ile hataların toplamı sıfıra gider;
+$\prod \varphi_{X_{ni}/s_n}(t) \to e^{-t^2/2}$ sonucuna varılır.
+Ayrıntı: Billingsley~\cite{Billingsley1995}, §27.
+\end{proof}
+
+\begin{onerme}[Lyapunov Koşulu $\Rightarrow$ Lindeberg]
+\label{prop:lyapunov}
+$\sum_{i=1}^n E[|X_{ni}|^{2+\delta}] / s_n^{2+\delta} \to 0$ (bazı $\delta > 0$)
+$\Rightarrow$ Lindeberg koşulu $\Rightarrow$ MLT.
+Lyapunov koşulu daha hesaplanabilir ama Lindeberg'den daha kuvvetlidir.
+\end{onerme}
+
+\begin{ornek}[Lindeberg Koşulunun Önemi]
+$n$ işçinin maaş artışı: $X_i \sim \Normal(0, \sigma_i^2)$, $\sigma_i^2 = i$.
+$s_n^2 = \sum i = n(n+1)/2$.
+Lyapunov ($\delta=1$): $\sum E[|X_i|^3]/s_n^3 \propto \sum i^{3/2}/n^{3/2} \to 0$.
+Toplam büyük olduğunda bile MLT geçerli; Lindeberg sağlanır.
+\end{ornek}
+
+% =====================================================================
+\section{Çok Boyutlu Merkezi Limit Teoremi}
+\label{sec:cok_boyut_mlt}
+% =====================================================================
+
+\begin{teorem}[Çok Boyutlu MLT]
+\label{thm:cok_boyut_mlt}
+$\mathbf{X}_1, \mathbf{X}_2, \ldots$ i.i.d.\ $\mathbb{R}^k$ değerli,
+$E[\mathbf{X}_i] = \boldsymbol{\mu}$, kovaryans matrisi $\boldsymbol{\Sigma}$ (pozitif yarı-tanımlı). O zaman
+\[
+  \sqrt{n}(\bar{\mathbf{X}}_n - \boldsymbol{\mu}) \xrightarrow{d} \Normal_k(\mathbf{0},\, \boldsymbol{\Sigma}).
+\]
+\end{teorem}
+
+\begin{proof}
+\textbf{Cramér-Wold cihazı:} $\mathbf{Y}_n \xrightarrow{d} \mathbf{Y}$ ($\mathbb{R}^k$'de) ancak ve ancak
+her $\mathbf{a} \in \mathbb{R}^k$ için $\mathbf{a}^\top \mathbf{Y}_n \xrightarrow{d} \mathbf{a}^\top \mathbf{Y}$.
+
+$\mathbf{a}^\top \sqrt{n}(\bar{\mathbf{X}}_n - \boldsymbol{\mu}) = \sqrt{n}(\overline{\mathbf{a}^\top\mathbf{X}_n} - \mathbf{a}^\top\boldsymbol{\mu})$.
+
+$\mathbf{a}^\top\mathbf{X}_i$: i.i.d., ortalama $0$, varyans $\mathbf{a}^\top\boldsymbol{\Sigma}\mathbf{a}$.
+Tek boyutlu MLT: $\xrightarrow{d} \Normal(0, \mathbf{a}^\top\boldsymbol{\Sigma}\mathbf{a})$.
+Bu $\Normal_k(\mathbf{0},\boldsymbol{\Sigma})$'nın doğrusal kombinasyonudur; Cramér-Wold tamamlar.
+\end{proof}
+
+\begin{ornek}[Çok Boyutlu Normal Yaklaşım]
+$(X_i, Y_i)$ i.i.d., $E[\mathbf{X}] = (\mu_X, \mu_Y)^\top$,
+$\boldsymbol{\Sigma} = \begin{pmatrix}\sigma_X^2 & \rho\sigma_X\sigma_Y \\ \rho\sigma_X\sigma_Y & \sigma_Y^2\end{pmatrix}$.
+Büyük $n$: $(\bar{X}_n, \bar{Y}_n)$ yaklaşık $\Normal_2\!\left((\mu_X,\mu_Y)^\top,\, \boldsymbol{\Sigma}/n\right)$.
+Bu, iki boyutlu güven bölgelerinin (elips) temelidir.
+\end{ornek}
+
+% =====================================================================
+\section{Berry-Esseen Teoremi}
+\label{sec:berry_esseen}
+% =====================================================================
+
+\begin{motivasyon}[MLT'nin Hızı Nedir?]
+MLT $Z_n \xrightarrow{d} \Normal(0,1)$ diyor. Ama $n = 30$ iken ne kadar yakınız?
+Berry-Esseen teoremi hata büyüklüğüne sayısal üst sınır koyar.
+\end{motivasyon}
+
+\begin{teorem}[Berry-Esseen]
+\label{thm:berry_esseen}
+$X_1, \ldots, X_n$ i.i.d., $E[X_1] = 0$, $E[X_1^2] = \sigma^2 > 0$,
+$E[|X_1|^3] = \rho < \infty$. O zaman her $x \in \mathbb{R}$ için
+\[
+  \left|F_{Z_n}(x) - \Phi(x)\right| \leq \frac{C\,\rho}{\sigma^3\sqrt{n}},
+\]
+burada $C \leq 0.4748$ (en iyi bilinen sabit; Shevtsova 2010).
+\end{teorem}
+
+İspatın ana fikri: KF'ler farkına Fourier ters dönüşümü uygulanması;
+"yumuşatma" (smoothing) lemması aracılığıyla KDF farkına bağlanması.
+Ayrıntı için Feller Vol.II~\cite{Feller1971}, Bölüm XVI.5 veya Durrett~\cite{Durrett2019}, §3.4.
+
+\begin{ornek}[Berry-Esseen Uygulaması]
+$X_i \sim \mathrm{Bernoulli}(0.5)$: $\sigma^2 = 0.25$, $\rho = E[|X_1|^3] = 0.5$.
+$n = 36$: hata $\leq C \cdot 0.5/(0.25^{3/2}\cdot 6) = C \cdot 0.5/(0.125\cdot 6) \approx 0.663C \approx 0.315$.
+$n = 100$: hata $\leq C\cdot 0.5/(0.125\cdot 10) \approx 0.190$.
+$n = 1000$: hata $\leq 0.060$: 3 ondalık basamak için $n \approx 1000$ önerilir.
+\end{ornek}
+
+\begin{hataanalizi}
+"$n \geq 30$ ise MLT yeterince iyi yaklaşır" — çok kaba bir kuraldır.
+Berry-Esseen: hata üçüncü mutlak moment ile orantılı.
+Çarpık dağılımlarda ($\rho$ büyük) $n = 30$ yetersizdir;
+çok çarpık dağılımlar (lognormal, Pareto) için $n = 1000$ bile tartışmalıdır.
+\end{hataanalizi}
+
+% =====================================================================
+\section{Poisson Yakınsaması}
+\label{sec:poisson_yaklinsama}
+% =====================================================================
+
+\begin{teorem}[Le Cam Teoremi]
+\label{thm:le_cam}
+$X_1, \ldots, X_n$ \emph{bağımsız} (özdeş dağılımlı olmak zorunda değil),
+$X_i \sim \mathrm{Bernoulli}(p_i)$, $S_n = \sum X_i$.
+$\lambda_n = \sum p_i$. Toplam varyasyon mesafesi:
+\[
+  d_{TV}(S_n, \Pois(\lambda_n)) \leq 2\sum_{i=1}^n p_i^2 = 2\sum p_i^2.
+\]
+\end{teorem}
+
+\begin{proof}[Ana Fikir — Stein-Chen Yöntemi]
+Poisson operatörü: $\mathcal{A}f(k) = \lambda f(k+1) - kf(k)$.
+$E[\mathcal{A}f(S_n)]$ ile $E[\mathcal{A}f(\Pois(\lambda))]$ arasındaki fark,
+$\sum p_i^2$ terimlerinden beslenir.
+Ayrıntı: Arratia-Goldstein-Gordon (1989) veya Durrett~\cite{Durrett2019}, §3.6.
+\end{proof}
+
+\begin{ornek}[Le Cam Uygulaması]
+$n = 200$, $p_i = 1/200$ homojen: $\lambda = 1$, $\sum p_i^2 = 200 \cdot (1/200)^2 = 1/200$.
+$d_{TV} \leq 2/200 = 0.01$: Poisson yaklaşımı $S_{200}$ için çok iyidir.
+Bu, Bölüm~\ref{subsec:poisson}'daki binom-Poisson limitinin nicel versiyonudur.
+\end{ornek}
+
+% =====================================================================
+\section{Yinelenmiş Logaritma Kanunu}
+\label{sec:yinelenmis_log}
+% =====================================================================
+
+\begin{motivasyon}[MLT'nin Ötesi]
+MLT: $S_n/({\sigma\sqrt{n}}) \xrightarrow{d} \Normal(0,1)$. Yani $S_n \approx \sigma\sqrt{n}$ büyüklüğünde.
+Ama $S_n/(\sigma\sqrt{n})$'nin üstel rastlanımsal salınımı ne kadar büyük olabilir?
+Sezgi: bazen $k\sigma\sqrt{n}$'ye ($k > 1$) çıkabilir; bu "bazen"in kesin sınırı nedir?
+\end{motivasyon}
+
+\begin{teorem}[Yinelenmiş Logaritma Kanunu (YLK)]
+\label{thm:ylk}
+$X_1, X_2, \ldots$ i.i.d., $E[X_1] = 0$, $\mathrm{Var}(X_1) = \sigma^2 \in (0,\infty)$,
+$S_n = \sum_{i=1}^n X_i$. O zaman
+\[
+  \limsup_{n\to\infty} \frac{S_n}{\sigma\sqrt{2n\ln\ln n}} = 1 \quad \text{n.k.}
+\]
+ve $\liminf_{n\to\infty} S_n/(\sigma\sqrt{2n\ln\ln n}) = -1$ n.k.
+\end{teorem}
+
+İspat oldukça teknik olup Kolmogorov'un orijinal 1929 kanıtına, daha sonra
+Hartman-Wintner (1941) genel versiyonuna dayanır.
+Temel fikir: uygun olayların bağımsızlığı + Borel-Cantelli lemmalarının dikkatli uygulanması.
+
+\begin{onerme}[YLK ve MLT Karşılaştırması]
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & MLT & YLK \\
+\midrule
+Normalize eden & $\sigma\sqrt{n}$ & $\sigma\sqrt{2n\ln\ln n}$ \\
+Limit türü & Dağılımla ($\Normal(0,1)$) & n.k.\ ($\limsup = 1$) \\
+Anlam & Tipik davranış & Ekstrem salınım \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{onerme}
+
+\begin{ornek}[YLK Yorumu]
+$X_i \sim \Normal(0,1)$ bağımsız. $S_n$ neredeyse kesinlikle
+$\pm\sqrt{2n\ln\ln n}$ bandının içinde kalır; bu bandı sonsuz kez tam olarak dokunur
+ama aşmaz (kesin üst sınır).
+$n = 10^6$: bant genişliği $\approx \sqrt{2 \times 10^6 \times \ln\ln(10^6)} \approx \sqrt{2\times10^6\times2.93} \approx 2420$.
+MLT bandı $\sqrt{n} \approx 1000$; YLK bant $\approx 2.4$ kat daha geniş.
+\end{ornek}
+
+% =====================================================================
+\section{Büyük Örneklemde Normal Yaklaşımlar}
+\label{sec:buyuk_orneklem}
+% =====================================================================
+
+\begin{onerme}[Örneklem Ortalaması — Güven Aralığı]
+\label{prop:guven_araligi}
+$X_1, \ldots, X_n$ i.i.d., $\mu$ bilinmiyor, $\sigma^2$ biliniyor. MLT'den:
+\[
+  P\!\left(\bar{X}_n - z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X}_n + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right) \to 1-\alpha.
+\]
+$z_{0.025} = 1.96$: yaklaşık $\%95$ güven aralığı $\bar{X}_n \pm 1.96\sigma/\sqrt{n}$.
+\end{onerme}
+
+\begin{onerme}[Örneklem Oranı]
+\label{prop:oran_guven}
+$X_i \sim \mathrm{Bernoulli}(p)$, $\hat{p} = \bar{X}_n$. MLT:
+$\sqrt{n}(\hat{p}-p)/\sqrt{p(1-p)} \xrightarrow{d} \Normal(0,1)$.
+$p$ bilinmiyorsa $\sqrt{\hat{p}(1-\hat{p})}$ ile değiştirin (Slutsky):
+yaklaşık $\%95$ GA: $\hat{p} \pm 1.96\sqrt{\hat{p}(1-\hat{p})/n}$.
+\end{onerme}
+
+\begin{proof}
+$\hat{p}$ yerine $p$ yazılan versiyonu MLT'nin doğrudan uygulaması.
+$\sqrt{\hat{p}(1-\hat{p})} \xrightarrow{P} \sqrt{p(1-p)}$ (BSK + sürekli haritalama).
+Slutsky: bölüm dağılımla $\Normal(0,1)$'e yakınsar.
+\end{proof}
+
+\begin{teorem}[Delta Yöntemi — MLT Uygulaması]
+\label{thm:delta_mlt}
+$\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} \Normal(0,\sigma^2)$ ve $g$, $\mu$'da türevlenebilir ise
+(Teorem~\ref{thm:delta_yontemi} ile birlikte):
+\[
+  \sqrt{n}(g(\bar{X}_n) - g(\mu)) \xrightarrow{d} \Normal(0,\, \sigma^2[g'(\mu)]^2).
+\]
+Bu, Bölüm~\ref{chp:nokta_tahmin}'deki asimptotik güven aralıklarının temelidir.
+\end{teorem}
+
+\begin{ornek}[Varyans Stabilize Eden Dönüşüm]
+$X_i \sim \mathrm{Bernoulli}(p)$: $\sigma^2 = p(1-p)$, $p$'ye bağlı.
+$g(p) = \arcsin(\sqrt{p})$: $g'(p) = 1/(2\sqrt{p(1-p)})$.
+Delta: $[g'(p)]^2 \sigma^2 = p(1-p)/(4p(1-p)) = 1/4$ — sabit!
+$\sqrt{n}(\arcsin\sqrt{\hat{p}} - \arcsin\sqrt{p}) \xrightarrow{d} \Normal(0, 1/4)$.
+Varyans artık $p$'den bağımsız: güven aralıkları her $p$ için eşit genişlikte.
+\end{ornek}
+
+\begin{onerme}[Poisson Gözlemleri için Normal Yaklaşım]
+$X \sim \Pois(\lambda)$, $\lambda$ büyük:
+$(\sqrt{X} - \sqrt{\lambda}) \xrightarrow{d} \Normal(0, 1/4)$ (karekök dönüşümü).
+$P(X \leq k) \approx \Phi\!\left(\frac{k+0.5-\lambda}{\sqrt{\lambda}}\right)$ (süreklilik düzeltmesi).
+\end{onerme}
+
+% ---- Disiplinlerarası Bağlantı (TYMM) ----
+\begin{kopru}[Disiplinlerarası — Fizik, Sosyal Bilimler, Biyoistatistik]
+\textbf{Fizik:} Termal dengedeki gaz moleküllerinin Maxwell-Boltzmann hız dağılımı,
+çok sayıda bağımsız çarpışmanın MLT sonucu olarak Gaussian'a yakınsar.
+Hata teorisi (Gauss): ölçüm hatalarının bağımsız küçük bileşenlerden oluştuğu
+varsayımı altında toplam hata normal dağılır.\\
+\textbf{Sosyal bilimler:} Büyük örneklem istatistiği (anket, seçim tahminleri, A/B testi)
+%\%95 güven aralığı MLT'ye dayanır. "Hata payı $\pm 3\%$" beyanı normal yaklaşımın uygulamasıdır.\\
+\textbf{Biyoistatistik:} Klinik denemelerde $t$-testi, MLT'nin küçük örneklemlerde
+doğrudan uygulaması değil, $t$ dağılımının kullanımıdır; büyük $n$'de $t_n \to \Normal(0,1)$.
+\end{kopru}
+
+% ---- Öz-Yansıtma ----
+\begin{ozyansima}
+\begin{itemize}[leftmargin=1.8em]
+  \item MLT'nin "evrenselliği" size sezgisel olarak neden doğru geliyor (ya da gelmiyor)?
+  \item Berry-Esseen teoremi "$n \geq 30$ yeterli" kuralını nasıl sorgular?
+  \item Lindeberg koşulu intuisyon olarak ne anlama gelir?
+        "Hiçbir terim baskın değil" yorumunu bir örnekle somutlaştırın.
+  \item YLK ile MLT arasındaki farkı bir grafikle anlatın (sözlü olarak tarif edin).
+\end{itemize}
+\end{ozyansima}
+
+% ---- Köprü Notu ----
+\begin{kopru}
+\textbf{Önceki bölüm:} Bölüm~\ref{chp:buyuk_sayilar} BSK'yı verdi (yakınsama garantisi);
+bu bölüm yakınsama \emph{hızını} ve \emph{dağılımını} belirledi.\\
+\textbf{Sonraki (opsiyonel):} Bölüm~\ref{chp:martingaller} — koşullu beklenti
+ve martingallar; martingal MLT.\\
+\textbf{İstatistik kısmı:} Bölüm~\ref{chp:istatistik_temelleri}'nde asimptotik
+dağılım teorisi; Bölüm~\ref{chp:nokta_tahmin}'de MLE'nin asimptotik normalliği
+($\sqrt{n}(\hat\theta_{MLE}-\theta) \xrightarrow{d} \Normal(0, I(\theta)^{-1})$).
+\defterbaglantisi{bolum08\_mlt.ipynb}{%
+  MLT simülasyonu (çeşitli dağılımlar), Berry-Esseen görselleştirmesi, YLK yolu}
+\end{kopru}
+
+% =====================================================================
+%  ALIŞTIRMALAR
+% =====================================================================
+
+\cozumlualistirmalar
+
+\begin{alistirma}[Al.8.1]{A}{MLT Uygulaması}
+Bir sigorta şirketinin yıllık hasar başına ödeme miktarı $E[X] = 1000$ TL,
+$\sigma = 200$ TL. $n = 100$ hasar için toplam ödemenin $105\,000$ TL'yi aşma
+olasılığını MLT ile tahmin edin.
+\end{alistirma}
+\alcozum{%
+$S_{100}$: $E[S_{100}] = 100\,000$, $\mathrm{Var}(S_{100}) = 100 \times 200^2 = 4\,000\,000$,
+$\sigma_{S_{100}} = 2000$.
+$P(S_{100} > 105\,000) = P\!\left(Z > \frac{105000-100000}{2000}\right) = P(Z > 2.5) = 1-\Phi(2.5) \approx 0.0062$.}
+
+\begin{alistirma}[Al.8.2]{A}{De Moivre-Laplace}
+$S_{400} \sim \Binom(400, 0.4)$.
+(a) $P(150 \leq S_{400} \leq 170)$'i MLT ile hesaplayın (süreklilik düzeltmesiyle).
+(b) $E[S_{400}]$ ve $\sigma_{S_{400}}$'ü hesaplayın.
+\end{alistirma}
+\alcozum{%
+(b) $E[S_{400}]=160$, $\sigma=\sqrt{400\cdot0.4\cdot0.6}=\sqrt{96}\approx9.798$.\\
+(a) Süreklilik düzeltmesiyle: $P(149.5\leq S\leq170.5)$.
+$z_1=(149.5-160)/9.798\approx-1.072$, $z_2=(170.5-160)/9.798\approx1.072$.
+$P\approx\Phi(1.072)-\Phi(-1.072)=2\Phi(1.072)-1\approx2(0.8582)-1=0.7164$.}
+
+\begin{alistirma}[Al.8.3]{B}{Berry-Esseen Sınırı}
+$X_i \sim \mathrm{Exp}(1)$ bağımsız: $\mu=1$, $\sigma^2=1$, $E[|X_1-1|^3]$'ü hesaplayın.
+Berry-Esseen ile $n=50$ için maksimum KDF hatasına üst sınır verin.
+\end{alistirma}
+\alcozum{%
+$Y_i = X_i-1$ için $E[|Y_i|^3]$.
+$E[|X-1|^3] = \int_0^\infty |x-1|^3 e^{-x}dx = \int_0^1(1-x)^3e^{-x}dx + \int_1^\infty(x-1)^3e^{-x}dx$.
+Entegrasyon by parts (veya mgf türevi): $E[|X-1|^3] = 2$ (Exp(1) için).
+$\sigma^3 = 1$, $\rho = 2$.
+Berry-Esseen: hata $\leq C\cdot2/(\sqrt{50})\approx 0.4748\cdot2/7.071\approx0.134$.
+$n=50$, üstel dağılım için maksimum KDF hatası yaklaşık $0.134$.}
+
+\begin{alistirma}[Al.8.4]{B}{Delta Yöntemi + MLT}
+$X_1,\ldots,X_n$ i.i.d.\ $\mathrm{Pois}(\lambda)$, $\bar{X}_n$ örneklem ortalaması.
+(a) MLT: $\sqrt{n}(\bar{X}_n-\lambda)$'nın limit dağılımını yazın.
+(b) $g(x) = \sqrt{x}$ dönüşümü ile $\sqrt{n}(\sqrt{\bar{X}_n}-\sqrt{\lambda})$'nın limit dağılımını bulun.
+(c) (b)'nin sonucu neden uygulamada faydalıdır?
+\end{alistirma}
+\alcozum{%
+(a) $\mathrm{Var}(X_i)=\lambda$: $\sqrt{n}(\bar{X}_n-\lambda)\xrightarrow{d}\Normal(0,\lambda)$.\\
+(b) $g'(x)=1/(2\sqrt{x})$, $g'(\lambda)=1/(2\sqrt{\lambda})$.
+$\sqrt{n}(\sqrt{\bar{X}_n}-\sqrt{\lambda})\xrightarrow{d}\Normal(0,\lambda/(4\lambda))=\Normal(0,1/4)$.\\
+(c) Varyans $1/4$ artık $\lambda$'ya bağlı değil: güven aralığı $\sqrt{\hat\lambda}\pm z_{\alpha/2}/(2\sqrt{n})$.
+Bilinmeyen parametre ile güven aralığı genişliğini kontrol etmek mümkün.}
+
+% ---
+
+\alistirmalar
+
+\begin{alistirma}[Al.8.5]{A}{Örneklem Oranı}
+$n=400$ kişilik ankette $180$ kişi "evet" dedi. $\hat{p}=0.45$.
+(a) $p$ için yaklaşık $\%95$ güven aralığını hesaplayın.
+(b) $p=0.5$ hipotezini $\alpha=0.05$ için test edin ($z$-testi).
+\end{alistirma}
+\alcozum{%
+(a) $\hat{p}=0.45$, $\sqrt{\hat{p}(1-\hat{p})/n}=\sqrt{0.2475/400}=\sqrt{0.000619}\approx0.02488$.
+GA: $0.45\pm1.96\times0.02488 = (0.401, 0.499)$.
+(b) $z=(0.45-0.5)/\sqrt{0.5\times0.5/400}=(−0.05)/0.025=−2.0$.
+$|z|=2.0>1.96$: $H_0$ reddedilir, $\alpha=0.05$.}
+
+\begin{alistirma}[Al.8.6]{A}{Poisson Normal Yaklaşımı}
+$X \sim \Pois(25)$. MLT ile $P(X \leq 30)$ için normal yaklaşım verin.
+Süreklilik düzeltmesini kullanın.
+\end{alistirma}
+\alcozum{%
+$E[X]=25$, $\sigma=5$.
+$P(X\leq30)\approx P\!\left(Z\leq\frac{30.5-25}{5}\right)=\Phi(1.10)\approx0.8643$.
+(Gerçek değer $\approx0.870$; süreklilik düzeltmesi olmadan $\Phi(1.0)\approx0.841$, daha az doğru.)}
+
+\begin{alistirma}[Al.8.7]{B}{Lindeberg Koşulu}
+$X_{ni} = \pm 1/\sqrt{n}$ eşit olasılıkla ($i = 1,\ldots,n$), bağımsız.
+(a) $E[X_{ni}]=0$, $\sigma_{ni}^2=1/n$, $s_n^2=1$ olduğunu gösterin.
+(b) Lindeberg koşulunun sağlandığını kontrol edin.
+(c) $\sum X_{ni}$'nin limit dağılımını belirtin.
+\end{alistirma}
+\alcozum{%
+(a) $\sigma_{ni}^2 = E[X_{ni}^2]=1/n$; $s_n^2=n\cdot(1/n)=1$. \\
+(b) $L_n(\varepsilon) = \sum_i E[X_{ni}^2\mathbf{1}_{|X_{ni}|>\varepsilon s_n}]/s_n^2$.
+$|X_{ni}|=1/\sqrt{n}$; $\varepsilon s_n=\varepsilon$.
+$n$'yeterince büyüyünce $1/\sqrt{n}<\varepsilon$: indikatör sıfır.
+$L_n(\varepsilon)=0$ (tüm büyük $n$). Sağlandı.\\
+(c) Lindeberg-Feller: $\sum X_{ni}\xrightarrow{d}\Normal(0,1)$.}
+
+\begin{alistirma}[Al.8.8]{B}{Çok Boyutlu MLT}
+$(X_i, Y_i)$ i.i.d., $E[X]=E[Y]=0$, $\mathrm{Var}(X)=\mathrm{Var}(Y)=1$, $\mathrm{Cov}(X,Y)=\rho$.
+$(\bar{X}_n, \bar{Y}_n)$'nin büyük örneklem dağılımını yazın.
+$U_n = \bar{X}_n + \bar{Y}_n$'nin yaklaşık dağılımını bulun.
+\end{alistirma}
+\alcozum{%
+$\boldsymbol{\Sigma} = \begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$.
+$\sqrt{n}(\bar{X}_n,\bar{Y}_n)^\top \xrightarrow{d} \Normal_2(\mathbf{0},\boldsymbol{\Sigma})$.\\
+$U_n = \bar{X}_n+\bar{Y}_n$: $\mathbf{a}=(1,1)^\top$.
+$\mathrm{Var}(U_n)=\mathbf{a}^\top\boldsymbol{\Sigma}\mathbf{a}/n=(1+1+2\rho)/n=2(1+\rho)/n$.
+$\sqrt{n}\,U_n\xrightarrow{d}\Normal(0,2(1+\rho))$.}
+
+\begin{alistirma}[Al.8.9]{C}{MLT İspat Detayı}
+$(1-t^2/(2n))^n \to e^{-t^2/2}$ limitini $n\to\infty$ için kesin biçimde ispatlayın.
+Daha genel olarak: $a_n \to 0$ ve $na_n \to a$ iken $(1+a_n)^n \to e^a$ olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+$\ln(1+a_n)^n = n\ln(1+a_n)$.
+$\ln(1+x) = x - x^2/2 + O(x^3)$ ($x\to0$).
+$n\ln(1+a_n) = n(a_n - a_n^2/2 + O(a_n^3))$.
+$na_n \to a$; $na_n^2 = (na_n)\cdot a_n \to a\cdot0 = 0$ ($a_n\to0$).
+$nO(a_n^3) = na_n \cdot a_n^2 \to 0$.
+$\Rightarrow n\ln(1+a_n) \to a$.
+$\Rightarrow (1+a_n)^n = e^{n\ln(1+a_n)} \to e^a$.
+Özel durum: $a_n = -t^2/(2n)$, $na_n = -t^2/2 \to -t^2/2$.
+$(1-t^2/(2n))^n \to e^{-t^2/2}$. \checkmark}
+
+% =====================================================================
+\endinput

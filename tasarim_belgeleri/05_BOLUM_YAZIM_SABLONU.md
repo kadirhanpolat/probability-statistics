@@ -22,14 +22,29 @@ Tahmini Okuma Süresi: ~ [n] saat
 
 ---
 
-## 2. Motivasyon (1-3 Sayfa)
+## 2. Bölüm Başı Kazanım Listesi (TYMM Gereksinimi)
+
+Her bölümün başında net, ölçülebilir öğrenme çıktıları:
+
+```
+Bu bölümün sonunda öğrenci:
+• [Kavram]'ı tanımlayabilmeli ve örnekler üretebilmeli
+• [Teorem]'i ispatlayabilmeli
+• [Yöntem]'i uygulayarak problem çözebilmeli
+• ...  (5-7 madde)
+```
+
+---
+
+## 3. Motivasyon (1-3 Sayfa)
 
 **Amaç:** Öğrencinin "neden bu bölümü öğreniyorum?" sorusunu yanıtlamak.
 
 **Yapı:**
 1. Somut bir problem ya da paradoks (matematiksel ya da gerçek hayattan)
-2. "Bu bölümde şunları öğreneceğiz..." (madde listesi — 5-7 madde)
-3. Bu bölümün kitabın genel yapısındaki yeri (1 cümle)
+2. **Köprü Kurma (TYMM):** "Lise matematiğinde ... gördünüz. Bu bölümde o bilgiyi ... için kullanacağız." (1-2 cümle)
+3. "Bu bölümde şunları öğreneceğiz..." (kazanım listesine bağlantı)
+4. Bu bölümün kitabın genel yapısındaki yeri (1 cümle)
 
 **Örnek kalıp:**
 > Bir saati boyunca gelecek olan yolcu sayısını tahmin etmek istiyorsunuz...  
@@ -169,6 +184,20 @@ Teorem kadar önemli olmayan ama ispatlanması gereken sonuçlar için:
 └──────────────────────────────────────────────────────┘
 ```
 
+### 4.10. Disiplinlerarası Bağlantı Kutusu (TYMM Gereksinimi)
+
+Her bölümde en az 1 adet:
+
+```
+┌──────────────────────────────────────────────────────┐
+│ DİSİPLİNLERARASI BAĞLANTI                           │
+│                                                      │
+│ [Bu kavramın fizik / biyoloji / ekonomi /            │
+│ mühendislik / sosyal bilimlerdeki kullanımı;         │
+│ somut bir örnek]                                     │
+└──────────────────────────────────────────────────────┘
+```
+
 ---
 
 ## 5. Çözümlü Örnekler (Her Bölümde En Az 8 Örnek)
@@ -212,45 +241,63 @@ Notasyon özeti:
 
 ---
 
-## 7. Problemler
+## 7. Bölüm Sonu Alıştırma Yapısı
 
-### Yapı
+### Üç Çıktı, Tek Kaynak
+
+`maarif.sty`'nin `\ifmaarifcozum` mekanizması üç farklı PDF üretir:
+
+| Dosya | İçerik | Hedef |
+|---|---|---|
+| `main-ogrenci.tex` | Çözümlü alıştırmalar + çözümsüz problemler | Öğrenci |
+| `main-egitmen.tex` | Tüm problemlerin tam çözümleri | Eğitmen kılavuzu |
+| `main-tam.tex` | Her şey görünür | İç arşiv |
+
+### Bölüm Sonu Sırası
 
 ```
-PROBLEMLER
+\cozumlualistirmalar   % ── Çözümlü Alıştırmalar başlığı ──
 
-— A Seviyesi (Temel) ————————————————————————
+\begin{alistirma}[Al.N.1]{A}{Başlık}
+  [Problem ifadesi]
+\end{alistirma}
+\alcozum{[Tam çözüm — öğrencide görünür, her iki sürümde]}
 
-A.1. [Problem ifadesi]
-A.2. [Problem ifadesi]
-...
+\begin{alistirma}[Al.N.2]{B}{Başlık}
+  [Problem ifadesi]
+\end{alistirma}
+\alcozum{[Tam çözüm — öğrencide görünür]}
 
-— B Seviyesi (Orta) —————————————————————————
+\alistirmalar           % ── Alıştırmalar başlığı ──
 
-B.1. [Problem ifadesi]
-B.2. [Problem ifadesi]
-...
+\begin{alistirma}[Al.N.3]{A}{Başlık}
+  [Problem ifadesi]
+\end{alistirma}
+\alcozum{[Tam çözüm — YALNIZCA eğitmen sürümünde görünür]}
 
-— C Seviyesi (İleri / Araştırma) ————————————
+\begin{alistirma}[Al.N.4]{B}{Başlık}
+  [Problem ifadesi]
+\end{alistirma}
+\alcozum{[Tam çözüm — YALNIZCA eğitmen sürümünde görünür]}
 
-C.1. [İspat gerektiren problem]
-C.2. [Araştırma sorusu veya açık problem]
-...
+\begin{alistirma}[Al.N.5]{C}{Başlık}
+  [İspat gerektiren / araştırma sorusu]
+\end{alistirma}
+\alcozum{[İpucu + tam çözüm — YALNIZCA eğitmen sürümünde]}
 ```
 
-### Problem Yazım Kuralları
+### Alıştırma Yazım Kuralları
 
-- Her A ve B seviyesi problemi bir yanıt veya kısa çözüm içerir (kitap sonunda)
-- C seviyesi problemleri yalnızca ipucu içerir (tam çözüm değil)
-- Bazı problemler "Bu sonucu kendi başınıza kanıtlayın" niteliğinde teorem ispat problemleri olabilir
-- Bazı problemler önceki bölüm kavramlarını bu bölümdekilerle birleştirir
+- **Çözümlü alıştırmalar:** Bölüm içi örneklerden daha uzun; birden fazla adım içeren, rehberli problem çözümü. Hem öğrenci hem eğitmen sürümünde tam çözüm görünür.
+- **Çözümsüz alıştırmalar:** Öğrenci sürümünde çözüm yok. `\alcozum{}` her zaman yazılır ama yalnızca eğitmen PDF'inde görünür.
+- C seviyesi problemlerde `\alcozum{}` içinde önce `\begin{ipucu}{1}...\end{ipucu}` ipucu hiyerarşisi, ardından tam çözüm.
 
-### Minimum Problem Sayısı
+### Minimum Alıştırma Sayısı
 
-| Bölüm türü | A Seviyesi | B Seviyesi | C Seviyesi | Toplam |
-|---|---|---|---|---|
-| Teori ağırlıklı (Böl. 1-9) | 8 | 8 | 4 | 20 |
-| İstatistik ağırlıklı (Böl. 11-16) | 10 | 10 | 5 | 25 |
+| Bölüm türü | Çözümlü | A (çözümsüz) | B (çözümsüz) | C (çözümsüz) | Toplam |
+|---|---|---|---|---|---|
+| Teori ağırlıklı (Böl. 1-9) | 3 | 6 | 6 | 4 | 19+ |
+| İstatistik ağırlıklı (Böl. 11-16) | 4 | 8 | 8 | 5 | 25+ |
 
 ---
 
@@ -279,60 +326,117 @@ Her bölümün başında:
 
 ```
 [Bölüm Kapağı]
-[Motivasyon]
+[Kazanım Listesi]              ← TYMM
+[Motivasyon + Köprü Kurma]     ← TYMM
 [Tarihsel Not — isteğe bağlı]
   §N.1. [Alt bölüm başlığı]
+    [kesif + \ogrencialani]    ← tanımdan önce keşif
+    [tanimgerekce]             ← neden bu tanım böyle?
     [Tanımlar]
+    [kritiksorgu]              ← koşul kalkarsa?
     [Teoremler + İspatlar]
-    [Örnekler A/B/C]
-    [Uyarı/Not kutuları]
+    [ispatiskele]              ← B seviyesi için
+    [hataanalizi / karsiornek]
+    [disiplinlerarası bağlantı] ← TYMM
+    [kendinleifade]
+    [mikroozet]
   §N.2. [...]
   ...
 [Bölüm Özeti]
-[Problemler: A / B / C]
+[ozyansima]                    ← TYMM
+[kopru]                        ← ileri okuma + sonraki bölüm
+[Çözümlü Alıştırmalar]         ← \cozumlualistirmalar
+[Alıştırmalar: A / B / C]      ← \alistirmalar (eğitmende çözümlü)
 [Kaynaklar ve İleri Okuma]
 ```
 
 ---
 
-## 10. Tipografi Notları (LaTeX için)
+## 10. LaTeX Ortamları — Kaynak Dosyalar
+
+Kitap iki stil dosyası kullanır:
+
+| Dosya | İçerik |
+|---|---|
+| `maarif.sty` | Pedagojik kutular (motivasyon, kesif, hataanalizi, alistirma, alcozum, …) |
+| `olasilik.sty` | Matematik ortamları (tanim, teorem, ispat, …) + olasılık makroları |
+
+### `olasilik.sty` Ortamları (topoloji.sty yapısından türetilecek)
 
 ```latex
-% Tanım
-\begin{definition}[Tanım Adı]
-  ...
-\end{definition}
+% Teorem ortamları
+\newtheorem{tanim}{Tanım}[chapter]
+\newtheorem{teorem}[tanim]{Teorem}
+\newtheorem{onerme}[tanim]{Önerme}
+\newtheorem{lemma}[tanim]{Lemma}
+\newtheorem{sonuc}[tanim]{Sonuç}
+\newtheorem{ornek}[tanim]{Örnek}
+\newtheorem*{uyari}{Uyarı}
+\newtheorem*{notkutu}{Not}
+\renewcommand{\qedsymbol}{$\blacksquare$}
 
-% Teorem
-\begin{theorem}[Teorem Adı]
-  ...
-\end{theorem}
-\begin{proof}
-  \textbf{Fikir:} ...
-  
-  \textbf{Adım 1.} ...
-\end{proof}
-
-% Uyarı kutusu
-\begin{warning}
-  ...
-\end{warning}
-
-% Sezgisel yorum
-\begin{intuition}
-  ...
-\end{intuition}
-
-% Örnek
-\begin{example}
-  ...
-  \begin{solution}
-    ...
-  \end{solution}
-\end{example}
+% Olasılık makroları
+\newcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Cor}{\operatorname{Cor}}
+\newcommand{\iid}{\overset{\text{i.i.d.}}{\sim}}
+\newcommand{\asto}{\xrightarrow{\text{n.k.}}}   % neredeyse kesin
+\newcommand{\pto}{\xrightarrow{\mathbb{P}}}      % olasılıkla
+\newcommand{\dto}{\xrightarrow{d}}               % dağılımla
+\newcommand{\sigalg}{\mathcal{F}}
+\newcommand{\Borel}{\mathcal{B}}
+\newcommand{\olas}[1]{(\Omega,\mathcal{F},#1)}   % olasılık uzayı
 ```
 
-Tüm bu ortamlar kitabın LaTeX şablonunda tanımlanacak.
+### `maarif.sty` Pedagojik Kutular — Kullanım Örneği
+
+```latex
+\begin{motivasyon}
+  Bir saati boyunca gelen araç sayısını modelliyoruz...
+\end{motivasyon}
+
+\begin{kesif}[σ-cebiri neden gerekli?]
+  Hangi küme ailesi olasılık için "iyi" çalışır? Deneyin:
+  \ogrencialani[4cm]
+\end{kesif}
+
+\begin{tanimgerekce}
+  Sadece sonlu kesişim değil, sayılabilir kesişim istiyoruz çünkü...
+\end{tanimgerekce}
+
+\begin{tanim}[σ-Cebiri]
+  ...
+\end{tanim}
+
+\begin{kritiksorgu}
+  Sayılabilirlik koşulu kalksa ne bozulur?
+\end{kritiksorgu}
+
+% Bölüm sonu
+\cozumlualistirmalar
+\begin{alistirma}[Al.2.1]{A}{Örnek σ-cebirleri}
+  ...
+\end{alistirma}
+\alcozum{Çözüm adımları...}
+
+\alistirmalar
+\begin{alistirma}[Al.2.5]{B}{İspat}
+  ...
+\end{alistirma}
+\alcozum{Tam ispat — yalnızca eğitmen PDF'inde görünür.}
+```
+
+### Üretim Komutu
+
+```latex
+% main-ogrenci.tex
+\usepackage{maarif}          % \alcozum gizli
+
+% main-egitmen.tex
+\usepackage[cozumler]{maarif} % \alcozum görünür
+```
 
 ---
 

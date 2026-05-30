@@ -74,6 +74,8 @@ Bu kitap o boşluğu doldurmayı hedefler: hem sağlam matematiksel temel hem de
 
 Bu kitap aşağıdakileri kasıtlı olarak kapsamaz:
 - Hesaplamalı/uygulamalı istatistik (R, Python ile analiz)
-- Bayesian istatistik (ayrı bir kitap konusu)
+- Tam Bayesian istatistik (MCMC, hiyerarşik modeller, Bayes karar teorisi — ayrı bir kitap konusu)
 - Makine öğrenmesi istatistiği
 - Mühendislik uygulamaları odaklı içerik
+
+**Bayesian not:** Bölüm 12.7'de Bayes tahmincisi, konjugat önsel dağılım, sonsal dağılım ve inanılırlık aralığı (credible interval) tanım düzeyinde ele alınır. Bayes hipotez testi kapsam dışıdır.

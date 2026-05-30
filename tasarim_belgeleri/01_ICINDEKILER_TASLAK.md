@@ -185,7 +185,11 @@
 — 12.5.2. MLE'nin Tutarlılığı  
 — 12.5.3. MLE'nin Asimptotik Normalliği  
 12.6. Momentler Yöntemi  
-12.7. Bayes Tahmini — Giriş  
+12.7. Bayes Tahmini — Giriş
+— 12.7.1. Konjugat Önsel Dağılım
+— 12.7.2. Sonsal Dağılım ve Bayes Tahmincisi
+— 12.7.3. İnanılırlık Aralığı (Credible Interval) — tanım düzeyinde
+*[Not: Bayes hipotez testi kapsam dışıdır; bu alt bölüm frekansçı çerçeveyle karşılaştırmalı olarak sunulur]*  
 *[Kaynaklar: Casella & Berger; Lehmann & Casella; Hogg & Craig]*
 
 ---

@@ -1,0 +1,1078 @@
+% =====================================================================
+%  BÖLÜM 0 — Ön Bilgiler: Kümeler, Fonksiyonlar ve Sayılabilirlik
+%  Olasılık Teorisi ve Matematiksel İstatistik
+%  Kaynaklar: Billingsley Ek A; Klenke Böl. 1; Durrett Ek A
+% =====================================================================
+
+\chapter{Ön Bilgiler: Kümeler, Fonksiyonlar ve Sayılabilirlik}
+
+\bolumalinti{``Mathematicians always strive to confuse their audiences;
+  where there is no confusion, there is no prestige.''}{Gian-Carlo Rota (1932--1999)}
+
+\noindent\textbf{Ön Koşullar:} Lise düzeyinde kümeler ve fonksiyonlar kavramı.
+Bir önceki bölüm yoktur; bu bölüm tüm kitabın temel taşıdır.
+
+\noindent\textbf{Bu Bölüm Sonraki Bölümlerde Kullanılır:}
+Bölüm~1 (ölçüm teorisi için doğrudan),
+Bölüm~2 (olasılık uzayı yapısı),
+Bölüm~3 (rasgele değişkenler).
+
+\noindent\textbf{Tahmini Okuma Süresi:} $\approx 4$~saat.
+
+\vspace{0.5\baselineskip}
+
+% ─── KAZANIMLAR ────────────────────────────────────────────────────
+\begin{kazanimlar}
+Bu bölümün sonunda öğrenci:
+\begin{itemize}[leftmargin=1.8em, itemsep=2pt]
+  \item Küme cebiri işlemlerini (birleşim, kesişim, fark, tümleyen) hem
+        sonlu hem sayılabilir hem de keyfi indis kümeleri üzerinde
+        uygulayabilmeli ve De~Morgan yasalarını ispatlayabilmeli,
+  \item Ters görüntü (\emph{preimage}) kavramını tanımlayabilmeli ve ters
+        görüntünün birleşim, kesişim ve tümleme işlemlerini koruyduğunu
+        ispatlayabilmeli,
+  \item Sonlu, sayılabilir ve sayılamaz kümeleri ayırt edebilmeli;
+        $\Q$'nun sayılabilir, $\R$'nin sayılamaz olduğunu ispatlayabilmeli,
+  \item Gerçel sayılarda üst sınır (\emph{supremum}) ve alt sınır
+        (\emph{infimum}) kavramlarını tanımlayabilmeli ve tamtümlük
+        aksiyomunu ifade edebilmeli,
+  \item Genişletilmiş gerçel sayı doğrusu $\Rbar$'yi
+        ve üzerinde yapılan aritmetik kuralları açıklayabilmeli,
+  \item Sayı dizileri için $\limsup$ ve $\liminf$'i tanımlayabilmeli ve
+        hesaplayabilmeli,
+  \item Küme dizileri için $\limsup$ ve $\liminf$'i yorumlayabilmeli
+        (``sonsuz kez'' ve ``eninde sonunda'' olay dili ile ilişkilendirebilmeli).
+\end{itemize}
+\end{kazanimlar}
+
+% ─── MOTİVASYON ────────────────────────────────────────────────────
+\begin{motivasyon}
+Olasılık teorisinin kalbi \emph{ölçüm teorisidir} (measure theory) ve ölçüm
+teorisi tamamen küme işlemleri üzerine kuruludur. Bir olayın olasılığını
+tanımlamak için, önce ``hangi kümelere olasılık atayabiliriz?'' sorusunu
+yanıtlamamız gerekir. Bu sorunun yanıtı $\sigma$-cebiri kavramına götürür;
+$\sigma$-cebirleri ise sayılabilir birleşim ve kesişim gibi işlemleri
+barındırdıklarından, sayılabilirlik kavramını doğrudan olasılık teorisinin
+merkezine taşır.
+
+\medskip
+
+\textbf{Köprü kurma.} Lise matematiğinde sonlu küme işlemlerini (Venn
+şemaları, De~Morgan yasaları) öğrendiniz. Bu bölümde o bilgiyi \emph{sonsuz
+küme aileleri} üzerine genişleteceğiz. Böylece Bölüm~1'de, sonsuz çok olayı
+kapsayan bir $\sigma$-cebirini kolaylıkla tanımlayabilecek ve Kolmogorov'un
+aksiyomlarını Bölüm~2'de tam anlamıyla anlayabileceksiniz.
+
+\medskip
+
+Bu bölümde şunları öğreneceğiz:
+küme cebiri ile rahat çalışmayı ($\S0.1$),
+fonksiyonların ters görüntü özelliklerini ($\S0.2$),
+sayılabilirlik teorisini ($\S0.3$),
+gerçel sayı sisteminin tamtümlük özelliğini ($\S0.4$)
+ve sayı/küme dizilerinde $\limsup$/$\liminf$ kavramlarını ($\S0.5$).
+\end{motivasyon}
+
+
+% =====================================================================
+\section{Küme Cebiri}
+% =====================================================================
+
+\begin{kesif}[Sonsuz birleşim ne demektir?]
+Sonlu iki kümenin birleşimini $A \cup B$ olarak biliyorsunuz. Peki
+$A_1 \cup A_2 \cup A_3 \cup \cdots$ ifadesini nasıl yazarsınız?
+Düşüncelerinizi aşağıya not edin; ardından Tanım~\ref{def:kumecebiri}'yi
+okuyun.
+\ogrencialani[2.5cm]
+\end{kesif}
+
+\begin{tanimgerekce}
+Sonsuz birleşimi $\bigcup_{n=1}^\infty A_n$ olarak yazmak sadece notasyon
+kolaylığı değildir. Olasılık teorisinde olayların ``en az birinin gerçekleşmesi''
+durumu doğal olarak sonsuz birleşim gerektirir. Örneğin bir madeni paranın
+sonsuza dek atılması deneyi düşünüldüğünde, ``en az bir kez tura gelme'' olayı
+sonsuz birleşimle ifade edilir.
+\end{tanimgerekce}
+
+\begin{tanim}[Temel Küme İşlemleri]\label{def:kumecebiri}
+Bir $\Omega$ evren kümesi ve $\Omega$'nın alt kümeleri $A, B, (A_n)_{n \geq 1}$
+verilsin. Aşağıdaki işlemleri tanımlıyoruz:
+\begin{align*}
+  \text{Tümleyen:}\quad
+    & A^c \coloneqq \{\omega \in \Omega : \omega \notin A\}, \\[2pt]
+  \text{Fark:}\quad
+    & A \setminus B \coloneqq A \cap B^c
+      = \{\omega \in \Omega : \omega \in A,\ \omega \notin B\}, \\[2pt]
+  \text{Simetrik fark:}\quad
+    & A \triangle B \coloneqq (A \setminus B) \cup (B \setminus A), \\[2pt]
+  \text{Sayılabilir birleşim:}\quad
+    & \bigcup_{n=1}^\infty A_n
+      \coloneqq \{\omega \in \Omega : \omega \in A_n \text{ bazı } n \in \N \text{ için}\}, \\[2pt]
+  \text{Sayılabilir kesişim:}\quad
+    & \bigcap_{n=1}^\infty A_n
+      \coloneqq \{\omega \in \Omega : \omega \in A_n \text{ her } n \in \N \text{ için}\}.
+\end{align*}
+İki küme \textbf{ayrık} \emph{(disjoint)} adını alır; eğer $A \cap B = \emptyset$.
+Bir $(A_n)$ kümeler ailesi \textbf{ikili ayrık} \emph{(pairwise disjoint)} adını alır
+eğer $A_i \cap A_j = \emptyset$, $i \neq j$ için.
+\end{tanim}
+
+\begin{kritiksorgu}[Keyfi indis kümeleri]
+Yukarıdaki tanım $n \in \N$ için yazıldı. Peki $I$ herhangi bir indis
+kümesi olsaydı, yani $\bigcup_{i \in I} A_i$, tanım nasıl değişirdi? $I$
+sayılamaz olursa ne olur?
+\end{kritiksorgu}
+
+Küme cebiri işlemlerinin en önemli özellikleri De~Morgan yasaları aracılığıyla
+ifade edilir. Bu yasalar, ölçüm teorisinde $\sigma$-cebirlerinin tümleme altında
+kapalı olduğunu ispat etmede kullanılacak temel araçtır.
+
+\begin{teorem}[De~Morgan Yasaları]\label{thm:demorgan}
+Bir $(A_n)_{n \geq 1}$ kümeler ailesi için:
+\[
+  \left(\bigcup_{n=1}^\infty A_n\right)^c = \bigcap_{n=1}^\infty A_n^c
+  \qquad \text{ve} \qquad
+  \left(\bigcap_{n=1}^\infty A_n\right)^c = \bigcup_{n=1}^\infty A_n^c.
+\]
+\end{teorem}
+
+\begin{proof}
+\textit{Fikir:} ``$A_1 \cup A_2 \cup \cdots$'nin tümleyeni'' demek ``hiçbir $A_n$'de
+bulunmamak'' demektir; bu ise tüm $A_n^c$'lerin kesişimidir.
+
+\medskip
+
+\textbf{Adım 1.} İlk eşitliği kanıtlıyoruz. $\omega \in \left(\bigcup_n A_n\right)^c$
+olsun. Bu, $\omega \notin \bigcup_n A_n$ demektir; yani \emph{hiçbir} $n$ için
+$\omega \in A_n$ değildir. Dolayısıyla \emph{her} $n$ için $\omega \in A_n^c$,
+yani $\omega \in \bigcap_n A_n^c$.
+
+\textbf{Adım 2.} Tersine, $\omega \in \bigcap_n A_n^c$ olsun. Her $n$ için
+$\omega \in A_n^c$, yani $\omega \notin A_n$. O hâlde $\omega \notin \bigcup_n A_n$,
+yani $\omega \in \left(\bigcup_n A_n\right)^c$.
+
+\medskip
+
+\textbf{Adım 3.} İki içerme birden elde edildiğinden
+$\left(\bigcup_n A_n\right)^c = \bigcap_n A_n^c$.
+İkinci eşitlik, birincisini $A_n^c$ yerine uygulamakla ya da
+$A \mapsto A^c$ simetrisiyle elde edilir.
+\end{proof}
+
+\begin{ornek}[De~Morgan yasası --- somut uygulama]\label{ex:demorgan}
+$\Omega = \R$ ve $A_n = (0, n)$, $n \geq 1$ olsun.
+O hâlde $\bigcup_{n=1}^\infty A_n = (0,\infty)$ ve
+\[
+  \left(\bigcup_{n=1}^\infty A_n\right)^c = (-\infty,0].
+\]
+Öte yandan $A_n^c = (-\infty,0] \cup [n,\infty)$, dolayısıyla
+\[
+  \bigcap_{n=1}^\infty A_n^c = (-\infty,0],
+\]
+çünkü $[n,\infty)$'ların kesişimi boştur. De~Morgan eşitliği doğrulanmış oldu.
+\end{ornek}
+
+Küme dizileri için monoton diziler özellikle önemlidir.
+
+\begin{tanim}[Artan ve Azalan Küme Dizileri]\label{def:monotondizi}
+$(A_n)_{n \geq 1}$ bir küme dizisi olsun.
+\begin{itemize}[leftmargin=1.8em]
+  \item Dizi \textbf{artan} \emph{(increasing)} adını alır; eğer $A_1 \subseteq A_2 \subseteq \cdots$.
+        Bu durumda $A_n \nearrow$ gösterimi kullanılır ve
+        $\lim_n A_n \coloneqq \bigcup_n A_n$ tanımlanır.
+  \item Dizi \textbf{azalan} \emph{(decreasing)} adını alır; eğer $A_1 \supseteq A_2 \supseteq \cdots$.
+        Bu durumda $A_n \searrow$ gösterimi kullanılır ve
+        $\lim_n A_n \coloneqq \bigcap_n A_n$ tanımlanır.
+\end{itemize}
+\end{tanim}
+
+\begin{mikroozet}[§0.1 özeti]
+Temel küme işlemleri sonsuz indis kümeleri üzerine genişletildi.
+De~Morgan yasaları tümleme ile birleşim/kesişim arasındaki dönüşümü sağlar.
+Monoton küme dizilerinin limiti birleşim ya da kesişim olarak tanımlanır.
+\end{mikroozet}
+
+
+% =====================================================================
+\section{Fonksiyonlar ve Ters Görüntü}
+% =====================================================================
+
+\begin{motivasyon}[§0.2]
+Bir rasgele değişken, tanımı gereği ölçülebilir bir fonksiyondur.
+``Ölçülebilir'' sıfatının ne anlama geldiğini anlamak için,
+bir fonksiyonun \emph{ters görüntüsünün} küme işlemlerini nasıl
+koruduğunu bilmek şarttır. Bu alt bölüm tam olarak bu teknik temel
+için vardır.
+\end{motivasyon}
+
+\begin{tanim}[Ters Görüntü (Preimage)]\label{def:tergoriuntu}
+$f: X \to Y$ bir fonksiyon ve $B \subseteq Y$ olsun.
+$f$'nin $B$ altındaki \textbf{ters görüntüsü} \emph{(preimage, inverse image)}:
+\[
+  f^{-1}(B) \coloneqq \{x \in X : f(x) \in B\}.
+\]
+$f$'nin tersi mevcut olmasa bile $f^{-1}(B)$ her zaman tanımlıdır.
+\end{tanim}
+
+\begin{hataanalizi}[Ters görüntü ile ters fonksiyon]
+$f^{-1}(B)$ gösterimi yalnızca $f$ bijektif olduğunda
+ters fonksiyonu ifade eder. Genel durumda $f^{-1}(B)$ bir
+\emph{küme} işlemidir ve $f$'nin bijektif olmasını gerektirmez.
+Örneğin $f(x) = x^2$ ve $B = \{4\}$ ise $f^{-1}(B) = \{-2, 2\}$.
+\end{hataanalizi}
+
+Ters görüntünün olasılık teorisini bu kadar kullanışlı kılan temel özellik
+şudur: \emph{ters görüntü tüm küme işlemlerini korur.}
+
+\begin{teorem}[Ters Görüntünün Küme İşlemlerini Koruması]\label{thm:tergoriuntu}
+$f: X \to Y$ ve $(B_n)_{n \geq 1} \subseteq \mathcal{P}(Y)$ olsun. O zaman:
+\begin{enumerate}[label=(\roman*)]
+  \item $f^{-1}\!\left(\bigcup_n B_n\right) = \bigcup_n f^{-1}(B_n)$,
+  \item $f^{-1}\!\left(\bigcap_n B_n\right) = \bigcap_n f^{-1}(B_n)$,
+  \item $f^{-1}(B^c) = \left(f^{-1}(B)\right)^c$ her $B \subseteq Y$ için.
+\end{enumerate}
+\end{teorem}
+
+\begin{proof}
+\textit{Fikir:} Ters görüntü, ``$f(x) \in$'' koşuluyla çalışır; birleşim ve
+kesişim de ``bazı / her'' niceleyicileriyle çalışır. Bu iki yapı birebir örtüşür.
+
+\medskip
+
+\textbf{(i)}\; $x \in f^{-1}\!\left(\bigcup_n B_n\right)$
+$\iff f(x) \in \bigcup_n B_n$
+$\iff$ bazı $n$ için $f(x) \in B_n$
+$\iff$ bazı $n$ için $x \in f^{-1}(B_n)$
+$\iff x \in \bigcup_n f^{-1}(B_n)$.
+
+\textbf{(ii)}\; $x \in f^{-1}\!\left(\bigcap_n B_n\right)$
+$\iff f(x) \in \bigcap_n B_n$
+$\iff$ her $n$ için $f(x) \in B_n$
+$\iff$ her $n$ için $x \in f^{-1}(B_n)$
+$\iff x \in \bigcap_n f^{-1}(B_n)$.
+
+\textbf{(iii)}\; $x \in f^{-1}(B^c)$
+$\iff f(x) \in B^c$
+$\iff f(x) \notin B$
+$\iff x \notin f^{-1}(B)$
+$\iff x \in \left(f^{-1}(B)\right)^c$.
+\end{proof}
+
+\begin{notkutu}
+Teorem~\ref{thm:tergoriuntu}'nun önemi şuradan gelir: Bölüm~1'de
+$\sigma$-cebirlerini tanımladığımızda, bir fonksiyonun ``ölçülebilir'' olması tam
+olarak, ters görüntüsünün $\sigma$-cebirini $\sigma$-cebirine taşıması anlamına
+gelecektir. Yukarıdaki üç özellik bu taşımanın iyi tanımlı olduğunu garanti eder.
+\end{notkutu}
+
+\begin{tanim}[Bijektif Fonksiyon Türleri]\label{def:bijektif}
+$f: X \to Y$ bir fonksiyon olsun.
+\begin{itemize}[leftmargin=1.8em]
+  \item $f$ \textbf{enjektif} \emph{(injective, one-to-one)} adını alır;
+        eğer $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$.
+  \item $f$ \textbf{sürjektif} \emph{(surjective, onto)} adını alır;
+        eğer her $y \in Y$ için bir $x \in X$ mevcutsa $f(x) = y$.
+  \item $f$ \textbf{bijektif} \emph{(bijective)} adını alır;
+        eğer hem enjektif hem sürjektifse.
+        Bijektif fonksiyona aynı zamanda \textbf{bire-bir eşleşme}
+        \emph{(one-to-one correspondence)} da denir.
+\end{itemize}
+\end{tanim}
+
+\begin{kendinleifade}
+Teorem~\ref{thm:tergoriuntu}'nun (iii) maddesini kendi cümlenizle ifade edin:
+``$f^{-1}(B^c) = (f^{-1}(B))^c$ ifadesi ne anlama geliyor?''
+Özellikle $B = Y$ ve $B = \emptyset$ özel durumlarını kontrol edin.
+\ogrencialani[2cm]
+\end{kendinleifade}
+
+\begin{mikroozet}[§0.2 özeti]
+Ters görüntü $f^{-1}(B)$ her fonksiyon için tanımlıdır ve bijektiflik
+gerektirmez. Ters görüntü birleşim, kesişim ve tümlemeyi korur. Bu özellik
+ölçülebilirlik kavramının temel taşıdır.
+\end{mikroozet}
+
+
+% =====================================================================
+\section{Sonlu, Sayılabilir ve Sayılamaz Kümeler}
+% =====================================================================
+
+\begin{motivasyon}[§0.3]
+``Sayılabilir'' kavramı sezgilerimizi yanıltabilir: $\Z$ sonsuz olmasına
+karşın ``sayılabilir'', $\R$ ise sonsuz olup aynı zamanda ``sayılamaz''. Bu
+fark, $\sigma$-cebirlerinde neden \emph{sayılabilir} birleşim kullandığımızı
+(sayılamaz değil) açıklar. Sayılamaz birleşime izin versek, tüm singletonların
+birleşimi $\R$'dir; ama bu birleşime Lebesgue ölçüsü atayamazdık.
+\end{motivasyon}
+
+\begin{tanim}[Sayılabilirlik]\label{def:sayilabilir}
+Bir $A$ kümesi:
+\begin{itemize}[leftmargin=1.8em]
+  \item \textbf{sonlu} adını alır; eğer $A = \emptyset$ ya da $\{1,\ldots,n\}$
+        ile $A$ arasında bir bijeksiyon varsa (bazı $n \in \N$ için).
+  \item \textbf{sayılabilir sonsuz} \emph{(countably infinite)} adını alır;
+        eğer $\N$ ile $A$ arasında bir bijeksiyon mevcutsa.
+  \item \textbf{sayılabilir} \emph{(countable)} adını alır; eğer sonlu ya da
+        sayılabilir sonsuzsa.
+  \item \textbf{sayılamaz} \emph{(uncountable)} adını alır; eğer sayılabilir değilse.
+\end{itemize}
+\end{tanim}
+
+\begin{ornek}[Sayılabilir sonsuz kümeler]\label{ex:sayilabilir}
+$\Z$ sayılabilir sonsuzdur: $f: \N \to \Z$,
+\[
+  f(n) = \begin{cases} n/2 & n \text{ çift}, \\ -(n-1)/2 & n \text{ tek} \end{cases}
+\]
+bijeksiyonu $0,1,-1,2,-2,3,-3,\ldots$ sırasıyla saydırır.
+
+$\N \times \N$ de sayılabilir sonsuzdur: Cantor'un çapraz saydırma düzeniyle
+$(1,1),(1,2),(2,1),(1,3),(2,2),(3,1),\ldots$ sırasıyla sayılır.
+\end{ornek}
+
+\begin{teorem}[$\Q$ Sayılabilirdir]\label{thm:Qsayilabilir}
+Rasyonel sayılar kümesi $\Q$ sayılabilirdir.
+\end{teorem}
+
+\begin{proof}
+Her $q \in \Q^+$, $q = p/n$ ($p \in \N$, $n \in \N$, $\gcd(p,n) = 1$) biçiminde
+tek türlü yazılır. $\Q^+ \subseteq \N \times \N$ gömülüdür ve $\N \times \N$
+sayılabilirdir (Örnek~\ref{ex:sayilabilir}). $\Q = \Q^+ \cup \{0\} \cup (-\Q^+)$
+üç sayılabilir kümenin birleşimidir; dolayısıyla sayılabilirdir.
+\end{proof}
+
+\begin{teorem}[$\R$ Sayılamazdır --- Cantor'un Köşegen Argümanı]
+\label{thm:Rsayilamaz}
+Gerçel sayılar kümesi $\R$ sayılamazdır.
+Daha güçlü bir ifadeyle, $(0,1)$ aralığı bile sayılamazdır.
+\end{teorem}
+
+\begin{proof}
+\textit{Fikir:} $(0,1)$'in sayılabilir olduğunu varsayarak çelişki türetiriz;
+verilen herhangi bir sayımın ``dışarıda bıraktığı'' bir eleman üretiriz.
+
+\medskip
+
+\textbf{Çelişki varsayımı.} $(0,1)$'in sayılabilir olduğunu, yani
+$(0,1) = \{x_1, x_2, x_3, \ldots\}$ olduğunu varsayalım.
+
+\textbf{Adım 1.} Her $x_n$'i ondalık gösterimle yazın:
+$x_n = 0.a_{n1}\,a_{n2}\,a_{n3}\cdots$, $a_{nk} \in \{0,1,\ldots,9\}$.
+(Sona giden $9$'ların tekrarlanmasını önlemek için: $0.999\cdots = 1$ eşitliğini
+göz önünde bulundurarak sonlanan ondalıkları tercih edin.)
+
+\textbf{Adım 2.} Yeni bir $y = 0.b_1 b_2 b_3 \cdots$ sayısı inşa edin:
+\[
+  b_n \coloneqq
+  \begin{cases}
+    5, & a_{nn} \neq 5, \\
+    6, & a_{nn} = 5.
+  \end{cases}
+\]
+
+\textbf{Adım 3.} $y \in (0,1)$'dir. Öte yandan $y \neq x_n$ her $n$ için,
+çünkü $y$ ile $x_n$'in $n$-inci ondalık basamakları farklıdır ($b_n \neq a_{nn}$).
+
+Bu durum, $y$'nin listede yer almadığı anlamına gelir; $(0,1) = \{x_1, x_2, \ldots\}$
+varsayımı çelişkilidir.
+\end{proof}
+
+\begin{karsiornek}[Sayılabilir kümenin tümleni sayılamaz olabilir]
+$\Q$, $\R$ içinde sayılabilirdir; fakat $\Q^c = \R \setminus \Q$
+(irrasyonel sayılar) sayılamazdır. Evreni sayılamaz olan bir kümenin
+sayılabilir bir alt kümesinin tümleyeni sayılamaz olmak zorundadır.
+\end{karsiornek}
+
+\begin{teorem}[Sayılabilir Ailenin Birleşimi]\label{thm:sayilabilirbir}
+Eğer her $n \in \N$ için $A_n$ sayılabilir ise,
+$\bigcup_{n=1}^\infty A_n$ da sayılabilirdir.
+\end{teorem}
+
+\begin{proof}
+Her $A_n$ sayılabilir olduğundan $A_n = \{a_{n1}, a_{n2}, a_{n3}, \ldots\}$
+olarak yazılabilir. $\bigcup_n A_n$'ın elemanlarını Cantor'un çapraz tarama
+düzeniyle sıralıyoruz:
+\[
+  a_{11},\; a_{12}, a_{21},\; a_{13}, a_{22}, a_{31},\; \ldots
+\]
+Bu, $\bigcup_n A_n$'dan $\N$'ye enjektif bir fonksiyon verir (tekrarları atlayın);
+dolayısıyla $\bigcup_n A_n$ sayılabilirdir.
+\end{proof}
+
+\begin{notkutu}
+Teorem~\ref{thm:sayilabilirbir}'in tersi doğru değildir: sayılamaz bir küme
+sayılamaz çok sayılabilir parçaya bölünebilir. Örneğin $\R$ sayılamaz,
+ama her tekil küme $\{x\}$ sonludur.
+\end{notkutu}
+
+% Disiplinlerarası bağlantı — TYMM gereksinimi
+\begin{tcolorbox}[maarif@base, colframe=maKopru, colback=maKopru!4,
+    colbacktitle=maKopru,
+    title={Disiplinlerarası bağlantı --- Bilgisayar bilimi ve hesaplanabilirlik}]
+Sayılabilirlik kavramı bilgisayar biliminde merkezi bir rol oynar.
+Herhangi bir programlama dilinde yazılabilen tüm programlar kümesi sayılabilirdir
+(her program sonlu bir karakter dizisidir). Buna karşın $\R \to \R$
+fonksiyonları kümesi sayılamazdır. Dolayısıyla ``hesaplanamaz fonksiyonlar'' vardır;
+bu Turing'in durma problemi ile doğrudan bağlantılıdır.
+\end{tcolorbox}
+
+\begin{mikroozet}[§0.3 özeti]
+Sayılabilirlik, bir kümenin $\N$ ile eşleştirilebilmesi anlamına gelir.
+$\Q$ sayılabilir, $\R$ sayılamazdır. Sayılabilir ailenin sayılabilir
+birleşimi sayılabilirdir. $\sigma$-cebiri tanımında ``sayılabilir birleşim'' koşulu
+bu ayrımı işlevsel kılar.
+\end{mikroozet}
+
+
+% =====================================================================
+\section{Gerçel Sayılar ve Genişletilmiş Gerçel Sayı Doğrusu}
+% =====================================================================
+
+\begin{motivasyon}[§0.4]
+Olasılık teorisinde beklentiler, seriler ve integraller kullanılır. Bunların
+bazıları $+\infty$ ya da $-\infty$ değer alabilir. Örneğin bir Poisson rasgele
+değişkeninin tüm momentleri sonludur; ama bazı ağır kuyruklu dağılımların birinci
+momenti bile sonsuz olabilir. Bu yüzden gerçel sayıları $\pm\infty$ ile
+genişletmek zorunludur.
+\end{motivasyon}
+
+\begin{tanim}[Supremum ve İnfimum]\label{def:supinf}
+$A \subseteq \R$, $A \neq \emptyset$ olsun.
+\begin{itemize}[leftmargin=1.8em]
+  \item $M \in \R$'ye $A$'nın \textbf{üst sınırı} \emph{(upper bound)} denir;
+        eğer $a \leq M$ her $a \in A$ için.
+  \item $A$'nın \textbf{üst kenar değeri} \emph{(supremum)}, var olan tüm üst
+        sınırların en küçüğüdür; $\sup A$ ile gösterilir.
+  \item Benzer biçimde \textbf{alt sınır} \emph{(lower bound)} ve
+        \textbf{alt kenar değeri} \emph{(infimum)} $\inf A$ tanımlanır.
+\end{itemize}
+$A$ yukarıdan sınırlı değilse $\sup A = +\infty$; aşağıdan sınırlı değilse
+$\inf A = -\infty$ olarak tanımlanır. Boş küme için $\sup \emptyset = -\infty$
+ve $\inf \emptyset = +\infty$ konvansiyonu kullanılır.
+\end{tanim}
+
+\begin{aksiyom}[Gerçel Sayıların Tamtümlüğü]
+\label{ax:tamtumluk}
+Yukarıdan sınırlı her boşalmayan $A \subseteq \R$ kümesinin bir
+$\sup A \in \R$ üst kenar değeri vardır.
+\end{aksiyom}
+
+\begin{notkutu}
+$\Q$ bu aksiyomu sağlamaz: $\{q \in \Q : q^2 < 2\}$ kümesinin
+$\Q$ içinde supremumu yoktur ($\sqrt{2} \notin \Q$).
+Tamtümlük aksiyomu, $\R$'yi $\Q$'dan ayıran temel özelliktir ve
+analizin tüm önemli teoremlerinin (Bolzano-Weierstrass, Heine-Borel, vb.) temelidir.
+\end{notkutu}
+
+\begin{tanim}[Genişletilmiş Gerçel Sayı Doğrusu]\label{def:Rbar}
+$\Rbar \coloneqq \R \cup \{-\infty, +\infty\}$ kümesi
+aşağıdaki düzen ve aritmetik kurallarla donatılır:
+\begin{gather*}
+  -\infty < x < +\infty \quad \text{her } x \in \R \text{ için},\\[4pt]
+  x + \infty = +\infty, \quad
+  x - \infty = -\infty \quad (x \in \R), \\[2pt]
+  x \cdot (+\infty) = \operatorname{sgn}(x) \cdot \infty \quad (x \neq 0), \\[2pt]
+  0 \cdot (\pm\infty) = 0
+  \quad \text{\emph{(olasılık teorisinde bu konvansiyon kullanılır!)}}, \\[2pt]
+  (+\infty) + (-\infty) \quad \text{tanımsız.}
+\end{gather*}
+\end{tanim}
+
+\begin{uyari}
+$(+\infty) - (+\infty)$ ve $(+\infty) + (-\infty)$ tanımsızdır.
+Bu ifadelerle karşılaşıldığında problem ifadesini yeniden düzenlemek gerekir.
+Olasılık teorisinde beklenti hesaplarken bu durum ortaya çıkabilir
+(Bölüm~4'te ele alınacaktır).
+\end{uyari}
+
+\begin{hataanalizi}[$0 \cdot \infty = 0$ konvansiyonunun önemi]
+Olasılık teorisinde $0 \cdot \infty = 0$ konvansiyonu \emph{kasıtlı olarak}
+seçilmiştir: sıfır olasılıklı bir olayın beklentiye katkısının sıfır olmasını
+istiyoruz. Gerçel analizin bazı kitapları bu konvansiyonu kullanmaz; bu nedenle
+farklı kaynaklardaki tanımları dikkatle karşılaştırın.
+\end{hataanalizi}
+
+\begin{ornek}[Supremum ve İnfimum hesabı]
+\begin{enumerate}[label=(\alph*)]
+  \item $A = \{1 - 1/n : n \in \N\} = \{0, 1/2, 2/3, 3/4, \ldots\}$
+        için $\sup A = 1$ (ama $1 \notin A$) ve $\inf A = 0$ ($0 \in A$).
+  \item $B = \{n \in \N\} = \{1,2,3,\ldots\}$ için $\inf B = 1 \in B$ ve
+        $\sup B = +\infty$.
+  \item $C = \emptyset$ için $\sup C = -\infty$ ve $\inf C = +\infty$
+        (konvansiyonel tanım).
+\end{enumerate}
+\end{ornek}
+
+\begin{mikroozet}[§0.4 özeti]
+Tamtümlük aksiyomu, her sınırlı kümenin $\R$'de supremum/infimum
+sahibi olduğunu garanti eder.
+$\Rbar = \R \cup \{-\infty, +\infty\}$,
+özellikle $0 \cdot \infty = 0$ konvansiyonuyla, ölçüm ve olasılık teorisinin
+standart çalışma alanıdır.
+\end{mikroozet}
+
+
+% =====================================================================
+\section{Üst Limit ve Alt Limit}
+% =====================================================================
+
+\begin{motivasyon}[§0.5]
+Bir dizi yakınsamıyorsa bile $\limsup$ ve $\liminf$ her zaman tanımlıdır
+($\Rbar$'da değerleri mevcuttur). Olasılık teorisinde Borel-Cantelli
+lemmalarını (Bölüm~7) ifade etmek için küme dizilerinin $\limsup$'ını,
+büyük sayılar kanununu anlamak için ise sayı dizilerinin $\limsup$'ını
+sıklıkla kullanacağız.
+\end{motivasyon}
+
+\subsection{Sayı Dizilerinde Üst ve Alt Limit}
+
+\begin{tanim}[$\limsup$ ve $\liminf$ --- Sayı Dizileri]\label{def:limsup_sayi}
+$(a_n)_{n \geq 1} \subseteq \Rbar$ bir dizi olsun. Tanımlarız:
+\[
+  \limsup_{n \to \infty} a_n
+  \coloneqq \inf_{n \geq 1} \sup_{k \geq n} a_k
+  = \lim_{n\to\infty} \sup_{k \geq n} a_k,
+\]
+\[
+  \liminf_{n \to \infty} a_n
+  \coloneqq \sup_{n \geq 1} \inf_{k \geq n} a_k
+  = \lim_{n\to\infty} \inf_{k \geq n} a_k.
+\]
+İki limit $\Rbar$'da her zaman mevcuttur; çünkü $s_n \coloneqq \sup_{k \geq n} a_k$
+azalan, $t_n \coloneqq \inf_{k \geq n} a_k$ artan bir dizidir.
+\end{tanim}
+
+\begin{onerme}[$\limsup$ ve $\liminf$'in Temel Özellikleri]\label{prop:limsup_ozellik}
+Her $(a_n) \subseteq \Rbar$ için:
+\begin{enumerate}[label=(\roman*)]
+  \item $\liminf_n a_n \leq \limsup_n a_n$,
+  \item $\lim_n a_n$ mevcutsa (uzun anlamda $\Rbar$'da)
+        $\lim_n a_n = \liminf_n a_n = \limsup_n a_n$.
+\end{enumerate}
+\end{onerme}
+
+\begin{proof}
+(i) $n$ sabit alındığında $\inf_{k \geq n} a_k \leq \sup_{k \geq n} a_k$.
+$n \to \infty$ alındığında sol tarafın limiti $\liminf$, sağ tarafın limiti
+$\limsup$'tır; eşitsizlik korunur.
+
+(ii) $\lim_n a_n = L$ olsun. Her $\varepsilon > 0$ için yeterince büyük
+$n$'de $|a_k - L| < \varepsilon$ (her $k \geq n$). Bu,
+$\sup_{k \geq n} a_k \leq L + \varepsilon$ ve
+$\inf_{k \geq n} a_k \geq L - \varepsilon$ verir; $\varepsilon \to 0$
+ile sonuç elde edilir.
+\end{proof}
+
+\begin{ornek}[$\limsup$ ve $\liminf$ hesabı]
+$a_n = (-1)^n$ için: $\sup_{k \geq n} a_k = 1$ ve $\inf_{k \geq n} a_k = -1$
+tüm $n$ için, dolayısıyla
+$\limsup_n a_n = 1$ ve $\liminf_n a_n = -1$.
+Dizi yakınsamadığından $\lim_n a_n$ mevcut değil, ama $\limsup/\liminf$
+her zaman tanımlıdır.
+\end{ornek}
+
+\subsection{Küme Dizilerinde Üst ve Alt Limit}
+
+Bu alt bölüm Bölüm~7'deki Borel-Cantelli lemmalarının doğrudan ön koşuludur.
+
+\begin{tanim}[$\limsup$ ve $\liminf$ --- Küme Dizileri]\label{def:limsup_kume}
+$(A_n)_{n \geq 1}$ bir küme dizisi olsun. Tanımlarız:
+\begin{align*}
+  \limsup_{n\to\infty} A_n
+  &\coloneqq \bigcap_{n=1}^\infty \bigcup_{k=n}^\infty A_k, \\[4pt]
+  \liminf_{n\to\infty} A_n
+  &\coloneqq \bigcup_{n=1}^\infty \bigcap_{k=n}^\infty A_k.
+\end{align*}
+\end{tanim}
+
+\begin{tanimgerekce}
+Bu tanımların sezgisel yorumları aşağıdaki önerme ile netleşir.
+``Sonsuz kez'' ve ``eninde sonunda'' dili, olasılık teorisindeki olayların
+geleceğe dair yorumunu doğrudan yansıtır.
+\end{tanimgerekce}
+
+\begin{onerme}[Küme $\limsup$ ve $\liminf$'in Yorumu]\label{prop:limsup_kume}
+$(A_n)$ bir küme dizisi olsun. O zaman:
+\begin{align*}
+  \limsup_{n} A_n
+  &= \{\omega : \omega \in A_n \text{ sonsuz sayıda } n \text{ için}\}, \\[4pt]
+  \liminf_{n} A_n
+  &= \{\omega : \omega \in A_n \text{ eninde sonunda her } n \text{ için}\}.
+\end{align*}
+Olasılık literatüründe bu kümeler sırasıyla ``s.s.~çok'' (\emph{infinitely often}, i.o.)
+ve ``e.s.'' (\emph{eventually}) olay kümeleri olarak adlandırılır.
+\end{onerme}
+
+\begin{proof}
+$\omega \in \limsup_n A_n = \bigcap_n \bigcup_{k \geq n} A_k$ olsun.
+Bu, her $n$ için $\omega \in \bigcup_{k \geq n} A_k$ anlamına gelir; yani
+her $n$ için bazı $k \geq n$ ile $\omega \in A_k$. Dolayısıyla sonsuz
+sayıda $k$ için $\omega \in A_k$ (yoksa bir $n_0$ bulunurdu ki $k \geq n_0$
+için $\omega \notin A_k$, bu $\omega \notin \bigcup_{k \geq n_0} A_k$,
+çelişki).
+
+Tersine, $\omega$ sonsuz sayıda $n$'de $A_n$'deyse, her $N$ için $N$'den büyük
+bir $k$ ile $\omega \in A_k$ vardır; dolayısıyla $\omega \in \bigcup_{k \geq N} A_k$
+her $N$ için, yani $\omega \in \bigcap_N \bigcup_{k \geq N} A_k$.
+
+\medskip
+
+$\liminf$ için: $\omega \in \liminf_n A_n = \bigcup_n \bigcap_{k \geq n} A_k$
+iff bazı $n_0$ için her $k \geq n_0$'da $\omega \in A_k$,
+yani $\omega$ eninde sonunda her $A_n$'dedir.
+\end{proof}
+
+\begin{teorem}[$\liminf \subseteq \limsup$]\label{thm:liminf_subseteq}
+Her küme dizisi $(A_n)$ için:
+\[
+  \liminf_{n} A_n \subseteq \limsup_{n} A_n.
+\]
+Dizi monoton artanlarsa ya da monoton azalanlarsa, $\liminf = \limsup$.
+\end{teorem}
+
+\begin{proof}
+``Eninde sonunda her $A_n$'de olmak'' kesinlikle ``sonsuz sayıda $A_n$'de olmak''ı
+gerektirir; dolayısıyla $\liminf \subseteq \limsup$.
+
+Dizi artanlarsa ($A_n \nearrow$): $\omega \in \limsup_n A_n$ olsun; sonsuz çok $n$
+için $\omega \in A_n$, dolayısıyla bazı $n_0$ için $\omega \in A_{n_0}$, ve
+$A_{n_0} \subseteq A_k$ her $k \geq n_0$ için. Yani $\omega \in \liminf_n A_n$.
+Azalan dizi benzer argümanla ele alınır.
+\end{proof}
+
+\begin{ispatiskele}[Teorem~\ref{thm:liminf_subseteq} --- azalan dizi]
+Dizi azalanlarsa ($A_n \searrow$) $\liminf = \limsup$ olduğunu kanıtlayın:
+
+\iskeleadim{1}{$A_n \searrow$ olduğundan, her $n$ için $\bigcap_{k \geq n} A_k = \bosluk{A_n}$'deki en küçük eleman, yani $\bigcap_{k \geq n} A_k = \bigcap_{k=1}^\infty A_k$.}
+
+\iskeleadim{2}{$\liminf_n A_n = \bigcup_n \bigcap_{k \geq n} A_k = \bosluk{\bigcap_{k=1}^\infty A_k}$.}
+
+\iskeleadim{3}{Benzer argümanla $\limsup_n A_n = \bosluk{\bigcap_{k=1}^\infty A_k}$, yani iki küme eşittir.}
+\end{ispatiskele}
+
+\begin{ornek}[$\limsup$ ve $\liminf$ küme hesabı]\label{ex:limsupkume}
+$\Omega = \R$ ve
+\[
+  A_n =
+  \begin{cases}
+    (0,1), & n \text{ tek}, \\
+    (0,2), & n \text{ çift}.
+  \end{cases}
+\]
+O zaman:
+\[
+  \limsup_n A_n = (0,2),
+  \qquad
+  \liminf_n A_n = (0,1).
+\]
+Çünkü her $x \in (0,2)$ sonsuz sayıda çift indisli $A_n$'de yer alır;
+yalnızca $(0,1)$ kümesi eninde sonunda tüm $A_n$'lerde yer alır.
+\end{ornek}
+
+\begin{kendinleifade}
+$(A_n)$ ile $B_n = A_n^c$ arasındaki $\limsup$ ve $\liminf$ ilişkisini
+De~Morgan yasasını kullanarak türetin. Beklenen sonuç:
+$\left(\limsup_n A_n\right)^c = \liminf_n A_n^c$.
+\ogrencialani[2.5cm]
+\end{kendinleifade}
+
+\begin{mikroozet}[§0.5 özeti]
+$\limsup_n A_n$ = sonsuz sık olay; $\liminf_n A_n$ = eninde sonunda
+gerçekleşen olay. Her zaman $\liminf \subseteq \limsup$. Monoton dizilerde
+ikisi eşittir. Bu dil Bölüm~7'deki Borel-Cantelli lemmalarının tam dilidir.
+\end{mikroozet}
+
+
+% =====================================================================
+%  BÖLÜM SONU ÖZETİ
+% =====================================================================
+\section*{Bölüm Özeti}
+\addcontentsline{toc}{section}{Bölüm Özeti}
+
+\noindent
+\begin{tcolorbox}[maarif@base, colframe=maOzet, colback=maOzet!4,
+    colbacktitle=maOzet, title={Bölüm 0 --- Temel Sonuçlar}]
+\begin{itemize}[leftmargin=1.8em, itemsep=3pt]
+  \item \textbf{De~Morgan:}
+        $\left(\bigcup_n A_n\right)^c = \bigcap_n A_n^c$ ve
+        $\left(\bigcap_n A_n\right)^c = \bigcup_n A_n^c$.
+  \item \textbf{Ters görüntü:} $f^{-1}$ birleşim, kesişim ve tümlemeyi korur
+        (Teorem~\ref{thm:tergoriuntu}).
+  \item \textbf{Sayılabilirlik:} $\Q$ sayılabilir; $\R$ sayılamaz (Cantor köşegen argümanı).
+        Sayılabilir ailenin birleşimi sayılabilirdir.
+  \item \textbf{Tamtümlük:} Sınırlı her boşalmayan $A \subseteq \R$ kümesinin
+        $\sup A$ ve $\inf A$ değerleri $\R$'de mevcuttur.
+  \item \textbf{$\Rbar$:} $0 \cdot (\pm\infty) = 0$ konvansiyonuyla kullanılır;
+        $(+\infty)+(-\infty)$ tanımsız.
+  \item \textbf{$\limsup / \liminf$ (kümeler):}
+        $\limsup_n A_n$ = s.s.~çok; $\liminf_n A_n$ = eninde~sonunda.
+        $\left(\limsup_n A_n\right)^c = \liminf_n A_n^c$.
+\end{itemize}
+
+\medskip\noindent\textbf{Notasyon özeti:}
+\begin{itemize}[leftmargin=1.8em, itemsep=2pt, label={--}]
+  \item $A^c$: tümleyen;\quad $A \triangle B$: simetrik fark;\quad $\powerset{\Omega}$: kuvvet kümesi
+  \item $f^{-1}(B)$: ters görüntü
+  \item $\sup A$, $\inf A$: üst/alt kenar değer;\quad
+        $\Rbar = \R \cup \{-\infty, +\infty\}$
+  \item $\limsup_n A_n = \bigcap_n \bigcup_{k \geq n} A_k$;\quad
+        $\liminf_n A_n = \bigcup_n \bigcap_{k \geq n} A_k$
+\end{itemize}
+\end{tcolorbox}
+
+% ─── ÖZ-YANSITMA ──────────────────────────────────────────────────
+\begin{ozyansima}
+Bu bölümü tamamladıktan sonra kendinize şu soruları sorun:
+\begin{itemize}[leftmargin=1.8em, itemsep=3pt]
+  \item De~Morgan yasasını kaynağa bakmadan ispatlayabilir misiniz?
+  \item Ters görüntünün neden tümlemeyi koruduğunu, bir arkadaşınıza sözlü
+        açıklayabilir misiniz?
+  \item Cantor'un köşegen argümanında hangi adım çelişkiyi üretir?
+  \item $\limsup_n A_n$ ile $\liminf_n A_n$ arasındaki farkı tek cümleyle
+        ifade edebilir misiniz?
+\end{itemize}
+\end{ozyansima}
+
+% ─── KÖPRÜ NOTU ───────────────────────────────────────────────────
+\begin{kopru}
+\textbf{Sonraki bölüm (Bölüm~1: Ölçüm Teorisinin Temelleri).}
+Küme cebiri bilgisi doğrudan $\sigma$-cebiri tanımına gidecek;
+sayılabilirlik orada ``sayılabilir birleşim altında kapalı'' koşulunda karşınıza
+çıkacak. Ters görüntünün küme işlemlerini koruması ise ölçülebilir fonksiyon
+tanımının kalbidir.
+
+\medskip
+
+\textbf{İleri okuma.}
+Billingsley \cite{billingsley1995} Ek~A;
+Klenke \cite{klenke2014} Bölüm~1.1;
+Durrett \cite{durrett2019} Ek~A.1.
+\end{kopru}
+
+
+% =====================================================================
+%  ALIŞTIRMALAR
+% =====================================================================
+
+\cozumlualistirmalar
+
+% ─── Çözümlü Alıştırma 0.1 ───────────────────────────────────────
+\begin{alistirma}[Al.0.1]{A}{De~Morgan yasası --- doğrudan uygulama}
+$\Omega = \{1,2,3,4,5,6\}$ (zar atma örnek uzayı) ve $A_n = \{k \in \Omega : k \leq n+1\}$,
+$n = 1,2,3$ olsun. Hesaplayın:
+(a)~$\bigcup_{n=1}^{3} A_n$,\quad
+(b)~$\left(\bigcup_{n=1}^{3} A_n\right)^c$,\quad
+(c)~$\bigcap_{n=1}^{3} A_n^c$.
+İki sonucun eşit olduğunu doğrulayın.
+\end{alistirma}
+\alcozum{%
+(a) $A_1 = \{1,2\}$, $A_2 = \{1,2,3\}$, $A_3 = \{1,2,3,4\}$.
+$\bigcup_{n=1}^{3} A_n = \{1,2,3,4\}$.
+
+(b) $\left(\bigcup_n A_n\right)^c = \Omega \setminus \{1,2,3,4\} = \{5,6\}$.
+
+(c) $A_1^c = \{3,4,5,6\}$, $A_2^c = \{4,5,6\}$, $A_3^c = \{5,6\}$.
+$\bigcap_n A_n^c = \{5,6\}$.
+
+İki küme eşittir; De~Morgan yasası doğrulanmış oldu. $\blacksquare$%
+}
+
+% ─── Çözümlü Alıştırma 0.2 ───────────────────────────────────────
+\begin{alistirma}[Al.0.2]{B}{Ters görüntü --- aralıklar}
+$f: \R \to \R$, $f(x) = x^2$ olsun.
+(a)~$f^{-1}([0,4])$'ü hesaplayın.
+(b)~$f^{-1}((-1,0))$'ı hesaplayın ve yorumlayın.
+(c)~$B_1 = [1,4]$ ve $B_2 = [4,9]$ için $f^{-1}(B_1 \cap B_2)$'yi
+    hem doğrudan hem de $f^{-1}(B_1) \cap f^{-1}(B_2)$ olarak hesaplayın;
+    eşit olduklarını doğrulayın.
+\end{alistirma}
+\alcozum{%
+(a) $f^{-1}([0,4]) = \{x : x^2 \in [0,4]\} = [-2,2]$.
+
+(b) $f^{-1}((-1,0)) = \{x : x^2 \in (-1,0)\} = \emptyset$.
+Yorum: $f(x) = x^2 \geq 0$ olduğundan görüntü $[0,\infty)$;
+negatif değerlerin ters görüntüsü boştur.
+
+(c) $B_1 \cap B_2 = \{4\}$, dolayısıyla $f^{-1}(\{4\}) = \{-2,2\}$.
+
+$f^{-1}(B_1) = [-2,-1] \cup [1,2]$ ve $f^{-1}(B_2) = [-3,-2] \cup [2,3]$.
+$f^{-1}(B_1) \cap f^{-1}(B_2) = \{-2,2\}$.
+
+İki sonuç eşittir: Teorem~\ref{thm:tergoriuntu}(ii) doğrulandı. $\blacksquare$%
+}
+
+% ─── Çözümlü Alıştırma 0.3 ───────────────────────────────────────
+\begin{alistirma}[Al.0.3]{B}{Küme $\limsup$ ve $\liminf$ --- azalan dizi}
+$\Omega = [0,1]$ ve $A_n = [0, 1/n]$ olsun.
+(a)~$\limsup_n A_n$'i hesaplayın.
+(b)~$\liminf_n A_n$'i hesaplayın.
+(c)~Dizi monoton mu? Cevabınızı Teorem~\ref{thm:liminf_subseteq} ile
+    ilişkilendirin.
+\end{alistirma}
+\alcozum{%
+(a) Dizi azalan: $A_{n+1} \subset A_n$.
+$\bigcup_{k \geq n} A_k = A_n = [0,1/n]$ (en büyük eleman $A_n$).
+$\limsup_n A_n = \bigcap_{n \geq 1} [0,1/n] = \{0\}$.
+
+(b) $\bigcap_{k \geq n} A_k = \bigcap_{k \geq n} [0,1/k] = \{0\}$ her $n$ için.
+$\liminf_n A_n = \bigcup_{n \geq 1} \{0\} = \{0\}$.
+
+(c) Dizi azalan; Teorem~\ref{thm:liminf_subseteq}'ye göre
+$\limsup = \liminf = \{0\}$, yani $\lim_n A_n = \{0\}$.
+Sezgisel: aralıklar gittikçe küçülür, tek ortak nokta $\{0\}$ kalır. $\blacksquare$%
+}
+
+% ─── Çözümlü Alıştırma 0.4 ───────────────────────────────────────
+\begin{alistirma}[Al.0.4]{A}{$\Z$'nin sayılabilirliği}
+$\Z$'nin sayılabilir sonsuz olduğunu, açık bir bijeksiyon
+$f: \N \to \Z$ yazarak kanıtlayın. ($\N = \{1,2,3,\ldots\}$.)
+\end{alistirma}
+\alcozum{%
+$f(n) = \begin{cases} n/2 & n \text{ çift}, \\ -(n-1)/2 & n \text{ tek}\end{cases}$
+tanımlayın. Değerler: $f(1)=0$, $f(2)=1$, $f(3)=-1$, $f(4)=2$, $f(5)=-2$, \ldots
+
+\emph{Enjektif:} $f(m) = f(n)$ olsun. $m,n$ ikisi de çift ise $m/2 = n/2$, yani $m=n$.
+İkisi de tek ise $(m-1)/2 = (n-1)/2$, yani $m=n$. Biri çift biri tek olamaz
+(biri pozitif, diğeri sıfır ya da negatif verir; çelişki).
+
+\emph{Sürjektif:} $z > 0$ ise $n = 2z$ çift, $f(2z) = z$; $z \leq 0$ ise
+$n = 1-2z$ tek, $f(1-2z) = z$.
+
+$f$ bijektiftir; dolayısıyla $\Z$ sayılabilir sonsuzdur. $\blacksquare$%
+}
+
+\alistirmalar
+
+% ─── A Seviyesi ───────────────────────────────────────────────────
+\begin{alistirma}[Al.0.5]{A}{Küme özdeşlikleri}
+Aşağıdakilerin doğru mu yanlış mı olduğunu belirleyin. Doğruysa ispatlayın;
+yanlışsa karşı örnek verin.
+\begin{enumerate}[label=(\alph*)]
+  \item $A \setminus (B \cup C) = (A \setminus B) \cap (A \setminus C)$
+  \item $A \triangle B = B \triangle A$
+  \item $A \cap (B \triangle C) = (A \cap B) \triangle (A \cap C)$
+  \item $(A \triangle B) \triangle C = A \triangle (B \triangle C)$
+\end{enumerate}
+\end{alistirma}
+\alcozum{%
+(a) Doğru. $A \setminus (B \cup C) = A \cap (B \cup C)^c = A \cap (B^c \cap C^c)
+= (A \cap B^c) \cap (A \cap C^c) = (A \setminus B) \cap (A \setminus C)$.
+
+(b) Doğru. Simetrik fark tanımı gereği simetriktir:
+$(A \setminus B) \cup (B \setminus A) = (B \setminus A) \cup (A \setminus B)$.
+
+(c) Doğru. Her $\omega$ için dört durum kontrol edilir;
+$A \cap (B \triangle C)$ ve $(A \cap B) \triangle (A \cap C)$
+her iki ifade ``$A$'da, ama $B$ ve $C$'den tam olarak birinde'' olan
+elemanlar kümesidir.
+
+(d) Doğru (simetrik fark birleştirme yasasına uyar). İspat: her $\omega$
+için $A \triangle B \triangle C$ tam olarak tek sayıda kümede bulunan
+elemanları içerir. $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.6]{A}{Supremum ve İnfimum}
+Aşağıdaki kümelerin $\sup$ ve $\inf$ değerlerini bulun; her değerin kümede
+bulunup bulunmadığını belirtin.
+\begin{enumerate}[label=(\alph*)]
+  \item $A = \left\{\dfrac{(-1)^n}{n} : n \in \N\right\}$
+  \item $B = \{x \in \Q : x^2 < 3\}$
+  \item $C = \left\{1 - \dfrac{1}{2^n} : n \in \N_0\right\}$
+        ($\N_0 = \{0,1,2,\ldots\}$)
+\end{enumerate}
+\end{alistirma}
+\alcozum{%
+(a) $A = \{-1, 1/2, -1/3, 1/4, \ldots\}$. $\sup A = 1/2 \in A$;
+$\inf A = -1 \in A$.
+
+(b) $B = (-\sqrt{3}, \sqrt{3}) \cap \Q$. $\sup B = \sqrt{3} \notin B$
+(irrasyonel); $\inf B = -\sqrt{3} \notin B$.
+
+(c) $C = \{0, 1/2, 3/4, 7/8, \ldots\}$. $\sup C = 1 \notin C$
+(limit değer, küme içermez); $\inf C = 0 \in C$. $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.7]{A}{$\limsup$ ve $\liminf$ --- salınan dizi}
+$(a_n)$ dizisi $a_n = \sin(n\pi/2)$, $n \geq 1$ olsun.
+(a)~İlk sekiz terimi yazın.
+(b)~$\limsup_n a_n$ ve $\liminf_n a_n$'i hesaplayın.
+\end{alistirma}
+\alcozum{%
+(a) $1,\,0,\,-1,\,0,\,1,\,0,\,-1,\,0$.
+
+(b) Dizi $\{1,0,-1,0,\ldots\}$ döngüsündedir. $\sup_{k \geq n} a_k = 1$ her
+$n$ için. $\limsup_n a_n = 1$. Benzer biçimde $\liminf_n a_n = -1$. $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.8]{A}{Gösterge fonksiyonu ve simetrik fark}
+$\gostf{A}(\omega) = 1$ eğer $\omega \in A$, aksi hâlde $0$ olsun.
+Gösterin ki:
+\[
+  \gostf{A \triangle B} = \gostf{A} + \gostf{B} - 2\,\gostf{A \cap B}.
+\]
+\end{alistirma}
+\alcozum{%
+Dört durum:
+\begin{itemize}
+  \item $\omega \in A \cap B$: sol = 0, sağ = $1+1-2 = 0$. \checkmark
+  \item $\omega \in A \setminus B$: sol = 1, sağ = $1+0-0 = 1$. \checkmark
+  \item $\omega \in B \setminus A$: sol = 1, sağ = $0+1-0 = 1$. \checkmark
+  \item $\omega \notin A \cup B$: sol = 0, sağ = $0+0-0 = 0$. \checkmark
+\end{itemize}
+$\blacksquare$%
+}
+
+% ─── B Seviyesi ───────────────────────────────────────────────────
+\begin{alistirma}[Al.0.9]{B}{Sayılabilir birleşim --- uygulama}
+(a)~$\N \times \N$'nin sayılabilir olduğunu ispatlayın.
+(b)~$\Q$'nun sayılabilirliğini Teorem~\ref{thm:sayilabilirbir}'i kullanarak
+    yeniden ispatlayın.
+(c)~Herhangi bir $A \subseteq B$ için $A$ sayılabilir olduğunda $B$'nin
+    sayılabilmesinin \emph{yeterli} koşulunu tartışın. ($B$ sayılabilir
+    olmak zorunda mı?)
+\end{alistirma}
+\alcozum{%
+(a) $f: \N \times \N \to \N$, $f(m,n) = 2^{m-1}(2n-1)$ bijeksiyondur
+(her pozitif tam sayı tek türlü $2^a \cdot b$ biçiminde yazılır, $b$ tek).
+Dolayısıyla $\N \times \N \cong \N$, sayılabilirdir.
+
+(b) $\Q^+ \subseteq \N \times \N$ gömülebilir ($p/q \mapsto (p,q)$ enjektif).
+$\Q = \Q^+ \cup \{0\} \cup (-\Q^+)$, Teorem~\ref{thm:sayilabilirbir} ile sayılabilir.
+
+(c) $A \subseteq B$ ise $A$'nın sayılabilirliği $B$'yi zorunlu olarak
+sayılabilir kılmaz. Örneğin $A = \{0\}$ ve $B = \R$: $A$ sonlu,
+$B$ sayılamazdır. Ama $B \subseteq A$ ile $A$ sayılabilir ise $B$
+sayılabilirdir (sayılabilir bir kümenin her alt kümesi sayılabilir). $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.10]{B}{Küme $\limsup$ ve $\liminf$ --- iki dizi}
+$\Omega = \R$ olsun. Her dizi için $\limsup$ ve $\liminf$'i hesaplayın.
+\begin{enumerate}[label=(\alph*)]
+  \item $A_n = \left(-\dfrac{1}{n},\, 1 + \dfrac{1}{n}\right)$
+  \item $A_n = (n, n+1)$
+\end{enumerate}
+\end{alistirma}
+\alcozum{%
+(a) Dizi azalan: $A_{n+1} \subset A_n$. $\bigcup_{k \geq n} A_k = A_n$ ve
+$\bigcap_{k \geq n} A_k \to [0,1]$.
+$\limsup_n A_n = \liminf_n A_n = [0,1]$.
+
+(b) $\bigcup_{k \geq n} A_k = (n,\infty)$ ve $\bigcap_{k \geq n} A_k = \emptyset$.
+$\limsup_n A_n = \bigcap_{n \geq 1}(n,\infty) = \emptyset$.
+$\liminf_n A_n = \bigcup_{n \geq 1} \emptyset = \emptyset$.
+Yorum: $(n,n+1)$ sağa kayar; hiçbir sabit nokta bu dizinin sonsuz
+üyesinde değildir. $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.11]{B}{Ters görüntü --- mutlak değer fonksiyonu}
+$f: \R \to \R$, $f(x) = |x|$ olsun.
+\begin{enumerate}[label=(\alph*)]
+  \item $f^{-1}([1,2])$
+  \item $f^{-1}(\{0\})$
+  \item $f^{-1}(\R \setminus [0,1])$ hem doğrudan hem de
+        $\left(f^{-1}([0,1])\right)^c$ olarak hesaplayın; eşitliği
+        Teorem~\ref{thm:tergoriuntu}(iii) ile ilişkilendirin.
+\end{enumerate}
+\end{alistirma}
+\alcozum{%
+(a) $f^{-1}([1,2]) = \{x : |x| \in [1,2]\} = [-2,-1] \cup [1,2]$.
+
+(b) $f^{-1}(\{0\}) = \{0\}$.
+
+(c) Doğrudan: $\R \setminus [0,1] = (-\infty,0) \cup (1,\infty)$;
+$f^{-1} = (-\infty,-1) \cup (1,\infty)$ (çünkü $|x| > 1 \iff x > 1$ ya da $x < -1$).
+
+$(f^{-1}([0,1]))^c = [-1,1]^c = (-\infty,-1) \cup (1,\infty)$.
+
+İki sonuç eşittir; Teorem~\ref{thm:tergoriuntu}(iii) doğrulandı. $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.12]{B}{$\limsup$ tümleme özdeşliği --- ispat}
+$(A_n)$ bir küme dizisi için $\left(\limsup_n A_n\right)^c = \liminf_n A_n^c$
+olduğunu ispatlayın.
+\end{alistirma}
+\alcozum{%
+De~Morgan yasasını art arda uygulayın:
+\begin{align*}
+  \left(\limsup_n A_n\right)^c
+  &= \left(\bigcap_{n=1}^\infty \bigcup_{k \geq n} A_k\right)^c \\
+  &= \bigcup_{n=1}^\infty \left(\bigcup_{k \geq n} A_k\right)^c \\
+  &= \bigcup_{n=1}^\infty \bigcap_{k \geq n} A_k^c \\
+  &= \liminf_n A_n^c. \qquad \blacksquare
+\end{align*}
+Sezgisel yorum: ``$\omega$ sonsuz sık $A_n$'de \emph{değil}'' $\iff$
+``$\omega$ eninde sonunda her $A_n^c$'de.'' $\blacksquare$%
+}
+
+% ─── C Seviyesi ───────────────────────────────────────────────────
+\begin{alistirma}[Al.0.13]{C}{Cantor kümesinin sayılamazlığı}
+\textbf{Cantor kümesi} $\mathcal{C}$, $[0,1]$'den ardı ardına orta üçte bir
+açık aralıklar çıkarılarak elde edilir: önce $(1/3,2/3)$, ardından
+$(1/9,2/9)$ ve $(7/9,8/9)$, vb.
+
+(a)~$\mathcal{C}$'nin Lebesgue ölçüsünün $0$ olduğunu gösterin
+(çıkarılan açık aralıkların uzunluk toplamı $1$'dir).
+
+(b)~$\mathcal{C}$, üçlü taban gösteriminde yalnızca $0$ ve $2$ basamağı
+içeren sayıların kümesidir. Bu gözlemi kullanarak $\mathcal{C}$'nin
+sayılamaz olduğunu kanıtlayın.
+\end{alistirma}
+\alcozum{%
+\begin{ipucu}{1}
+$n$-inci adımda $2^{n-1}$ adet, her biri $1/3^n$ uzunluklu aralık çıkarılır.
+\end{ipucu}
+
+(a) Toplam çıkarılan uzunluk:
+$\sum_{n=1}^\infty 2^{n-1}/3^n = \tfrac{1}{2}\sum_{n=1}^\infty (2/3)^n
+= \tfrac{1}{2} \cdot \tfrac{2/3}{1/3} = 1$.
+
+(b) Her $x \in \mathcal{C}$, $x = \sum_{n=1}^\infty d_n/3^n$ ($d_n \in \{0,2\}$)
+biçiminde yazılır. $g: \mathcal{C} \to [0,1]$, $g(x) = \sum_{n=1}^\infty (d_n/2)/2^n$
+sürjektiftir (her ikili gösterim elde edilir). $[0,1]$ sayılamaz; sürjektif
+görüntünün alt kümesi sayılamaz olamaz; dolayısıyla $\mathcal{C}$ sayılamazdır.
+$\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.14]{C}{Alt dizi ve $\limsup$/$\liminf$ ilişkisi}
+$(A_n)$ bir küme dizisi ve $(A_{n_k})_{k \geq 1}$, $(A_n)$'nin bir alt dizisi
+($n_1 < n_2 < \cdots$) olsun. Kanıtlayın ki:
+\[
+  \liminf_n A_n \subseteq \liminf_k A_{n_k}
+  \subseteq \limsup_k A_{n_k} \subseteq \limsup_n A_n.
+\]
+\end{alistirma}
+\alcozum{%
+\begin{ipucu}{1}
+$\limsup_k A_{n_k} \subseteq \limsup_n A_n$ için: $\omega$'nın sonsuz çok $A_{n_k}$'da
+olması, sonsuz çok $A_n$'da olması anlamına gelir (alt dizi endeksleri de $\N$'dedir).
+\end{ipucu}
+
+\textbf{$\limsup_k A_{n_k} \subseteq \limsup_n A_n$:}
+$\omega$ sonsuz çok $k$ için $A_{n_k}$'da $\Rightarrow$ sonsuz çok $n \in \{n_1,n_2,\ldots\}$
+için $\omega \in A_n$ $\Rightarrow$ $\omega \in \limsup_n A_n$.
+
+\textbf{$\liminf_n A_n \subseteq \liminf_k A_{n_k}$:}
+$\omega \in \liminf_n A_n$ $\Rightarrow$ bazı $N$ için $k \geq N \Rightarrow \omega \in A_k$.
+$n_k \geq k$ olduğundan, yeterince büyük $k$ için $n_k \geq N$ ve $\omega \in A_{n_k}$;
+yani $\omega \in \liminf_k A_{n_k}$.
+
+Ortadaki $\liminf \subseteq \limsup$ Teorem~\ref{thm:liminf_subseteq}'den gelir. $\blacksquare$%
+}
+
+\begin{alistirma}[Al.0.15]{C}{Simetrik fark ve ölçü}
+$(X, \mathcal{A}, \mu)$ bir ölçüm uzayı, $A, B \in \mathcal{A}$ ve $\mu$ sonlu
+ölçü olsun. Gösterin ki $\mu(A \triangle B) = \mu(A) + \mu(B) - 2\mu(A \cap B)$.
+Bu ifade neden bir ``küme metriği'' için temel oluşturur?
+\end{alistirma}
+\alcozum{%
+$A \triangle B = (A \setminus B) \cup (B \setminus A)$ ve bu iki küme ayrık.
+\begin{align*}
+  \mu(A \triangle B)
+  &= \mu(A \setminus B) + \mu(B \setminus A) \\
+  &= [\mu(A) - \mu(A \cap B)] + [\mu(B) - \mu(A \cap B)] \\
+  &= \mu(A) + \mu(B) - 2\mu(A \cap B).
+\end{align*}
+Metrik: $d(A,B) = \mu(A \triangle B)$ tanımlanırsa, $d(A,A)=0$, $d(A,B)=d(B,A)$
+ve üçgen eşitsizliği $A \triangle C \subseteq (A \triangle B) \cup (B \triangle C)$
+özdeşliğinden gelir. Bu ``ölçü teorik metrik'', $L^1$ normunun gösterge
+fonksiyonları üzerindeki karşılığıdır. $\blacksquare$%
+}
