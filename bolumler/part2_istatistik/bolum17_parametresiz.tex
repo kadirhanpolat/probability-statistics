@@ -181,6 +181,105 @@ $U_i = F_0(X_i)\iid\Uniform[0,1]$ ($F_0$ sürekli). $F_n$ yerine uniform ampirik
 \end{ispatiskele}
 
 %% ============================================================
+\section{Medyan için Güven Aralığı}
+\label{sec:medyan_ga}
+%% ============================================================
+
+\begin{teorem}[Medyan için dağılım-serbest GA]\label{thm:medyan_ga}
+$X_1,\ldots,X_n\iid F$ sürekli; medyan $m$ bilinmiyor. Sıra istatistikleri $X_{(1)}\leq\cdots\leq X_{(n)}$.
+
+$\Prob(X_{(r)}\leq m\leq X_{(s)}) = \sum_{k=r}^{s-1}\binom{n}{k}(1/2)^n$.
+
+$(1-\alpha)$ güven aralığı: $r$ ve $s$'yi $\sum_{k=r}^{s-1}\binom{n}{k}2^{-n}\geq1-\alpha$ sağlayacak biçimde seç.
+\end{teorem}
+
+\begin{proof}
+$\Prob(X_{(r)}\leq m) = \Prob(\text{en az } r \text{ gözlem } m\text{'den küçük}) = \Prob(B_{n,1/2}\geq r)$ ($B_{n,1/2}\sim\Binom(n,1/2)$). $\Prob(X_{(r)}\leq m\leq X_{(s)}) = \Prob(r\leq B_{n,1/2}\leq s-1)$.
+\end{proof}
+
+\begin{ornek}[Medyan GA, $n=9$, $\alpha=0.05$]
+$\sum_{k=r}^{8-r}\binom{9}{k}(1/2)^9$ $r=2$, $s=8$: $\sum_{k=2}^7\binom{9}{k}/512=(9+36+84+126+126+84)/512=465/512=0.908<0.95$. $r=2,s=8$ yeterli değil. $r=1,s=9$: $\sum_{k=1}^8\binom{9}{k}/512=(512-1-1)/512=510/512=0.996\geq0.95$. GA: $[X_{(1)},X_{(9)}]$, kapsama $\geq99.6\%$.
+\end{ornek}
+
+%% ============================================================
+\section{Spearman Sıra Korelasyonu}
+\label{sec:spearman}
+%% ============================================================
+
+\begin{tanim}[Spearman'ın $\rho$ istatistiği]\label{def:spearman}
+$(X_i,Y_i)_{i=1}^n$ çiftleri. $R_i$ = $X_i$'nin sırası, $S_i$ = $Y_i$'nin sırası. \textbf{Spearman $\rho$}:
+\[
+  r_S = 1 - \frac{6\sum_{i=1}^n d_i^2}{n(n^2-1)}, \quad d_i = R_i - S_i.
+\]
+Parametrik Pearson korelasyonunun sıra tabanlı alternatifi; aykırı değerlere sağlamlı.
+\end{tanim}
+
+\begin{teorem}[Spearman $\rho$ — bağlantı]
+$r_S$ aslında sıraların Pearson korelasyonudur: $r_S = \Cor(R_i,S_i)$. $H_0:\rho=0$ (bağımsızlık) altında $T=r_S\sqrt{(n-2)/(1-r_S^2)}\dto t_{n-2}$.
+\end{teorem}
+
+\begin{proof}
+Sıralar $1,\ldots,n$'nin ortalaması $(n+1)/2$; varyansı $(n^2-1)/12$. Pearson formülünü sıralara uygulayınca $r_S$ elde edilir. Büyük örneklem: $\sqrt{n-1}r_S\dto\Normal(0,1)$ ($H_0$ altında).
+\end{proof}
+
+\begin{ornek}[Spearman $\rho$ hesabı]
+$(X,Y)$ çiftleri: sıralar $(R,S)$: $(1,2),(2,1),(3,4),(4,3),(5,5)$. $d_i=(-1,1,-1,1,0)$. $\sum d_i^2=4$. $r_S=1-6\cdot4/(5\cdot24)=1-0.2=0.8$.
+\end{ornek}
+
+%% ============================================================
+\section{Permütasyon Testleri}
+\label{sec:permutasyon_test}
+%% ============================================================
+
+\begin{tanim}[Permütasyon testi]\label{def:permutasyon_test}
+$H_0$: iki grup $\{X_i\}$ ve $\{Y_j\}$ aynı dağılımdan. Test istatistiği $T$ (örn. $|\bar{X}-\bar{Y}|$).
+
+\textbf{Permütasyon dağılımı:} Tüm $\binom{m+n}{m}$ mümkün grup atamasında $T$ değerleri hesaplanır. $p$-değeri: gözlenen $T$'den büyük ya da eşit $T$ değerlerinin oranı.
+\end{tanim}
+
+\begin{teorem}[Permütasyon testinin kesin geçerliliği]
+$H_0$ altında tüm permütasyonlar eşit olasılıklı; permütasyon $p$-değeri tam anlamlılık düzeyi $\alpha$'yı kontrol eder (dağılım varsayımı gerektirmez).
+\end{teorem}
+
+\begin{ornek}[Küçük örneklem permütasyon testi]
+Grup A: $\{3,7\}$, Grup B: $\{1,5\}$. $T=|\bar{A}-\bar{B}|=|5-3|=2$. Tüm $\binom{4}{2}=6$ bölme: $\{3,7\}$ vs $\{1,5\}$: $T=2$; $\{3,1\}$ vs $\{7,5\}$: $T=4$; $\{3,5\}$ vs $\{1,7\}$: $T=2$; $\{1,7\}$ vs $\{3,5\}$: $T=2$; $\{1,5\}$ vs $\{3,7\}$: $T=2$; $\{7,5\}$ vs $\{3,1\}$: $T=4$. $p=\Prob(T\geq2)=6/6=1.00$. $H_0$ reddedilemez.
+\end{ornek}
+
+%% ============================================================
+\section{Asimptotik Göreli Verimlilik (ARE)}
+\label{sec:are}
+%% ============================================================
+
+\begin{tanim}[ARE]\label{def:are}
+$T_n^{(1)}$ ve $T_n^{(2)}$ aynı hipotez için iki test. $n_1(n_2)$: $T^{(1)}(T^{(2)})$'nin belirli güce ($1-\beta$) ulaşması için gereken örneklem büyüklükleri.
+\[
+  \mathrm{ARE}(T^{(1)},T^{(2)}) = \lim_{n\to\infty}\frac{n_2}{n_1}.
+\]
+$\mathrm{ARE}>1$: $T^{(1)}$ daha verimli; daha az gözlemle aynı güce ulaşır.
+\end{tanim}
+
+\begin{teorem}[Wilcoxon vs $t$-testi ARE]\label{thm:are_wilcoxon}
+Normal dağılım altında:
+\[
+  \mathrm{ARE}(\text{Wilcoxon},t) = \frac{3}{\pi} \approx 0.955.
+\]
+Wilcoxon normallik geçerliyken $t$'nin $\%95.5$ veriminde çalışır — ama normallikten sapmalarda Wilcoxon üstün olabilir.
+\end{teorem}
+
+\begin{ispatiskele}
+Pitman verimlilik: $\mathrm{ARE}=\mathrm{SH}^2_{t}/\mathrm{SH}^2_W$ lokal alternatif altında asimptotik güç eğrileri karşılaştırılarak türetilir. Normal $f$ için Pitman verimlilik $12\sigma^2[f(0)]^2 = 12\sigma^2 /(2\pi\sigma^2)=6/\pi\to3/\pi$ (tek örneklem Wilcoxon için $3/\pi\approx0.955$).
+\end{ispatiskele}
+
+\begin{teorem}[ARE — genel sonuç]
+\begin{itemize}
+  \item Herhangi sürekli dağılım için: $\mathrm{ARE}(\text{Wilcoxon},t)\geq108/125\approx0.864$.
+  \item Çift üstel dağılımda: $\mathrm{ARE}=2.0$ (Wilcoxon iki kat verimli).
+  \item Cauchy dağılımda: $\mathrm{ARE}=\infty$ ($t$-testi tutarsız; Wilcoxon tutarlı).
+\end{itemize}
+Sonuç: Wilcoxon normalliği hiçbir zaman çok fazla kaybetmez; ağır kuyrukta büyük kazanç.
+\end{teorem}
+
+%% ============================================================
 \section{Bootstrap}
 \label{sec:bootstrap}
 %% ============================================================
