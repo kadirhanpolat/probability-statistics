@@ -415,6 +415,130 @@ $g(x,y) = x/y$; $\nabla g = (1/\mu_Y,\, -\mu_X/\mu_Y^2)^\top$.
 \]
 \end{ornek}
 
+% =====================================================================
+\section{Karakteristik Fonksiyon: Tersçevirme ve Benzersizlik}
+\label{sec:kf_ters}
+% =====================================================================
+
+\begin{motivasyon}[KF Neden Bu Kadar Güçlü?]
+Moment üreten fonksiyon her dağılım için mevcut olmayabilir (Cauchy).
+Karakteristik fonksiyon $\varphi_X(t) = E[e^{itX}]$ her dağılım için vardır.
+Dahası, KF dağılımı \emph{tam olarak} belirler: iki rasgele değişkenin KF'leri özdeşse
+dağılımları da özdeştir. Tersçevirme formülü, KF'den PDF'ye geçiş sağlar.
+\end{motivasyon}
+
+\begin{teorem}[KF Benzersizlik Teoremi]
+\label{thm:kf_benzersizlik}
+$X$ ve $Y$ rasgele değişkenler. Eğer $\varphi_X(t) = \varphi_Y(t)$ tüm $t \in \mathbb{R}$ için
+geçerliyse $X \overset{d}{=} Y$ (aynı dağılım).
+\end{teorem}
+
+\begin{proof}[İspat Taslağı]
+$F_X = F_Y$ olduğu yeter. Herhangi $a < b$ için
+\[
+  P(a < X \leq b) = \lim_{T\to\infty} \frac{1}{2\pi} \int_{-T}^T \frac{e^{-ita}-e^{-itb}}{it}\varphi_X(t)\,dt,
+\]
+(Lévy tersçevirme formülü). Aynı formül $F_Y$ için de geçerli; $\varphi_X = \varphi_Y$ koşuluyla
+$F_X(b)-F_X(a) = F_Y(b)-F_Y(a)$ her $a < b$ için. $F_X = F_Y$ çıkar.
+\end{proof}
+
+\begin{teorem}[Tersçevirme Formülü]
+\label{thm:kf_terscevir}
+$X$ sürekli rasgele değişken, $\int_{-\infty}^{+\infty} |\varphi_X(t)|\,dt < \infty$ ise
+\[
+  f_X(x) = \frac{1}{2\pi} \int_{-\infty}^{+\infty} e^{-itx}\,\varphi_X(t)\,dt.
+\]
+Yani KF, PDF'nin Fourier dönüşümüdür; tersçevirme Fourier ters dönüşümüdür.
+\end{teorem}
+
+\begin{ornek}[Normal KF'sinden PDF'ye]
+$\varphi_X(t) = e^{i\mu t - \sigma^2 t^2/2}$ (Normal KF).
+$\int |\varphi_X(t)|\,dt = \int e^{-\sigma^2 t^2/2}\,dt = \sqrt{2\pi}/\sigma < \infty$.
+Tersçevirme:
+\[
+  f_X(x) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} e^{-itx} e^{i\mu t - \sigma^2 t^2/2}\,dt
+  = \frac{1}{\sigma\sqrt{2\pi}} e^{-(x-\mu)^2/(2\sigma^2)}.
+\]
+(Gauss integralini tamamlayarak $t$'deki kareyi tamamlama kullanılır.)
+\end{ornek}
+
+\begin{teorem}[Lévy Süreklilik Teoremi]
+\label{thm:levy_sureklilik}
+$\varphi_{X_n}(t) \to \varphi(t)$ her $t$'de, ve $\varphi$ $t=0$'da sürekli ise
+$X_n \xrightarrow{d} X$ burada $X$'in KF'si $\varphi$'dir.
+\end{teorem}
+
+\begin{proof}[İspat Notu]
+Temel fikir: KDF dizisinin görece kompaktlığı (Helly seçim teoremi) + KF yakınsamasının
+limit ölçümünü tam belirlemesi. Tam ispat için Billingsley~\cite{Billingsley1995}, §26.
+Bu teorem MLT'nin KF ile ispatının kalbini oluşturur (Bölüm~\ref{chp:merkezi_limit}).
+\end{proof}
+
+\begin{hataanalizi}
+"$\varphi_{X_n}(t) \to \varphi(t)$ her $t$'de, dolayısıyla $X_n \xrightarrow{d} X$."
+Bu çıkarım Lévy Sürekliliği'ni atlıyor: $\varphi$'nin $t=0$'da sürekli (yani geçerli bir KF) olması
+gerekir. $\varphi_n(t) = e^{-n|t|}$ ise limit $\varphi(0)=1$, $\varphi(t)=0$ ($t\neq0$) —
+bu bir KF değildir. Sonuç: $X_n \to \infty$ dağılıma (mass escape), limit dağılım mevcut değil.
+\end{hataanalizi}
+
+\begin{mikroozet}
+KF her dağılım için vardır; benzersiz olarak belirler.
+Tersçevirme: $f_X = (2\pi)^{-1}\int e^{-itx}\varphi_X(t)\,dt$ ($|\varphi|$ integrallenebilir ise).
+Lévy Sürekliliği: KF yakınsaması $\Leftrightarrow$ dağılımla yakınsama.
+\end{mikroozet}
+
+% =====================================================================
+\section{İkinci Dereceden Delta Yöntemi}
+\label{sec:delta2}
+% =====================================================================
+
+\begin{motivasyon}[Birinci Türev Sıfır Olduğunda]
+Delta yöntemi $g'(\mu) \neq 0$ gerektirir. $g'(\mu) = 0$ ise $\sqrt{n}(g(\bar{X}_n) - g(\mu))$
+sıfıra yakınsar: limit dağılım dejenere. Doğru ölçek $n$'dir; limit dağılım normal değil,
+ki-kare ile ilgilidir.
+\end{motivasyon}
+
+\begin{teorem}[İkinci Dereceden Delta Yöntemi]
+\label{thm:delta2}
+$\sqrt{n}(X_n - \mu) \xrightarrow{d} \Normal(0, \sigma^2)$, $g'(\mu) = 0$,
+$g''(\mu) \neq 0$ ise:
+\[
+  n(g(X_n) - g(\mu)) \xrightarrow{d} \frac{\sigma^2 g''(\mu)}{2} \chi^2_1.
+\]
+\end{teorem}
+
+\begin{proof}
+İkinci derecede Taylor:
+$g(X_n) - g(\mu) = g'(\mu)(X_n-\mu) + \tfrac{g''(\mu)}{2}(X_n-\mu)^2 + o((X_n-\mu)^2)$.
+$g'(\mu) = 0$:
+$n(g(X_n)-g(\mu)) = \tfrac{g''(\mu)}{2}\cdot n(X_n-\mu)^2 + o_P(1)$.
+$\sqrt{n}(X_n-\mu) \xrightarrow{d} \Normal(0,\sigma^2)$;
+sürekli haritalama: $n(X_n-\mu)^2 \xrightarrow{d} \sigma^2 Z^2$ ($Z \sim \Normal(0,1)$).
+$Z^2 \sim \chi^2_1$: $n(g(X_n)-g(\mu)) \xrightarrow{d} \frac{\sigma^2 g''(\mu)}{2}\chi^2_1$.
+\end{proof}
+
+\begin{ornek}[Varyans Tahmincisi]
+$X_i$ i.i.d., $E[X_i] = \mu$, $\mathrm{Var}(X_i) = \sigma^2$, $E[(X_i-\mu)^4] = \mu_4 < \infty$.
+$g(m) = (m - \mu)^2$ fonksiyonu, $g'(\mu) = 0$, $g''(\mu) = 2$.
+
+$n(\bar{X}_n - \mu)^2 \xrightarrow{d} \sigma^2 \chi^2_1$.
+
+Örneğin $\sigma^2 = 1$: $n(\bar{X}_n-\mu)^2 \xrightarrow{d} \chi^2_1$.
+Bu, varyans-örneklem büyüklüğü ilişkisinin ikinci dereceden hassas analizini sağlar.
+\end{ornek}
+
+\begin{ornek}[Sıfır Noktasında Sinüs Dönüşümü]
+$\bar{X}_n \xrightarrow{P} 0$; $g(x) = \sin(x)$. $g'(0) = 1 \neq 0$, normal delta yöntemi geçerli.
+Ama $h(x) = 1 - \cos(x)$: $h'(0) = 0$, $h''(0) = 1$.
+$n(1 - \cos(\bar{X}_n)) \xrightarrow{d} \frac{\sigma^2}{2}\chi^2_1$.
+\end{ornek}
+
+\begin{mikroozet}
+$g'(\mu) = 0$: standart delta yöntemi çöker.
+İkinci derecede Delta: $n(g(X_n)-g(\mu)) \to \frac{\sigma^2 g''(\mu)}{2}\chi^2_1$.
+Limit dağılım ki-kare; ölçek $\sqrt{n}$ yerine $n$.
+\end{mikroozet}
+
 % ---- Disiplinlerarası Bağlantı (TYMM) ----
 \begin{kopru}[Disiplinlerarası — Mühendislik ve Veri Bilimi]
 \textbf{Güvenilirlik mühendisliği:} Paralel sistemlerde hayatta kalma süresi $X_{(n)}$,
@@ -561,7 +685,35 @@ $= \frac{\beta^{\alpha+\gamma}e^{-\beta z}}{\Gamma(\alpha)\Gamma(\gamma)} \int_0
 $u = t/z$: $\int_0^z t^{\alpha-1}(z-t)^{\gamma-1}dt = z^{\alpha+\gamma-1}B(\alpha,\gamma)
 = z^{\alpha+\gamma-1}\Gamma(\alpha)\Gamma(\gamma)/\Gamma(\alpha+\gamma)$.
 $f_{X+Y}(z) = \frac{\beta^{\alpha+\gamma}}{\Gamma(\alpha+\gamma)}z^{\alpha+\gamma-1}e^{-\beta z}$
-— bu $\Gama(\alpha+\gamma,\beta)$ PDF'sidir. \checkmark}
+— bu $\Gama(\alpha+\gamma,\beta)$ PDF'sidir.}
+
+\begin{alistirma}[Al.6.10]{B}{KF Tersçevirme}
+$X$ rasgele değişken, $\varphi_X(t) = e^{-|t|}$ (Cauchy KF).
+(a) $\int_{-\infty}^{+\infty} |\varphi_X(t)|\,dt$'nin varlığını kontrol edin.
+(b) Tersçevirme formülünü kullanarak $f_X(x)$'i hesaplayın.
+(c) Sonucun hangi standart dağılıma karşılık geldiğini belirtin.
+\end{alistirma}
+\alcozum{%
+(a) $\int_{-\infty}^\infty |e^{-|t|}|\,dt = 2\int_0^\infty e^{-t}\,dt = 2 < \infty$. Formül uygulanabilir.\\
+(b) $f_X(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{-itx}e^{-|t|}\,dt
+= \frac{1}{2\pi}\left[\int_0^\infty e^{t(-1-ix)}\,dt + \int_0^\infty e^{t(-1+ix)}\,dt\right]$
+$= \frac{1}{2\pi}\left[\frac{1}{1+ix} + \frac{1}{1-ix}\right] = \frac{1}{2\pi}\cdot\frac{2}{1+x^2} = \frac{1}{\pi(1+x^2)}$.\\
+(c) $f_X(x) = \frac{1}{\pi(1+x^2)}$ — standart Cauchy$(0,1)$ PDF'si.}
+
+\begin{alistirma}[Al.6.11]{B}{İkinci Dereceden Delta Yöntemi}
+$X_1, \ldots, X_n$ i.i.d., $E[X_i] = 0$, $\mathrm{Var}(X_i) = 1$.
+$g(x) = x^2 + 3x$.
+(a) $g'(0)$ ve $g''(0)$'ı hesaplayın.
+(b) $\sqrt{n}(g(\bar{X}_n) - g(0))$ için limit dağılımı verin.
+(c) Eğer $h(x) = x^2$ olsaydı, $n(h(\bar{X}_n) - h(0))$ için limit dağılımını verin.
+\end{alistirma}
+\alcozum{%
+$g(x) = x^2 + 3x$; $g'(x) = 2x+3$; $g'(0) = 3 \neq 0$; $g''(0) = 2$.\\
+(a) $g'(0) = 3$, $g''(0) = 2$.\\
+(b) Standart delta (çünkü $g'(0)=3\neq0$): $\sqrt{n}(g(\bar{X}_n)-0) \xrightarrow{d} \Normal(0, 1\cdot 9) = \Normal(0,9)$.\\
+(c) $h(x)=x^2$; $h'(0)=0$, $h''(0)=2$. İkinci dereceden delta:
+$n(h(\bar{X}_n)-0) \xrightarrow{d} \frac{1\cdot2}{2}\chi^2_1 = \chi^2_1$.
+Yani $n\bar{X}_n^2 \xrightarrow{d} \chi^2_1$ — bu MLT'nin doğal bir sonucudur.}
 
 % =====================================================================
 \endinput
