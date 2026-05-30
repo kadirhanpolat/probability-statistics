@@ -325,6 +325,101 @@ Yalnızca $p$-değerini raporlamak yeterli değildir: etki büyüklüğü ($d$, 
 \end{hataanalizi}
 
 %% ============================================================
+\section{Wald ve Score Testleri}
+\label{sec:wald_score}
+%% ============================================================
+
+\begin{tanim}[Wald testi]\label{def:wald_testi}
+$H_0:\theta=\theta_0$; MLE $\hat\theta_n$; Fisher bilgisi $I(\theta)$. \textbf{Wald test istatistiği}:
+\[
+  W_n = \frac{(\hat\theta_n-\theta_0)^2}{\widehat{\Var}(\hat\theta_n)} = (\hat\theta_n-\theta_0)^2 \cdot nI(\hat\theta_n) \dto \chi^2_1 \quad (H_0 \text{ altında}).
+\]
+Çok parametreli: $W_n = n(\hat{\boldsymbol\theta}-\boldsymbol\theta_0)^\top \hat{I}(\hat{\boldsymbol\theta})(\hat{\boldsymbol\theta}-\boldsymbol\theta_0)\dto\chi^2_r$.
+\end{tanim}
+
+\begin{tanim}[Score testi (Rao testi)]\label{def:score_testi}
+\textbf{Score istatistiği}:
+\[
+  S_n = \frac{1}{n}\left[\frac{\partial\logLikh(\theta_0;\mathbf{X})}{\partial\theta}\right]^2 \cdot \frac{1}{I(\theta_0)} = \frac{U_n^2}{nI(\theta_0)} \dto\chi^2_1 \quad (H_0 \text{ altında}).
+\]
+$U_n = \partial\logLikh/\partial\theta|_{\theta_0}$ score vektörü; kısıtlı MLE ($\theta_0$) üzerinde değerlendirilir.
+\end{tanim}
+
+\begin{teorem}[Üç test eşdeğerliliği]\label{thm:uc_test}
+Regularity koşulları altında ORT ($\Lambda$), Wald ($W$) ve Score ($S$) testleri asimptotik olarak eşdeğerdir:
+\[
+  -2\log\Lambda_n = W_n + o_p(1) = S_n + o_p(1).
+\]
+Tüm üçü $\chi^2_r$ sınır dağılımına sahip.
+\end{teorem}
+
+\begin{proof}[Proof — taslak]
+$\ell(\theta)=\logLikh(\theta;\mathbf{X})/n$ olsun. $\theta_0$ etrafında Taylor:
+\[
+  \ell(\hat\theta) \approx \ell(\theta_0) + U_n(\hat\theta-\theta_0) - \frac{n}{2}I(\theta_0)(\hat\theta-\theta_0)^2.
+\]
+$\hat\theta$'da $\ell'(\hat\theta)=0$ kullanılınca: $U_n \approx nI(\theta_0)(\hat\theta-\theta_0)$. Bu denklemi $-2\log\Lambda$, $W$, $S$ ifadelerine sokarak üçünün aynı asimptotik dağılıma (ve aynı $n\to\infty$ sınırına) sahip olduğu görülür.
+\end{proof}
+
+\begin{ornek}[Üç testin karşılaştırılması — Normal]
+$X_1,\ldots,X_n\iid\Normal(\mu,1)$. $H_0:\mu=0$.
+\begin{itemize}
+  \item ORT: $-2\log\Lambda = n\bar X^2$.
+  \item Wald: $W=n\bar X^2/I(0)^{-1}=n\bar X^2$ (aynı!).
+  \item Score: $U_n = n\bar X$; $S = n\bar X^2$ (aynı!).
+\end{itemize}
+Normal durumda üç test özdeştir — yalnızca asimptotik değil, kesin olarak.
+\end{ornek}
+
+\begin{hataanalizi}
+Score testi $\hat\theta$'yı hesaplamadan uygulanabildiğinden hesap kolaylığı sağlar (kısıtlı altında değerlendirme). Wald testi en kolay uygulanır ama parametrizasyona duyarlıdır: $h(\theta)$ için Wald $=\hat h(\theta)$ içermez. ORT en kararlı ama her ikisini de hesaplamayı gerektirir.
+\end{hataanalizi}
+
+%% ============================================================
+\section{Permütasyon Testi ve Tam Anlamlılık}
+\label{sec:tam_anlamlilik}
+%% ============================================================
+
+\begin{tanim}[Tam anlamlılık düzeyi]\label{def:tam_anlamlilik}
+Test tam $\alpha$ düzeyindedir (\textbf{kesin test} \emph{(exact test)}) eğer $\sup_{\theta\in\Theta_0}\Prob_\theta(T\in R) = \alpha$ (eşitlik, eşitsizlik değil). Fisher tam testi ve ikili veriler için kesin testler mümkündür.
+\end{tanim}
+
+\begin{teorem}[Fisher'ın tam testi]\label{thm:fisher_tam}
+$2\times2$ oluşum tablosu; satır ve sütun toplamları sabit. $H_0$: bağımsızlık altında sol üst gözem $X$ hipergeometrik dağılır:
+\[
+  \Prob(X=k\mid\text{sabit toplamlar}) = \frac{\binom{m}{k}\binom{N-m}{n-k}}{\binom{N}{n}}.
+\]
+$p$-değeri: gözlenen $k$'ye eşit veya daha uç değerlerin toplamı.
+\end{teorem}
+
+\begin{proof}[Proof — kısa]
+Sabit marjinaller koşullu dağılımı tamamen belirler. $H_0$ altında herhangi doldurma biçimi eşit olasılıklı; Fisher bu koşullu dağılımı kullandı — normallik veya asimptotik yaklaşım gerekmez.
+\end{proof}
+
+\begin{ornek}[Fisher tam testi — klinik veri]
+\[
+\begin{array}{c|cc|c}
+ & \text{İyileşti} & \text{İyileşmedi} & \text{Toplam}\\\hline
+\text{İlaç} & 7 & 3 & 10 \\
+\text{Plasebo} & 2 & 8 & 10 \\\hline
+\text{Toplam} & 9 & 11 & 20
+\end{array}
+\]
+$X=7$ (ilaç-iyileşti). $\Prob(X\geq7\mid\text{sabit})=\Prob(7)+\Prob(8)+\Prob(9)$.
+$\Prob(X=7)=\binom{9}{7}\binom{11}{3}/\binom{20}{10}=36\cdot165/184756=0.0654$.
+$\Prob(X=8)=36\cdot55/184756=0.0107$, $\Prob(X=9)=\binom{9}{9}\binom{11}{1}/184756=0.0006$.
+$p=0.0767>0.05$: bağımsızlık reddedilemez (küçük örneklem).
+\end{ornek}
+
+\begin{teorem}[Monte Carlo permütasyon $p$-değeri]\label{thm:mc_permutasyon}
+Tüm permütasyonlar hesaplanamıyorsa: $B$ rasgele permütasyon üret; $p\approx(\#\{b:T^b\geq T_{\mathrm{gözlem}}\}+1)/(B+1)$. Bu yaklaşım $B\to\infty$'da gerçek permütasyon $p$-değerine yakınsar.
+\end{teorem}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Genetik:} Permütasyon testi gen ilişkilendirme çalışmalarında (GWAS) çoklu test altın standardı. \textbf{Klinik denemeler:} Fisher tam testi küçük örneklemli 2×2 tablolarda (yan etki izleme). \textbf{Sosyal bilimler:} Asimptotik varsayımlar geçerli olmadığında permütasyon güvenli alternatif.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
