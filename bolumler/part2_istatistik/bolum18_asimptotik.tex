@@ -325,6 +325,96 @@ Her iki test asimptotik olarak normal; güç fonksiyonları $1-\beta=\Phi(c\cdot
 \end{ispatiskele}
 
 %% ============================================================
+\section{Semiparametrik Modeller ve Etkinlik Sınırı}
+\label{sec:semiparametrik}
+%% ============================================================
+
+\begin{tanim}[Semiparametrik model]\label{def:semiparametrik}
+Model $\mathcal{P}=\{P_{\theta,\eta}: \theta\in\Theta\subseteq\mathbb{R}^p,\;\eta\in\mathcal{H}\}$; $\theta$ sonlu boyutlu ilgi parametresi, $\eta$ sonsuz boyutlu tortu (nuisance) parametresi. Örnekler:
+\begin{itemize}
+  \item Cox orantılı tehlike modeli: $\lambda(t;x)=\lambda_0(t)e^{\beta^\top x}$ ($\beta$ ilgi, $\lambda_0$ serbest).
+  \item Yarı-parametrik konum-ölçek: $X_i=\theta+\varepsilon_i$, $\varepsilon_i\iid f$ (bilinmiyor).
+\end{itemize}
+\end{tanim}
+
+\begin{tanim}[Etkili bilgi ve Cramér-Rao sınırı]\label{def:etkin_bilgi}
+Semiparametrik Cramér-Rao sınırı: $\tilde{I}(\theta)$ \textbf{etkili Fisher bilgisi}. Her $\sqrt{n}$-tutarlı $T_n$ tahmin edicisi için:
+\[
+  \liminf_{n\to\infty} n\,\Var_{\theta,\eta}(T_n) \geq \tilde{I}(\theta)^{-1}.
+\]
+$\tilde{I}(\theta) \leq I(\theta)$ (parametrik Fisher bilgisi) — sonsuz boyutlu belirsizlik verimliliği azaltır.
+\end{tanim}
+
+\begin{teorem}[Etkili skor]\label{thm:etkin_skor}
+İlgi parametresi $\theta$ için etkili skor:
+\[
+  \tilde\ell_\theta = \ell_\theta - \Pi(\ell_\theta \mid \overline{\mathcal{H}}),
+\]
+$\ell_\theta = \partial\log p/\partial\theta$ parametrik skor; $\Pi$ ortogonal projeksiyon tortu skor uzayına. $\tilde{I}(\theta)=\Beklenti[\tilde\ell_\theta^2]$.
+\end{teorem}
+
+\begin{ispatiskele}
+$\ell_\theta = \tilde\ell_\theta + \Pi(\ell_\theta|\overline{\mathcal{H}})$; ikinci terim tortu yönünde bilgi. Etkili skor tortu skoruna ortogonal: $\Beklenti[\tilde\ell_\theta\ell_\eta]=0$ tüm $\eta$ pertürbasyonları için. Bu ortogonallik, nuisance'dan bağımsız çıkarım anlamına gelir.
+\end{ispatiskele}
+
+\begin{ornek}[Cox modeli — kısmi olabilirlik]
+Cox modelinde $\hat\beta$ kısmi olabilirlik MLE'si; $\lambda_0$ tahmin edilmeksizin $\sqrt{n}$-tutarlı ve etkili (semiparametrik CR sınırına ulaşan). Bu, Cox modelinin güçlü bir semiparametrik özelliğidir.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Tıbbi hayatta kalma analizi:} Cox modeli; semiparametrik etkinlik teorisi doğrudan burada. \textbf{Ekonometri:} Instrumental variables (IV) tahmin edicisi semiparametrik çerçevede. \textbf{Kausal çıkarım:} Propensity score tahmin için semiparametrik etkinlik.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
+\section{Yüksek Boyutlu İstatistik Girişi}
+\label{sec:yuksek_boyut}
+%% ============================================================
+
+\begin{kesif}
+$n<p$ durumunda (gözlem sayısı parametre sayısından az) EKK çözümü belirsiz; $\hat{\boldsymbol\beta}=(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}$ yoktur. Hangi araçlar gerekli?
+\end{kesif}
+
+\begin{tanim}[Seyreklik varsayımı]\label{def:seyreklik}
+$\boldsymbol\beta\in\mathbb{R}^p$'nin en fazla $s$ bileşeni sıfırdan farklı ($s\ll p$): $\|\boldsymbol\beta\|_0\leq s$. Bu \textbf{seyreklik} \emph{(sparsity)} varsayımı yüksek boyutlu tahmin teorisinin temelidir.
+\end{tanim}
+
+\begin{teorem}[Lasso Oracle eşitsizliği]\label{thm:lasso_oracle}
+$\mathbf{Y}=\mathbf{X}\boldsymbol\beta_0+\boldsymbol\varepsilon$ ($\varepsilon_i\iid\Normal(0,\sigma^2)$); $\boldsymbol\beta_0$ $s$-seyrek. Lasso tahmincisi $\lambda=c\sigma\sqrt{\log p/n}$ ile:
+\[
+  \frac{1}{n}\|\mathbf{X}(\hat{\boldsymbol\beta}_{\text{lasso}}-\boldsymbol\beta_0)\|^2 \leq C\frac{s\sigma^2\log p}{n}
+\]
+n.k.\ (kısıtlı eigendeğer koşulu altında). $p\gg n$ hâlinde bile anlamlı oran.
+\end{teorem}
+
+\begin{proof}[Proof — taslak]
+Temel teknik: kısıtlı eigendeğer koşulu (REK) ve $\ell_1$-$\ell_2$ dönüşümü. REK: $\mathbf{X}^\top\mathbf{X}/n$'nin seyrek yönlerde minimum eigendeğeri sıfırdan uzak. REK + Lasso dual koşulu: hatanın seyrek koni içinde kalması. İspat: Bickel-Ritov-Tsybakov (2009).
+\end{proof}
+
+\begin{tanim}[Kısıtlı eigendeğer koşulu (REK)]\label{def:rek}
+$\kappa>0$, $c_0>1$ için:
+\[
+  \min_{\boldsymbol\delta\neq0,\|\boldsymbol\delta_{S^c}\|_1\leq c_0\|\boldsymbol\delta_S\|_1} \frac{\|\mathbf{X}\boldsymbol\delta\|/\sqrt{n}}{\|\boldsymbol\delta_S\|} \geq \kappa.
+\]
+$S$: destek ($|\boldsymbol\beta_0|>0$ olan indeks kümesi). REK Gaussian tasarım için yüksek olasılıkla gerçekleşir.
+\end{tanim}
+
+\begin{teorem}[Boyutsallık laneti]\label{thm:boyutsallik}
+Düzgün minimax kare hata riski: $n$ gözlem, $p$ parametre; en hızlı küçülen oran:
+\[
+  \inf_{T_n}\sup_{\|\boldsymbol\beta\|_0\leq s} \Beklenti\!\left[\frac{\|\hat{\boldsymbol\beta}-\boldsymbol\beta\|^2}{n}\right] \asymp \frac{s\log(p/s)}{n}.
+\]
+Lasso bu minimax oran elde eder (log faktörüne kadar).
+\end{teorem}
+
+\begin{ornek}[Yüksek boyutlu regresyon — gen ifadesi]
+$n=100$ hasta, $p=20000$ gen: standart regresyon çalışmaz. Lasso ile $\hat{s}\approx15$ anlamlı gen seçilir; oracle eşitsizliği, tahmin hatasının $O(15\cdot\log 20000/100)=O(0.72)$ oranında sınırlı olduğunu garantiler (gerçek modelin 15 değişkenden oluştuğu varsayımlıyla).
+\end{ornek}
+
+\begin{hataanalizi}
+Yüksek boyutlu istatistiksel çıkarım (güven aralıkları, p-değerleri) klasik teoriden farklıdır: Lasso seçim sonrası çıkarım (post-selection inference) için standart $t$-testi geçersizdir. Debiased Lasso veya LOCO (leave-one-covariate-out) gibi yöntemler gerekir.
+\end{hataanalizi}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
