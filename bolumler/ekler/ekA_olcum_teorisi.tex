@@ -232,3 +232,70 @@ Varlık ve yegânlık Radon-Nikodym teoreminden çıkar.
   \item \emph{Varyans ayrışımı:} $\Var(X)=\Beklenti[\Var(X\mid\mathcal{G})]+\Var(\Beklenti[X\mid\mathcal{G}])$.
 \end{enumerate}
 \end{teorem}
+
+%% ============================================================
+\section{Olasılık Teorisinde Önemli Eşitsizlikler}
+\label{app:esitsizlikler}
+%% ============================================================
+
+Aşağıdaki eşitsizlikler bölümler boyunca tekrar tekrar kullanılmaktadır.
+
+\begin{teorem}[Jensen Eşitsizliği]\label{app:thm:jensen}
+$\phi:\mathbb{R}\to\mathbb{R}$ dışbükey ve $\Beklenti[|X|]<\infty$:
+\[
+  \phi(\Beklenti[X]) \leq \Beklenti[\phi(X)].
+\]
+İçbükey $\phi$ için ters yön.
+Uygulamalar: $\Beklenti[X^2]\geq(\Beklenti[X])^2$; $\Beklenti[\log X]\leq\log\Beklenti[X]$.
+\end{teorem}
+
+\begin{teorem}[Markov ve Chebyshev]\label{app:thm:markov_cheby}
+\begin{enumerate}[(a)]
+  \item \emph{Markov:} $X\geq0$, $a>0$: $\Prob(X\geq a)\leq\Beklenti[X]/a$.
+  \item \emph{Chebyshev:} $\Var(X)<\infty$: $\Prob(|X-\Beklenti[X]|\geq k)\leq\Var(X)/k^2$.
+  \item \emph{Cantelli (tek yönlü):} $\Prob(X-\mu\geq k)\leq\sigma^2/(\sigma^2+k^2)$.
+\end{enumerate}
+\end{teorem}
+
+\begin{teorem}[Cauchy-Schwarz ve Hölder]\label{app:thm:cs_holder}
+\begin{enumerate}[(a)]
+  \item \emph{Cauchy-Schwarz:} $\Beklenti[|XY|]\leq\sqrt{\Beklenti[X^2]\Beklenti[Y^2]}$.
+  \item \emph{Hölder:} $1/p+1/q=1$, $p,q\geq1$: $\Beklenti[|XY|]\leq(\Beklenti[|X|^p])^{1/p}(\Beklenti[|Y|^q])^{1/q}$.
+  \item \emph{Lyapunov:} $1\leq r\leq s$: $(\Beklenti[|X|^r])^{1/r}\leq(\Beklenti[|X|^s])^{1/s}$.
+\end{enumerate}
+\end{teorem}
+
+\begin{teorem}[Chernoff ve Hoeffding]\label{app:thm:chernoff_hoeff}
+$X_1,\ldots,X_n$ bağımsız, $\Beklenti[X_i]=0$, $a_i\leq X_i\leq b_i$.
+\begin{enumerate}[(a)]
+  \item \emph{Chernoff:} MGF $M(\lambda)<\infty$ için $\Prob(S_n\geq t)\leq e^{-\sup_\lambda[\lambda t-n\log M(\lambda)]}$.
+  \item \emph{Hoeffding:} $\Prob(|S_n|\geq t)\leq2\exp(-2t^2/\sum(b_i-a_i)^2)$.
+\end{enumerate}
+\end{teorem}
+
+%% ============================================================
+\section{Zayıf ve Güçlü Yakınsama: Özet Tablosu}
+\label{app:yakin_ozet}
+%% ============================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\hline
+\textbf{Yakınsama türü} & \textbf{Tanım} & \textbf{İlişki} \\
+\hline
+n.k.\ (a.s.) & $P(\lim X_n=X)=1$ & en güçlü \\
+$L^p$ & $\Beklenti[|X_n-X|^p]\to0$ & n.k. $\not\Rightarrow$ $L^1$ \\
+Olasılıkta ($P$) & $P(|X_n-X|>\varepsilon)\to0$ & $L^1\Rightarrow P$; n.k. $\Rightarrow P$ \\
+Dağılımda ($d$) & $F_n(x)\to F(x)$ süreklilik noktasında & en zayıf \\
+\hline
+\end{tabular}
+\end{center}
+
+Genel içerme: n.k. $\Rightarrow P \Rightarrow d$; $L^p \Rightarrow P \Rightarrow d$.
+Ters yönler çalışmaz: $P\not\Rightarrow$ n.k.; $d\not\Rightarrow P$ (dağılımda yakınsama için $X_n,X$ aynı uzayda olmak zorunda değil).
+
+\begin{ornek}[Her yönden karşı örnek]\label{app:ex:yakin_karsiornek}
+$X_n=\mathbf{1}_{[0,1/n]}$, $n\to\infty$: $X_n\pto0$ ve $X_n\to0$ n.k.\ (Lebesgue ölçüsünde). \\
+$Y_n$: $[0,1]$'de gezici bloklar ($P(Y_n=1)=1/n$, $Y_n\pto0$ ama $Y_n\not\to0$ n.k.\ hiçbir $\omega$'da).
+\end{ornek}

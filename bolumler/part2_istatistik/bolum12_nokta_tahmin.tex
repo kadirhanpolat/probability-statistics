@@ -644,6 +644,24 @@ $X_1,\ldots,X_n\iid\Exp(\lambda)$ ($\Beklenti[X]=1/\lambda$). $T=\sum X_i$ tamam
 $\Beklenti[n/T]=n\cdot\Beklenti[1/T]$. $T\sim\Gama(n,1/\lambda)$; $\Beklenti[1/T]=(n-1)^{-1}\cdot\lambda$ ($n>1$ için, negatif moment formülü). Bekle: $\Beklenti[T^{-1}]=\lambda/(n-1)$. O zaman $\Beklenti[n/T]=n\lambda/(n-1)\neq\lambda$. Düzeltme: yansız olan $\hat\lambda=(n-1)/T$. Bu $T$'nin fonksiyonu ve yansız, dolayısıyla UMVUE.%
 }
 
+\begin{alistirma}[Al.12.2b]{B}{Rao-Blackwell Adımı: Poisson}
+$X_1,\ldots,X_n\iid\Pois(\lambda)$. $\delta(X_1)=\mathbf{1}[X_1=0]=e^{-\lambda}$'nın yansız tahmincisi. $T=\sum X_i$ yeterli. (a) $\delta_{\mathrm{RB}}(T)=E[\delta(X_1)|T=t]$'yi hesapla. (b) Bu tahmin edici neden $\delta(X_1)$'den daha iyidir?
+\end{alistirma}
+\alcozum{%
+(a) $E[\mathbf{1}[X_1=0]|T=t]=P(X_1=0|T=t)$. $T=t$ koşulunda $X_1\sim\Binom(t,1/n)$ (Poisson birleşimi ayrışımı):
+$P(X_1=0|T=t)=(1-1/n)^t$.
+$\delta_\mathrm{RB}(T)=(1-1/n)^T$ — UMVUE (tamamlayıcı yeterli $T$'nin fonksiyonu, yansız).
+(b) Rao-Blackwell: $\mathrm{Var}(\delta_\mathrm{RB})\leq\mathrm{Var}(\delta)$. $\delta(X_1)$ sadece $X_1$ kullanırken $\delta_\mathrm{RB}$ tüm $T$'yi kullanır.}
+
+\begin{alistirma}[Al.12.2c]{B}{MSE Karşılaştırması: MLE vs Yansız}
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$. (a) $\hat\sigma^2_{\mathrm{MLE}}=\frac{1}{n}\sum(X_i-\bar X)^2$'nin MSE'sini hesapla. (b) $S^2=\frac{1}{n-1}\sum(X_i-\bar X)^2$'nin MSE'sini hesapla. (c) Hangisi daha küçük MSE'ye sahip?
+\end{alistirma}
+\alcozum{%
+$(n-1)S^2/\sigma^2\sim\chi^2_{n-1}$: $E[S^2]=\sigma^2$, $\Var(S^2)=2\sigma^4/(n-1)$.
+(a) $\hat\sigma^2_\mathrm{MLE}=\frac{n-1}{n}S^2$: $E[\hat\sigma^2_\mathrm{MLE}]=\frac{n-1}{n}\sigma^2$ (yanlı). $\mathrm{MSE}(\hat\sigma^2_\mathrm{MLE})=\Var+\mathrm{bias}^2=\frac{(n-1)^2}{n^2}\cdot\frac{2\sigma^4}{n-1}+\frac{\sigma^4}{n^2}=\frac{(2n-1)\sigma^4}{n^2}$.
+(b) $\mathrm{MSE}(S^2)=\Var(S^2)=\frac{2\sigma^4}{n-1}$.
+(c) $\frac{2n-1}{n^2}<\frac{2}{n-1}$: her $n\geq1$ için $\hat\sigma^2_\mathrm{MLE}$ daha küçük MSE'ye sahip.}
+
 \alistirmalar
 
 \begin{alistirma}[Al.12.3]{A}{Momentler — Beta}

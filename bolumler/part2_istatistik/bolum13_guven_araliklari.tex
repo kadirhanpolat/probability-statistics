@@ -458,6 +458,22 @@ $n=9$, $\bar{x}=23.1$, $s=4.5$, normal popülasyon. (a) \%95 $t$-aralığı. (b)
 (a) $t_{8,0.025}=2.306$; GA: $23.1\pm2.306\cdot(4.5/3)=23.1\pm3.459=[19.641,26.559]$. (b) $n=100$: $z_{0.025}=1.960$; GA: $23.1\pm1.960\cdot(4.5/10)=23.1\pm0.882$. Büyük örneklemde $t\approx z$ ve aralık çok daralır.%
 }
 
+\begin{alistirma}[Al.13.2b]{B}{Bootstrap Güven Aralığı}
+$X_1,\ldots,X_{20}$ gözlemi, $\bar{x}=12.4$, $s=3.1$. (a) Nonparametrik bootstrap ile medyan için \%95 GA'nın mantığını açıklayın. (b) $B=1000$ bootstrap örnekleminde medyan standart hatası $\hat\sigma^*=0.82$ bulundu. Normal yaklaşım ile GA'yı kurun. (c) Bootstrap'ın klasik $t$-aralığına göre avantajı nedir?
+\end{alistirma}
+\alcozum{%
+(a) Her bootstrap örnekleminden medyan $\tilde\theta^{*(b)}$ hesaplanır ($b=1,\ldots,B$). Emprik dağılım $F^*$ kullanılarak güven sınırları: $(\tilde\theta^*_{(\alpha/2)},\tilde\theta^*_{(1-\alpha/2)})$ yüzdelik yöntemi ile.
+(b) Normal yaklaşım: $\tilde\theta\pm z_{\alpha/2}\hat\sigma^*=\tilde\theta\pm1.96\cdot0.82$. Medyan $\approx\bar{x}=12.4$ (simetrik ise): $12.4\pm1.607=[10.79,14.01]$.
+(c) Bootstrap normallik varsaymaz; medyan, oran ve diğer düzgün olmayan istatistikler için geçerlidir; küçük örneklemde $t$-dağılımı varsayımını aşar.}
+
+\begin{alistirma}[Al.13.2c]{B}{Bayes Güvenilir Aralığı — Hesap}
+$X_1,\ldots,X_n\iid\Binom(1,p)$, $n=30$, $\sum x_i=18$. Önsel $p\sim\Beta(2,2)$. (a) Sonsal dağılımı bulun. (b) \%95 eşit-kuyruklu güvenilir aralığı Beta kantil tablosuyla kurun. (c) Bu aralığı klasik Wald aralığıyla karşılaştırın.
+\end{alistirma}
+\alcozum{%
+(a) Sonsal: $p|X\sim\Beta(2+18,2+12)=\Beta(20,14)$.
+(b) \%95 GA: $(\Beta_{0.025}(20,14), \Beta_{0.975}(20,14))$. $\Beta(20,14)$ modu $19/32=0.594$. Yaklaşık hesap: $\mu_1=20/34=0.588$, $\sigma_1^2=20\cdot14/(34^2\cdot35)=0.00696$. Normal yaklaşım: $0.588\pm1.96\cdot0.0834\approx[0.425,0.751]$.
+(c) Wald: $\hat p=18/30=0.6$, $\hat\sigma=\sqrt{0.6\cdot0.4/30}=0.0894$; GA: $0.6\pm1.96\cdot0.0894=[0.425,0.775]$. Bayesçi önceden $\Beta(2,2)$ ortalamaya (0.5) doğru çeker.}
+
 \alistirmalar
 
 \begin{alistirma}[Al.13.3]{A}{Varyans için GA}

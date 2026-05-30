@@ -462,6 +462,25 @@ $X\sim\Normal(\mu,1)$, tek gözlem. $H_0:\mu=0$ vs $H_1:\mu=2$. $\alpha=0.05$ i�
 $\Lambda(x)=\exp(2x-2)>k\iff x>c$. $\Prob_0(X>c)=0.05\Rightarrow c=1.645$. Güç: $\Prob_2(X>1.645)=\Prob(\Normal(2,1)>1.645)=\Phi(0.355)\approx0.639$.%
 }
 
+\begin{alistirma}[Al.14.2b]{B}{$p$-Değeri Yorumu ve Tip I-II Hata Dengesi}
+Bir ilaç deneyi: $H_0$: "ilaç etkisiz" vs $H_1$: "ilaç etkili", $n=50$, $\bar X=2.1$, $\sigma=1.5$. (a) $Z$ istatistiğini hesapla. (b) $p$-değerini bul (tek kuyruk). (c) $\alpha=0.01$ ile karar ver. (d) $\beta=0.10$ güç için $n$ kaç olmalı?
+\end{alistirma}
+\alcozum{%
+(a) $Z=\bar X/(\sigma/\sqrt{n})=2.1/(1.5/\sqrt{50})=2.1/0.212=9.91$.
+(b) $p=P(Z>9.91)\approx0$ (son derece küçük).
+(c) $p<0.01$: $H_0$ reddedilir — ilaç etkili.
+(d) $n$ için: $\Prob_{\mu=\delta}(Z>z_\alpha)=1-\beta$; $z_\alpha+z_\beta=\delta\sqrt{n}/\sigma$. $z_{0.01}=2.326$, $z_{0.10}=1.282$. $n=[(z_\alpha+z_\beta)\sigma/\delta]^2=[(2.326+1.282)\cdot1.5/2.1]^2\approx6.59$. Yuvarlama: $n=7$. (Daha muhafazakâr $\delta$ için daha büyük $n$ gerekir.)}
+
+\begin{alistirma}[Al.14.2c]{B}{Çoklu Karşılaştırma — Bonferroni}
+$m=10$ hipotez aynı anda test ediliyor. Ham $p$-değerleri: $0.003, 0.008, 0.02, 0.04, 0.05, 0.06, 0.08, 0.10, 0.15, 0.20$. (a) Bonferroni düzeltmeli $\alpha^*$ ile hangilerini reddedersiniz? (b) Benjamini-Hochberg (BH) FDR kontrolü ($q=0.05$) ile hangilerini reddedersiniz?
+\end{alistirma}
+\alcozum{%
+(a) Bonferroni: $\alpha^*=0.05/10=0.005$. $p<0.005$: $p_1=0.003$ — sadece 1 red.
+(b) BH: $p$-değerlerini sırala: $p_{(k)}\leq kq/m=k\cdot0.05/10=0.005k$.
+$k=1$: $0.003\leq0.005$; $k=2$: $0.008\leq0.010$; $k=3$: $0.02\leq0.015$? Hayır.
+En büyük $k^*$: $k^*=2$ ($p_{(2)}=0.008\leq0.010$). İlk 2 hipotez reddedilir.
+BH, Bonferroni'den daha güçlü: 2 vs 1 red.}
+
 \alistirmalar
 
 \begin{alistirma}[Al.14.3]{A}{$\chi^2$ varyans testi}
