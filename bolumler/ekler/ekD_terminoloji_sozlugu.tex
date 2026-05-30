@@ -251,6 +251,61 @@ $\mathbf{1}_A$ & $A$ kümesinin gösterge fonksiyonu \\
 $\sigma(\mathcal{C})$ & $\mathcal{C}$ tarafından üretilen $\sigma$-cebiri \\
 $\mathcal{B}(\mathbb{R})$ & Borel $\sigma$-cebiri \\
 $n.k.$ & neredeyse kesin (almost surely) \\
+$o_P(1)$ & olasılıkta sıfıra giden terim \\
+$O_P(1)$ & olasılıkta sınırlı terim (stochastically bounded) \\
+$D_\mathrm{KL}(P\|Q)$ & $P$'den $Q$'ya KL iraksaması \\
+$I(X;Y)$ & $X$ ve $Y$ arasındaki karşılıklı bilgi \\
+$H(X)$ & $X$'in Shannon entropisi \\
+$\|\mathbf{x}\|_p$ & $\mathbf{x}$'in $L^p$ normu \\
+$\boldsymbol\Sigma$ & Kovaryans matrisi \\
+$\mathbf{I}(\boldsymbol\theta)$ & Fisher bilgi matrisi (çok parametreli) \\
+\hline
+\end{tabular}
+\end{center}
+
+%% ============================================================
+\section{Dağılım Parametreleri ve Özellikleri Hızlı Başvuru}
+\label{app:dagılım_hizli}
+%% ============================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llllll}
+\hline
+\textbf{Dağılım} & \textbf{Param.} & $E[X]$ & $\Var(X)$ & \textbf{MÜF} $M(t)$ & \textbf{Fisher} $\mathcal{I}$ \\
+\hline
+$\Binom(n,p)$ & $n,p$ & $np$ & $np(1-p)$ & $(1-p+pe^t)^n$ & $n/(p(1-p))$ \\
+$\Pois(\lambda)$ & $\lambda$ & $\lambda$ & $\lambda$ & $e^{\lambda(e^t-1)}$ & $1/\lambda$ \\
+$\Gama(\alpha,\beta)$ & $\alpha,\beta$ & $\alpha\beta$ & $\alpha\beta^2$ & $(1-\beta t)^{-\alpha}$ & $\alpha/\beta^2$ \\
+$\Normal(\mu,\sigma^2)$ & $\mu,\sigma^2$ & $\mu$ & $\sigma^2$ & $e^{\mu t+\sigma^2t^2/2}$ & $1/\sigma^2$ \\
+$\Beta(\alpha,\beta)$ & $\alpha,\beta$ & $\frac{\alpha}{\alpha+\beta}$ & $\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$ & — & — \\
+$\Exp(\lambda)$ & $\lambda$ & $1/\lambda$ & $1/\lambda^2$ & $(1-t/\lambda)^{-1}$ & $1/\lambda^2$ \\
+$\chi^2_\nu$ & $\nu$ & $\nu$ & $2\nu$ & $(1-2t)^{-\nu/2}$ & — \\
+$t_\nu$ & $\nu$ & $0$ ($\nu>1$) & $\nu/(\nu-2)$ ($\nu>2$) & — & — \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent\textit{Not:} $\Gama(\alpha,\beta)$: $\beta$ ölçek parametresi; yoğunluk $f(x)=x^{\alpha-1}e^{-x/\beta}/(\Gamma(\alpha)\beta^\alpha)$.
+
+%% ============================================================
+\section{Asimptotik Dağılım Özet Tablosu}
+\label{app:asimptotik_tablo}
+%% ============================================================
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lll}
+\hline
+\textbf{İstatistik} & \textbf{Asimptotik dağılım} ($n\to\infty$) & \textbf{Koşul} \\
+\hline
+$\sqrt{n}(\bar X_n-\mu)$ & $\Normal(0,\sigma^2)$ & $E[X^2]<\infty$ (MLT) \\
+$\sqrt{n}(\hat\theta_n^\mathrm{MLE}-\theta_0)$ & $\Normal(0,\mathcal{I}(\theta_0)^{-1})$ & Cramér düzenlilik \\
+$\sqrt{n}(g(\bar X_n)-g(\mu))$ & $\Normal(0,[g'(\mu)]^2\sigma^2)$ & Delta, $g'(\mu)\neq0$ \\
+$2\log\Lambda_n$ (LRT) & $\chi^2_r$ ($r=$ kısıt sayısı) & Cramér düzenlilik \\
+$W_n$ (Wald) & $\chi^2_r$ & Cramér düzenlilik \\
+$S_n$ (Skor) & $\chi^2_r$ & Cramér düzenlilik \\
+$\sqrt{n}(F_n(x)-F(x))$ & $\Normal(0,F(x)(1-F(x)))$ & Glivenko-Cantelli \\
 \hline
 \end{tabular}
 \end{center}
