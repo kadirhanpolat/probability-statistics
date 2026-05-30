@@ -1,5 +1,5 @@
 %% ============================================================
-%% BÖLÜM 13 — Güven Aralıkları
+%% BÖLÜM 13 --- Güven Aralıkları
 %% Olasılık Teorisi ve Matematiksel İstatistik
 %% ============================================================
 \chapter{Güven Aralıkları}
@@ -42,7 +42,7 @@ $1-\alpha$ \textbf{güven düzeyi} \emph{(confidence level)}, $\alpha$ \textbf{a
 \end{tanim}
 
 \begin{tanimgerekce}
-Sık yapılan yorum hatası: "\%95 olasılıkla $\theta$, $[L,U]$ içinde" — bu yanlış. $\theta$ sabit; $L$ ve $U$ rasgele. Doğru yorum: Yöntemi tekrar tekrar uygulandığında aralıkların \%95'i gerçek $\theta$'yı kapsar.
+Sık yapılan yorum hatası: "\%95 olasılıkla $\theta$, $[L,U]$ içinde" --- bu yanlış. $\theta$ sabit; $L$ ve $U$ rasgele. Doğru yorum: Yöntemi tekrar tekrar uygulandığında aralıkların \%95'i gerçek $\theta$'yı kapsar.
 \end{tanimgerekce}
 
 \begin{hataanalizi}
@@ -254,7 +254,7 @@ Güven düzeyini $\alpha=0.05$'ten $\alpha=0.01$'e çekince aralık nasıl deği
 Birden fazla güven aralığı aynı kapsama olasılığına sahip olabilir. En bilgilisi en kısasıdır.
 
 \begin{teorem}[Simetrik unimodal dağılımda en kısa GA]\label{thm:en_kisa}
-Pivot $Q$'nun yoğunluğu unimodal ve simetrik ($f_Q$ genişleme merkezi $c$ olan) ise, sabit uzunluklu $(1-\alpha)$ aralık içinde kapsama olasılığını maksimize eden — eşdeğer olarak, sabit kapsama olasılığında uzunluğu minimize eden — aralık simetriktir: $\Prob(c-d\leq Q\leq c+d)=1-\alpha$.
+Pivot $Q$'nun yoğunluğu unimodal ve simetrik ($f_Q$ genişleme merkezi $c$ olan) ise, sabit uzunluklu $(1-\alpha)$ aralık içinde kapsama olasılığını maksimize eden --- eşdeğer olarak, sabit kapsama olasılığında uzunluğu minimize eden --- aralık simetriktir: $\Prob(c-d\leq Q\leq c+d)=1-\alpha$.
 \end{teorem}
 
 \begin{proof}[Proof (taslak)]
@@ -289,7 +289,7 @@ $\theta=(\psi,\lambda)$, ilgi parametresi $\psi$, tortu $\lambda$. \textbf{Profi
 \]
 \end{tanim}
 
-\begin{teorem}[Wilks — profil olabilirlik GA]\label{thm:wilks_profil}
+\begin{teorem}[Wilks --- profil olabilirlik GA]\label{thm:wilks_profil}
 Düzenli model, $n\to\infty$. O zaman $\{\psi: R_P(\psi)\leq\chi^2_{1,\alpha}\}$ yaklaşık $(1-\alpha)$ güven aralığı oluşturur.
 \end{teorem}
 
@@ -297,7 +297,7 @@ Düzenli model, $n\to\infty$. O zaman $\{\psi: R_P(\psi)\leq\chi^2_{1,\alpha}\}$
 $X_i\iid\mathrm{LogNormal}(\mu,\sigma^2)$. $\psi=e^\mu$ ilgi parametresi. Profil GA:
 1. $\hat\mu,\hat\sigma^2$ = MLE. 2. Farklı $\mu$ değerleri için $\hat\sigma^2(\mu)=\frac1n\sum(\log X_i-\mu)^2$. 3. $R_P(\mu)\leq3.84$ kümesi GA.
 
-Profil GA, Wald GA'ya göre asimetrik olabilir — gerçek GA şekline daha iyi uyar.
+Profil GA, Wald GA'ya göre asimetrik olabilir --- gerçek GA şekline daha iyi uyar.
 \end{ornek}
 
 %% ============================================================
@@ -321,7 +321,7 @@ Her aralık $\alpha/k$ düzeyinde kurulursa FWER $\leq\alpha$.
 Birleşim sınırı: $\Prob(\bigcup_j A_j)\leq\sum_j\Prob(A_j)\leq k\cdot(\alpha/k)=\alpha$.
 \end{proof}
 
-\begin{teorem}[Scheffé eşzamanlı GA — regresyon]\label{thm:scheffe_ga}
+\begin{teorem}[Scheffé eşzamanlı GA --- regresyon]\label{thm:scheffe_ga}
 Çok değişkenli regresyonda tüm doğrusal kombinasyonlar $c^\top\beta$ için eşzamanlı \%$95$ GA:
 \[
   c^\top\hat\beta \pm \sqrt{p\,F_{p,n-p,\alpha}}\cdot\hat\sigma\sqrt{c^\top(X^\top X)^{-1}c}.
@@ -353,7 +353,7 @@ Bu bir $p$-boyutlu elipsoittir; $\bar{\mathbf{X}}$ merkezi, $\Sigma/(n\chi^2_{p,
 $\bar{\mathbf{X}}\sim\Normal(\boldsymbol\mu,\Sigma/n)$; standartlaştırarak $\mathbf{Z}=\Sigma^{-1/2}(\bar{\mathbf{X}}-\boldsymbol\mu)\sqrt{n}\sim\Normal(\mathbf{0},I_p)$. $\|\mathbf{Z}\|^2=(\bar{\mathbf{X}}-\boldsymbol\mu)^\top(n\Sigma^{-1})(\bar{\mathbf{X}}-\boldsymbol\mu)\sim\chi^2_p$ (standart Normal karelerinin toplamı).
 \end{proof}
 
-\begin{teorem}[Asimptotik güven bölgesi — genel]\label{thm:asimptotik_bolge}
+\begin{teorem}[Asimptotik güven bölgesi --- genel]\label{thm:asimptotik_bolge}
 MLE $\hat{\boldsymbol\theta}_n$ için:
 \[
   n(\hat{\boldsymbol\theta}_n-\boldsymbol\theta)^\top I(\boldsymbol\theta) (\hat{\boldsymbol\theta}_n-\boldsymbol\theta) \dto \chi^2_p.
@@ -390,25 +390,25 @@ $X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$; $\mu,\sigma^2$ bilinmiyor. $(1-\alpha
 $k = k(n,\gamma,\alpha)$ tolerans çarpanı tablodan veya şu yaklaşımla: $k\approx\frac{z_{(1-\gamma)/2}}{\sqrt{1-z_\alpha^2/(2(n-1))}}\sqrt{1+\frac{1}{n}}$ (Wald-Wolfowitz yaklaşımı).
 \end{teorem}
 
-\begin{proof}[Proof — taslak]
+\begin{proof}[Proof --- taslak]
 $X_{\text{yeni}}|\mu,\sigma\sim\Normal(\mu,\sigma^2)$; $\bar X|\mu,\sigma\sim\Normal(\mu,\sigma^2/n)$. $\Prob(|\bar X-X_{\text{yeni}}|>kS)$ ifadesi $\chi^2$ ve $t$ dağılımlarını içerir; integral kapalı formda değil. $k$ tablo değerleri Monte Carlo veya yaklaşımla hesaplanır.
 \end{proof}
 
-\begin{ornek}[Tolerans aralığı — vida uzunluğu]
+\begin{ornek}[Tolerans aralığı --- vida uzunluğu]
 Makine $n=25$ vida üretti; $\bar{x}=50.2$ mm, $s=0.3$ mm. \%95 güvenle vidaların \%99'unu kapsayan tolerans aralığını bul. $k(25,0.99,0.05)\approx3.46$ (tablodan). Aralık: $50.2\pm3.46\cdot0.3=50.2\pm1.04=[49.16,\;51.24]$ mm.
 \end{ornek}
 
 \begin{hataanalizi}
 Üç farklı aralık türünü karıştırmayın:
 \begin{itemize}
-  \item \textbf{Güven aralığı}: $\mu$ gibi bir parametre için — aralık ortalamayı kapsar.
-  \item \textbf{Tahmin aralığı}: tek bir yeni gözlem için — $X_{\text{yeni}}\in[L,U]$.
-  \item \textbf{Tolerans aralığı}: popülasyonun $\gamma$ oranı için — hem gelecek hem geçmiş gözlemler.
+  \item \textbf{Güven aralığı}: $\mu$ gibi bir parametre için --- aralık ortalamayı kapsar.
+  \item \textbf{Tahmin aralığı}: tek bir yeni gözlem için --- $X_{\text{yeni}}\in[L,U]$.
+  \item \textbf{Tolerans aralığı}: popülasyonun $\gamma$ oranı için --- hem gelecek hem geçmiş gözlemler.
 \end{itemize}
 Tolerans aralığı en geniş, güven aralığı en dar. Kalite güvencesinde tolerans aralığı standart.
 \end{hataanalizi}
 
-\begin{teorem}[Tahmin aralığı — tek yeni gözlem]\label{thm:tahmin_aralik}
+\begin{teorem}[Tahmin aralığı --- tek yeni gözlem]\label{thm:tahmin_aralik}
 $X_{\text{yeni}}$ bağımsız, $\Normal(\mu,\sigma^2)$'dan. $\mu,\sigma^2$ bilinmiyor. $(1-\alpha)$ tahmin aralığı \emph{(prediction interval)}:
 \[
   \bar X \pm t_{n-1,\alpha/2}\,S\sqrt{1+\frac{1}{n}}.
@@ -450,7 +450,7 @@ Edgeworth düzeltmesi:
 \[
   \Delta = \frac{2}{6\sqrt{20}}(1.96^2-1)\cdot2\phi(1.96) = \frac{2}{6\cdot4.47}(2.842)(0.584)\approx0.0124.
 \]
-Gerçek kapsama $\approx0.95+0.012=0.962$ (aşırı kapsama) — sağa çarpık dağılımda normal yaklaşım tutucu davranır.
+Gerçek kapsama $\approx0.95+0.012=0.962$ (aşırı kapsama) --- sağa çarpık dağılımda normal yaklaşım tutucu davranır.
 \end{ornek}
 
 \begin{teorem}[Bootstrap-t güven aralığının kapsama doğruluğu]\label{thm:bootstrap_kapsama}
@@ -466,7 +466,7 @@ Double bootstrap güven aralığı (Beran 1987), kapsama hatasını $O(n^{-1})$'
 
 $p\geq3$ parametreli $\boldsymbol\mu\in\mathbb{R}^p$ tahmininde, James-Stein tahminedici MLE'nin OKH'sini düşürür; bu fenomen güven bölgeleri için de paralel sonuçlar doğurur.
 
-\begin{tanim}[SURE — Stein'ın hesapsız risk tahmincisi]
+\begin{tanim}[SURE --- Stein'ın hesapsız risk tahmincisi]
 $\mathbf{X}\sim\Normal_p(\boldsymbol\mu,\sigma^2I)$, yansız risk tahmincisi:
 \[
   \widehat{R}(\delta,\boldsymbol\mu) = p\sigma^2 + \sum_{i=1}^p\left[\left(\frac{\partial\delta_i}{\partial X_i}\right)^2\sigma^4 - 2\sigma^2\frac{\partial\delta_i}{\partial X_i}\right].
@@ -531,7 +531,7 @@ $X_1,\ldots,X_{20}$ gözlemi, $\bar{x}=12.4$, $s=3.1$. (a) Nonparametrik bootstr
 (b) Normal yaklaşım: $\tilde\theta\pm z_{\alpha/2}\hat\sigma^*=\tilde\theta\pm1.96\cdot0.82$. Medyan $\approx\bar{x}=12.4$ (simetrik ise): $12.4\pm1.607=[10.79,14.01]$.
 (c) Bootstrap normallik varsaymaz; medyan, oran ve diğer düzgün olmayan istatistikler için geçerlidir; küçük örneklemde $t$-dağılımı varsayımını aşar.}
 
-\begin{alistirma}[Al.13.2c]{B}{Bayes Güvenilir Aralığı — Hesap}
+\begin{alistirma}[Al.13.2c]{B}{Bayes Güvenilir Aralığı --- Hesap}
 $X_1,\ldots,X_n\iid\Binom(1,p)$, $n=30$, $\sum x_i=18$. Önsel $p\sim\Beta(2,2)$. (a) Sonsal dağılımı bulun. (b) \%95 eşit-kuyruklu güvenilir aralığı Beta kantil tablosuyla kurun. (c) Bu aralığı klasik Wald aralığıyla karşılaştırın.
 \end{alistirma}
 \alcozum{%
@@ -552,7 +552,7 @@ $\chi^2_{19,0.025}=32.852$, $\chi^2_{19,0.975}=8.907$. GA: $[19\cdot16.4/32.852,
 $n=20$ denemede $k=2$ başarı. $p$ için (a) Wald aralığı, (b) Wilson aralığı kur (\%95). Sonuçları yorumla.
 \end{alistirma}
 \alcozum{%
-$\bar{p}=0.1$. (a) Wald: $0.1\pm1.96\sqrt{0.1\cdot0.9/20}=0.1\pm0.131=[-0.031,0.231]$ — olumsuz değer içeriyor, geçersiz. (b) Wilson: pay=$0.1+1.96^2/40=0.196$; payda=$1+3.84/20=1.192$; merkez$=0.164$; $\pm\approx0.155$; $[0.009,\;0.319]$ — daha sağlam.%
+$\bar{p}=0.1$. (a) Wald: $0.1\pm1.96\sqrt{0.1\cdot0.9/20}=0.1\pm0.131=[-0.031,0.231]$ --- olumsuz değer içeriyor, geçersiz. (b) Wilson: pay=$0.1+1.96^2/40=0.196$; payda=$1+3.84/20=1.192$; merkez$=0.164$; $\pm\approx0.155$; $[0.009,\;0.319]$ --- daha sağlam.%
 }
 
 \begin{alistirma}[Al.13.5]{B}{Welch güven aralığı}
@@ -569,7 +569,7 @@ Bir üretim hattında $\sigma=5$ mm. Ortalamayı $\pm0.5$ mm hassasiyetle \%95 i
 $n\geq(1.96\cdot5/0.5)^2=384.16\Rightarrow n=385$. $n=770$'de: ME$=1.96\cdot5/\sqrt{770}=0.354$ mm, yani $1/\sqrt{2}\approx0.707$ katına düşer. Hassasiyet $\sqrt{2}$ faktörüyle artmış.%
 }
 
-\begin{alistirma}[Al.13.7]{C}{Pivot yöntemi — Uniform}
+\begin{alistirma}[Al.13.7]{C}{Pivot yöntemi --- Uniform}
 $X_1,\ldots,X_n\iid\Uniform[0,\theta]$. $Q=X_{(n)}/\theta$'nın dağılımını bul ve $\theta$ için $(1-\alpha)$ güven aralığını türet.
 \end{alistirma}
 \alcozum{%
@@ -594,5 +594,5 @@ $n=10$, $s^2=9.6$, Normal popülasyon. (a) $\sigma^2$ için eşit kuyruk \%90 GA
 $X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$, ikisi de bilinmiyor. $\psi=\mu$ ilgi parametresi. (a) Profil log-olabilirliği $\ell_P(\mu)$'yü hesapla. (b) $R_P(\mu)=2[\ell(\hat\mu,\hat\sigma^2)-\ell_P(\mu)]$ ifadesini hesapla ve $n(\bar X-\mu)^2/S^2$ ile ilişkilendir.
 \end{alistirma}
 \alcozum{%
-(a) $\ell(\mu,\sigma^2)=-\frac{n}{2}\log\sigma^2-\frac{1}{2\sigma^2}\sum(X_i-\mu)^2$. $\hat\sigma^2(\mu)=\frac1n\sum(X_i-\mu)^2$. $\ell_P(\mu)=-\frac{n}{2}\log\hat\sigma^2(\mu)-n/2$. (b) $R_P(\mu)=n\log(\hat\sigma^2(\mu)/\hat\sigma^2)=n\log(1+t^2/(n-1))$ ($t=\sqrt{n}(\bar X-\mu)/S$). $R_P\leq\chi^2_{1,\alpha}$ koşulu $|t|\leq t_{n-1,\alpha/2}$'ye indirgenir — profil olabilirlik GA, $t$-aralığıyla özdeştir.%
+(a) $\ell(\mu,\sigma^2)=-\frac{n}{2}\log\sigma^2-\frac{1}{2\sigma^2}\sum(X_i-\mu)^2$. $\hat\sigma^2(\mu)=\frac1n\sum(X_i-\mu)^2$. $\ell_P(\mu)=-\frac{n}{2}\log\hat\sigma^2(\mu)-n/2$. (b) $R_P(\mu)=n\log(\hat\sigma^2(\mu)/\hat\sigma^2)=n\log(1+t^2/(n-1))$ ($t=\sqrt{n}(\bar X-\mu)/S$). $R_P\leq\chi^2_{1,\alpha}$ koşulu $|t|\leq t_{n-1,\alpha/2}$'ye indirgenir --- profil olabilirlik GA, $t$-aralığıyla özdeştir.%
 }

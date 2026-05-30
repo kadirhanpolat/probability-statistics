@@ -1,5 +1,5 @@
 % =====================================================================
-%  BÖLÜM 2 — Olasılık Uzayları
+%  BÖLÜM 2 --- Olasılık Uzayları
 %  Kaynaklar: Kolmogorov 1933; Feller Vol. I Böl. I-V; Gnedenko Böl. 1
 % =====================================================================
 
@@ -76,13 +76,13 @@ uyguladı ve bu paradoksları çözdü: olasılık artık bir ölçüm uzayıdı
 Üç bileşenden oluşan $(\Omega, \mathcal{F}, \Prob)$ üçlüsüne
 \textbf{olasılık uzayı} \emph{(probability space)} denir; burada:
 \begin{itemize}
-  \item $\Omega$: \textbf{örnek uzay} \emph{(sample space)} — deneyin tüm
+  \item $\Omega$: \textbf{örnek uzay} \emph{(sample space)} --- deneyin tüm
         olası sonuçlarının kümesi; elemanlarına $\omega$ denir ve
         \textbf{sonuç} \emph{(outcome, elementary event)} adını alır.
   \item $\mathcal{F}$: $\Omega$ üzerinde bir \textbf{$\sigma$-cebiri}
-        (Tanım~\ref{def:sigmacebiri}) — elemanlarına \textbf{olay} \emph{(event)} denir.
+        (Tanım~\ref{def:sigmacebiri}) --- elemanlarına \textbf{olay} \emph{(event)} denir.
   \item $\Prob: \mathcal{F} \to [0,1]$: \textbf{olasılık ölçüsü}
-        \emph{(probability measure)} — Kolmogorov'un üç aksiyomunu sağlar:
+        \emph{(probability measure)} --- Kolmogorov'un üç aksiyomunu sağlar:
 \end{itemize}
 \begin{enumerate}[label=\textbf{(K\arabic*)}]
   \item $\Prob(A) \geq 0$ her $A \in \mathcal{F}$ için,
@@ -349,9 +349,9 @@ Oran: $\Prob(A \cap B_k)/\Prob(A) = \Prob(B_k \mid A)$.
 \begin{notkutu}
 Bayes teoremindeki terminoloji:
 \begin{itemize}
-  \item $\Prob(B_k)$: \textbf{önsel olasılık} \emph{(prior probability)} — $A$ gözlemlenmeden önceki bilgi.
-  \item $\Prob(A \mid B_k)$: \textbf{olabilirlik} \emph{(likelihood)} — $B_k$ doğruysa $A$'nın olasılığı.
-  \item $\Prob(B_k \mid A)$: \textbf{sonsal olasılık} \emph{(posterior probability)} — $A$ gözlemlendikten sonra.
+  \item $\Prob(B_k)$: \textbf{önsel olasılık} \emph{(prior probability)} --- $A$ gözlemlenmeden önceki bilgi.
+  \item $\Prob(A \mid B_k)$: \textbf{olabilirlik} \emph{(likelihood)} --- $B_k$ doğruysa $A$'nın olasılığı.
+  \item $\Prob(B_k \mid A)$: \textbf{sonsal olasılık} \emph{(posterior probability)} --- $A$ gözlemlendikten sonra.
   \item $\Prob(A)$: \textbf{marjinal (normalleştirme sabiti)}.
 \end{itemize}
 \end{notkutu}
@@ -639,7 +639,7 @@ $\Prob(A^c \cap B \mid C) = \Prob(B \mid C) - \Prob(A \cap B \mid C)
 = \Prob(A^c \mid C)\Prob(B \mid C)$.
 \end{proof}
 
-\begin{tanim}[Olasılıklı Grafik Model — Bayesçi Ağ]
+\begin{tanim}[Olasılıklı Grafik Model --- Bayesçi Ağ]
 \label{def:bayesci_ag}
 Rasgele değişkenler $X_1, \ldots, X_n$; bir yönlü asiklik graf (DAG).
 Her $X_i$, ebeveynleri $\mathrm{Pa}(X_i)$ koşulunda diğer atalardan bağımsız:
@@ -894,7 +894,7 @@ $P(A_1|B)=\frac{(1/2)(1/3)}{1/2}=\frac{1}{3}$; $P(A_2|B)=\frac{1\cdot(1/3)}{1/2}
 
 (b) Değiştirir $\to$ kapı 2 seçer: $P(\text{araba})=P(A_2|B)=2/3$. Değiştirmez: $1/3$. Değiştirmek iki kat daha iyi!
 
-(c) Yanılgı: Sunucunun ek bilgi verdiği göz ardı ediliyor. Sunucunun kapı açması rastgele değil — keçi içeren kapıyı bilinçli açar. Bu bilgi kapı 2'nin olasılığını günceller. İnsanlar genellikle sunucunun hamlesi bağımsız diye düşünür ($P=1/3$ değişmez sanır); Bayes teoremi bu bağımlılığı doğru biçimde yakalar.}
+(c) Yanılgı: Sunucunun ek bilgi verdiği göz ardı ediliyor. Sunucunun kapı açması rastgele değil --- keçi içeren kapıyı bilinçli açar. Bu bilgi kapı 2'nin olasılığını günceller. İnsanlar genellikle sunucunun hamlesi bağımsız diye düşünür ($P=1/3$ değişmez sanır); Bayes teoremi bu bağımlılığı doğru biçimde yakalar.}
 
 \begin{alistirma}[Al.2.4c]{C}{Olasılık Ölçüsünün Süreklilik Özellikleri}
 $(\Omega,\mathcal{F},\Prob)$ olasılık uzayı.
@@ -1048,7 +1048,7 @@ $\sigma$-sonlu durumlarda tekdir. $\blacksquare$%
 \begin{alistirma}[Al.2.12]{C}{Sonsuz bağımsız denemeler}
 $(\Omega, \mathcal{F}, \Prob)$ üzerinde $A_1, A_2, \ldots$ bağımsız,
 $\Prob(A_n) = p \in (0,1)$ her $n$ için.
-(a) $\Prob(A_n \text{ s.s. çok})$ — yani $\Prob(\limsup_n A_n)$ — nedir?
+(a) $\Prob(A_n \text{ s.s. çok})$ --- yani $\Prob(\limsup_n A_n)$ --- nedir?
 (b) $\Prob(A_n \text{ eninde sonunda hep gerçekleşir})$ nedir?
 (c) Cevaplarınızı $p$ değerine göre yorumlayın.
 \end{alistirma}
@@ -1099,7 +1099,7 @@ Koşullu bağımsız değil!\\
 $\Prob(A\cap C\mid B) = \Prob(A\cap B\cap C)/\Prob(B) = (1/4)/(1/2) = 1/2 \neq \Prob(A|B)\Prob(C|B) = (1/2)(1/2)$.
 $A \not\perp C \mid B$.}
 
-\begin{alistirma}[Al.2.15]{B}{Bayesçi Ağ — Ortak Dağılım}
+\begin{alistirma}[Al.2.15]{B}{Bayesçi Ağ --- Ortak Dağılım}
 $X_1$, $X_2 \mid X_1$, $X_3 \mid X_2$ zinciri (her ikili normal):
 $X_1 \sim \Normal(0,1)$; $X_2 \mid X_1 = x_1 \sim \Normal(x_1, 1)$; $X_3 \mid X_2 = x_2 \sim \Normal(x_2, 1)$.
 (a) $E[X_2]$ ve $\mathrm{Var}(X_2)$'yi hesaplayın.

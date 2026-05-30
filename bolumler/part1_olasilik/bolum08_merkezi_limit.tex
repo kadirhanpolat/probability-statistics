@@ -65,7 +65,7 @@ $\mu = np$, $\sigma^2 = npq$. O zaman her $a < b$'de
 \]
 \end{teorem}
 
-\begin{proof}[İskelet İspat — Stirling Yaklaşımı]
+\begin{proof}[İskelet İspat --- Stirling Yaklaşımı]
 Stirling formülü: $k! \approx \sqrt{2\pi k}(k/e)^k$.
 $P(S_n = k)$ için $\binom{n}{k}p^kq^{n-k}$'yi Stirling ile açarak
 $k = np + x\sqrt{npq}$ ($x$ sabit) için bu olasılığın
@@ -85,7 +85,7 @@ $= \Phi(1.12) - \Phi(-1.12) \approx 0.7372$.
 \label{sec:genel_mlt}
 % =====================================================================
 
-\begin{teorem}[Merkezi Limit Teoremi — i.i.d.\ Durum]
+\begin{teorem}[Merkezi Limit Teoremi --- i.i.d.\ Durum]
 \label{thm:mlt}
 $X_1, X_2, \ldots$ i.i.d., $E[X_1] = \mu$, $\mathrm{Var}(X_1) = \sigma^2 \in (0,\infty)$. O zaman
 \[
@@ -115,7 +115,7 @@ Lévy süreklilik teoremi (Teorem~\ref{prop:kf_yaklinsama}): $Z_n \xrightarrow{d
 MLT hangi koşulları \emph{gerektirmez}?
 \begin{itemize}
   \item $X_i$ normal olmak \emph{zorunda değil} (herhangi bir dağılım).
-  \item $E[X_i^3] < \infty$ \emph{gerekmez} — yalnızca $\sigma^2 < \infty$ yeterli.
+  \item $E[X_i^3] < \infty$ \emph{gerekmez} --- yalnızca $\sigma^2 < \infty$ yeterli.
   \item $X_i$'lerin sürekli olması \emph{gerekmez} (kesikli dağılımlar da MLT'ye tabidir).
 \end{itemize}
 Ne gerekir: i.i.d. + sonlu varyans. Bunlar ortadan kalkarsa MLT bozulabilir
@@ -251,7 +251,7 @@ $n = 1000$: hata $\leq 0.060$: 3 ondalık basamak için $n \approx 1000$ öneril
 \end{ornek}
 
 \begin{hataanalizi}
-"$n \geq 30$ ise MLT yeterince iyi yaklaşır" — çok kaba bir kuraldır.
+"$n \geq 30$ ise MLT yeterince iyi yaklaşır" --- çok kaba bir kuraldır.
 Berry-Esseen: hata üçüncü mutlak moment ile orantılı.
 Çarpık dağılımlarda ($\rho$ büyük) $n = 30$ yetersizdir;
 çok çarpık dağılımlar (lognormal, Pareto) için $n = 1000$ bile tartışmalıdır.
@@ -272,7 +272,7 @@ $\lambda_n = \sum p_i$. Toplam varyasyon mesafesi:
 \]
 \end{teorem}
 
-\begin{proof}[Ana Fikir — Stein-Chen Yöntemi]
+\begin{proof}[Ana Fikir --- Stein-Chen Yöntemi]
 Poisson operatörü: $\mathcal{A}f(k) = \lambda f(k+1) - kf(k)$.
 $E[\mathcal{A}f(S_n)]$ ile $E[\mathcal{A}f(\Pois(\lambda))]$ arasındaki fark,
 $\sum p_i^2$ terimlerinden beslenir.
@@ -337,7 +337,7 @@ MLT bandı $\sqrt{n} \approx 1000$; YLK bant $\approx 2.4$ kat daha geniş.
 \label{sec:buyuk_orneklem}
 % =====================================================================
 
-\begin{onerme}[Örneklem Ortalaması — Güven Aralığı]
+\begin{onerme}[Örneklem Ortalaması --- Güven Aralığı]
 \label{prop:guven_araligi}
 $X_1, \ldots, X_n$ i.i.d., $\mu$ bilinmiyor, $\sigma^2$ biliniyor. MLT'den:
 \[
@@ -360,7 +360,7 @@ $\sqrt{\hat{p}(1-\hat{p})} \xrightarrow{P} \sqrt{p(1-p)}$ (BSK + sürekli harita
 Slutsky: bölüm dağılımla $\Normal(0,1)$'e yakınsar.
 \end{proof}
 
-\begin{teorem}[Delta Yöntemi — MLT Uygulaması]
+\begin{teorem}[Delta Yöntemi --- MLT Uygulaması]
 \label{thm:delta_mlt}
 $\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} \Normal(0,\sigma^2)$ ve $g$, $\mu$'da türevlenebilir ise
 (Teorem~\ref{thm:delta_yontemi} ile birlikte):
@@ -373,7 +373,7 @@ Bu, Bölüm~\ref{chp:nokta_tahmin}'deki asimptotik güven aralıklarının temel
 \begin{ornek}[Varyans Stabilize Eden Dönüşüm]
 $X_i \sim \mathrm{Bernoulli}(p)$: $\sigma^2 = p(1-p)$, $p$'ye bağlı.
 $g(p) = \arcsin(\sqrt{p})$: $g'(p) = 1/(2\sqrt{p(1-p)})$.
-Delta: $[g'(p)]^2 \sigma^2 = p(1-p)/(4p(1-p)) = 1/4$ — sabit!
+Delta: $[g'(p)]^2 \sigma^2 = p(1-p)/(4p(1-p)) = 1/4$ --- sabit!
 $\sqrt{n}(\arcsin\sqrt{\hat{p}} - \arcsin\sqrt{p}) \xrightarrow{d} \Normal(0, 1/4)$.
 Varyans artık $p$'den bağımsız: güven aralıkları her $p$ için eşit genişlikte.
 \end{ornek}
@@ -385,7 +385,7 @@ $P(X \leq k) \approx \Phi\!\left(\frac{k+0.5-\lambda}{\sqrt{\lambda}}\right)$ (s
 \end{onerme}
 
 % ---- Disiplinlerarası Bağlantı (TYMM) ----
-\begin{kopru}[Disiplinlerarası — Fizik, Sosyal Bilimler, Biyoistatistik]
+\begin{kopru}[Disiplinlerarası --- Fizik, Sosyal Bilimler, Biyoistatistik]
 \textbf{Fizik:} Termal dengedeki gaz moleküllerinin Maxwell-Boltzmann hız dağılımı,
 çok sayıda bağımsız çarpışmanın MLT sonucu olarak Gaussian'a yakınsar.
 Hata teorisi (Gauss): ölçüm hatalarının bağımsız küçük bileşenlerden oluştuğu
@@ -411,7 +411,7 @@ doğrudan uygulaması değil, $t$ dağılımının kullanımıdır; büyük $n$'
 \begin{kopru}
 \textbf{Önceki bölüm:} Bölüm~\ref{chp:buyuk_sayilar} BSK'yı verdi (yakınsama garantisi);
 bu bölüm yakınsama \emph{hızını} ve \emph{dağılımını} belirledi.\\
-\textbf{Sonraki (opsiyonel):} Bölüm~\ref{chp:martingaller} — koşullu beklenti
+\textbf{Sonraki (opsiyonel):} Bölüm~\ref{chp:martingaller} --- koşullu beklenti
 ve martingallar; martingal MLT.\\
 \textbf{İstatistik kısmı:} Bölüm~\ref{chp:istatistik_temelleri}'nde asimptotik
 dağılım teorisi; Bölüm~\ref{chp:nokta_tahmin}'de MLE'nin asimptotik normalliği
@@ -478,7 +478,7 @@ i.i.d.\ koşulda koşullu Lindeberg $\to$ klasik Lindeberg. Martingal ortogonall
 \end{ispatiskele}
 
 \begin{ornek}[MLE skor fonksiyonu martingali]\label{ex:skor_mart}
-$X_1,X_2,\ldots$ i.i.d.\ $f(x;\theta_0)$. $M_n=\sum_{k=1}^n\partial\log f(X_k;\theta_0)/\partial\theta$ (kümülatif skor). $D_k=\partial\log f(X_k;\theta)/\partial\theta$; $\Beklenti[D_k|\mathcal{F}_{k-1}]=\Beklenti[D_k]=0$ (skor beklentisi sıfır). $\Var(D_k)=\mathcal{I}(\theta_0)$ Fisher bilgisi. Martingal MLT: $M_n/\sqrt{n}\dto\Normal(0,\mathcal{I}(\theta_0))$ — MLE asimptotik normalliğinin temeli.
+$X_1,X_2,\ldots$ i.i.d.\ $f(x;\theta_0)$. $M_n=\sum_{k=1}^n\partial\log f(X_k;\theta_0)/\partial\theta$ (kümülatif skor). $D_k=\partial\log f(X_k;\theta)/\partial\theta$; $\Beklenti[D_k|\mathcal{F}_{k-1}]=\Beklenti[D_k]=0$ (skor beklentisi sıfır). $\Var(D_k)=\mathcal{I}(\theta_0)$ Fisher bilgisi. Martingal MLT: $M_n/\sqrt{n}\dto\Normal(0,\mathcal{I}(\theta_0))$ --- MLE asimptotik normalliğinin temeli.
 \end{ornek}
 
 % =====================================================================
@@ -502,7 +502,7 @@ $\sqrt{n}(g(\bar X_n)-g(\mu))\approx g'(\mu)\cdot\sqrt{n}(\bar X_n-\mu)\dto\Norm
 \begin{enumerate}
   \item \textbf{Log-dönüşüm:} $g(x)=\log x$, $\bar X_n\pto\mu>0$. $\sqrt{n}(\log\bar X_n-\log\mu)\dto\Normal(0,\sigma^2/\mu^2)$.
   \item \textbf{Oran tahmini:} $\hat p=\bar X_n\in(0,1)$, $g(p)=\log(p/(1-p))$ (logit). $g'(p)=1/(p(1-p))$: $\sqrt{n}(\hat\ell-\ell)\dto\Normal(0,1/(p(1-p)))$.
-  \item \textbf{MLE varyans stabilizasyonu:} Poisson $\lambda$: $g(\lambda)=\sqrt{\lambda}$ ile $\sqrt{n}(\sqrt{\bar X}-\sqrt\lambda)\dto\Normal(0,1/4)$ — varyans $\lambda$'dan bağımsız.
+  \item \textbf{MLE varyans stabilizasyonu:} Poisson $\lambda$: $g(\lambda)=\sqrt{\lambda}$ ile $\sqrt{n}(\sqrt{\bar X}-\sqrt\lambda)\dto\Normal(0,1/4)$ --- varyans $\lambda$'dan bağımsız.
 \end{enumerate}
 \end{ornek}
 
@@ -565,7 +565,7 @@ Pay MLT ile $\Normal(0,\mathcal{I}(\theta_0))$'a yakınsadı (Martingal MLT §\r
 
 \textbf{Epidemiyoloji:} Log-risk oranı için delta yöntemi: $\log(\hat p_1/\hat p_2)$'nin standart hatası delta yöntemiyle hesaplanır ve güven aralığı kurulur.
 
-\textbf{Finansal Matematik:} Black-Scholes delta ($\partial V/\partial S$) portföy riskini ölçer — delta yönteminin sürekli zamana genişlemesi.
+\textbf{Finansal Matematik:} Black-Scholes delta ($\partial V/\partial S$) portföy riskini ölçer --- delta yönteminin sürekli zamana genişlemesi.
 \end{disiplinlerarasibaglan}
 
 % =====================================================================
@@ -638,7 +638,7 @@ $X_1,\ldots,X_n$ i.i.d.\ $\Normal(\mu,\sigma^2)$ (her ikisi bilinmiyor). $\mathb
 \]
 Asimptotik varyans: $\nabla g^\top\Sigma\,\nabla g = \frac{\sigma^2}{\sigma^2}+\frac{\mu^2}{4\sigma^6}\cdot2\sigma^4 = 1+\frac{\mu^2}{2\sigma^2}$.
 
-(c) $\sqrt{n}(S_n/\bar X_n - \sigma/\mu)\xrightarrow{d}\Normal(0,\,1+\text{CV}^2/2)$ burada CV$=\sigma/\mu$ varyasyon katsayısı. CV büyükse (yüksek değişkenlik), katsayının kendisini tahmin etmek de daha belirsiz — sezgisel olarak tutarlı.}
+(c) $\sqrt{n}(S_n/\bar X_n - \sigma/\mu)\xrightarrow{d}\Normal(0,\,1+\text{CV}^2/2)$ burada CV$=\sigma/\mu$ varyasyon katsayısı. CV büyükse (yüksek değişkenlik), katsayının kendisini tahmin etmek de daha belirsiz --- sezgisel olarak tutarlı.}
 
 \begin{alistirma}[Al.8.4c]{C}{Karakteristik Fonksiyon ve Süreklilik Teoremi}
 $X_1,X_2,\ldots$ i.i.d., $\varphi(t)=E[e^{itX_1}]$.

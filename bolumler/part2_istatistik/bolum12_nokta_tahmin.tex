@@ -1,5 +1,5 @@
 %% ============================================================
-%% BÖLÜM 12 — Nokta Tahmini
+%% BÖLÜM 12 --- Nokta Tahmini
 %% Olasılık Teorisi ve Matematiksel İstatistik
 %% ============================================================
 \chapter{Nokta Tahmini}
@@ -249,7 +249,7 @@ $W$ yansız tahmin edici ve $T$ yeterli istatistik olsun. $W^* = \Beklenti[W\mid
 \end{proof}
 
 \begin{kritiksorgu}
-Rao-Blackwell sadece yeterli istatistiğe koşullanmak yeterli mi, UMVUE garanti eder mi? Hayır — $T$ tamamlayıcı olmalı. Tamamlayıcılık olmazsa $W^*$ yeterli fakat UMVUE değil olabilir.
+Rao-Blackwell sadece yeterli istatistiğe koşullanmak yeterli mi, UMVUE garanti eder mi? Hayır --- $T$ tamamlayıcı olmalı. Tamamlayıcılık olmazsa $W^*$ yeterli fakat UMVUE değil olabilir.
 \end{kritiksorgu}
 
 \subsection{Lehmann-Scheffé Teoremi}
@@ -483,7 +483,7 @@ $\Beklenti[\|\hat{\boldsymbol\mu}^{JS}-\boldsymbol\mu\|^2]=p-(p-2)^2\Beklenti[1/
 \end{ispatiskele}
 
 %% ============================================================
-\section{Skor Fonksiyonu ve Fisher Bilgisi — İleri}
+\section{Skor Fonksiyonu ve Fisher Bilgisi --- İleri}
 \label{sec:fisher_ileri}
 %% ============================================================
 
@@ -512,7 +512,7 @@ $X\sim\Normal(\mu,\sigma^2)$, $\theta=(\mu,\sigma^2)$. $\log f = -\frac12\log\si
 \[
   \mathbf{I}(\theta) = \begin{pmatrix}1/\sigma^2 & 0 \\ 0 & 1/(2\sigma^4)\end{pmatrix}.
 \]
-Cramér-Rao: $\Var(\hat\mu)\geq\sigma^2/n$, $\Var(\hat\sigma^2)\geq2\sigma^4/n$ — yansız MLE her ikisini sağlar.
+Cramér-Rao: $\Var(\hat\mu)\geq\sigma^2/n$, $\Var(\hat\sigma^2)\geq2\sigma^4/n$ --- yansız MLE her ikisini sağlar.
 \end{ornek}
 
 %% ============================================================
@@ -592,7 +592,7 @@ Aşağıdaki koşullar \emph{Cramér düzenlilik koşulları} olarak adlandırı
 \end{enumerate}
 \end{tanim}
 
-\begin{teorem}[MLE tekliği — üstel aile]\label{thm:mle_teklik}
+\begin{teorem}[MLE tekliği --- üstel aile]\label{thm:mle_teklik}
 $\{f(x;\theta):\theta\in\Theta\}$ tam düzenli üstel aile olsun. O zaman $\hat\theta_n^{\mathrm{MLE}}$ her $n$ için vardır, tektir ve Rao-Blackwell'e göre UMVUE ile çakışır.
 \end{teorem}
 
@@ -602,9 +602,9 @@ Tam düzenli üstel ailede $\ell_n(\theta)=n\bar T\cdot\eta(\theta)-nA(\eta(\the
 
 \begin{ornek}[Üstel ailede MLE]\label{ex:ustel_mle}
 \begin{enumerate}
-  \item $X_i\iid\Binom(m,p)$: $\hat p_n=\bar X/m$ — tek çözüm, UMVUE.
-  \item $X_i\iid\Pois(\lambda)$: $\hat\lambda_n=\bar X$ — tek çözüm, UMVUE.
-  \item $X_i\iid\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinmiyor): $(\hat\mu_n,\hat\sigma^2_n)=(\bar X,\frac1n\sum(X_i-\bar X)^2)$ — $\mu$ için UMVUE ama $\sigma^2$ için yanlı.
+  \item $X_i\iid\Binom(m,p)$: $\hat p_n=\bar X/m$ --- tek çözüm, UMVUE.
+  \item $X_i\iid\Pois(\lambda)$: $\hat\lambda_n=\bar X$ --- tek çözüm, UMVUE.
+  \item $X_i\iid\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinmiyor): $(\hat\mu_n,\hat\sigma^2_n)=(\bar X,\frac1n\sum(X_i-\bar X)^2)$ --- $\mu$ için UMVUE ama $\sigma^2$ için yanlı.
 \end{enumerate}
 \end{ornek}
 
@@ -613,7 +613,7 @@ Düzenlilik koşulları (R1) ihlal edilirse MLE ne olur? Örnek: $X_i\iid\Unifor
 \end{kritiksorgu}
 
 \begin{ispatiskele}
-\textbf{İspat taslağı: MLE tekliği — üstel aile}
+\textbf{İspat taslağı: MLE tekliği --- üstel aile}
 \begin{enumerate}
   \item $f(x;\theta)$'yı doğal parametreli üstel aile biçiminde yaz.
   \item Log-olabilirlik $\ell_n(\eta)$'nun içbükeyliğini $A''(\eta)=\Var_\eta(T)>0$ ile göster.
@@ -642,13 +642,13 @@ $\tilde I(\theta)\leq I(\theta)$: semiparametrik sınır, parametrik sınırdan 
 \end{teorem}
 
 \begin{ornek}[Konum-ölçek modeli]\label{ex:konum_olcek}
-$X_i=\theta+\sigma\varepsilon_i$ ($\varepsilon_i$ bilinmeyen, simetrik yoğunluklu). Konum $\theta$ için etkili skor hesaplanır: $\tilde\ell_\theta=-f'(x-\theta)/f(x-\theta)$ (skor orijini). Kapalı form: $\tilde I(\theta)=\int[f'(x)/f(x)]^2f(x)dx$ — bu tam olarak $f$ biliniyorsa parametrik bilgidir. Bilinmiyorsa $\tilde I<I$ — belirsizlik kaybı.
+$X_i=\theta+\sigma\varepsilon_i$ ($\varepsilon_i$ bilinmeyen, simetrik yoğunluklu). Konum $\theta$ için etkili skor hesaplanır: $\tilde\ell_\theta=-f'(x-\theta)/f(x-\theta)$ (skor orijini). Kapalı form: $\tilde I(\theta)=\int[f'(x)/f(x)]^2f(x)dx$ --- bu tam olarak $f$ biliniyorsa parametrik bilgidir. Bilinmiyorsa $\tilde I<I$ --- belirsizlik kaybı.
 \end{ornek}
 
 \subsection{Adaptif Tahmin}
 
 \begin{tanim}[Adaptif tahmin edici]\label{def:adaptif}
-$\hat\theta_n$ adaptiftir (\emph{adaptive}): $\sqrt{n}(\hat\theta_n-\theta)\xrightarrow{d}\Normal(0,1/I(\theta))$ — yani bozulma parametresi bilinmeseydi de aynı sınıra ulaşılır.
+$\hat\theta_n$ adaptiftir (\emph{adaptive}): $\sqrt{n}(\hat\theta_n-\theta)\xrightarrow{d}\Normal(0,1/I(\theta))$ --- yani bozulma parametresi bilinmeseydi de aynı sınıra ulaşılır.
 \end{tanim}
 
 Stein (1956): simetrik yoğunluklar için adaptif tahmin edici mevcuttur. Bickel (1982): konum ailesi için kaçınılmaz koşullar.
@@ -689,7 +689,7 @@ Hangi durumlarda MLE, UMVUE ile çakışır? Üstel ailede bu her zaman geçerli
 
 \cozumlualistirmalar
 
-\begin{alistirma}[Al.12.1]{A}{Fisher bilgisi — Bernoulli}
+\begin{alistirma}[Al.12.1]{A}{Fisher bilgisi --- Bernoulli}
 $X\sim\mathrm{Ber}(p)$ için Fisher bilgisini hesapla ve Cramér-Rao alt sınırını yaz. $\bar{X}_n$'nin bu sınırı sağladığını doğrula.
 \end{alistirma}
 \alcozum{%
@@ -709,7 +709,7 @@ $X_1,\ldots,X_n\iid\Pois(\lambda)$. $\delta(X_1)=\mathbf{1}[X_1=0]=e^{-\lambda}$
 \alcozum{%
 (a) $E[\mathbf{1}[X_1=0]|T=t]=P(X_1=0|T=t)$. $T=t$ koşulunda $X_1\sim\Binom(t,1/n)$ (Poisson birleşimi ayrışımı):
 $P(X_1=0|T=t)=(1-1/n)^t$.
-$\delta_\mathrm{RB}(T)=(1-1/n)^T$ — UMVUE (tamamlayıcı yeterli $T$'nin fonksiyonu, yansız).
+$\delta_\mathrm{RB}(T)=(1-1/n)^T$ --- UMVUE (tamamlayıcı yeterli $T$'nin fonksiyonu, yansız).
 (b) Rao-Blackwell: $\mathrm{Var}(\delta_\mathrm{RB})\leq\mathrm{Var}(\delta)$. $\delta(X_1)$ sadece $X_1$ kullanırken $\delta_\mathrm{RB}$ tüm $T$'yi kullanır.}
 
 \begin{alistirma}[Al.12.2c]{B}{MSE Karşılaştırması: MLE vs Yansız}
@@ -723,14 +723,14 @@ $(n-1)S^2/\sigma^2\sim\chi^2_{n-1}$: $E[S^2]=\sigma^2$, $\Var(S^2)=2\sigma^4/(n-
 
 \alistirmalar
 
-\begin{alistirma}[Al.12.3]{A}{Momentler — Beta}
+\begin{alistirma}[Al.12.3]{A}{Momentler --- Beta}
 $X\sim\Beta(\alpha,\beta)$ için momentler yöntemi tahmin edicilerini $\bar{X}_n$ ve $S^2$ cinsinden yaz.
 \end{alistirma}
 \alcozum{%
 $\mu=\alpha/(\alpha+\beta)$, $\sigma^2=\alpha\beta/[(\alpha+\beta)^2(\alpha+\beta+1)]$. Çöz: $\hat\alpha=\bar{X}[\bar{X}(1-\bar{X})/S^2-1]$, $\hat\beta=(1-\bar{X})[\bar{X}(1-\bar{X})/S^2-1]$.%
 }
 
-\begin{alistirma}[Al.12.4]{B}{Poisson UMVUE — $e^{-\lambda}$}
+\begin{alistirma}[Al.12.4]{B}{Poisson UMVUE --- $e^{-\lambda}$}
 $X_1,\ldots,X_n\iid\Pois(\lambda)$. $\Prob(X=0)=e^{-\lambda}$'nın UMVUE'sünün $g(T)=\left(\frac{n-1}{n}\right)^T$ ($T=\sum X_i$) olduğunu göster. \textit{(İpucu: $\Beklenti[g(T)]$ hesapla.)}
 \end{alistirma}
 \alcozum{%
@@ -741,7 +741,7 @@ $T\sim\Pois(n\lambda)$; $\Beklenti[(1-1/n)^T]=\sum_{t=0}^\infty(1-1/n)^t e^{-n\l
 $X_1,\ldots,X_n\mid\mu\iid\Normal(\mu,4)$ ve $\mu\sim\Normal(0,1)$. $n=9$, $\bar{x}=2$ gözlemi için sonsal dağılımı ve Bayes tahmin edicisini hesapla. $n\to\infty$ limitini yorumla.
 \end{alistirma}
 \alcozum{%
-$1/\sigma_n^2=9/4+1/1=13/4$; $\sigma_n^2=4/13$. $\mu_n=(4/13)(9\cdot2/4+0/1)=(4/13)(9/2)=18/13\approx1{,}38$. $n\to\infty$: $\sigma_n^2\to0$, $\mu_n\to\bar{X}_n$ — MLE baskın gelir.%
+$1/\sigma_n^2=9/4+1/1=13/4$; $\sigma_n^2=4/13$. $\mu_n=(4/13)(9\cdot2/4+0/1)=(4/13)(9/2)=18/13\approx1{,}38$. $n\to\infty$: $\sigma_n^2\to0$, $\mu_n\to\bar{X}_n$ --- MLE baskın gelir.%
 }
 
 \begin{alistirma}[Al.12.6]{C}{Cramér-Rao sınırına ulaşma koşulu}

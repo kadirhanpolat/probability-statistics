@@ -1,5 +1,5 @@
 % =====================================================================
-%  BÖLÜM 0 — Ön Bilgiler: Kümeler, Fonksiyonlar ve Sayılabilirlik
+%  BÖLÜM 0 --- Ön Bilgiler: Kümeler, Fonksiyonlar ve Sayılabilirlik
 %  Olasılık Teorisi ve Matematiksel İstatistik
 %  Kaynaklar: Billingsley Ek A; Klenke Böl. 1; Durrett Ek A
 % =====================================================================
@@ -83,7 +83,7 @@ Sonlu iki kümenin birleşimini $A \cup B$ olarak biliyorsunuz. Peki
 $A_1 \cup A_2 \cup A_3 \cup \cdots$ ifadesini nasıl yazarsınız?
 Düşüncelerinizi aşağıya not edin; ardından Tanım~\ref{def:kumecebiri}'yi
 okuyun.
-\kesifcevap{$\bigcup_{n=1}^{\infty} A_n$ — "en az bir $A_n$'e ait olan tüm elemanlar." Daha
+\kesifcevap{$\bigcup_{n=1}^{\infty} A_n$ --- "en az bir $A_n$'e ait olan tüm elemanlar." Daha
   uzun yazılışı: $\omega \in \bigcup_n A_n \Leftrightarrow \exists n: \omega \in A_n$.
   Sonsuz kesişim: $\bigcap_{n=1}^{\infty} A_n = \{\omega : \forall n,\, \omega \in A_n\}$.}
 \end{kesif}
@@ -411,7 +411,7 @@ sayılamaz çok sayılabilir parçaya bölünebilir. Örneğin $\R$ sayılamaz,
 ama her tekil küme $\{x\}$ sonludur.
 \end{notkutu}
 
-% Disiplinlerarası bağlantı — TYMM gereksinimi
+% Disiplinlerarası bağlantı --- TYMM gereksinimi
 \begin{disiplinlerarasibaglan}[Bilgisayar bilimi ve hesaplanabilirlik]
 Sayılabilirlik kavramı bilgisayar biliminde merkezi bir rol oynar.
 Herhangi bir programlama dilinde yazılabilen tüm programlar kümesi sayılabilirdir
@@ -700,8 +700,8 @@ ikisi eşittir. Bu dil Bölüm~7'deki Borel-Cantelli lemmalarının tam dilidir.
 % =====================================================================
 
 \begin{motivasyon}[Neden Dizi Yakınsaması Olasılık Teorisi için Önemli?]
-Olasılık teorisinde neredeyse her önemli sonuç — Büyük Sayılar Kanunu,
-Merkezi Limit Teoremi, martingal teoremi — bir dizi (ya da fonksiyon dizisinin)
+Olasılık teorisinde neredeyse her önemli sonuç --- Büyük Sayılar Kanunu,
+Merkezi Limit Teoremi, martingal teoremi --- bir dizi (ya da fonksiyon dizisinin)
 yakınsaması ifadesidir. Bu nedenle dizi yakınsamasının analitik temelleri
 ön koşul bilginin kilit parçasıdır.
 \end{motivasyon}
@@ -741,7 +741,7 @@ $a_N > L - \varepsilon$ olan $N$ var. $n \geq N$: $L - \varepsilon < a_N \leq a_
 yani $|a_n - L| < \varepsilon$. $a_n \to L$.
 \end{proof}
 
-\begin{ornek}[Monoton Dizi Teoremi — Üstel Sınır]
+\begin{ornek}[Monoton Dizi Teoremi --- Üstel Sınır]
 $a_n = (1 + 1/n)^n$ monoton artan ve $a_n < 3$ (sınırlı): $a_n \to e$.
 Bu hem $e$'nin varlığını kanıtlar hem de Poisson yaklaşımında $(1-\lambda/n)^n \to e^{-\lambda}$ için kullanılır.
 \end{ornek}
@@ -859,7 +859,7 @@ $(X,d)$ \emph{metrik uzay}: $d:X\times X\to[0,\infty)$ ile
 \begin{enumerate}
   \item $(\mathbb{R}^n, d_2)$: $d_2(x,y)=\sqrt{\sum(x_i-y_i)^2}$ Öklid metriği.
   \item $(\mathbb{R}^n, d_\infty)$: $d_\infty(x,y)=\max_i|x_i-y_i|$ supremum metriği.
-  \item $(C[a,b],d_\infty)$: sürekli fonksiyonlar, $d_\infty(f,g)=\sup_{x\in[a,b]}|f(x)-g(x)|$ — düzgün yakınsama metriği.
+  \item $(C[a,b],d_\infty)$: sürekli fonksiyonlar, $d_\infty(f,g)=\sup_{x\in[a,b]}|f(x)-g(x)|$ --- düzgün yakınsama metriği.
   \item Kesikli metrik: $d(x,y)=\mathbf{1}[x\neq y]$.
 \end{enumerate}
 \end{ornek}
@@ -891,7 +891,7 @@ $\{x_n\}=\{T^nx_0\}$ Cauchy: $d(x_{n+k},x_n)\leq\frac{\lambda^n}{1-\lambda}d(x_1
 \label{sec:ince_analiz}
 % =====================================================================
 
-\begin{tanim}[$\limsup/\liminf$ — sayılar için]\label{def:limsup_sayi}
+\begin{tanim}[$\limsup/\liminf$ --- sayılar için]\label{def:limsup_sayi}
 $(a_n)\subset\mathbb{R}$:
 \[
   \limsup_{n\to\infty}a_n = \lim_{n\to\infty}\sup_{k\geq n}a_k,\quad
@@ -1107,7 +1107,7 @@ $(X,d)$ metrik uzay. (a) $\mathbb{R}^n$ ile $d(\mathbf{x},\mathbf{y})=\max_i|x_i
 (c) $(0,1)$ tam değildir: $x_n=1/n$ Cauchy dizisi ama $\lim x_n=0\notin(0,1)$. Kurtarma: $g:(0,1)\to\mathbb{R}$, $g(x)=\tan(\pi(x-1/2))$ homeomorfizm (sürekli ve tersi sürekli). $\mathbb{R}$ üzerindeki standart metriğin geri çekimi: $d^*(x,y)=|g(x)-g(y)|$, bu $(0,1)$'de tam metriktir (eşdeğer topoloji ama $d^*$ ile tüm Cauchy diziler yakınsar).}
 
 \begin{alistirma}[Al.0.4d]{B}{Fonksiyon Sınıfları ve Süreklilik}
-$f:[0,1]\to\mathbb{R}$ sürekli. (a) $f$'nin $[0,1]$'de üniform sürekli olduğunu Heine-Cantor teoremi ile açıklayın. (b) Weierstrass yaklaşım teoremini ifade edin ve $f(x)=|x-1/2|$ için sezgisel uygulayın. (c) $g:(0,1)\to\mathbb{R}$, $g(x)=1/x$ sürekli ama üniform sürekli değil — kanıtlayın.
+$f:[0,1]\to\mathbb{R}$ sürekli. (a) $f$'nin $[0,1]$'de üniform sürekli olduğunu Heine-Cantor teoremi ile açıklayın. (b) Weierstrass yaklaşım teoremini ifade edin ve $f(x)=|x-1/2|$ için sezgisel uygulayın. (c) $g:(0,1)\to\mathbb{R}$, $g(x)=1/x$ sürekli ama üniform sürekli değil --- kanıtlayın.
 \end{alistirma}
 \alcozum{%
 (a) \textbf{Heine-Cantor}: Kompakt metrik uzayda sürekli fonksiyon üniform süreklidir. $[0,1]$ kompakt (sınırlı ve kapalı, Heine-Borel). $f$ sürekli $\Rightarrow$ $f$ üniform sürekli: $\forall\varepsilon>0$, $\exists\delta>0$: $|x-y|<\delta\Rightarrow|f(x)-f(y)|<\varepsilon$, $\delta$ $x$'e bağlı değil.

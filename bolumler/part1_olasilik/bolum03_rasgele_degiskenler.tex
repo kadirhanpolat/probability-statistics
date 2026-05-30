@@ -58,7 +58,7 @@ Yazı-tura atışında $\Omega = \{Y, T\}$ olsun.
 "Tura sayısı" bir fonksiyon tanımlar: $X(Y) = 0$, $X(T) = 1$.
 Bu fonksiyonun hangi özelliği onu "rasgele değişken" yapar?
 Eğer $A = \{1\} \subset \mathbb{R}$ ise $\{X \in A\} = \{T\}$ olayı
-olasılık uzayında tanımlı olmalı — yani $\mathcal{F}$'ye ait olmalıdır.
+olasılık uzayında tanımlı olmalı --- yani $\mathcal{F}$'ye ait olmalıdır.
 Peki ya $A = (0.5, 1.5)$ veya $A = \emptyset$ için?
 Tüm Borel kümelerine bu özelliği istiyorsak ne elde ederiz?
 \kesifcevap{$X$ rasgele değişken olmak için $\forall A \in \mathcal{B}(\mathbb{R}): X^{-1}(A) \in \mathcal{F}$ gerekir.
@@ -112,7 +112,7 @@ $X^{-1}$ $\mathcal{F}$'ye düşüyor; $\mathcal{B}(\mathbb{R})$'nin üretilmesi 
 
 \begin{kritiksorgu}
 "$X$ sürekli olması rasgele değişken olması için yeterli midir?"
-Hayır: süreklilik analitik bir kavramdır, ölçülebilirliği garanti etmez —
+Hayır: süreklilik analitik bir kavramdır, ölçülebilirliği garanti etmez ---
 ancak Borel-ölçülebilir bir $\sigma$-cebir düzeni altında sürekli fonksiyonlar
 her zaman ölçülebilirdir (dolayısıyla rasgele değişkendir).
 Vitali kümesinin gösterge fonksiyonu, $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$'de
@@ -138,7 +138,7 @@ Diğerleri benzer.
 \end{proof}
 
 \begin{tarihselnot}
-"Rasgele değişken" terimi bir değişken değil, fonksiyondur — tarihsel adlandırma yanıltıcıdır.
+"Rasgele değişken" terimi bir değişken değil, fonksiyondur --- tarihsel adlandırma yanıltıcıdır.
 Kolmogorov 1933'te olasılığı ölçüm teorisi üzerine oturtmadan önce,
 rasgele değişkenler daha çok sezgisel olarak tanımlanıyordu.
 Modern tanım, Lebesgue'nin ölçüm teorisi ile Borel'in $\sigma$-cebirleri
@@ -180,7 +180,7 @@ eşdeğerdir. Rasgele değişkenler cebirsel işlemler ve limit altında kapalı
 $X$ bir rasgele değişken. $P(X \leq 1.5)$, $P(X \leq 3.7)$ gibi değerleri
 biliyorsak $X$ hakkında ne kadar bilgi sahibi oluruz?
 Eğer tüm $c \in \mathbb{R}$ için $P(X \leq c)$ değerlerini biliyorsak,
-bu yeterli midir — yani bu değerler $X$'in dağılımını tamamen belirler mi?
+bu yeterli midir --- yani bu değerler $X$'in dağılımını tamamen belirler mi?
 \kesifcevap{Evet. $F_X(c)=P(X\leq c)$ tüm $c\in\mathbb{R}$ için bilinirse,
   her yarı-kapalı aralığın ve dolayısıyla her Borel kümesinin olasılığı
   türetilir. Dağılım fonksiyonu, olasılık ölçüsünü $\mathbb{R}$ üzerinde biricik olarak belirler.}
@@ -321,7 +321,7 @@ $\sum_{k=0}^n p_X(k) = (p + (1-p))^n = 1$ (Binom teoremi).
 
 \begin{kesif}
 Bir terazi ibresi [0,1] aralığında rasgele bir değere işaret ediyor.
-$P(X = 0.5) = ?$ — sonsuz çok nokta var, her birinin olasılığı sıfır olmalı.
+$P(X = 0.5) = ?$ --- sonsuz çok nokta var, her birinin olasılığı sıfır olmalı.
 Peki $P(0.3 \leq X \leq 0.7) = ?$ Bu sıfır değil.
 Nasıl bir kavramla olasılıkları hesaplayabiliriz?
 \kesifcevap{Sürekli dağılımlarda $P(X=c)=0$ her $c$ için. Yoğunluk $f_X\geq 0$ ile
@@ -333,7 +333,7 @@ Nasıl bir kavramla olasılıkları hesaplayabiliriz?
 \begin{tanimgerekce}
 Radon-Nikodym teoremi der ki: $P_X \ll \lambda$ (Lebesgue ölçüsüne göre
 mutlak sürekli) ise $P_X(B) = \int_B f(x) \, d\lambda(x)$ yazan bir $f \geq 0$ var.
-Bu $f$ "yoğunluk"tur — noktasal olasılık değil, uzunluk başına olasılık yoğunluğu.
+Bu $f$ "yoğunluk"tur --- noktasal olasılık değil, uzunluk başına olasılık yoğunluğu.
 \end{tanimgerekce}
 
 \begin{tanim}[Mutlak Sürekli Rasgele Değişken]
@@ -406,7 +406,7 @@ yazılabilir; burada $F_{\text{kes}}$ kesikli, $F_{\text{sür}}$ mutlak sürekli
 bir KDF'dir.
 \end{tanim}
 
-\begin{onerme}[Lebesgue Ayrışım Teoremi — Özel Durum]
+\begin{onerme}[Lebesgue Ayrışım Teoremi --- Özel Durum]
 \label{prop:lebesgue_ayrisim}
 Her $F : \mathbb{R} \to [0,1]$ KDF'si şu biçimde tek türlü yazılabilir:
 \[
@@ -490,7 +490,7 @@ $f_{X|Y}(\cdot \mid y)$, $y$ sabit tutulduğunda $x$'in bir PDF'sidir:
 $\int f_{X|Y}(x \mid y) \, dx = 1$.
 \end{tanim}
 
-\begin{teorem}[Toplam Olasılık — Sürekli Versiyon]
+\begin{teorem}[Toplam Olasılık --- Sürekli Versiyon]
 \label{thm:toplam_surekli}
 $(X, Y)$ ortak sürekli dağılımlı olsun. O zaman
 \[
@@ -688,7 +688,7 @@ Bölüm~\ref{chp:beklenti}'deki karakteristik fonksiyon yöntemi çok daha hızl
 \end{ornek}
 
 % ---- Disiplinlerarası Bağlantı (TYMM) ----
-\begin{kopru}[Disiplinlerarası — Finans ve Mühendislik]
+\begin{kopru}[Disiplinlerarası --- Finans ve Mühendislik]
 \textbf{Finans:} Hisse senedi getirisinin lognormal modellenmesi (Black-Scholes),
 rasgele değişken dönüşüm teorisinin doğrudan uygulamasıdır.\\
 \textbf{Mühendislik:} Haberleşmede sinyal+gürültü modeli $Z = S + N$,
@@ -701,7 +701,7 @@ fonksiyon arasındaki bağlantı Heisenberg belirsizlik ilkesini yansıtır.
 % ---- Öz-Yansıtma ----
 \begin{ozyansima}
 \begin{itemize}
-  \item "Rasgele değişken bir sayı mı, yoksa fonksiyon mu?" — cevabınız ve gerekçeniz?
+  \item "Rasgele değişken bir sayı mı, yoksa fonksiyon mu?" --- cevabınız ve gerekçeniz?
   \item KDF'nin hangi özelliği sizi en çok şaşırttı?
   \item Sürekli durumda $P(X = x) = 0$ gerçeği sezgiye aykırı geliyor mu?
         Bunu fizik veya mühendislikten bir örnekle nasıl uzlaştırırsınız?
@@ -711,9 +711,9 @@ fonksiyon arasındaki bağlantı Heisenberg belirsizlik ilkesini yansıtır.
 
 % ---- Köprü Notu ----
 \begin{kopru}
-\textbf{Önceki bölüm:} Bölüm~\ref{chp:olasilik_uzaylari} — Kolmogorov aksiyomları,
+\textbf{Önceki bölüm:} Bölüm~\ref{chp:olasilik_uzaylari} --- Kolmogorov aksiyomları,
 bağımsızlık olaylar düzeyinde; burada rasgele değişkenlere taşındı.\\
-\textbf{Sonraki bölüm:} Bölüm~\ref{chp:beklenti} — Dağılımlar verildiğinde
+\textbf{Sonraki bölüm:} Bölüm~\ref{chp:beklenti} --- Dağılımlar verildiğinde
 $E[X]$, $\mathrm{Var}(X)$, momentler; Lebesgue integrali olarak beklenti.\\
 \textbf{Dijital katman:} Dönüşüm formüllerinin sayısal doğrulaması ve
 Monte Carlo simülasyonu \texttt{bolum03\_donusumler.ipynb} defterinde.
@@ -894,14 +894,14 @@ Sıkılık (\emph{tightness}): her $\varepsilon>0$ için kompakt $K_\varepsilon\
 \end{teorem}
 
 \begin{teorem}[Helly seçim teoremi]\label{thm:helly}
-Her sınırlı KDF dizisi $\{F_n\}$, monoton artan, sağdan sürekli limiti olan bir alt diziye sahiptir. (Bu limit bir KDF olmayabilir — kitle kaybolabilir.)
+Her sınırlı KDF dizisi $\{F_n\}$, monoton artan, sağdan sürekli limiti olan bir alt diziye sahiptir. (Bu limit bir KDF olmayabilir --- kitle kaybolabilir.)
 \end{teorem}
 
 \begin{ornek}[Dağılımda yakınsama örnekleri]\label{ex:dagilimda_ornekler}
 \begin{enumerate}
   \item $X_n\sim\Binom(n,\lambda/n)\dto\Pois(\lambda)$ (Poisson yakınsaması).
   \item $X_n\sim\Normal(0,1+1/n)\dto\Normal(0,1)$ (parametre yakınsaması).
-  \item $X_n=n$ (deterministik): $P(X_n\leq x)=0$ için her $x<n$; $F_{X_n}\to0$ — kitle kaçışı.
+  \item $X_n=n$ (deterministik): $P(X_n\leq x)=0$ için her $x<n$; $F_{X_n}\to0$ --- kitle kaçışı.
 \end{enumerate}
 \end{ornek}
 
@@ -981,7 +981,7 @@ Aşağıdaki KDF'lerin her biri için: (i) süreksizlik noktalarını bulun, (ii
 
 (C) $F$ her yerde sürekli, $f(x)=e^{-x}$ ($x>0$). \textbf{Mutlak sürekli}; $X\sim\mathrm{Exp}(1)$.}
 
-\begin{alistirma}[Al.3.4c]{C}{Değişken Dönüşümü — Skalar Sistemik}
+\begin{alistirma}[Al.3.4c]{C}{Değişken Dönüşümü --- Skalar Sistemik}
 $X$ sürekli rasgele değişken, PDF $f_X$, KDF $F_X$ birebir artan ve türevlenebilir.
 (a) $Y=aX+b$ ($a>0$) için $f_Y(y)$'yi bulun.
 (b) $U=F_X(X)$'in dağılımını bulun (Olasılık integral dönüşümü).
@@ -1114,7 +1114,7 @@ $X_1+X_2 \sim \Normal(0, 2+2\rho)$; $X_1-X_2 \sim \Normal(0, 2-2\rho)$.\\
 (b) Kovaryans sıfır (matris köşegen) $\Rightarrow$ Normal için bağımsız. Evet, bağımsız.\\
 (c) $X_1|X_2=1 \sim \Normal(\rho, 1-\rho^2)$.}
 
-\begin{alistirma}[Al.3.15]{C}{Kuantil Fonksiyon — Karma Dağılım}
+\begin{alistirma}[Al.3.15]{C}{Kuantil Fonksiyon --- Karma Dağılım}
 $X$ karma dağılım: $P(X = 0) = 1/2$, $P(X > 0) = 1/2$ ve $X \mid X>0 \sim \Exp(1)$.
 (a) $F_X(x)$'i her $x$ için yazın.
 (b) $F_X^{-1}(u)$'yu $u \in (0,1)$ için hesaplayın.

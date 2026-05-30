@@ -28,7 +28,7 @@ Bu bölümün sonunda öğrenci:
 
 % ---- Motivasyon ----
 \begin{motivasyon}
-Bir para atışında yazı gelme oranı $n$ büyüdükçe $1/2$'ye yaklaşır — bu sezgi,
+Bir para atışında yazı gelme oranı $n$ büyüdükçe $1/2$'ye yaklaşır --- bu sezgi,
 matematiksel olarak tam olarak ne anlama gelir? "Yaklaşmak" birden fazla biçimde
 tanımlanabilir: \emph{her} örnek yolu için mi, yoksa çoğunlukla mı?
 
@@ -278,7 +278,7 @@ ZBSK, Monte Carlo yönteminin matematiksel garantisidir.
 \begin{kritiksorgu}
 ZBSK şunu söyler: $P(|\bar{X}_n - \mu| > \varepsilon) \to 0$.
 Bu, $\bar{X}_n$'nin hiçbir zaman $\mu$'dan uzak olmadığı anlamına mı gelir?
-Hayır — yalnızca büyük sapmalar giderek daha düşük olasılıklı hale gelir.
+Hayır --- yalnızca büyük sapmalar giderek daha düşük olasılıklı hale gelir.
 $\bar{X}_n$'nin $\mu$'dan uzak olduğu anların kümesi boş olmayabilir;
 ama bu anların "oranı" sıfıra yaklaşır.
 \end{kritiksorgu}
@@ -311,7 +311,7 @@ $\sum_n P(|\bar{X}_n| > \varepsilon) \leq C/\varepsilon^4 \sum 1/n^2 < \infty$.
 Borel-Cantelli 1: $P(|\bar{X}_n| > \varepsilon \text{ i.o.}) = 0$ her $\varepsilon > 0$ için.
 Yani $\bar{X}_n \to 0$ n.k.
 
-\textbf{Adım 2 (Genel Durum — Kolmogorov Kırpma):}
+\textbf{Adım 2 (Genel Durum --- Kolmogorov Kırpma):}
 $E[|X_1|] < \infty$ için kırpılmış dizi $Y_n = X_n \mathbf{1}_{|X_n|\leq n}$ kullanılır.
 Kolmogorov ölçütü: $\sum \mathrm{Var}(Y_n)/n^2 < \infty$ (Böl.~\ref{chp:olcum_teorisi}'deki
 Kronecker lemması). Ayrıntılar Billingsley~\cite{Billingsley1995}, §22 veya Durrett~\cite{Durrett2019}, §2.4'te.
@@ -323,7 +323,7 @@ GBSK, ZBSK'yi içerir: n.k.\ yakınsama $\Rightarrow$ olasılıkla yakınsama
 (Teorem~\ref{thm:yaklinsama_hiyerarsi}). Tersi genel olarak yanlış.
 \end{teorem}
 
-\begin{ornek}[GBSK Uygulaması — Monte Carlo Hassasiyeti]
+\begin{ornek}[GBSK Uygulaması --- Monte Carlo Hassasiyeti]
 $g : [0,1] \to \mathbb{R}$ integrallenebilir. GBSK:
 $\frac{1}{n}\sum_{i=1}^n g(U_i) \xrightarrow{\text{n.k.}} \int_0^1 g(x)\,dx$.
 Bu, simülasyon çıktısının yalnızca "büyük ihtimalle" değil,
@@ -332,7 +332,7 @@ neredeyse tüm örnek yollarında kesinlikle doğru değere yakınsadığını g
 
 \begin{karsiornek}[GBSK'nın Beklenti Koşulunu Kaldıramazsınız]
 $X_i \sim \mathrm{Cauchy}(0,1)$ bağımsız: $E[|X_1|] = \infty$.
-$\bar{X}_n$, Cauchy(0,1) dağılımını korur — $0$'a yakınsamaz.
+$\bar{X}_n$, Cauchy(0,1) dağılımını korur --- $0$'a yakınsamaz.
 $E[|X_1|] < \infty$ koşulu vazgeçilmezdir.
 \end{karsiornek}
 
@@ -390,7 +390,7 @@ $\{X_n\}$ bağımsız rasgele değişkenler:
 
 \begin{kritiksorgu}
 0-1 Kanunu "olasılık ya 0 ya da 1" diyor. Bu deterministik mi?
-Hayır — bu olaylar gerçek anlamda belirsiz olabilir; ancak birden fazla bağımsız
+Hayır --- bu olaylar gerçek anlamda belirsiz olabilir; ancak birden fazla bağımsız
 deneyin asimptotik davranışını yöneten olaylar, her örnek yolunu etkilese de
 bütünleşik olarak keskin sınıflandırılabilir.
 \end{kritiksorgu}
@@ -439,7 +439,7 @@ Derinlemesine okuma için Dembo-Zeitouni~\cite{Dembo1998}.
 \end{hocanotu}
 
 % ---- Disiplinlerarası Bağlantı (TYMM) ----
-\begin{kopru}[Disiplinlerarası — Ekonomi, Fizik, Bilgisayar Bilimi]
+\begin{kopru}[Disiplinlerarası --- Ekonomi, Fizik, Bilgisayar Bilimi]
 \textbf{Ekonomi:} Büyük Sayılar Kanunu, ankete dayalı istatistiksel tahminlerin
 (seçim anketi, tüketici fiyat endeksi) hangi koşulda güvenilir olduğunu açıklar:
 gözlem sayısı $n$ büyüdükçe örneklem ortalaması nüfus ortalamasına yaklaşır.\\
@@ -465,8 +465,8 @@ $n$ tekrarlı bağımsız deneme, ortalama davranışı $O(1/\sqrt{n})$ hassasiy
 \begin{kopru}
 \textbf{Önceki bölümler:} Bölüm~\ref{chp:beklenti} (Chebyshev, DCT) ve
 Bölüm~\ref{chp:olcum_teorisi} (MYT) bu bölümün ispat araçlarını sağladı.\\
-\textbf{Sonraki bölüm:} Bölüm~\ref{chp:donusumler} — Dönüşümler;
-ardından Bölüm~\ref{chp:merkezi_limit} — BSK'nın öte boyutu:
+\textbf{Sonraki bölüm:} Bölüm~\ref{chp:donusumler} --- Dönüşümler;
+ardından Bölüm~\ref{chp:merkezi_limit} --- BSK'nın öte boyutu:
 $\bar{X}_n$ ne kadar hızlı yaklaşır? Cevap: $\sqrt{n}$ ölçeğinde Merkezi Limit Teoremi.\\
 \textbf{İstatistik kısmı:} Bölüm~\ref{chp:istatistik_temelleri}'de büyük örneklem
 tutarlılığı BSK çerçevesinde yeniden ele alınacak.
@@ -528,8 +528,8 @@ sonsuz kez geçmez.
 
 \begin{hataanalizi}
 YLK ve MLT'yi karıştırmak yaygın hatadır.
-MLT: $S_n/\sqrt{n\sigma^2} \xrightarrow{d} \Normal(0,1)$ — dağılımsal limit.
-YLK: $\limsup S_n/\sqrt{2n\sigma^2\ln\ln n} = 1$ n.k. — yol bazında keskin sınır.
+MLT: $S_n/\sqrt{n\sigma^2} \xrightarrow{d} \Normal(0,1)$ --- dağılımsal limit.
+YLK: $\limsup S_n/\sqrt{2n\sigma^2\ln\ln n} = 1$ n.k. --- yol bazında keskin sınır.
 YLK, MLT'den \emph{daha güçlü} bir sonuçtur; her bir örnek yolu hakkında bilgi verir.
 \end{hataanalizi}
 
@@ -638,7 +638,7 @@ $\{Z_n\}$ sonlu durum uzaylı, geri dönüşümlü ve pozitif tekrarlı Markov z
 $\pi$ durağan dağılımı. $f: S \to \mathbb{R}$ her duruma bir değer atar.
 Birkhoff: $\frac{1}{n}\sum_{k=0}^{n-1} f(Z_k) \xrightarrow{\text{n.k.}} \sum_{s\in S} f(s)\pi(s) = E_\pi[f]$.
 
-Yani "zamansal ortalama = uzamsal ortalama" — klasik ergodiklik eşitliği.
+Yani "zamansal ortalama = uzamsal ortalama" --- klasik ergodiklik eşitliği.
 \end{ornek}
 
 \begin{kritiksorgu}
@@ -684,9 +684,9 @@ $x,y\geq x_0$ ise
 \begin{ornek}[Ağır kuyruklu dağılımlar]\label{ex:agir_kuyruk}
 $P(X>x)\sim x^{-\alpha}L(x)$ ($\alpha>0$, $L$ yavaş değişen): \emph{düzenli değişen kuyruk}.
 \begin{itemize}
-  \item $\alpha>2$: $E[X^2]<\infty$ — standart MLT geçerli.
-  \item $1<\alpha\leq2$: $E[X]<\infty$ ama $E[X^2]=\infty$ — kararlı dağılımlara yakınsama, ölçek $n^{1/\alpha}$.
-  \item $0<\alpha\leq1$: $E[X]=\infty$ — büyük sayılar kanunu çöker.
+  \item $\alpha>2$: $E[X^2]<\infty$ --- standart MLT geçerli.
+  \item $1<\alpha\leq2$: $E[X]<\infty$ ama $E[X^2]=\infty$ --- kararlı dağılımlara yakınsama, ölçek $n^{1/\alpha}$.
+  \item $0<\alpha\leq1$: $E[X]=\infty$ --- büyük sayılar kanunu çöker.
 \end{itemize}
 Pareto$(\alpha)$, Cauchy $(\alpha=1)$, Student-$t_\nu$ ($\nu=\alpha$) bu sınıftadır.
 \end{ornek}
@@ -700,7 +700,7 @@ Pareto$(\alpha)$, Cauchy $(\alpha=1)$, Student-$t_\nu$ ($\nu=\alpha$) bu sınıf
 \label{sec:buyuk_sapma_sinir}
 % =====================================================================
 
-\begin{teorem}[Markov eşitsizliği — hatırlatma]\label{thm:markov_hatirlatma}
+\begin{teorem}[Markov eşitsizliği --- hatırlatma]\label{thm:markov_hatirlatma}
 $X\geq0$, $a>0$: $P(X\geq a)\leq E[X]/a$.
 \end{teorem}
 
@@ -728,7 +728,7 @@ $X_i\in[a_i,b_i]$ sınırlı bağımsız, $E[X_i]=0$. $P(S_n\geq t)\leq\exp\!\le
 \end{ornek}
 
 \begin{disiplinlerarasibaglan}
-\textbf{Makine Öğrenmesi — PAC öğrenimi:} Hoeffding eşitsizliği, bir öğrenme algoritmasının eğitim hatasının test hatasına $\varepsilon$ içinde yakınsadığını yüksek olasılıkla garanti eden PAC (\emph{probably approximately correct}) öğrenimi sınırının temelidir.
+\textbf{Makine Öğrenmesi --- PAC öğrenimi:} Hoeffding eşitsizliği, bir öğrenme algoritmasının eğitim hatasının test hatasına $\varepsilon$ içinde yakınsadığını yüksek olasılıkla garanti eden PAC (\emph{probably approximately correct}) öğrenimi sınırının temelidir.
 
 \textbf{Finansal Risk:} Düzenli değişen kuyruklar (Pareto, $t_\nu$) piyasa çöküşlerini modellemek için kullanılır; Basle III sermaye yeterliliği hesaplamalarında VaR (değer-risk) bu dağılımlara dayanır.
 \end{disiplinlerarasibaglan}
@@ -792,7 +792,7 @@ $\approx 0.6(0.1823)+0.4(-0.2231) = 0.1094-0.0892 = 0.0202$.
 $P(\bar{X}_{100}\geq 0.6)\leq e^{-100\times0.0202} = e^{-2.02} \approx 0.133$.
 Chebyshev: 0.25; Chernoff: 0.133. Gerçek değer $\approx 0.028$ (Chernoff daha yakın).}
 
-\begin{alistirma}[Al.7.4b]{B}{Bağımsızlık Olmadan BSK — Ergodik Teorem}
+\begin{alistirma}[Al.7.4b]{B}{Bağımsızlık Olmadan BSK --- Ergodik Teorem}
 $(X_n)_{n\geq1}$ \emph{durağan ergodik} dizi; $E[|X_1|]<\infty$, $\mu=E[X_1]$.
 (a) Birkhoff ergodik teoremi ne söyler? Güçlü BSK ile nasıl kıyaslanır?
 (b) Markov zinciri $X_n$ durağan dağılım $\pi$ ile ergodikse $\frac{1}{n}\sum_{k=1}^n f(X_k)\to\sum_x f(x)\pi(x)$ n.k. Bunu simülasyon bağlamında yorumlayın.
@@ -840,9 +840,9 @@ $X_1, X_2, \ldots$ bağımsız. Aşağıdaki olayların olasılığını belirti
 \end{alistirma}
 \alcozum{%
 Hepsi kuyruk $\sigma$-cebirinde. 0-1 Kanunu: $P(A), P(B), P(C) \in \{0,1\}$.
-Belirli dağılıma bağlı olmadan bu sonuç kesin — spesifik değer ayrıca hesaplanmalı.}
+Belirli dağılıma bağlı olmadan bu sonuç kesin --- spesifik değer ayrıca hesaplanmalı.}
 
-\begin{alistirma}[Al.7.7]{B}{Borel-Cantelli — Kuvvetli Kanun}
+\begin{alistirma}[Al.7.7]{B}{Borel-Cantelli --- Kuvvetli Kanun}
 $X_1, X_2, \ldots$ bağımsız, $E[X_i] = \mu$, $\mathrm{Var}(X_i) = \sigma^2 < \infty$.
 Borel-Cantelli 1'i kullanarak $\bar{X}_{n^2} \xrightarrow{\text{n.k.}} \mu$ olduğunu ispatlayın.
 ($n^2$'nin kare indeksler olduğuna dikkat: $\bar{X}$ dizisinin alt dizisi.)
@@ -862,7 +862,7 @@ $Y_n = S_n \xrightarrow{P} \sigma$; $g(y) = 1/y$ sürekli ($y\neq0$).
 Sürekli haritalama: $1/S_n \xrightarrow{P} 1/\sigma$.
 Slutsky çarpım: $T_n = X_n \cdot (1/S_n) \xrightarrow{d} \Normal(0,1) \cdot (1/\sigma) = \Normal(0,1/\sigma^2)$.}
 
-\begin{alistirma}[Al.7.9]{C}{GBSK — Kolmogorov Yeterli Koşulu}
+\begin{alistirma}[Al.7.9]{C}{GBSK --- Kolmogorov Yeterli Koşulu}
 $\{X_n\}$ bağımsız (mutlaka i.i.d.\ değil), $E[X_n] = 0$,
 $\sum_{n=1}^\infty \mathrm{Var}(X_n)/n^2 < \infty$.
 Kronecker lemmasını kullanarak $\bar{X}_n \xrightarrow{\text{n.k.}} 0$ olduğunu gösterin.
@@ -877,7 +877,7 @@ $L^2$ yakınsaması + martingal argümanı veya Borel-Cantelli ile $\sum Y_k$ n.
 \textbf{Kronecker Lemması:} $\sum_{k=1}^\infty a_k/k$ yakınsarsa $\frac{1}{n}\sum_{k=1}^n a_k \to 0$.
 $a_k = X_k$ uygulandığında: $\sum X_k/k$ yakınsıyor (yukarıdaki ipucu) $\Rightarrow$ $\bar{X}_n \to 0$ n.k.}
 
-\begin{alistirma}[Al.7.10]{B}{Yinelenmiş Logaritma Kanunu — Uygulama}
+\begin{alistirma}[Al.7.10]{B}{Yinelenmiş Logaritma Kanunu --- Uygulama}
 $X_i \sim \Normal(0,1)$ i.i.d., $S_n = \sum_{i=1}^n X_i$.
 (a) YLK'ya göre $\limsup_{n\to\infty} S_n/\sqrt{2n\ln\ln n}$'nin değerini verin.
 (b) $n = 10^4$ için $\sqrt{2n\ln\ln n}$'yi sayısal olarak hesaplayın.

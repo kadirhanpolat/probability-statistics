@@ -33,8 +33,8 @@ ve beklenti soyut düzeyde incelendi. Şimdi pratikte en sık karşılaşılan d
 ailelerini somutlaştırıyoruz. Bu dağılımlar teorik güzelliklerinin yanı sıra
 istatistiksel modellemenin (Kısım~\ref{part:istatistik}) temel yapı taşlarıdır.
 
-Her dağılım için standart bilgi şeması: PMF/PDF — parametreler — $E[X]$, $\mathrm{Var}(X)$ —
-MÜF/KF — özellikler — tipik kullanım alanı.
+Her dağılım için standart bilgi şeması: PMF/PDF --- parametreler --- $E[X]$, $\mathrm{Var}(X)$ ---
+MÜF/KF --- özellikler --- tipik kullanım alanı.
 
 \medskip
 \textbf{Köprü.} Bölüm~\ref{chp:beklenti}'deki MÜF ve KF araçları burada her dağılım
@@ -327,7 +327,7 @@ $X \sim \Exp(\lambda)$ ($\lambda > 0$):
 \textbf{MÜF:} $M_X(t) = \lambda/(\lambda - t)$, $t < \lambda$.
 \end{tanim}
 
-\begin{onerme}[Bellek Yoksunluğu — Sürekli]
+\begin{onerme}[Bellek Yoksunluğu --- Sürekli]
 $X \sim \Exp(\lambda)$ için her $s, t > 0$'da $P(X > s+t \mid X > s) = P(X > t)$.
 Sürekli dağılımlar arasında bellek yoksunluğu özelliğine sahip tek dağılım üsteldir.
 \end{onerme}
@@ -408,9 +408,9 @@ $X \sim \mathrm{Cauchy}(\mu, \sigma)$ ($\sigma > 0$):
 $\mathrm{Cauchy}(0,1)$: $Z_1/Z_2$ ($Z_1, Z_2$ bağımsız standart normal).
 \end{tanim}
 
-\begin{karsiornek}[Cauchy — Büyük Sayılar Kanunu Çöküyor]
+\begin{karsiornek}[Cauchy --- Büyük Sayılar Kanunu Çöküyor]
 $X_1, X_2, \ldots$ bağımsız $\mathrm{Cauchy}(0,1)$ ise
-$\bar{X}_n = n^{-1}\sum X_i$ de $\mathrm{Cauchy}(0,1)$ dağılımlıdır —
+$\bar{X}_n = n^{-1}\sum X_i$ de $\mathrm{Cauchy}(0,1)$ dağılımlıdır ---
 ortalama $n$ büüdükçe stabilize olmaz. Büyük Sayılar Kanunu beklentinin
 varlığını gerektirir; Cauchy bunu ihlal eder.
 \end{karsiornek}
@@ -485,7 +485,7 @@ $\bar{X}$ ve örneklem varyansı $S^2$ ile bunlar türetilir (Böl.~\ref{chp:ist
 % =====================================================================
 
 \begin{kesif}
-Binom, Poisson, Normal, Gama, Beta — bu dağılımların PDF/PMF'leri çok farklı görünüyor.
+Binom, Poisson, Normal, Gama, Beta --- bu dağılımların PDF/PMF'leri çok farklı görünüyor.
 Ama hepsinin $\exp(\ldots)$ biçiminde yazılabildiğini fark ettiniz mi?
 Bu yapı tesadüf mü, yoksa derin bir ortak özelliği mi yansıtıyor?
 \kesifcevap{Üstel aile: $f(x;\theta)=h(x)\exp[\eta(\theta)T(x)-A(\theta)]$.
@@ -572,7 +572,7 @@ tek bir "standart" tablo yeterlidir: $F(x \mid \mu, \sigma) = F_0((x-\mu)/\sigma
 \end{onerme}
 
 % ---- Disiplinlerarası Bağlantı (TYMM) ----
-\begin{kopru}[Disiplinlerarası — Biyoloji, Fizik, Mühendislik]
+\begin{kopru}[Disiplinlerarası --- Biyoloji, Fizik, Mühendislik]
 \textbf{Biyoloji:} Popülasyon büyüklüğü, hücre bölünme süreleri üstel ve gama
 dağılımlarıyla modellenir; lognormal dağılım protein konsantrasyonlarını açıklar.\\
 \textbf{Fizik:} Maxwell-Boltzmann hız dağılımı gama ailesine aittir;
@@ -596,9 +596,9 @@ sayesinde sıra kuyruk modellerinin temelidir.
 
 % ---- Köprü Notu ----
 \begin{kopru}
-\textbf{Önceki bölüm:} Bölüm~\ref{chp:beklenti} — beklenti, MÜF, KF araçları
+\textbf{Önceki bölüm:} Bölüm~\ref{chp:beklenti} --- beklenti, MÜF, KF araçları
 buradaki her dağılım için somutlaştırıldı.\\
-\textbf{Sonraki bölüm:} Bölüm~\ref{chp:buyuk_sayilar} — büyük sayılar kanunlarında
+\textbf{Sonraki bölüm:} Bölüm~\ref{chp:buyuk_sayilar} --- büyük sayılar kanunlarında
 bu dağılımların asimptotik davranışı; Bölüm~\ref{chp:merkezi_limit}'te normal
 dağılıma yakınsama.\\
 \textbf{İstatistik kısmı:} Böl.~\ref{chp:nokta_tahmin}'de üstel aile ve yeterli
@@ -613,7 +613,7 @@ istatistik; Böl.~\ref{chp:hipotez_testi}'nde $\chi^2$, $t$, $F$ test istatistik
 % =====================================================================
 
 \begin{motivasyon}[Üstel Ötesi: Esnek Ömür Modelleri]
-Üstel dağılım "bellek yoksunluğu" ile idealdir — ama gerçek cihaz ömürleri çoğunlukla
+Üstel dağılım "bellek yoksunluğu" ile idealdir --- ama gerçek cihaz ömürleri çoğunlukla
 bunu sağlamaz: eskiyen sistemlerde arıza oranı zamanla \emph{artar}.
 Weibull dağılımı bu esnekliği sağlar; şekil parametresi $k > 1$ azalan,
 $k < 1$ artan, $k = 1$ sabit arıza oranını modeller.
@@ -632,7 +632,7 @@ $X \sim \mathrm{Weibull}(k, \lambda)$ ($k, \lambda > 0$):
 Özel durum: $k = 1$ ise $X \sim \Exp(1/\lambda)$.
 \end{tanim}
 
-\begin{onerme}[Weibull — Gama İlişkisi]
+\begin{onerme}[Weibull --- Gama İlişkisi]
 $X \sim \mathrm{Weibull}(k, \lambda)$ ise $Y = (X/\lambda)^k \sim \Exp(1)$.
 Ters: $X = \lambda Y^{1/k}$. Bu dönüşüm simülasyonda kullanılır.
 \end{onerme}
@@ -652,9 +652,9 @@ $X \sim \mathrm{Pareto}(\alpha, x_m)$ ($\alpha, x_m > 0$):
 \textbf{Varyans:} $\mathrm{Var}(X) = \alpha x_m^2/[(\alpha-1)^2(\alpha-2)]$ ($\alpha > 2$).
 \end{tanim}
 
-\begin{ornek}[Pareto — Güç Yasası]
-$\alpha = 1.16$: Gelir dağılımı (80-20 kuralı — Pareto ilkesi).
-$P(X > x) = (x_m/x)^\alpha$: "ağır kuyruk" (heavy tail) — olasılık polinomik azalır.
+\begin{ornek}[Pareto --- Güç Yasası]
+$\alpha = 1.16$: Gelir dağılımı (80-20 kuralı --- Pareto ilkesi).
+$P(X > x) = (x_m/x)^\alpha$: "ağır kuyruk" (heavy tail) --- olasılık polinomik azalır.
 Üstel dağılımda $P(X > x) = e^{-\lambda x}$: üstel azalır.
 Pareto'da $\alpha < 2$: sonsuz varyans; $\alpha < 1$: sonsuz beklenti.
 \end{ornek}
@@ -662,8 +662,8 @@ Pareto'da $\alpha < 2$: sonsuz varyans; $\alpha < 1$: sonsuz beklenti.
 \begin{hataanalizi}
 "Pareto dağılımlı veriler için MLT'yi uygulayabilirim."
 Yanlış: $\alpha \leq 2$ ise sonlu varyans yok; MLT'nin koşulu bozulur.
-$\alpha \in (1,2)$: sonlu beklenti var ama sonlu varyans yok — GBSK geçerli, MLT geçersiz.
-$\alpha \in (0,1]$: sonlu beklenti bile yok — GBSK bile çöker.
+$\alpha \in (1,2)$: sonlu beklenti var ama sonlu varyans yok --- GBSK geçerli, MLT geçersiz.
+$\alpha \in (0,1]$: sonlu beklenti bile yok --- GBSK bile çöker.
 Ağır kuyruklu dağılımlarda istatistiksel yöntemler dikkatle seçilmelidir.
 \end{hataanalizi}
 
@@ -701,11 +701,11 @@ son iki terimi toplama: $\sum_k\pi_k(E_k[X])^2 - (\sum_k\pi_k E_k[X])^2 = \sum_k
 \begin{ornek}[Gaussian Karışımı]
 $K=2$: $f(x) = \pi_1 \phi_{\mu_1,\sigma_1^2}(x) + \pi_2 \phi_{\mu_2,\sigma_2^2}(x)$.
 Parametre: $(\pi_1, \mu_1, \sigma_1^2, \mu_2, \sigma_2^2)$.
-İki tepe oluşturabilir — tek Normal'in modelleyemediği bimodal veri.
+İki tepe oluşturabilir --- tek Normal'in modelleyemediği bimodal veri.
 Örnek: erkek-kadın boy dağılımı (iki normal, farklı ortalama).
 \end{ornek}
 
-\begin{ornek}[Negatif Binom — Poisson Karışımı]
+\begin{ornek}[Negatif Binom --- Poisson Karışımı]
 $X \mid \Lambda = \lambda \sim \Pois(\lambda)$, $\Lambda \sim \Gama(\alpha, \beta)$.
 Marjinal: $P(X = k) = \int_0^\infty e^{-\lambda}\lambda^k/k! \cdot f_\Gamma(\lambda;\alpha,\beta)\,d\lambda$.
 Hesap sonucu: $X \sim \mathrm{NegBinom}(\alpha, \beta/(1+\beta))$.
@@ -752,7 +752,7 @@ $\mathbf{X}=(\mathbf{X}_1^\top,\mathbf{X}_2^\top)^\top\sim\Normal_{p+q}$, $\bold
 \[
   \mathbf{X}_1|\mathbf{X}_2=\mathbf{x}_2\sim\Normal_p\!\left(\boldsymbol\mu_1+\boldsymbol\Sigma_{12}\boldsymbol\Sigma_{22}^{-1}(\mathbf{x}_2-\boldsymbol\mu_2),\;\boldsymbol\Sigma_{11}-\boldsymbol\Sigma_{12}\boldsymbol\Sigma_{22}^{-1}\boldsymbol\Sigma_{21}\right).
 \]
-Koşullu ortalama, $\mathbf{x}_2$'nin doğrusal fonksiyonudur — çok değişkenli regresyonun temeli.
+Koşullu ortalama, $\mathbf{x}_2$'nin doğrusal fonksiyonudur --- çok değişkenli regresyonun temeli.
 \end{ornek}
 
 \begin{teorem}[Kareler dağılımı: ki-kare bağlantısı]\label{thm:kare_dagilimlari}

@@ -50,7 +50,7 @@ her $n$ için $X_n$ $\mathcal{F}_n$-ölçülebilir.
 
 \begin{tanim}[Doğal Filtrasyon]
 $X_0, X_1, \ldots$ dizisi için \textbf{doğal filtrasyon}:
-$\mathcal{F}_n = \sigma(X_0, X_1, \ldots, X_n)$ — "ilk $n+1$ gözlemden üretilen bilgi".
+$\mathcal{F}_n = \sigma(X_0, X_1, \ldots, X_n)$ --- "ilk $n+1$ gözlemden üretilen bilgi".
 \end{tanim}
 
 % =====================================================================
@@ -86,7 +86,7 @@ Sezgi: martingal $\equiv$ dürüst oyun; süpmartingal $\equiv$ oyuncuya karşı
 \end{enumerate}
 \end{ornek}
 
-\begin{onerme}[Jensen — Martingalden Altmartingale]
+\begin{onerme}[Jensen --- Martingalden Altmartingale]
 $M_n$ martingal ve $\varphi$ konveks ise $\varphi(M_n)$ altmartingal:
 $E[\varphi(M_{n+1})\mid\mathcal{F}_n] \geq \varphi(E[M_{n+1}\mid\mathcal{F}_n]) = \varphi(M_n)$.
 Özel: $|M_n|$ altmartingal ($\varphi = |\cdot|$).
@@ -108,7 +108,7 @@ $\{\tau \leq n\} \in \mathcal{F}_n$ ise (durma kararı geleceği gerektirmez).
 \begin{itemize}
   \item İlk geçiş zamanı: $\tau_a = \inf\{n \geq 0 : S_n \geq a\}$ durma zamanıdır.
   \item Sabit $\tau = n_0$: her sabit zaman durma zamanıdır.
-  \item "Son $n$ için $X_n > a$": bu gelecek bilgisi gerektirir — durma zamanı \emph{değildir}.
+  \item "Son $n$ için $X_n > a$": bu gelecek bilgisi gerektirir --- durma zamanı \emph{değildir}.
 \end{itemize}
 \end{ornek}
 
@@ -177,7 +177,7 @@ yani $X_n$ her yerde limit sahibi (sonsuz olabilir).
 $\sup E[X_n^+] < \infty$ $\Rightarrow$ $E[X_\infty^+] < \infty$; monoton sınır $\Rightarrow$ sonlu.
 \end{proof}
 
-\begin{onerme}[GBSK — Martingal İspatı]
+\begin{onerme}[GBSK --- Martingal İspatı]
 $X_i$ i.i.d., $E[|X_1|] < \infty$. $S_n = \sum X_i$.
 $M_n = E[S_N/N \mid \mathcal{F}_n]$ (geri-martingal argümanıyla) $\to E[X_1]$ n.k.
 Bu, GBSK'nın martingal teorisi aracılığıyla zarif alternatif ispatıdır.
@@ -221,7 +221,7 @@ $(M_n)$ martingal, $p>1$, $M^* = \max_{k\leq N}|M_k|$:
 $p=2$: $E[(M^*)^2] \leq 4E[M_N^2]$.
 \end{sonuc}
 
-\begin{ornek}[GBSK — maksimal eşitsizlikle]
+\begin{ornek}[GBSK --- maksimal eşitsizlikle]
 $S_n = \sum_{k=1}^n X_k$ ($X_k$ bağımsız, $E[X_k]=0$, $E[X_k^2]=\sigma^2$). Doob eşitsizliği:
 $\Prob(\max_{k\leq n}|S_k|\geq\lambda)\leq E[S_n^2]/\lambda^2 = n\sigma^2/\lambda^2$.
 Bu Kolmogorov maksimal eşitsizliğini verir ve GBSK ispatında temel araçtır.
@@ -260,7 +260,7 @@ $(M_n)$ martingal. Eşdeğerler:
 \end{enumerate}
 \end{teorem}
 
-\begin{ornek}[Koşullu beklenti martingali — kapanma]
+\begin{ornek}[Koşullu beklenti martingali --- kapanma]
 $Y\in L^1$; $M_n = E[Y\mid\mathcal{F}_n]$. Ailenin UI olduğunu göster:
 $E[|M_n|\mathbf{1}_{|M_n|>c}] \leq E[E[|Y|\mid\mathcal{F}_n]\mathbf{1}_{|M_n|>c}] = E[|Y|\mathbf{1}_{|M_n|>c}]$.
 Markov: $\Prob(|M_n|>c)\leq E[|Y|]/c\to0$. Mutlak süreklilik ile UI.
@@ -284,7 +284,7 @@ Azalan $\sigma$-cebirleri $\mathcal{F}_n\supseteq\mathcal{F}_{n+1}\supseteq\cdot
 $(M_n)$ geri martingal, $E[|M_1|]<\infty$. O zaman $M_\infty = \lim_{n\to\infty}M_n$ n.k.\ ve $L^1$'de var; $M_\infty = E[M_1\mid\mathcal{F}_\infty]$ ($\mathcal{F}_\infty = \bigcap_n\mathcal{F}_n$).
 \end{teorem}
 
-\begin{teorem}[GBSK — Geri Martingal İspatı]
+\begin{teorem}[GBSK --- Geri Martingal İspatı]
 \label{thm:gbsk_geri}
 $X_1,X_2,\ldots\iid$, $E[|X_1|]<\infty$. $\bar{X}_n = n^{-1}\sum_{k=1}^n X_k$.
 $\mathcal{G}_n = \sigma(\bar{X}_n, \bar{X}_{n+1}, \ldots)$ geri filtrasyon. $\bar{X}_n$ geri martingal:
@@ -311,7 +311,7 @@ $L^2$ yakınsama: Doob'un eşitsizliği $E[\sup_n M_n^2] \leq 4\sup E[M_n^2]$;
 DCT ile $L^2$ yakınsama.
 \end{proof}
 
-\begin{ornek}[Rassal Yürüyüş — $L^2$ Martingal]
+\begin{ornek}[Rassal Yürüyüş --- $L^2$ Martingal]
 $S_n = \sum_{i=1}^n \xi_i$ ($E[\xi_i]=0$, $E[\xi_i^2]=\sigma^2$).
 $M_n = S_n/\sqrt{n}$: $E[M_n^2] = \sigma^2$ sınırlı.
 Ama $M_n/\sqrt{\ln n} \to 0$ n.k.\ (YLK'nın sonucu),
@@ -350,7 +350,7 @@ $P_0$ altında: $E_0[\Lambda_n\mid\mathcal{F}_{n-1}] = \Lambda_{n-1}E_0[f_1(X_n)
 
 $(\Lambda_n,\mathcal{F}_n)$ $P_0$ altında \textbf{martingal}. Doob: $\Lambda_n\to\Lambda_\infty$ n.k.\ ($P_0$ altında).
 
-$P_0\neq P_1$ için $\Lambda_\infty=0$ n.k.\ ($P_0$) — Hellinger yakınsama ile. Bu Neyman-Pearson ispatının temeli.
+$P_0\neq P_1$ için $\Lambda_\infty=0$ n.k.\ ($P_0$) --- Hellinger yakınsama ile. Bu Neyman-Pearson ispatının temeli.
 \end{ornek}
 
 \begin{ornek}[Koşullu Olasılıklar Martingali]
@@ -358,7 +358,7 @@ $A\in\mathcal{F}$; $M_n = \Prob(A\mid\mathcal{F}_n)$. Kule özelliğinden martin
 \end{ornek}
 
 \begin{disiplinlerarasibaglan}
-\textbf{Finans:} Martingal fiyatlama — etkin piyasada hisse senedi fiyatı martingal. Opsiyon fiyatlaması: risksiz ölçü altında indirgenmiş fiyat martingal. \textbf{Sıralı istatistik:} İsteğe bağlı durma ile SPRT (Wald sıralı olabilirlik oranı testi). \textbf{Enformasyon teorisi:} Olabilirlik oranı martingali, iki model arasındaki ayrışmayı ölçer.
+\textbf{Finans:} Martingal fiyatlama --- etkin piyasada hisse senedi fiyatı martingal. Opsiyon fiyatlaması: risksiz ölçü altında indirgenmiş fiyat martingal. \textbf{Sıralı istatistik:} İsteğe bağlı durma ile SPRT (Wald sıralı olabilirlik oranı testi). \textbf{Enformasyon teorisi:} Olabilirlik oranı martingali, iki model arasındaki ayrışmayı ölçer.
 \end{disiplinlerarasibaglan}
 
 % =====================================================================
@@ -386,7 +386,7 @@ Dolayısıyla $M_n$ martingal. Teklik: her iki ayrışım $X = M'+A'$ verilse $M
 sol taraf martingal, sağ taraf öngörülebilir; bu yalnızca $M=M'$, $A=A'$ ile mümkün.
 \end{proof}
 
-\begin{ornek}[Doob Ayrışımı — Rassal Yürüyüş]
+\begin{ornek}[Doob Ayrışımı --- Rassal Yürüyüş]
 $S_n = \sum_{i=1}^n \xi_i$ ($E[\xi_i] = \mu > 0$, $\mathrm{Var}(\xi_i) = \sigma^2$).
 $S_n$ altmartingal (artan eğilim). Doob ayrışımı:
 $A_n = n\mu$ (öngörülebilir drift), $M_n = S_n - n\mu = \sum(\xi_i-\mu)$ martingal.
@@ -458,7 +458,7 @@ Bu, zaman serisi analizinde koşullu heteroskedastisite modellerinin temelidir.
 % ---- Köprü Notu ----
 \begin{kopru}
 \textbf{Önceki:} Bölüm~\ref{sec:kosullu_beklenti} koşullu beklenti; Böl.~\ref{chp:buyuk_sayilar} BSK.\\
-\textbf{Sonraki (opsiyonel):} Bölüm~\ref{chp:stokastik} — Stokastik Süreçler.\\
+\textbf{Sonraki (opsiyonel):} Bölüm~\ref{chp:stokastik} --- Stokastik Süreçler.\\
 \textbf{Uygulamalar:} Finansta martingal fiyatlama; sıralı analizde isteğe bağlı durma.
 \defterbaglantisi{bolum09\_martingaller.ipynb}{Martingal simülasyonu, gamblerın iflası}
 \end{kopru}
@@ -478,7 +478,7 @@ $E[M_{n+1}\mid\mathcal{F}_n] = E[M_n X_{n+1}\mid\mathcal{F}_n] = M_n E[X_{n+1}\m
 = M_n E[X_{n+1}] = M_n \cdot 1 = M_n$.
 (Bağımsızlık: $X_{n+1}$ $\mathcal{F}_n$'den bağımsız.)}
 
-\begin{alistirma}[Al.9.2]{B}{Gamblerın İflası — Varyans Martingali}
+\begin{alistirma}[Al.9.2]{B}{Gamblerın İflası --- Varyans Martingali}
 $S_n$ simetrik rassal yürüyüş ($\xi_i = \pm1$, $\sigma^2=1$). $M_n = S_n^2 - n$.
 (a) $M_n$'nin martingal olduğunu gösterin.
 (b) $\tau = \inf\{n: S_n = a\}$ ($a > 0$) için $E[\tau] = a^2$ olduğunu IBD ile bulun.
@@ -486,11 +486,11 @@ $S_n$ simetrik rassal yürüyüş ($\xi_i = \pm1$, $\sigma^2=1$). $M_n = S_n^2 -
 \alcozum{%
 (a) $E[M_{n+1}\mid\mathcal{F}_n] = E[(S_n+\xi_{n+1})^2 - (n+1)\mid\mathcal{F}_n]
 = S_n^2 + 2S_n E[\xi_{n+1}] + E[\xi_{n+1}^2] - n - 1 = S_n^2 - n = M_n$. $\checkmark$\\
-(b) IBD ($\tau$ sınırsız ama Koşul (iii) çalışır — artışlar $\leq 1+1+1$):
+(b) IBD ($\tau$ sınırsız ama Koşul (iii) çalışır --- artışlar $\leq 1+1+1$):
 $E[M_\tau] = E[S_\tau^2 - \tau] = E[M_0] = 0$.
 $S_\tau = a$ (emici bariyer): $a^2 - E[\tau] = 0$. $E[\tau] = a^2$.}
 
-\begin{alistirma}[Al.9.3cozum]{B}{Doob Yakınsama — $L^1$ Martingal}
+\begin{alistirma}[Al.9.3cozum]{B}{Doob Yakınsama --- $L^1$ Martingal}
 $(M_n)_{n\geq0}$ bir martingal ve $\sup_n E[|M_n|]<\infty$. Doob $L^1$ yakınsama teoremine göre $M_n\to M_\infty$ n.k. belirterek, aşağıdaki sonuçları türetin:
 (a) $M_n = E[Z\mid\mathcal{F}_n]$ ise $M_n\to E[Z\mid\mathcal{F}_\infty]$ n.k.\ ve $L^1$'de.
 (b) $M_n = S_n/n$ ($S_n$ bağımsız toplamı, $E[|X_1|]<\infty$) için ZBSK ile ilişkilendirin.
@@ -498,7 +498,7 @@ $(M_n)_{n\geq0}$ bir martingal ve $\sup_n E[|M_n|]<\infty$. Doob $L^1$ yakınsam
 \alcozum{%
 (a) $E[|M_n|] = E[|E[Z\mid\mathcal{F}_n]|] \leq E[|Z|] < \infty$ (Jensen + koşullu beklenti), dolayısıyla sınır koşulu sağlanır. Doob yakınsama teoremi: $M_n\to M_\infty$ n.k.\ ile $L^1$'de. Levy örtme teoremi (Levy's upward theorem): $E[Z\mid\mathcal{F}_n]\to E[Z\mid\mathcal{F}_\infty]$ n.k., çünkü $\mathcal{F}_\infty = \sigma(\bigcup_n\mathcal{F}_n)$.
 
-(b) $M_n = E[\bar{X}\mid\mathcal{F}_n] = S_n/n$ martingal değildir; ZBSK ise $S_n/n\to\mu$ n.k.\ (Birkhoff–Khintchine). Martingal çerçevesinde GBSK, bağımsız ilerleyen martingale (optional stopping + uniform integrability) indirgenerek ispatlanır.}
+(b) $M_n = E[\bar{X}\mid\mathcal{F}_n] = S_n/n$ martingal değildir; ZBSK ise $S_n/n\to\mu$ n.k.\ (Birkhoff--Khintchine). Martingal çerçevesinde GBSK, bağımsız ilerleyen martingale (optional stopping + uniform integrability) indirgenerek ispatlanır.}
 
 \begin{alistirma}[Al.9.4cozum]{B}{Üstel Martingal ve Büyük Sapmalar}
 $X_1,X_2,\ldots\iid$ ile $E[e^{tX_1}] = M(t) < \infty$ ($t>0$). $M_n = e^{tS_n}/M(t)^n$ tanımlayın.
@@ -545,7 +545,7 @@ olduğunu Jensen'i kullanarak gösterin.
 \alcozum{%
 $E[X_{n+1}^2\mid\mathcal{F}_n] \geq (E[X_{n+1}\mid\mathcal{F}_n])^2 = X_n^2$. (Jensen, $\varphi$ konveks.)}
 
-\begin{alistirma}[Al.9.6]{C}{Olabilirlik Oranı — $P_0$ altında}
+\begin{alistirma}[Al.9.6]{C}{Olabilirlik Oranı --- $P_0$ altında}
 $X_i\iid\Normal(0,1)$ ($P_0$) veya $\Normal(\mu,1)$ ($P_1$, $\mu\neq0$). $\Lambda_n = \exp(n\mu\bar{X}_n - n\mu^2/2)$. $\Lambda_n\to0$ n.k.\ ($P_0$ altında) olduğunu gösterin.
 \end{alistirma}
 \alcozum{%

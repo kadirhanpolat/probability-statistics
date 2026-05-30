@@ -1,5 +1,5 @@
 %% ============================================================
-%% BÖLÜM 10 — Stokastik Süreçlere Giriş  [OPSİYONEL]
+%% BÖLÜM 10 --- Stokastik Süreçlere Giriş  [OPSİYONEL]
 %% Olasılık Teorisi ve Matematiksel İstatistik
 %% ============================================================
 \chapter{Stokastik Süreçlere Giriş}
@@ -22,7 +22,7 @@ Bu bölümün sonunda okuyucu:
 \end{kazanimlar}
 
 \begin{motivasyon}
-Tek bir rasgele değişken statik bir belirsizliği modellerken, \emph{stokastik süreç} zamanla evrilen belirsizliği modelleyen rasgele değişken ailesidir. Hisse senedi fiyatları, kuyruklar, epidemi yayılımı, iklim değişkenliği — bunların tümü stokastik süreçtir.
+Tek bir rasgele değişken statik bir belirsizliği modellerken, \emph{stokastik süreç} zamanla evrilen belirsizliği modelleyen rasgele değişken ailesidir. Hisse senedi fiyatları, kuyruklar, epidemi yayılımı, iklim değişkenliği --- bunların tümü stokastik süreçtir.
 
 \medskip
 \noindent\textbf{Köprü:} Bölüm~\ref{chp:martingaller}'daki filtrasyon ve uyum kavramları doğrudan burada kullanılacak. Markov zincirlerindeki geçişler aslında $\sigma$-cebirlerinin monoton dizisi anlamında "bilgi artışı" kavramıdır.
@@ -135,7 +135,7 @@ Geri dönüş teoremi, yenileme teorisine dayanır. $m_j=\Beklenti_j[T_j]$ (ilk 
 $S=\{0,1\}$, $P=\begin{pmatrix}1-\alpha&\alpha\\\beta&1-\beta\end{pmatrix}$. Durağan dağılım: $\pi_0=\beta/(\alpha+\beta)$, $\pi_1=\alpha/(\alpha+\beta)$. $\alpha,\beta>0$ ise ergodik.
 \end{ornek}
 
-\begin{ornek}[Gambler's ruin — Markov zinciri]\label{ex:gambler_markov}
+\begin{ornek}[Gambler's ruin --- Markov zinciri]\label{ex:gambler_markov}
 $S=\{0,1,\ldots,N\}$; $p_{i,i+1}=p$, $p_{i,i-1}=q=1-p$, sınır durumları absorbe edici. Bu Markov zincirinde $0$ ve $N$ geri dönüşlü, diğerleri geçici. $i$'den başlayıp $N$'ye ulaşma olasılığı $\rho_i$:
 \[
   \rho_i = \frac{1-(q/p)^i}{1-(q/p)^N} \quad (p\neq q), \qquad \rho_i = i/N \quad (p=q).
@@ -181,7 +181,7 @@ $T_k$ ($k$-inci varış arası) i.i.d.\ $\Exp(\lambda)$.
 $\Prob(T_1>t) = \Prob(N(t)=0)=e^{-\lambda t}$; dolayısıyla $T_1\sim\Exp(\lambda)$. Markov özelliği (bağımsız artışlar) $T_2,T_3,\ldots$'yı da bağımsız $\Exp(\lambda)$ yapar.
 \end{proof}
 
-\begin{teorem}[İnceleme — süperpozisyon]\label{thm:poisson_ozellikler}
+\begin{teorem}[İnceleme --- süperpozisyon]\label{thm:poisson_ozellikler}
 $\{N_1(t)\}$ ve $\{N_2(t)\}$ bağımsız, sırasıyla $\lambda_1$ ve $\lambda_2$ hızlı Poisson süreçleri.
 \begin{enumerate}[(a)]
   \item \textbf{Süperpozisyon:} $N(t)=N_1(t)+N_2(t)$ ise $(\lambda_1+\lambda_2)$ hızlı Poisson.
@@ -200,7 +200,7 @@ Karakteristik fonksiyonla: $N_1(t)+N_2(t)$ bağımsız Poisson toplamı $\Pois((
 %% ============================================================
 
 \begin{tarihselnot}
-Robert Brown (1827) su altındaki polenlerin rastgele hareketini gözlemledi. Einstein (1905) diffüzyon denklemini türetti. Wiener (1923) matematiksel temeli kurdu — bu nedenle \emph{Wiener süreci} de denir.
+Robert Brown (1827) su altındaki polenlerin rastgele hareketini gözlemledi. Einstein (1905) diffüzyon denklemini türetti. Wiener (1923) matematiksel temeli kurdu --- bu nedenle \emph{Wiener süreci} de denir.
 \end{tarihselnot}
 
 \begin{tanim}[Standart Brownian hareket]\label{def:brownian}
@@ -286,7 +286,7 @@ $\lambda_i=\lambda$ (sabit varış), $\mu_i=\mu$ ($i\geq1$). $\rho=\lambda/\mu<1
 (geometrik dağılım). Ortalama kuyruk uzunluğu: $L=\rho/(1-\rho)$. Little yasası: $L=\lambda W$ ($W$ ortalama bekleme süresi).
 \end{ornek}
 
-\begin{proof}[Proof — M/M/1 durağan dağılım]
+\begin{proof}[Proof --- M/M/1 durağan dağılım]
 Denge denklemi $\lambda\pi_{i-1}=\mu\pi_i$ (akış denge koşulu). Yinelemeli çözüm: $\pi_i=(\lambda/\mu)^i\pi_0$. Normalleştirme: $\sum\pi_i=\pi_0/(1-\rho)=1$ ise $\pi_0=1-\rho$.
 \end{proof}
 
@@ -324,7 +324,7 @@ $dS=\mu S\,dt+\sigma S\,dW$; $f(S)=\log S$. Itô:
 \[
   d\log S = \frac{1}{S}dS - \frac{1}{2S^2}\sigma^2 S^2\,dt = (\mu-\tfrac{\sigma^2}{2})dt+\sigma\,dW.
 \]
-Entegre: $S(t)=S(0)\exp[(\mu-\sigma^2/2)t+\sigma W(t)]$ — Bölüm~\ref{ex:geometrik_brownian}'deki sonuç türetildi.
+Entegre: $S(t)=S(0)\exp[(\mu-\sigma^2/2)t+\sigma W(t)]$ --- Bölüm~\ref{ex:geometrik_brownian}'deki sonuç türetildi.
 \end{ornek}
 
 \begin{ornek}[$W^2(t)$ hesabı]\label{ex:w2_ito}
@@ -332,7 +332,7 @@ $f(W)=W^2$, $f''=2$. Itô: $d(W^2)=2W\,dW+dt$. Entegre:
 \[
   W^2(t)-W^2(0)=2\int_0^t W(s)\,dW(s)+t \implies \int_0^t W(s)\,dW(s)=\frac{W^2(t)-t}{2}.
 \]
-Klasik hesap $\int_0^t W\,dW = W^2(t)/2$ verir — Itô fazladan $-t/2$ terimi ekler.
+Klasik hesap $\int_0^t W\,dW = W^2(t)/2$ verir --- Itô fazladan $-t/2$ terimi ekler.
 \end{ornek}
 
 %% ============================================================
@@ -364,16 +364,16 @@ $f(t,x)=e^{\theta t}x$ formunu dene; Itô:
 Entegre: $e^{\theta t}X(t) - x_0 = \sigma\int_0^t e^{\theta s}\,dW(s)$; $e^{-\theta t}$ ile böl. Dağılım: Itô izometrisi ile varyans hesaplanır.
 \end{proof}
 
-\begin{teorem}[OU — durağan dağılım]\label{thm:ou_duraganlik}
+\begin{teorem}[OU --- durağan dağılım]\label{thm:ou_duraganlik}
 $t\to\infty$: $X(t)\dto X_\infty\sim\Normal(0,\sigma^2/(2\theta))$. Bu durağan dağılım: $\Beklenti[X_\infty]=0$, $\Var(X_\infty)=\sigma^2/(2\theta)$.
 \end{teorem}
 
-\begin{ornek}[Faiz oranı modeli — Vasicek]
-Kısa faiz $r(t)$: $dr = a(b-r)dt + \sigma\,dW$. Bu OU sürecidir; $\theta=a$, denge $b$. $t\to\infty$: $r\to\Normal(b, \sigma^2/(2a))$. Negatif faiz olasılığı var — gerçekçi sınırlama için CIR modeli kullanılır.
+\begin{ornek}[Faiz oranı modeli --- Vasicek]
+Kısa faiz $r(t)$: $dr = a(b-r)dt + \sigma\,dW$. Bu OU sürecidir; $\theta=a$, denge $b$. $t\to\infty$: $r\to\Normal(b, \sigma^2/(2a))$. Negatif faiz olasılığı var --- gerçekçi sınırlama için CIR modeli kullanılır.
 \end{ornek}
 
 \begin{hataanalizi}
-OU süreci "ortalamaya dönüş" gösterir — başlangıçtan uzaklaştığında bir çekme kuvveti etkiler. Brownian hareket ile karıştırmayın: $W(t)$ sınırsız büyür ($\Var(W(t))=t\to\infty$), OU ise durağan dağılıma yakınsar.
+OU süreci "ortalamaya dönüş" gösterir --- başlangıçtan uzaklaştığında bir çekme kuvveti etkiler. Brownian hareket ile karıştırmayın: $W(t)$ sınırsız büyür ($\Var(W(t))=t\to\infty$), OU ise durağan dağılıma yakınsar.
 \end{hataanalizi}
 
 %% ============================================================
@@ -414,12 +414,12 @@ Hedef $\pi(x)$; öneri dağılımı $q(x\to y)$. Her adımda:
 MH algoritmasıyla oluşturulan zincir ayrıntılı dengeyi sağlar; $\pi$ durağan dağılımdır. Zincir geri dönülemez ve aperiyodik ise $\pi$'ye yakınsar.
 \end{teorem}
 
-\begin{proof}[Proof — ayrıntılı denge]
+\begin{proof}[Proof --- ayrıntılı denge]
 $\pi(x)K_{\mathrm{MH}}(x,y) = \pi(x)q(x,y)\alpha(x,y)$. $\alpha(x,y)=\min(1,r)$ ($r=\pi(y)q(y,x)/[\pi(x)q(x,y)]$): $r\leq1$ ise $\alpha(x,y)=r=\pi(y)q(y,x)/[\pi(x)q(x,y)]$, yani $\pi(x)K=\pi(y)q(y,x)=\pi(y)K_{\mathrm{MH}}(y,x)$. Simetri; $r\geq1$ durumu benzer.
 \end{proof}
 
 \begin{ornek}[Random-walk Metropolis]
-Öneri: $q(x\to y)=\phi(y-x;0,\tau^2)$ (Gaussian yürüyüş). $q$ simetrik olduğundan $q(x,y)=q(y,x)$; $\alpha(x,y)=\min(1,\pi(y)/\pi(x))$. Hedef $\pi\propto e^{-x^2/2}$ için her adımda yalnızca $\pi(y)/\pi(x)$ oranı hesaplanır — normalleştirme gerekmez.
+Öneri: $q(x\to y)=\phi(y-x;0,\tau^2)$ (Gaussian yürüyüş). $q$ simetrik olduğundan $q(x,y)=q(y,x)$; $\alpha(x,y)=\min(1,\pi(y)/\pi(x))$. Hedef $\pi\propto e^{-x^2/2}$ için her adımda yalnızca $\pi(y)/\pi(x)$ oranı hesaplanır --- normalleştirme gerekmez.
 \end{ornek}
 
 \begin{teorem}[Gibbs örneklemesi]\label{thm:gibbs}
@@ -443,7 +443,7 @@ Her Gibbs adımının hedef dağılımın marjinalini koruduğunu göster: tek b
   \item Poisson süreci: bağımsız+durağan artışlar; $N(t)\sim\Pois(\lambda t)$; varış araları $\Exp(\lambda)$.
   \item Brownian hareket: Gaussian bağımsız artışlar, sürekli türevsiz yollar, martingal.
   \item CTMC: Q-matrisi; Kolmogorov denklemleri; M/M/1 geometrik durağan dağılım.
-  \item Itô: $df = f'\,dX + \frac12 f''\sigma^2\,dt$ — ikinci türev terimi ekstra.
+  \item Itô: $df = f'\,dX + \frac12 f''\sigma^2\,dt$ --- ikinci türev terimi ekstra.
 \end{itemize}
 \end{mikroozet}
 
@@ -493,7 +493,7 @@ $\Beklenti[W(3)^2]=\Var(W(3))=3$. $\Cov(W(2),W(5))=\min(2,5)=2$. $\Cor=2/\sqrt{2
 (a) $\pi_0=\beta/(\alpha+\beta)$, $\pi_1=\alpha/(\alpha+\beta)$. (b) Özdeğerler $1$ ve $1-\alpha-\beta$: $p_{00}^{(n)}=\pi_0+\pi_1(1-\alpha-\beta)^n$. (c) $|1-\alpha-\beta|<1$ olduğundan ikinci terim $\to0$; $p_{00}^{(n)}\to\pi_0$.%
 }
 
-\begin{alistirma}[Al.10.5]{C}{Gambler's ruin — genel}
+\begin{alistirma}[Al.10.5]{C}{Gambler's ruin --- genel}
 $p\neq q$ için Gambler's Ruin'de $i$'den başlayıp $N$'ye ulaşma olasılığı $\rho_i=\frac{1-(q/p)^i}{1-(q/p)^N}$ olduğunu fark denklemiyle ispat et. Ortalama oyun uzunluğunu $i=N/2$, $p=q=1/2$ özel durumunda hesapla.
 \end{alistirma}
 \alcozum{%
@@ -521,21 +521,21 @@ $X(0)=0$, $\theta=1$, $\sigma=2$. (a) $\Var(X(t))$'yi bul. (b) $t\to\infty$'da d
 (a) $\Var(X(t))=\frac{\sigma^2}{2\theta}(1-e^{-2\theta t})=2(1-e^{-2t})$. (b) $t\to\infty$: $\Var=2$. (c) $\Var(X(1))=2(1-e^{-2})\approx2(1-0.135)=1.73$.%
 }
 
-\begin{alistirma}[Al.10.10]{B}{Metropolis-Hastings — kabul oranı}
+\begin{alistirma}[Al.10.10]{B}{Metropolis-Hastings --- kabul oranı}
 Hedef $\pi(x)\propto e^{-x^2/2}$ (standart Normal). $x=-1$'deyken $y=0.5$ önerildi. Kabul oranı $\alpha(-1,0.5)$'i simetrik öneri dağılımında hesapla ve yorumla.
 \end{alistirma}
 \alcozum{%
-$\alpha=\min(1,\pi(0.5)/\pi(-1))=\min(1,e^{-0.125}/e^{-0.5})=\min(1,e^{0.375})=\min(1,1.455)=1$. Kabul oranı $1$ — önerilen nokta daha yüksek yoğunlukta, her zaman kabul edilir.%
+$\alpha=\min(1,\pi(0.5)/\pi(-1))=\min(1,e^{-0.125}/e^{-0.5})=\min(1,e^{0.375})=\min(1,1.455)=1$. Kabul oranı $1$ --- önerilen nokta daha yüksek yoğunlukta, her zaman kabul edilir.%
 }
 
 \begin{alistirma}[Al.10.8]{C}{Doğum-ölüm durağan dağılım}
 Doğum-ölüm süreci: $\lambda_i=\lambda/(i+1)$ (artan yükle azalan varış), $\mu_i=\mu$ ($i\geq1$). (a) Durağan dağılım formülünü yaz. (b) $\lambda=\mu$ iken $\pi_i$'yi hesapla; hangi bilinen dağılım çıkar?
 \end{alistirma}
 \alcozum{%
-(a) $\pi_i=\pi_0\prod_{k=0}^{i-1}\frac{\lambda_k}{\mu_{k+1}}=\pi_0\prod_{k=0}^{i-1}\frac{\lambda/(k+1)}{\mu}=\pi_0\frac{\lambda^i}{\mu^i\cdot i!}$. (b) $\lambda=\mu$: $\pi_i=\pi_0/i!$. Normalleştirme: $\pi_0\sum_{i=0}^\infty 1/i!=\pi_0 e^1=1$; $\pi_0=e^{-1}$; $\pi_i=e^{-1}/i!$ — Poisson$(1)$ dağılımı!%
+(a) $\pi_i=\pi_0\prod_{k=0}^{i-1}\frac{\lambda_k}{\mu_{k+1}}=\pi_0\prod_{k=0}^{i-1}\frac{\lambda/(k+1)}{\mu}=\pi_0\frac{\lambda^i}{\mu^i\cdot i!}$. (b) $\lambda=\mu$: $\pi_i=\pi_0/i!$. Normalleştirme: $\pi_0\sum_{i=0}^\infty 1/i!=\pi_0 e^1=1$; $\pi_0=e^{-1}$; $\pi_i=e^{-1}/i!$ --- Poisson$(1)$ dağılımı!%
 }
 
-\begin{alistirma}[Al.10.11]{B}{Wiener Süreci — Kovaryans}
+\begin{alistirma}[Al.10.11]{B}{Wiener Süreci --- Kovaryans}
 $W(t)$ standart Brownian hareket. (a) $(W(s),W(t))$ ($s<t$) birleşik dağılımını bul. (b) $\Cov(W(s),W(t))=\min(s,t)$ olduğunu ispat et.
 \end{alistirma}
 \alcozum{%
@@ -549,7 +549,7 @@ $f(x)=\sqrt{x}$, $X(t)=|W(t)|$ (yansıyan Brownian). Resmi Itô formülü $d(\sq
 Itô: $f(x)=\sqrt{x}$, $X(t)=W(t)^2$: $d\sqrt{X}=\frac{1}{2\sqrt{X}}dX-\frac{1}{8X^{3/2}}(dX)^2$. $dX=2W\,dW+dt$: $(dX)^2=4W^2\,dt$. $d|W|=\frac{W}{|W|}dW+\frac{1}{2|W|}dt$ (Tanaka formülü).
 $E[|W(t)|]=E[\sqrt{W(t)^2}]$; $W(t)\sim\Normal(0,t)$: $E[|W(t)|]=\sqrt{t}\cdot E[|Z|]=\sqrt{t}\cdot\sqrt{2/\pi}=\sqrt{2t/\pi}$.}
 
-\begin{alistirma}[Al.10.13]{C}{Gibbs Örnekleyicisi — Çift Normal}
+\begin{alistirma}[Al.10.13]{C}{Gibbs Örnekleyicisi --- Çift Normal}
 $(X,Y)\sim\Normal_2(\mathbf{0},\boldsymbol\Sigma)$, $\boldsymbol\Sigma=\begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$. Gibbs adımlarının geçiş dağılımlarını yazın. Neden durağan dağılım $\Normal_2(\mathbf{0},\boldsymbol\Sigma)$'dır?
 \end{alistirma}
 \alcozum{%
