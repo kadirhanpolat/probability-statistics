@@ -472,6 +472,185 @@ tutarlılığı BSK çerçevesinde yeniden ele alınacak.
 \end{kopru}
 
 % =====================================================================
+\section{Yinelenmiş Logaritma Kanunu}
+\label{sec:yil_kanunu}
+% =====================================================================
+
+\begin{motivasyon}[Büyük Sayılar Ötesinde]
+GBSK: $\bar{X}_n \to \mu$ n.k. Ama ne \emph{kadar} hızlı yaklaşıyor?
+$\sqrt{n}$ ölçeğinde Merkezi Limit Teoremi normal dağılım verir.
+Daha ince soru: n.k.\ her örnek yolunun salınım büyüklüğü nedir?
+Yinelenmiş Logaritma Kanunu (YLK) bu soruyu tam olarak yanıtlar.
+\end{motivasyon}
+
+\begin{teorem}[Kolmogorov'un Yinelenmiş Logaritma Kanunu]
+\label{thm:ylk}
+$X_1, X_2, \ldots$ i.i.d., $E[X_1] = 0$, $E[X_1^2] = \sigma^2 \in (0,\infty)$.
+$S_n = X_1 + \cdots + X_n$ ise
+\[
+  P\!\left(\limsup_{n\to\infty} \frac{S_n}{\sqrt{2\sigma^2 n \ln\ln n}} = 1\right) = 1.
+\]
+Eşdeğer olarak: n.k.\ her örnek yolunda
+$\limsup_{n\to\infty} S_n/\sqrt{2\sigma^2 n\ln\ln n} = 1$
+ve $\liminf_{n\to\infty} S_n/\sqrt{2\sigma^2 n\ln\ln n} = -1$.
+\end{teorem}
+
+\begin{proof}[İspat Taslağı]
+İki yönlü ispat gerekir.
+
+\textbf{Üst sınır ($\limsup \leq 1$ n.k.):}
+Sabit $b > 1$. Geometrik alt dizi $n_k = \lfloor b^k \rfloor$ seçin.
+$A_k = \{S_{n_k} > (1+\varepsilon)\sqrt{2\sigma^2 n_k \ln\ln n_k}\}$.
+Olağan sapma tahmini ile $P(A_k) \leq C/k^{1+\varepsilon}$.
+$\sum P(A_k) < \infty$: Borel-Cantelli 1 ile $P(A_k \text{ i.o.}) = 0$.
+Alt diziler arası maksimum kontrolü tüm $n$'ye genişler.
+
+\textbf{Alt sınır ($\limsup \geq 1$ n.k.):}
+Uygun $\varepsilon_k \to 0$ ile olaylar
+$B_k = \{S_{n_{k+1}} - S_{n_k} > (1-\varepsilon)\sqrt{2\sigma^2(n_{k+1}-n_k)\ln\ln n_{k+1}}\}$
+tanımlanır. $\{B_k\}$ asimptotik bağımsız; $\sum P(B_k) = \infty$.
+Bağımsız Borel-Cantelli: $P(B_k \text{ i.o.}) = 1$.
+Tam ispat: Hartman-Wintner (1941), bkz. Billingsley~\cite{Billingsley1995}, §12.
+\end{proof}
+
+\begin{ornek}[YLK'nın Yorumu]
+$X_i \sim \Normal(0,1)$, $\sigma^2 = 1$. YLK:
+\[
+  \limsup_{n\to\infty} \frac{S_n}{\sqrt{2n\ln\ln n}} = 1 \quad \text{n.k.}
+\]
+$n = 10^6$: $\sqrt{2 \cdot 10^6 \cdot \ln\ln 10^6} = \sqrt{2\times10^6 \times 2.97} \approx 2439$.
+$S_n$ sonsuz çok kez $\approx 2439$'a ulaşır, ama asla $2439 \cdot (1+\varepsilon)$'ı
+sonsuz kez geçmez.
+\end{ornek}
+
+\begin{hataanalizi}
+YLK ve MLT'yi karıştırmak yaygın hatadır.
+MLT: $S_n/\sqrt{n\sigma^2} \xrightarrow{d} \Normal(0,1)$ — dağılımsal limit.
+YLK: $\limsup S_n/\sqrt{2n\sigma^2\ln\ln n} = 1$ n.k. — yol bazında keskin sınır.
+YLK, MLT'den \emph{daha güçlü} bir sonuçtur; her bir örnek yolu hakkında bilgi verir.
+\end{hataanalizi}
+
+\begin{mikroozet}
+YLK: $S_n$'nin n.k.\ salınım büyüklüğü tam olarak $\sqrt{2\sigma^2 n \ln\ln n}$ ölçeğindedir.
+GBSK ($S_n = o(n)$) ve MLT ($S_n = O(\sqrt{n})$) arasına düşer: $S_n = O(\sqrt{n\ln\ln n})$ n.k.
+\end{mikroozet}
+
+% =====================================================================
+\section{Yenileme Teorisi Girişi}
+\label{sec:yenileme_teorisi}
+% =====================================================================
+
+\begin{tanim}[Yenileme Süreci]
+\label{def:yenileme_sureci}
+$X_1, X_2, \ldots$ i.i.d., $X_i > 0$ n.k., $E[X_1] = \mu < \infty$.
+$X_i$: arası zamanlar. $S_0 = 0$, $S_n = X_1 + \cdots + X_n$.
+\textbf{Yenileme sayacı}: $N(t) = \max\{n \geq 0 : S_n \leq t\}$.
+$\{N(t), t \geq 0\}$: \textbf{yenileme süreci} (renewal process).
+\end{tanim}
+
+\begin{teorem}[Temel Yenileme Teoremi]
+\label{thm:temel_yenileme}
+$E[X_1] = \mu \in (0,\infty)$ ise
+\[
+  \frac{N(t)}{t} \xrightarrow{\text{n.k.}} \frac{1}{\mu} \quad (t \to \infty).
+\]
+Daha kesin: $E[N(t)]/t \to 1/\mu$ ve $\mathrm{Var}(N(t))/t \to \sigma^2/\mu^3$
+($\sigma^2 = \mathrm{Var}(X_1)$).
+\end{teorem}
+
+\begin{proof}
+$N(t) \geq n \Leftrightarrow S_n \leq t$. Dolayısıyla $S_{N(t)} \leq t < S_{N(t)+1}$.
+Her iki tarafı $N(t)$'ye böl:
+\[
+  \frac{S_{N(t)}}{N(t)} \leq \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)}.
+\]
+GBSK: $S_{N(t)}/N(t) \xrightarrow{\text{n.k.}} \mu$ ($N(t) \to \infty$ çünkü $\mu < \infty$).
+Sıkıştırma: $t/N(t) \xrightarrow{\text{n.k.}} \mu$, yani $N(t)/t \xrightarrow{\text{n.k.}} 1/\mu$.
+\end{proof}
+
+\begin{ornek}[Makine Bakım Modeli]
+Bir makine $X_i \sim \Exp(\lambda)$ ömrü sonunda yenileniyor.
+$E[X_i] = 1/\lambda$. Temel Yenileme: $N(t)/t \to \lambda$ n.k.
+$t$ birim zamanda ortalama $\lambda t$ yenileme yapılır.
+\end{ornek}
+
+\begin{teorem}[Blackwell'in Yenileme Teoremi]
+\label{thm:blackwell}
+$X_i$ aritmetik-olmayan (non-arithmetic) dağılımlı ise: her $h > 0$ için
+\[
+  E[N(t+h) - N(t)] \to \frac{h}{\mu} \quad (t \to \infty).
+\]
+Yani uzun vadede $[t, t+h]$ aralığındaki beklenen yenileme sayısı $h/\mu$'ya yaklaşır:
+sistem "kararlı duruma" (steady state) girer.
+\end{teorem}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Güvenilirlik Mühendisliği:} Yenileme süreci, ekipman ömürleri ve
+bakım planlamasının temel modelidir: $N(t)$ arızaların kümülatif sayısıdır.\\
+\textbf{Kuyruk Teorisi:} M/G/1 kuyruğunda servis süreleri yenileme sürecini oluşturur;
+Temel Yenileme Teoremi ortalama bekleme süresi hesaplamasında kullanılır.\\
+\textbf{Ekonomi:} Stok yönetiminde sipariş dönemleri yenileme yapısı taşır.
+\end{disiplinlerarasibaglan}
+
+% =====================================================================
+\section{Durağan Diziler için Ergodik Teorem}
+\label{sec:ergodik_teorem}
+% =====================================================================
+
+\begin{tanim}[Durağan Dizi]
+\label{def:duragan_dizi}
+$\{X_n\}$ rasgele değişkenler dizisi \textbf{(geniş anlamda) durağan}
+(stationary) denir, eğer her $k, n$ ve $h$ için
+$(X_k, X_{k+1}, \ldots, X_{k+n})$ ile $(X_{k+h}, X_{k+h+1}, \ldots, X_{k+h+n})$
+aynı dağılıma sahipse.
+
+Özel durumlar: i.i.d.\ diziler, durağan Markov zincirleri.
+\end{tanim}
+
+\begin{tanim}[Kaydırma Dönüşümü ve Ergodiklik]
+\label{def:ergodiklik}
+$\Omega$'da \textbf{kaydırma dönüşümü} $\theta: \theta(\omega)_n = \omega_{n+1}$.
+Dizi $\theta$-uyumlu: $X_n(\omega) = X_0(\theta^n \omega)$.
+$A \in \mathcal{F}$ \textbf{değişmez} (invariant) olay: $\theta^{-1}A = A$.
+$P$ ölçümü \textbf{ergodik}: her değişmez olay $A$ için $P(A) \in \{0,1\}$.
+\end{tanim}
+
+\begin{teorem}[Birkhoff'un Ergodik Teoremi]
+\label{thm:birkhoff}
+$\{X_n\}$ durağan ve ergodik (ölçüm $P$ ergodik), $E[|X_0|] < \infty$. O zaman
+\[
+  \frac{1}{n}\sum_{k=0}^{n-1} X_k \xrightarrow{\text{n.k.}} E[X_0].
+\]
+\end{teorem}
+
+\begin{proof}[İspat Notu]
+Bağımsız diziler için (i.i.d.) bu Kolmogorov GBSK'dır.
+Genel ergodik durum için ispat daha derindir: Maximal Ergodik Lemma (Maximal Lemma)
+ve Garsia'nın kombinatoryal argümanı kullanılır.
+Referans: Durrett~\cite{Durrett2019}, §7.2; Billingsley~\cite{Billingsley1995}, §24.
+\end{proof}
+
+\begin{ornek}[Ergodik Markov Zinciri]
+$\{Z_n\}$ sonlu durum uzaylı, geri dönüşümlü ve pozitif tekrarlı Markov zinciri;
+$\pi$ durağan dağılımı. $f: S \to \mathbb{R}$ her duruma bir değer atar.
+Birkhoff: $\frac{1}{n}\sum_{k=0}^{n-1} f(Z_k) \xrightarrow{\text{n.k.}} \sum_{s\in S} f(s)\pi(s) = E_\pi[f]$.
+
+Yani "zamansal ortalama = uzamsal ortalama" — klasik ergodiklik eşitliği.
+\end{ornek}
+
+\begin{kritiksorgu}
+Ergodik teorem i.i.d.\ koşulunu gevşetiyor. Hangi koşulun gerektiğini tartışın:
+bağımsızlık mı, durağanlık mı, yoksa ergodiklik mi? Ergodikliğin 0-1 Kanunu
+ile ilişkisini açıklayın.
+\end{kritiksorgu}
+
+\begin{mikroozet}
+Durağan + ergodik dizilerde $\frac{1}{n}\sum_{k=0}^{n-1}X_k \to E[X_0]$ n.k.
+Bu, GBSK'nın i.i.d.\ ötesine genellemesidir; Markov zincirleri ve zaman serisi
+analizinin matematiksel temelidir.
+\end{mikroozet}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
@@ -580,6 +759,57 @@ $L^2$ yakınsaması + martingal argümanı veya Borel-Cantelli ile $\sum Y_k$ n.
 \end{ipucu}
 \textbf{Kronecker Lemması:} $\sum_{k=1}^\infty a_k/k$ yakınsarsa $\frac{1}{n}\sum_{k=1}^n a_k \to 0$.
 $a_k = X_k$ uygulandığında: $\sum X_k/k$ yakınsıyor (yukarıdaki ipucu) $\Rightarrow$ $\bar{X}_n \to 0$ n.k.}
+
+\begin{alistirma}[Al.7.10]{B}{Yinelenmiş Logaritma Kanunu — Uygulama}
+$X_i \sim \Normal(0,1)$ i.i.d., $S_n = \sum_{i=1}^n X_i$.
+(a) YLK'ya göre $\limsup_{n\to\infty} S_n/\sqrt{2n\ln\ln n}$'nin değerini verin.
+(b) $n = 10^4$ için $\sqrt{2n\ln\ln n}$'yi sayısal olarak hesaplayın.
+(c) "GBSK $\bar{X}_n \to 0$" ile "YLK $S_n/\sqrt{2n\ln\ln n} \to 1$" ifadelerinin
+    çelişmediğini açıklayın.
+\end{alistirma}
+\alcozum{%
+(a) YLK (Teorem~\ref{thm:ylk}): $\sigma^2 = 1$ olduğundan $\limsup = 1$ n.k.\\
+(b) $n = 10^4$: $\ln n = \ln 10^4 = 4\ln 10 \approx 9.21$; $\ln\ln n = \ln 9.21 \approx 2.22$.
+$\sqrt{2 \times 10^4 \times 2.22} \approx \sqrt{44400} \approx 210.7$.
+Yani $S_{10^4}$ sonsuz kez $\approx 210.7$'ye ulaşır.\\
+(c) $\bar{X}_n = S_n/n \to 0$ (GBSK); $S_n/\sqrt{2n\ln\ln n} \to 1$ (YLK).
+$n^{-1} = o(n^{-1/2}(\ln\ln n)^{-1/2})$ olduğundan iki ifade farklı ölçek dilleridir.
+$\bar{X}_n \to 0$ yavaş yavaş gerçekleşir; YLK tam ne kadar yavaş olduğunu söyler.}
+
+\begin{alistirma}[Al.7.11]{B}{Yenileme Teorisi}
+Bir makine parçası $X_i \sim \Exp(2)$ dağılımına sahip ömürler geçiriyor ($i = 1, 2, \ldots$).
+Parça bozulduğunda hemen yenisiyle değiştiriliyor. $N(t)$ yenileme sayısı.
+(a) Temel Yenileme Teoremi ile $\lim_{t\to\infty} N(t)/t$'yi bulun.
+(b) Blackwell teoremini kullanarak $[100, 101]$ aralığındaki beklenen yenileme sayısını yaklaşık hesaplayın.
+(c) $N(t)$'nin standart sapmasının $\sim \sqrt{\sigma^2 t/\mu^3}$ ölçeğinde olduğunu yorumlayın
+    ($\sigma^2 = \mathrm{Var}(X_1) = 1/4$, $\mu = 1/2$).
+\end{alistirma}
+\alcozum{%
+$\mu = E[X_1] = 1/2$, $\sigma^2 = \mathrm{Var}(X_1) = 1/4$ ($\Exp(2)$ için).\\
+(a) $N(t)/t \xrightarrow{\text{n.k.}} 1/\mu = 2$. Uzun vadede dakikada 2 yenileme.\\
+(b) Blackwell: $E[N(101)-N(100)] \approx h/\mu = 1/(1/2) = 2$.
+$[100,101]$ aralığında beklenen 2 yenileme.\\
+(c) $\sigma^2 t/\mu^3 = (1/4) \cdot t/(1/8) = 2t$.
+$\mathrm{SD}(N(t)) \approx \sqrt{2t}$: büyük $t$'de $N(t)$ etrafında $\sqrt{2t}$ ölçeğinde salınır.}
+
+\begin{alistirma}[Al.7.12]{C}{Ergodik Markov Zinciri}
+$Z_n$ iki durumlı Markov zinciri, $S = \{0, 1\}$, geçiş matrisi
+$P = \begin{pmatrix}1-\alpha & \alpha \\ \beta & 1-\beta\end{pmatrix}$
+($0 < \alpha, \beta < 1$).
+(a) Durağan dağılım $\pi$'yi bulun.
+(b) $f(0) = 0$, $f(1) = 1$ ise Birkhoff Ergodik Teoremi'ne göre
+    $\frac{1}{n}\sum_{k=0}^{n-1} f(Z_k)$'nın sınırını verin.
+(c) Bu sonucu BSK ile karşılaştırın: bağımsızlık gerekiyor mu?
+\end{alistirma}
+\alcozum{%
+(a) $\pi P = \pi$: $\pi_0(1-\alpha) + \pi_1 \beta = \pi_0$ ve $\pi_0 + \pi_1 = 1$.
+$\pi_0 \alpha = \pi_1 \beta \Rightarrow \pi_1/\pi_0 = \alpha/\beta$.
+$\pi_0 = \beta/(\alpha+\beta)$, $\pi_1 = \alpha/(\alpha+\beta)$.\\
+(b) Zincir geri dönüşümlü ve pozitif tekrarlı (sonlu durum, $\alpha,\beta > 0$) $\Rightarrow$ ergodik.
+Birkhoff: $\frac{1}{n}\sum f(Z_k) \xrightarrow{\text{n.k.}} E_\pi[f] = \pi_1 = \alpha/(\alpha+\beta)$.\\
+(c) BSK: bağımsızlık + i.i.d.\ gerekir. Ergodik teorem: yalnızca durağanlık + ergodiklik.
+Markov zinciri bağımlı olduğu hâlde "zamansal ortalama = uzamsal ortalama" geçerlidir.
+Bağımsızlık, ergodikliğin özel bir durumudur.}
 
 % =====================================================================
 \endinput
