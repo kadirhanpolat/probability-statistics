@@ -297,6 +297,110 @@ Yüksek leverage ($h_{ii}$ büyük) mutlaka etkili nokta olmayabilir: $x_i$ uç 
 \end{ornek}
 
 %% ============================================================
+\section{Genelleştirilmiş Doğrusal Modeller (GLM) Girişi}
+\label{sec:glm}
+%% ============================================================
+
+\begin{kesif}
+Normal hata varsayımını kaldıralım: ikili yanıt (0/1), sayma verisi (Poisson), süre (Gama). Bu yanıtlar için doğrusal model uygun değildir — bağlantı fonksiyonu (link function) devreye girer.
+\end{kesif}
+
+\begin{tanim}[GLM]\label{def:glm}
+Üstel aileden yanıt $Y_i\sim f(y;\theta_i)$ ve $g(\mu_i)=\mathbf{x}_i^\top\boldsymbol\beta$ olsun; $\mu_i=\Beklenti[Y_i]$, $g$ \textbf{bağlantı fonksiyonu} \emph{(link function)}. Üç bileşen:
+\begin{enumerate}
+  \item Rasgele bileşen: $Y_i$'nin dağılımı (üstel aile).
+  \item Sistematik bileşen: doğrusal öngörücü $\eta_i=\mathbf{x}_i^\top\boldsymbol\beta$.
+  \item Bağlantı: $\eta_i=g(\mu_i)$.
+\end{enumerate}
+\end{tanim}
+
+\begin{ornek}[Önemli GLM'ler]\label{ex:glm_ornekler}
+\begin{itemize}
+  \item \textbf{Lojistik regresyon:} $Y_i\sim\mathrm{Ber}(p_i)$; $g=\mathrm{logit}$: $\log(p_i/(1-p_i))=\mathbf{x}_i^\top\boldsymbol\beta$.
+  \item \textbf{Poisson regresyon:} $Y_i\sim\Pois(\mu_i)$; $g=\log$: $\log\mu_i=\mathbf{x}_i^\top\boldsymbol\beta$.
+  \item \textbf{Normal regresyon:} $g=\mathrm{identity}$: klasik doğrusal model.
+\end{itemize}
+\end{ornek}
+
+\begin{teorem}[GLM'de MLE]\label{thm:glm_mle}
+GLM katsayıları kapalı formla değil, yinelemeli ağırlıklı en küçük kareler (IRLS) ile bulunur:
+\[
+  \boldsymbol\beta^{(t+1)} = (\mathbf{X}^\top W^{(t)}\mathbf{X})^{-1}\mathbf{X}^\top W^{(t)}\mathbf{z}^{(t)},
+\]
+$W_{ii}^{(t)} = w_i^{(t)}$ çalışma ağırlığı, $z_i^{(t)}$ çalışma yanıt. Her adım WLS; bağlantı türevi ve dağılım varyansından $W$, $\mathbf{z}$ belirlenir.
+\end{teorem}
+
+\begin{ispatiskele}
+Fisher puanlama: $\boldsymbol\beta^{(t+1)}=\boldsymbol\beta^{(t)}+I(\boldsymbol\beta^{(t)})^{-1}\mathbf{U}(\boldsymbol\beta^{(t)})$; $\mathbf{U}$ score vektörü, $I$ Fisher bilgisi. GLM yapısında bu yineleme IRLS biçimini alır.
+\end{ispatiskele}
+
+\begin{ornek}[Lojistik regresyon: yorum]
+$\hat\beta_1=0.6$ ise $e^{0.6}=1.82$: $x$ bir birim artınca oranın $(\text{odds})$ 1.82 katına çıkması bekleniyor. Not: bu log-olasılık (log-odds) etkisidir; doğrudan olasılık farkı değildir — bu ayrım kritik.
+\end{ornek}
+
+\begin{teorem}[GLM asimptotik dağılım]\label{thm:glm_asimptotik}
+Regularity koşulları altında $\hat{\boldsymbol\beta}_n$ MLE:
+\[
+  \sqrt{n}(\hat{\boldsymbol\beta}_n-\boldsymbol\beta) \dto \Normal_{p+1}(\mathbf{0},\; I(\boldsymbol\beta)^{-1}).
+\]
+Büyük örneklem $t$ ve $F$ testleri GLM çıkarımı için kullanılır.
+\end{teorem}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Tıp:} Lojistik regresyon hastalık risk faktörlerini modeller (odds ratio). \textbf{Ekoloji:} Tür sayısı için Poisson regresyon; Gamma GLM ağırlık verisi. \textbf{Sosyal bilimler:} İkili anket yanıtları (oy verme, tercihleri) için probit/logit.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
+\section{Regresyon Tanılama: Artık Analizi}
+\label{sec:artik_analiz}
+%% ============================================================
+
+\begin{tanim}[Artık türleri]\label{def:artik_turleri}
+Ham artık $e_i=Y_i-\hat Y_i$'nin varyansı eşit değildir ($\Var(e_i)=\sigma^2(1-h_{ii})$). Standardize edilmiş türevler:
+\begin{itemize}
+  \item \textbf{İç öğrenci artık}: $r_i=e_i/(S_e\sqrt{1-h_{ii}})$ — yaklaşık $t_{n-p-2}$.
+  \item \textbf{Dış öğrenci artık}: $r_i^*=e_i/(S_{(-i)}\sqrt{1-h_{ii}})$ — tam $t_{n-p-2}$ dağılımı.
+\end{itemize}
+\end{tanim}
+
+\begin{teorem}[Dış öğrenci artığı kapalı formu]\label{thm:dis_artik}
+\[
+  r_i^* = r_i\,\sqrt{\frac{n-p-2}{n-p-1-r_i^2}}.
+\]
+$n-1$ kere regresyon çalıştırmak yerine tek formülle hesaplanır.
+\end{teorem}
+
+\begin{proof}[Proof — taslak]
+$S_{(-i)}^2 = \frac{(n-p-1)S_e^2 - e_i^2/(1-h_{ii})}{n-p-2}$ (Sherman-Morrison güncelleme lemması). $S_{(-i)}$'yi $r_i^*$ formülüne yerleştirip basitleştir.
+\end{proof}
+
+\begin{tanim}[DFFITS ve DFBETAS]\label{def:dffits}
+\textbf{DFFITS}: $i$'inci gözlemin kaldırılması halinde $\hat Y_i$'nin standardize değişimi:
+\[
+  \mathrm{DFFITS}_i = r_i^*\sqrt{\frac{h_{ii}}{1-h_{ii}}}.
+\]
+\textbf{DFBETAS}$_{ji}$: $i$'inci gözlemin kaldırılması halinde $j$. katsayı değişimi. Eşikler: $|\mathrm{DFFITS}|>2\sqrt{(p+1)/n}$ veya $|\mathrm{DFBETAS}|>2/\sqrt{n}$ etkili nokta.
+\end{tanim}
+
+\begin{ornek}[Artık analizi adım adım]
+$n=20$, $p=2$ regresyonda 5. gözlem: $e_5=3.2$, $h_{55}=0.35$, $S_e=1.4$.
+\begin{itemize}
+  \item İç öğrenci: $r_5=3.2/(1.4\sqrt{0.65})=3.2/1.129=2.83$.
+  \item Dış öğrenci: $r_5^*=2.83\sqrt{17/(17-8.01)}=2.83\sqrt{1.89}=3.89$.
+  \item DFFITS: $3.89\sqrt{0.35/0.65}=3.89\cdot0.734=2.86$.
+  \item Eşik $2\sqrt{3/20}=0.775$; bu nokta etkili.
+\end{itemize}
+\end{ornek}
+
+\begin{teorem}[Bonferroni aykırı değer testi]\label{thm:aykiri_deger}
+$n$ iç öğrenci artığı $r_1,\ldots,r_n$; en büyük mutlak değer $r_{\max}$. $H_0$: aykırı değer yok altında:
+\[
+  r_{\max} \approx t_{n-p-2,\,\alpha/(2n)}.
+\]
+Bonferroni düzeltmesiyle $\alpha$ düzeyinde aykırı değer testi.
+\end{teorem}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
