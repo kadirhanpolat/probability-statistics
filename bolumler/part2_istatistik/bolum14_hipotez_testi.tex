@@ -312,10 +312,14 @@ Güç $=\Prob(|Z|>z_{\alpha/2})$ yaklaşık $\Phi(-z_{\alpha/2}+\Delta\sqrt{n}/(
 %% ============================================================
 
 \begin{kesif}
-$n\to\infty$ limitinde herhangi $\Delta\neq0$ istatistiksel olarak anlamlı hâle gelir. Bu "büyük veri tuzağı"dır: anlamlılık $\neq$ önem.
-\kesifcevap{Cohen'in $d=\Delta/\sigma$ veya $r^2$ etki büyüklüğü, $n$'den bağımsızdır.
-  $n\to\infty$'da herhangi $\Delta\neq 0$ anlamlı hale gelir; pratikte klinik/pratik önemi
-  ayrıca raporlamak zorunludur. Çözüm: güç analizi + etki büyüklüğü raporlanması.}
+İki grup arasındaki gerçek ortalama farkı $\Delta = 0.001$ (klinik açıdan ihmal
+edilebilir). $n = 10^6$ gözlemle iki yönlü $t$-testi uygulanıyor; $\sigma = 1$
+biliniyor. Test istatistiği ve $p$-değeri hakkında ne bekliyorsunuz?
+\kesifcevap{$t = \Delta\sqrt{n/2} = 0.001 \cdot \sqrt{500000} \approx 0.707$
+  değil; $n$ büyüdükçe $t = \Delta\sqrt{n}/(2\sigma) \to \infty$.
+  $n = 10^6$: $t \approx 500$, $p \approx 0$ --- son derece anlamlı.
+  Ama $\Delta = 0.001$ pratik önemi sıfır. İstatistiksel anlamlılık, pratik önemi
+  garanti etmez; etki büyüklüğü $d = \Delta/\sigma$ $n$'den bağımsız tek ölçüttür.}
 \end{kesif}
 
 \begin{tanim}[Cohen's $d$ --- etki büyüklüğü]\label{def:etki_buyuklugu}
@@ -542,7 +546,6 @@ $k=1$: $0.003\leq0.005$; $k=2$: $0.008\leq0.010$; $k=3$: $0.02\leq0.015$? Hayır
 En büyük $k^*$: $k^*=2$ ($p_{(2)}=0.008\leq0.010$). İlk 2 hipotez reddedilir.
 BH, Bonferroni'den daha güçlü: 2 vs 1 red.}
 
-\alistirmalar
 
 \begin{alistirma}[Al.14.3]{A}{$\chi^2$ varyans testi}
 $n=20$ gözlem; $s^2=18.5$. $H_0:\sigma^2=15$ vs $H_1:\sigma^2>15$. $\alpha=0.05$ için $Q$ hesapla ve karar ver.
@@ -550,13 +553,15 @@ $n=20$ gözlem; $s^2=18.5$. $H_0:\sigma^2=15$ vs $H_1:\sigma^2>15$. $\alpha=0.05
 \alcozum{%
 $Q=19\cdot18.5/15=23.43$. $\chi^2_{19,0.05}=30.14$. $Q<30.14$: $H_0$ reddedilemez.%
 }
-
 \begin{alistirma}[Al.14.4]{B}{Olabilirlik oran testi --- Poisson}
 $X_1,\ldots,X_{20}\iid\Pois(\lambda)$, $\sum x_i=38$. $H_0:\lambda=1.5$ vs $H_1:\lambda\neq1.5$ için ORT'yi hesapla ve Wilks yaklaşımıyla $p$-değerini bul.
 \end{alistirma}
 \alcozum{%
 $\MLE\lambda=\bar{x}=1.9$. $-2\log\Lambda=-2[20(\log1.5-\log1.9)+20(1.9-1.5)]=2[20\log(1.9/1.5)-8]=2[20\cdot0.2357-8]=2[4.714-8]=-2(-3.286)=6.57$. Wilks: $\chi^2_1$; $p=\Prob(\chi^2_1>6.57)\approx0.010$. $H_0$ reddedilir.%
 }
+\alistirmalar
+
+
 
 \begin{alistirma}[Al.14.5]{B}{Güç analizi}
 $X_1,\ldots,X_n\iid\Normal(\mu,4)$. $H_0:\mu=0$ vs $H_1:\mu=1$; $\alpha=0.05$. Gücü \%80'e çıkarmak için kaç gözlem gerekli?

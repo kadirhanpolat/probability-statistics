@@ -585,7 +585,7 @@ sayesinde sıra kuyruk modellerinin temelidir.
 % ---- Öz-Yansıtma ----
 \begin{ozyansima}
 \begin{itemize}
-  \item Binom ile Poisson arasındaki "limit" ilişkisini kendi cümlelerinizle açıklayın.
+  \item Binom ile Poisson arasındaki "limit" ilişkisini kendi cümlelerinizle açıklayınız.
         Hangi koşullar altında Poisson yaklaşımı makul bir seçimdir?
   \item Bellek yoksunluğu özelliği fiziksel olarak ne anlama gelir?
         Hangi gerçek hayat fenomenlerini modelleyebilir, hangilerini modelleyemez?
@@ -820,7 +820,7 @@ $X \sim \Pois(5)$.\\
 
 \begin{alistirma}[Al.5.2]{A}{Normal Dağılım}
 $X \sim \Normal(70, 100)$ (not: sınav puanı, $\sigma = 10$).
-(a) $P(X > 85)$. (b) $P(60 < X < 80)$. (c) 90. yüzdeliği bulun.
+(a) $P(X > 85)$. (b) $P(60 < X < 80)$. (c) 90. yüzdeliği bulunuz.
 \end{alistirma}
 \alcozum{%
 $Z = (X-70)/10 \sim \Normal(0,1)$.\\
@@ -830,9 +830,9 @@ $Z = (X-70)/10 \sim \Normal(0,1)$.\\
 
 \begin{alistirma}[Al.5.3]{B}{Gama Dağılımı ve Beklenti}
 $X \sim \Gama(3, 2)$.
-(a) $E[X]$, $\mathrm{Var}(X)$ ve $M_X(t)$'yi yazın.
-(b) $P(X > 3)$'ü sayısal ifade edin (yarı analitik form yeterli).
-(c) $X_1, X_2 \sim \Gama(3, 2)$ bağımsız ise $X_1 + X_2$'nin dağılımını bulun.
+(a) $E[X]$, $\mathrm{Var}(X)$ ve $M_X(t)$'yi yazınız.
+(b) $P(X > 3)$'ü sayısal ifade ediniz (yarı analitik form yeterli).
+(c) $X_1, X_2 \sim \Gama(3, 2)$ bağımsız ise $X_1 + X_2$'nin dağılımını bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $E[X] = 3/2$, $\mathrm{Var}(X) = 3/4$, $M_X(t) = (2/(2-t))^3$ ($t < 2$).\\
@@ -841,8 +841,8 @@ $X \sim \Gama(3, 2)$.
 (c) $X_1+X_2 \sim \Gama(6, 2)$.}
 
 \begin{alistirma}[Al.5.4]{B}{Üstel Ailede Log-Bölüşüm}
-$X \sim \Pois(\lambda)$'yı doğal parametre $\eta = \ln\lambda$ ile üstel aile formunda yazın.
-$B(\eta)$'yı bulun ve $B'(\eta) = E[T(X)]$ formülüyle $E[X] = \lambda$'yı doğrulayın.
+$X \sim \Pois(\lambda)$'yı doğal parametre $\eta = \ln\lambda$ ile üstel aile formunda yazınız.
+$B(\eta)$'yı bulunuz ve $B'(\eta) = E[T(X)]$ formülüyle $E[X] = \lambda$'yı doğrulayınız.
 \end{alistirma}
 \alcozum{%
 $P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} = \frac{1}{k!} \exp(k\ln\lambda - \lambda)
@@ -852,8 +852,8 @@ $B'(\eta) = e^\eta = \lambda = E[T(X)] = E[X]$. \checkmark}
 
 \begin{alistirma}[Al.5.5cozum]{B}{Çok Değişkenli Normal: Koşullu Dağılım}
 $(X,Y)\sim\Normal_2(\boldsymbol\mu,\Sigma)$; $\mu_X=2$, $\mu_Y=5$, $\sigma_X^2=4$, $\sigma_Y^2=9$, $\rho=0.6$.
-(a) $Y|X=x$'in koşullu dağılımını yazın.
-(b) $E[Y|X=4]$ ve $\Var(Y|X=4)$'ü hesaplayın.
+(a) $Y|X=x$'in koşullu dağılımını yazınız.
+(b) $E[Y|X=4]$ ve $\Var(Y|X=4)$'ü hesaplayınız.
 (c) $X$ ve $Y-0.9X$ bağımsız mıdır? Neden?
 \end{alistirma}
 \alcozum{%
@@ -871,8 +871,8 @@ $(X,Y)\sim\Normal_2(\boldsymbol\mu,\Sigma)$; $\mu_X=2$, $\mu_Y=5$, $\sigma_X^2=4
 
 \begin{alistirma}[Al.5.5b]{C}{Beta Dağılımı ve Bayes Güncellemesi}
 $p\sim\Beta(\alpha,\beta)$ önsel. $n$ bağımsız Bernoulli($p$) denemesinde $x$ başarı gözlemleniyor.
-(a) Sonsal $p|x$'i bulun.
-(b) $\alpha=3$, $\beta=2$, $n=10$, $x=7$ için $E[p|x]$ ve $\mathrm{Mo}[p|x]$ (tepe) hesaplayın.
+(a) Sonsal $p|x$'i bulunuz.
+(b) $\alpha=3$, $\beta=2$, $n=10$, $x=7$ için $E[p|x]$ ve $\mathrm{Mo}[p|x]$ (tepe) hesaplayınız.
 (c) $\alpha+\beta\to\infty$ (sabit $\alpha/(\alpha+\beta)=p_0$) durumunda sonsal beklenti ne olur?
 \end{alistirma}
 \alcozum{%
@@ -890,7 +890,6 @@ Karşılaştır: MLE $\hat p=7/10=0.700$. Bayes beklenti $2/3\approx0.667$ (öns
 
 % ---
 
-\alistirmalar
 
 \begin{alistirma}[Al.5.5]{A}{Binom Olasılık}
 10 soru içeren çoktan seçmeli testte her sorunun 4 şıkkı var; öğrenci tamamen rastgele cevaplıyor.
@@ -902,7 +901,6 @@ $X \sim \Binom(10, 1/4)$.
 (a) $\binom{10}{3}(1/4)^3(3/4)^7 \approx 0.2503$.
 (b) $P(X\geq5) = \sum_{k=5}^{10}\binom{10}{k}(1/4)^k(3/4)^{10-k} \approx 0.0781$.
 (c) $E[X] = 2.5$, $\mathrm{Var}(X) = 1.875$.}
-
 \begin{alistirma}[Al.5.6]{A}{Geometrik Uygulama}
 Bir üretim hattında her ürün $p = 0.05$ olasılıkla bozuk.
 (a) İlk bozuk ürünün 10. üründe çıkma olasılığı.
@@ -914,11 +912,14 @@ $X \sim \mathrm{Geom}(0.05)$.
 (a) $P(X=10) = (0.95)^9(0.05) \approx 0.0315$.
 (b) $P(X>20) = (0.95)^{20} \approx 0.3585$.
 (c) $E[X] = 1/0.05 = 20$.}
+\alistirmalar
+
+
 
 \begin{alistirma}[Al.5.7]{B}{Beta Dağılımı}
 $X \sim \Beta(2, 3)$.
-(a) $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayın.
-(b) $P(X > 0.5)$'i analitik olarak bulun.
+(a) $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayınız.
+(b) $P(X > 0.5)$'i analitik olarak bulunuz.
 (c) Bu dağılım hangi pratik durumu modelleyebilir?
 \end{alistirma}
 \alcozum{%
@@ -930,9 +931,9 @@ $P(X>0.5) = 12\int_{0.5}^1 x(1-x)^2 dx = 12[x^2/2 - 2x^3/3 + x^4/4]_{0.5}^1
 
 \begin{alistirma}[Al.5.8]{B}{$\chi^2$ ve $t$ Dağılımı}
 $X_1, \ldots, X_5$ bağımsız $\Normal(0,1)$.
-(a) $V = \sum X_i^2$'nin dağılımını yazın; $E[V]$ ve $\mathrm{Var}(V)$'yi bulun.
-(b) $Z \sim \Normal(0,1)$ bu $X_i$'lerden bağımsız. $T = Z/\sqrt{V/5}$'in dağılımını yazın.
-(c) $T^2$'nin dağılımını yazın.
+(a) $V = \sum X_i^2$'nin dağılımını yazınız; $E[V]$ ve $\mathrm{Var}(V)$'yi bulunuz.
+(b) $Z \sim \Normal(0,1)$ bu $X_i$'lerden bağımsız. $T = Z/\sqrt{V/5}$'in dağılımını yazınız.
+(c) $T^2$'nin dağılımını yazınız.
 \end{alistirma}
 \alcozum{%
 (a) $V \sim \chi^2_5 = \Gama(5/2, 1/2)$. $E[V] = 5$, $\mathrm{Var}(V) = 10$.\\
@@ -941,7 +942,7 @@ $X_1, \ldots, X_5$ bağımsız $\Normal(0,1)$.
 
 \begin{alistirma}[Al.5.9]{B}{Poisson-Gama Karışımı}
 $\Lambda \sim \Gama(\alpha, \beta)$ ve $X \mid \Lambda = \lambda \sim \Pois(\lambda)$.
-$X$'in koşulsuz dağılımının negatif binom olduğunu gösterin.
+$X$'in koşulsuz dağılımının negatif binom olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $P(X=k) = \int_0^\infty \frac{\lambda^k e^{-\lambda}}{k!} \cdot \frac{\beta^\alpha}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta\lambda} d\lambda
@@ -952,7 +953,7 @@ Bu $\mathrm{NegBin}(\alpha, \beta/(\beta+1))$ dağılımıdır.}
 
 \begin{alistirma}[Al.5.10]{B}{Yer-Ölçek Dönüşümü}
 $X \sim \mathrm{Cauchy}(0,1)$ ise $Y = \mu + \sigma X$ ($\sigma > 0$) için
-$Y \sim \mathrm{Cauchy}(\mu, \sigma)$ olduğunu gösterin.
+$Y \sim \mathrm{Cauchy}(\mu, \sigma)$ olduğunu gösteriniz.
 Cauchy dağılımı neden bir yer-ölçek ailesidir?
 \end{alistirma}
 \alcozum{%
@@ -962,10 +963,10 @@ $f_Y(y) = \frac{1}{\pi(1+((y-\mu)/\sigma)^2)} \cdot \frac{1}{\sigma}
 Yer-ölçek ailesi: standart form $f_0(z) = 1/(\pi(1+z^2))$; $f(y|\mu,\sigma) = f_0((y-\mu)/\sigma)/\sigma$.}
 
 \begin{alistirma}[Al.5.11]{C}{Normal Dağılımın Üstel Aile Formu}
-$X \sim \Normal(\mu, \sigma^2)$'yi iki parametreli üstel ailede yazın:
+$X \sim \Normal(\mu, \sigma^2)$'yi iki parametreli üstel ailede yazınız:
 $\boldsymbol{\eta} = (\eta_1, \eta_2)$, $\mathbf{T}(x) = (T_1(x), T_2(x))$ ile.
-$B(\boldsymbol{\eta})$'yı bulun ve $\partial B/\partial\eta_1 = E[T_1(X)]$,
-$\partial B/\partial\eta_2 = E[T_2(X)]$ formüllerini doğrulayın.
+$B(\boldsymbol{\eta})$'yı bulunuz ve $\partial B/\partial\eta_1 = E[T_1(X)]$,
+$\partial B/\partial\eta_2 = E[T_2(X)]$ formüllerini doğrulayınız.
 \end{alistirma}
 \alcozum{%
 $f(x|\mu,\sigma^2) = \frac{1}{\sqrt{2\pi}\sigma}\exp\!\left(-\frac{x^2}{2\sigma^2} + \frac{\mu}{\sigma^2}x - \frac{\mu^2}{2\sigma^2}\right)$.
@@ -976,7 +977,7 @@ $\partial B/\partial\eta_1 = -\eta_1/(2\eta_2) = \mu/\sigma^2 \cdot \sigma^2 = \
 $\partial B/\partial\eta_2 = \eta_1^2/(4\eta_2^2) - 1/(2\eta_2) = \mu^2 + \sigma^2 = E[X^2]$. \checkmark}
 
 \begin{alistirma}[Al.5.12]{C}{Binom $\to$ Poisson: Tam İspat}
-Teorem~\ref{thm:binom_poisson}'in ispatında kullanılan iki limiti kesin biçimde ispatlayın:
+Teorem~\ref{thm:binom_poisson}'in ispatında kullanılan iki limiti kesin biçimde ispatlayınız:
 (a) $n(n-1)\cdots(n-k+1)/n^k \to 1$.
 (b) $(1 - \lambda_n/n)^n \to e^{-\lambda}$ ($\lambda_n \to \lambda$).
 \end{alistirma}
@@ -988,10 +989,10 @@ Dolayısıyla $(1-\lambda_n/n)^n \to e^{-\lambda}$.}
 
 \begin{alistirma}[Al.5.13]{B}{Weibull Dağılımı}
 $X \sim \mathrm{Weibull}(k, \lambda)$.
-(a) $Y = (X/\lambda)^k$ dönüşümünün dağılımını bulun.
-(b) $k = 2$, $\lambda = 1$ için $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayın
+(a) $Y = (X/\lambda)^k$ dönüşümünün dağılımını bulunuz.
+(b) $k = 2$, $\lambda = 1$ için $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayınız
     ($\Gamma(1/2) = \sqrt{\pi}$, $\Gamma(3/2) = \sqrt{\pi}/2$, $\Gamma(2) = 1$).
-(c) $P(X > 2)$'yi kapalı formda yazın.
+(c) $P(X > 2)$'yi kapalı formda yazınız.
 \end{alistirma}
 \alcozum{%
 (a) $P(Y \leq y) = P((X/\lambda)^k \leq y) = 1 - e^{-y}$: $Y \sim \Exp(1)$.\\
@@ -1001,10 +1002,10 @@ $E[X^2] = \Gamma(1+1) = \Gamma(2) = 1$. $\mathrm{Var}(X) = 1 - \pi/4 \approx 0.2
 
 \begin{alistirma}[Al.5.14]{B}{Pareto Beklentisi ve Varyansı}
 $X \sim \mathrm{Pareto}(\alpha, x_m)$.
-(a) $\alpha = 3$, $x_m = 1$ için $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayın.
-(b) $P(X > 2x_m)$'yi $\alpha$ cinsinden yazın.
+(a) $\alpha = 3$, $x_m = 1$ için $E[X]$ ve $\mathrm{Var}(X)$'i hesaplayınız.
+(b) $P(X > 2x_m)$'yi $\alpha$ cinsinden yazınız.
 (c) "80-20 kuralı": $\alpha = \log 5/\log 4 \approx 1.16$ ise nüfusun üst \%20'si
-    toplam gelirin \%80'ini elde eder. $P(X > x_m \cdot 5^{1/\alpha})$'yi hesaplayın.
+    toplam gelirin \%80'ini elde eder. $P(X > x_m \cdot 5^{1/\alpha})$'yi hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (a) $E[X] = \alpha x_m/(\alpha-1) = 3/2$ ($\alpha=3$, $x_m=1$).
@@ -1015,8 +1016,8 @@ Nüfusun \%20'si bu eşiğin üzerinde: 80-20 kuralı.}
 
 \begin{alistirma}[Al.5.15]{A}{Gaussian Karışımı}
 $f(x) = 0.3\,\phi(x+2) + 0.7\,\phi(x-1)$ ($\phi$ standart normal).
-(a) $E[X]$'i hesaplayın. (b) $\mathrm{Var}(X)$'i bileşke formülle hesaplayın.
-(c) PDF'nin tek modlu mu çift modlu mu olduğunu söyleyin.
+(a) $E[X]$'i hesaplayınız. (b) $\mathrm{Var}(X)$'i bileşke formülle hesaplayınız.
+(c) PDF'nin tek modlu mu çift modlu mu olduğunu söyleyiniz.
 \end{alistirma}
 \alcozum{%
 (a) $E[X] = 0.3 \cdot (-2) + 0.7 \cdot 1 = -0.6 + 0.7 = 0.1$.\\

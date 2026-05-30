@@ -115,7 +115,7 @@ n.k.\ yakınsama: sağ tarafın olasılığı sıfır. Ölçünün monotonluğu:
 $P(|X_n-X| > \varepsilon) \leq P(\bigcup_{k\geq n}\{|X_k-X|>\varepsilon\})$,
 bu da $n\to\infty$'da sıfıra gider (azalan olaylar dizisi, Bölüm~\ref{chp:olcum_teorisi}).
 
-\textbf{P $\Rightarrow$ d:} $\varepsilon > 0$ ve $x$ süreklilik noktası alın.
+\textbf{P $\Rightarrow$ d:} $\varepsilon > 0$ ve $x$ süreklilik noktası alınız.
 $F_{X_n}(x) = P(X_n \leq x) \leq P(X \leq x+\varepsilon) + P(|X_n - X| > \varepsilon)$.
 $n\to\infty$: $\limsup F_{X_n}(x) \leq F_X(x+\varepsilon)$.
 Benzer şekilde alt sınır kurulur; $\varepsilon\to 0$ ile $F_{X_n}(x) \to F_X(x)$.
@@ -174,13 +174,12 @@ Tersleri genel olarak yanlış. Slutsky: $X_n \xrightarrow{d} X$, $Y_n \xrightar
 % =====================================================================
 
 \begin{kesif}
-$\{A_n\}$ olaylar dizisi. "$A_n$ sonsuz çok gerçekleşir" olayını
-Bölüm~\ref{chp:onbilgiler}'deki limsup dili ile nasıl ifade ederiz?
-Eğer $\sum P(A_n) < \infty$ ise bu olayın gerçekleşme olasılığı hakkında
-ne söyleyebiliriz?
-\kesifcevap{``$A_n$ sonsuz çok gerçekleşir'' $= \limsup A_n = \bigcap_{n=1}^\infty \bigcup_{k=n}^\infty A_k$.
-  Borel-Cantelli I: $\sum P(A_n)<\infty \Rightarrow P(\limsup A_n)=0$.
-  Sezgi: toplam olasılık sonludur, dolayısıyla sonsuz kez gerçekleşme imkânsızdır (n.k.).}
+$\{A_n\}$ olaylar dizisi. ``$A_n$ sonsuz çok gerçekleşir'' olayını
+Bölüm~\ref{chp:onbilgiler}'deki $\limsup$ dili ile nasıl ifade ederiz?
+\kesifcevap{``$A_n$ sonsuz çok gerçekleşir'' $= \limsup_n A_n
+  = \bigcap_{n=1}^\infty \bigcup_{k=n}^\infty A_k$.
+  Sezgi: $\bigcup_{k \geq n} A_k$ ``$n$'inci adımdan sonra en az biri gerçekleşir''
+  olayıdır; tüm $n$ için bu olayın gerçekleşmesi, sonsuz çok $A_k$'nın gerçekleşmesi demektir.}
 \end{kesif}
 
 \begin{tanim}[Sonsuz Sık Olay]
@@ -457,7 +456,7 @@ $n$ tekrarlı bağımsız deneme, ortalama davranışı $O(1/\sqrt{n})$ hassasiy
         diğerinin gerektirmemesi hakkında ne düşünüyorsunuz?
   \item 0-1 Kanunu size "belirsizliğin çift değerli" olduğunu söylüyor;
         sezginizle bu nasıl bağdaşıyor?
-  \item Chernoff sınırının Chebyshev'den daha güçlü olduğunu bir örnekle gösterin.
+  \item Chernoff sınırının Chebyshev'den daha güçlü olduğunu bir örnekle gösteriniz.
 \end{itemize}
 \end{ozyansima}
 
@@ -502,7 +501,7 @@ ve $\liminf_{n\to\infty} S_n/\sqrt{2\sigma^2 n\ln\ln n} = -1$.
 İki yönlü ispat gerekir.
 
 \textbf{Üst sınır ($\limsup \leq 1$ n.k.):}
-Sabit $b > 1$. Geometrik alt dizi $n_k = \lfloor b^k \rfloor$ seçin.
+Sabit $b > 1$. Geometrik alt dizi $n_k = \lfloor b^k \rfloor$ seçiniz.
 $A_k = \{S_{n_k} > (1+\varepsilon)\sqrt{2\sigma^2 n_k \ln\ln n_k}\}$.
 Olağan sapma tahmini ile $P(A_k) \leq C/k^{1+\varepsilon}$.
 $\sum P(A_k) < \infty$: Borel-Cantelli 1 ile $P(A_k \text{ i.o.}) = 0$.
@@ -642,9 +641,9 @@ Yani "zamansal ortalama = uzamsal ortalama" --- klasik ergodiklik eşitliği.
 \end{ornek}
 
 \begin{kritiksorgu}
-Ergodik teorem i.i.d.\ koşulunu gevşetiyor. Hangi koşulun gerektiğini tartışın:
+Ergodik teorem i.i.d.\ koşulunu gevşetiyor. Hangi koşulun gerektiğini tartışınız:
 bağımsızlık mı, durağanlık mı, yoksa ergodiklik mi? Ergodikliğin 0-1 Kanunu
-ile ilişkisini açıklayın.
+ile ilişkisini açıklayınız.
 \end{kritiksorgu}
 
 % =====================================================================
@@ -748,7 +747,7 @@ Chernoff/Hoeffding: üstel büyük sapma sınırları; makine öğrenmesinde PAC
 \cozumlualistirmalar
 
 \begin{alistirma}[Al.7.1]{A}{Yakınsama Türlerini Tanımak}
-$X_n = n^{-1/2}Z$ ($Z \sim \Normal(0,1)$, sabit). Gösterin:
+$X_n = n^{-1/2}Z$ ($Z \sim \Normal(0,1)$, sabit). Gösteriniz:
 (a) $X_n \xrightarrow{\text{n.k.}} 0$. (b) $X_n \xrightarrow{P} 0$. (c) $X_n \xrightarrow{d} 0$.
 Bu örnek hangi tipik yanılgıyı düzeltiyor?
 \end{alistirma}
@@ -769,8 +768,8 @@ Yani yalnızca sonlu sayıda $n$ için $X_n > n$ gerçekleşir.}
 
 \begin{alistirma}[Al.7.3]{B}{ZBSK ve GBSK Karşılaştırması}
 $X_1, X_2, \ldots$ i.i.d.\ $\mathrm{Exp}(1)$. $\bar{X}_n$'nin hangi değere yakınsadığını
-belirtin. (a) Chebyshev ZBSK ile $P(|\bar{X}_n - 1| > \varepsilon)$ için $n$ sayısına bağlı
-üst sınır verin. (b) Bu yakınsamanın GBSK anlamında da geçerli olduğunu söyleyin.
+belirtiniz. (a) Chebyshev ZBSK ile $P(|\bar{X}_n - 1| > \varepsilon)$ için $n$ sayısına bağlı
+üst sınır veriniz. (b) Bu yakınsamanın GBSK anlamında da geçerli olduğunu söyleyiniz.
 \end{alistirma}
 \alcozum{%
 $E[X_1] = 1$, $\mathrm{Var}(X_1) = 1$.\\
@@ -781,8 +780,8 @@ $\varepsilon = 0.1$ için $n = 100$ yeterli: $P(\ldots) \leq 1$.
 
 \begin{alistirma}[Al.7.4]{B}{Chernoff Sınırı}
 $X_i \sim \mathrm{Bernoulli}(0.5)$ bağımsız, $n = 100$, $a = 0.6$.
-(a) Chebyshev ile $P(\bar{X}_{100} \geq 0.6)$ için üst sınır verin.
-(b) Chernoff ile üst sınır verin ve karşılaştırın.
+(a) Chebyshev ile $P(\bar{X}_{100} \geq 0.6)$ için üst sınır veriniz.
+(b) Chernoff ile üst sınır veriniz ve karşılaştırınız.
 \end{alistirma}
 \alcozum{%
 (a) Chebyshev: $P(\bar{X}_n \geq 0.6) \leq P(|\bar{X}_n-0.5|\geq 0.1) \leq \mathrm{Var}(\bar{X}_n)/(0.1)^2
@@ -795,21 +794,21 @@ Chebyshev: 0.25; Chernoff: 0.133. Gerçek değer $\approx 0.028$ (Chernoff daha 
 \begin{alistirma}[Al.7.4b]{B}{Bağımsızlık Olmadan BSK --- Ergodik Teorem}
 $(X_n)_{n\geq1}$ \emph{durağan ergodik} dizi; $E[|X_1|]<\infty$, $\mu=E[X_1]$.
 (a) Birkhoff ergodik teoremi ne söyler? Güçlü BSK ile nasıl kıyaslanır?
-(b) Markov zinciri $X_n$ durağan dağılım $\pi$ ile ergodikse $\frac{1}{n}\sum_{k=1}^n f(X_k)\to\sum_x f(x)\pi(x)$ n.k. Bunu simülasyon bağlamında yorumlayın.
+(b) Markov zinciri $X_n$ durağan dağılım $\pi$ ile ergodikse $\frac{1}{n}\sum_{k=1}^n f(X_k)\to\sum_x f(x)\pi(x)$ n.k. Bunu simülasyon bağlamında yorumlayınız.
 (c) $X_1,X_2,\ldots$ i.i.d.\ ama simetrik Cauchy dağılımlı. $\bar X_n$ ne yapar? Neden BSK çalışmaz?
 \end{alistirma}
 \alcozum{%
 (a) \textbf{Birkhoff ergodik teoremi}: Durağan ergodik $(X_n)$ için $\bar X_n=\frac{1}{n}\sum_{k=1}^n X_k\xrightarrow{\text{n.k.}}\mu=E[X_1]$. Güçlü BSK, i.i.d.\ varsayımı altında ergodikliğin özel halidir; Birkhoff bağımlı ama durağan-ergodik dizilere geneller.
 
-(b) Markov Monte Carlo (MCMC) temeli: Zinciri durağan dağılımdan başlatın (veya yeterince uzun ısın sonra) ve $\frac{1}{n}\sum f(X_k)$ ile $E_\pi[f]$'yi tahmin edin. Ergodiklik garantisi yakınsamayı sağlar; bağımsız örnekleme yerine geçer.
+(b) Markov Monte Carlo (MCMC) temeli: Zinciri durağan dağılımdan başlatınız (veya yeterince uzun ısın sonra) ve $\frac{1}{n}\sum f(X_k)$ ile $E_\pi[f]$'yi tahmin ediniz. Ergodiklik garantisi yakınsamayı sağlar; bağımsız örnekleme yerine geçer.
 
 (c) Cauchy için $E[|X_1|]=\infty$ (beklenti var olmaz). Güçlü BSK'nın koşulu $E[|X_1|]<\infty$ ihlal edilir. Gerçekte $\bar X_n$ Cauchy($0,1$) dağılımlı kalır: $n$ büyüse de dağılım daralmaz. Büyük sayılar kanunları geçerli değil.}
 
 \begin{alistirma}[Al.7.4c]{C}{Yavaş Değişen Fonksiyonlar ve Kuyruğun Ağırlığı}
 $L$ yavaş değişen (slowly varying) demek: her $c>0$ için $L(cx)/L(x)\to1$ ($x\to\infty$).
-(a) $L(x)=\log x$ ve $L(x)=(\log x)^2$'nin yavaş değişen olduğunu doğrulayın.
+(a) $L(x)=\log x$ ve $L(x)=(\log x)^2$'nin yavaş değişen olduğunu doğrulayınız.
 (b) $P(X>x)=L(x)/x^\alpha$ ($\alpha>0$) ise $X$'in ortalaması ne zaman sonlu?
-(c) $\alpha=1$, $L(x)=1$ durumunda (Cauchy benzeri), $S_n/n\to?$ Limitin ne olduğunu belirtin.
+(c) $\alpha=1$, $L(x)=1$ durumunda (Cauchy benzeri), $S_n/n\to?$ Limitin ne olduğunu belirtiniz.
 \end{alistirma}
 \alcozum{%
 (a) $L(x)=\log x$: $\frac{\log(cx)}{\log x}=\frac{\log c+\log x}{\log x}=1+\frac{\log c}{\log x}\to1$. $\checkmark$ Benzer şekilde $(\log x)^2$ için de aynı argüman.
@@ -820,10 +819,9 @@ $L$ yavaş değişen (slowly varying) demek: her $c>0$ için $L(cx)/L(x)\to1$ ($
 
 % ---
 
-\alistirmalar
 
 \begin{alistirma}[Al.7.5]{A}{Yakınsama Türleri}
-Her biri için örnek verin ya da imkânsız olduğunu gösterin:
+Her biri için örnek veriniz ya da imkânsız olduğunu gösteriniz:
 (a) $X_n \xrightarrow{P} X$ ama $X_n \not\xrightarrow{\text{n.k.}} X$.
 (b) $X_n \xrightarrow{d} c$ (sabit) ama $X_n \not\xrightarrow{P} c$.
 \end{alistirma}
@@ -831,9 +829,11 @@ Her biri için örnek verin ya da imkânsız olduğunu gösterin:
 (a) Gezgin blok (Karşı Örnek~\ref{ex:yaklinsama_karsiornek}).\\
 (b) İmkânsız: $X_n \xrightarrow{d} c$ (dejenere) $\Leftrightarrow$ $X_n \xrightarrow{P} c$.
 Çünkü $P(|X_n-c|>\varepsilon) = P(X_n \leq c-\varepsilon) + P(X_n > c+\varepsilon) \to 0+0=0$.}
+\alistirmalar
+
 
 \begin{alistirma}[Al.7.6]{A}{0-1 Kanunu Uygulaması}
-$X_1, X_2, \ldots$ bağımsız. Aşağıdaki olayların olasılığını belirtin:
+$X_1, X_2, \ldots$ bağımsız. Aşağıdaki olayların olasılığını belirtiniz:
 (a) $A = \{\bar{X}_n \to 0\}$.
 (b) $B = \{\sum_{n=1}^\infty X_n/n \text{ yakınsar}\}$.
 (c) $C = \{\limsup_n X_n < \infty\}$.
@@ -844,7 +844,7 @@ Belirli dağılıma bağlı olmadan bu sonuç kesin --- spesifik değer ayrıca 
 
 \begin{alistirma}[Al.7.7]{B}{Borel-Cantelli --- Kuvvetli Kanun}
 $X_1, X_2, \ldots$ bağımsız, $E[X_i] = \mu$, $\mathrm{Var}(X_i) = \sigma^2 < \infty$.
-Borel-Cantelli 1'i kullanarak $\bar{X}_{n^2} \xrightarrow{\text{n.k.}} \mu$ olduğunu ispatlayın.
+Borel-Cantelli 1'i kullanarak $\bar{X}_{n^2} \xrightarrow{\text{n.k.}} \mu$ olduğunu ispatlayınız.
 ($n^2$'nin kare indeksler olduğuna dikkat: $\bar{X}$ dizisinin alt dizisi.)
 \end{alistirma}
 \alcozum{%
@@ -855,7 +855,7 @@ Her $\varepsilon>0$ için geçerli: $\bar{X}_{n^2} \xrightarrow{\text{n.k.}} \mu
 
 \begin{alistirma}[Al.7.8]{B}{Slutsky Uygulaması}
 $X_n \xrightarrow{d} \Normal(0,1)$ ve $S_n^2 \xrightarrow{P} \sigma^2 > 0$ (örnek varyans).
-$T_n = X_n / S_n$'nin limit dağılımını bulun.
+$T_n = X_n / S_n$'nin limit dağılımını bulunuz.
 \end{alistirma}
 \alcozum{%
 $Y_n = S_n \xrightarrow{P} \sigma$; $g(y) = 1/y$ sürekli ($y\neq0$).
@@ -865,13 +865,13 @@ Slutsky çarpım: $T_n = X_n \cdot (1/S_n) \xrightarrow{d} \Normal(0,1) \cdot (1
 \begin{alistirma}[Al.7.9]{C}{GBSK --- Kolmogorov Yeterli Koşulu}
 $\{X_n\}$ bağımsız (mutlaka i.i.d.\ değil), $E[X_n] = 0$,
 $\sum_{n=1}^\infty \mathrm{Var}(X_n)/n^2 < \infty$.
-Kronecker lemmasını kullanarak $\bar{X}_n \xrightarrow{\text{n.k.}} 0$ olduğunu gösterin.
-(\textit{İpucu:} $S_n = \sum_{k=1}^n X_k/k$'nin n.k.\ yakınsadığını Borel-Cantelli ile kurun;
+Kronecker lemmasını kullanarak $\bar{X}_n \xrightarrow{\text{n.k.}} 0$ olduğunu gösteriniz.
+(\textit{İpucu:} $S_n = \sum_{k=1}^n X_k/k$'nin n.k.\ yakınsadığını Borel-Cantelli ile kurunuz;
 ardından Kronecker: $S_n \to S$ ve $S_n = \sum X_k/k$ ise $\frac{1}{n}\sum_{k=1}^n X_k \to 0$.)
 \end{alistirma}
 \alcozum{%
 \begin{ipucu}{1}
-$Y_k = X_k/k$ tanımlayın; $\sum E[Y_k^2] = \sum \mathrm{Var}(X_k)/k^2 < \infty$.
+$Y_k = X_k/k$ tanımlayınız; $\sum E[Y_k^2] = \sum \mathrm{Var}(X_k)/k^2 < \infty$.
 $L^2$ yakınsaması + martingal argümanı veya Borel-Cantelli ile $\sum Y_k$ n.k.\ yakınsar.
 \end{ipucu}
 \textbf{Kronecker Lemması:} $\sum_{k=1}^\infty a_k/k$ yakınsarsa $\frac{1}{n}\sum_{k=1}^n a_k \to 0$.
@@ -879,10 +879,10 @@ $a_k = X_k$ uygulandığında: $\sum X_k/k$ yakınsıyor (yukarıdaki ipucu) $\R
 
 \begin{alistirma}[Al.7.10]{B}{Yinelenmiş Logaritma Kanunu --- Uygulama}
 $X_i \sim \Normal(0,1)$ i.i.d., $S_n = \sum_{i=1}^n X_i$.
-(a) YLK'ya göre $\limsup_{n\to\infty} S_n/\sqrt{2n\ln\ln n}$'nin değerini verin.
-(b) $n = 10^4$ için $\sqrt{2n\ln\ln n}$'yi sayısal olarak hesaplayın.
+(a) YLK'ya göre $\limsup_{n\to\infty} S_n/\sqrt{2n\ln\ln n}$'nin değerini veriniz.
+(b) $n = 10^4$ için $\sqrt{2n\ln\ln n}$'yi sayısal olarak hesaplayınız.
 (c) "GBSK $\bar{X}_n \to 0$" ile "YLK $S_n/\sqrt{2n\ln\ln n} \to 1$" ifadelerinin
-    çelişmediğini açıklayın.
+    çelişmediğini açıklayınız.
 \end{alistirma}
 \alcozum{%
 (a) YLK (Teorem~\ref{thm:ylk}): $\sigma^2 = 1$ olduğundan $\limsup = 1$ n.k.\\
@@ -896,9 +896,9 @@ $\bar{X}_n \to 0$ yavaş yavaş gerçekleşir; YLK tam ne kadar yavaş olduğunu
 \begin{alistirma}[Al.7.11]{B}{Yenileme Teorisi}
 Bir makine parçası $X_i \sim \Exp(2)$ dağılımına sahip ömürler geçiriyor ($i = 1, 2, \ldots$).
 Parça bozulduğunda hemen yenisiyle değiştiriliyor. $N(t)$ yenileme sayısı.
-(a) Temel Yenileme Teoremi ile $\lim_{t\to\infty} N(t)/t$'yi bulun.
-(b) Blackwell teoremini kullanarak $[100, 101]$ aralığındaki beklenen yenileme sayısını yaklaşık hesaplayın.
-(c) $N(t)$'nin standart sapmasının $\sim \sqrt{\sigma^2 t/\mu^3}$ ölçeğinde olduğunu yorumlayın
+(a) Temel Yenileme Teoremi ile $\lim_{t\to\infty} N(t)/t$'yi bulunuz.
+(b) Blackwell teoremini kullanarak $[100, 101]$ aralığındaki beklenen yenileme sayısını yaklaşık hesaplayınız.
+(c) $N(t)$'nin standart sapmasının $\sim \sqrt{\sigma^2 t/\mu^3}$ ölçeğinde olduğunu yorumlayınız
     ($\sigma^2 = \mathrm{Var}(X_1) = 1/4$, $\mu = 1/2$).
 \end{alistirma}
 \alcozum{%
@@ -913,10 +913,10 @@ $\mathrm{SD}(N(t)) \approx \sqrt{2t}$: büyük $t$'de $N(t)$ etrafında $\sqrt{2
 $Z_n$ iki durumlı Markov zinciri, $S = \{0, 1\}$, geçiş matrisi
 $P = \begin{pmatrix}1-\alpha & \alpha \\ \beta & 1-\beta\end{pmatrix}$
 ($0 < \alpha, \beta < 1$).
-(a) Durağan dağılım $\pi$'yi bulun.
+(a) Durağan dağılım $\pi$'yi bulunuz.
 (b) $f(0) = 0$, $f(1) = 1$ ise Birkhoff Ergodik Teoremi'ne göre
-    $\frac{1}{n}\sum_{k=0}^{n-1} f(Z_k)$'nın sınırını verin.
-(c) Bu sonucu BSK ile karşılaştırın: bağımsızlık gerekiyor mu?
+    $\frac{1}{n}\sum_{k=0}^{n-1} f(Z_k)$'nın sınırını veriniz.
+(c) Bu sonucu BSK ile karşılaştırınız: bağımsızlık gerekiyor mu?
 \end{alistirma}
 \alcozum{%
 (a) $\pi P = \pi$: $\pi_0(1-\alpha) + \pi_1 \beta = \pi_0$ ve $\pi_0 + \pi_1 = 1$.

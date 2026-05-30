@@ -156,7 +156,7 @@ fonksiyonlar olarak tanımlanır.
 \begin{kendinleifade}
 "Rasgele değişken" neden bir "değişken" değil, bir "fonksiyondur"?
 Hangi uzaydan hangi uzaya gider? Ölçülebilirlik koşulu ne anlama gelir?
-Bir arkadaşınıza matematiksiz bir dille açıklayın.
+Bir arkadaşınıza matematiksiz bir dille açıklayınız.
 \kendinleifadecevap{$X:\Omega\to\mathbb{R}$ --- her deney sonucuna ($\omega$) deterministik bir sayı atar.
   "Değişken" değil çünkü $X$ sabit bir kural, rastlantı $\omega$'dedir.
   Ölçülebilirlik: $\{X\leq c\}\in\mathcal{F}$ --- "en fazla $c$" olayının tanımlı olasılığı var;
@@ -256,7 +256,7 @@ Sağdan sürekli tanım $P(X \leq x) = F(x)$'i verir; $P(X < x)$ farklıdır.
 
 \begin{kendinleifade}
 KDF'nin üç temel özelliğini (monoton, sağdan sürekli, sınırlar)
-bir yabancı dil örneğiyle canlandırın: örneğin "dil testi skoru"nun
+bir yabancı dil örneğiyle canlandırınız: örneğin "dil testi skoru"nun
 KDF'si nasıl görünürdü? Sürekli mi olurdu, yoksa sıçramalı mı?
 \kendinleifadecevap{Dil testi puanı genelde tam sayı $\Rightarrow$ KDF \textbf{sıçramalı} (basamak fonksiyonu).
   \textbf{Monoton artan:} $P(X\leq 70)\leq P(X\leq 80)$ --- daha yüksek eşiği aşmak daha kolay.
@@ -759,7 +759,7 @@ $\mathbf{X} \sim \Normal_k(\boldsymbol{\mu}, \boldsymbol{\Sigma})$:
   \item \textbf{Marjinaller:} $X_i \sim \Normal(\mu_i, \sigma_{ii})$ (marjinallar normal).
   \item \textbf{Lineer dönüşüm:} $A\mathbf{X} + \mathbf{b} \sim \Normal(A\boldsymbol{\mu}+\mathbf{b}, A\boldsymbol{\Sigma}A^\top)$.
   \item \textbf{Bağımsızlık:} $X_i$ ve $X_j$ bağımsız $\Leftrightarrow$ $\sigma_{ij} = 0$ (Normal için korelasyonsuzluk = bağımsızlık!).
-  \item \textbf{Koşullu dağılım:} $\mathbf{X}$'i $(\mathbf{X}_1, \mathbf{X}_2)$ şeklinde parçalayın.
+  \item \textbf{Koşullu dağılım:} $\mathbf{X}$'i $(\mathbf{X}_1, \mathbf{X}_2)$ şeklinde parçalayınız.
   $\mathbf{X}_1 \mid \mathbf{X}_2 = \mathbf{x}_2 \sim \Normal(\boldsymbol{\mu}_{1|2},\, \boldsymbol{\Sigma}_{11|2})$:
   \begin{align*}
     \boldsymbol{\mu}_{1|2} &= \boldsymbol{\mu}_1 + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}(\mathbf{x}_2 - \boldsymbol{\mu}_2),\\
@@ -926,7 +926,7 @@ Dağılımda yakınsama $\iff$ zayıf yakınsama; Prokhorov sıkılık koşulu.
 \begin{alistirma}[Al.3.1]{A}{Ölçülebilirlik Kontrolü}
 $\Omega = \{1, 2, 3, 4\}$, $\mathcal{F} = \{\emptyset, \{1,2\}, \{3,4\}, \Omega\}$.
 $X(\omega) = \omega$ ve $Y(\omega) = \mathbf{1}_{\{1,2\}}(\omega)$ fonksiyonlarından
-hangisi rasgele değişkendir? Gerekçelendirin.
+hangisi rasgele değişkendir? Gerekçelendiriniz.
 \end{alistirma}
 \alcozum{%
 $Y$: $\{Y \leq 0\} = \{3,4\} \in \mathcal{F}$; $\{Y \leq 1\} = \Omega \in \mathcal{F}$;
@@ -938,7 +938,7 @@ $X$ rasgele değişkenin KDF'si:
 \[
   F(x) = \begin{cases} 0 & x < 0 \\ x/2 & 0 \leq x < 1 \\ 1/2 + (x-1)/4 & 1 \leq x < 3 \\ 1 & x \geq 3 \end{cases}
 \]
-$P(X = 0)$, $P(X = 1)$, $P(0.5 < X \leq 2)$ ve $P(X = 3)$'ü bulun.
+$P(X = 0)$, $P(X = 1)$, $P(0.5 < X \leq 2)$ ve $P(X = 3)$'ü bulunuz.
 \end{alistirma}
 \alcozum{%
 $P(X = 0) = F(0) - F(0^-) = 0 - 0 = 0$ ($F$ 0'da sürekli).\\
@@ -949,8 +949,8 @@ Bu KDF tamamen sürekli; dağılım mutlak süreklidir (karma bile değil).}
 
 \begin{alistirma}[Al.3.3]{B}{Koşullu Dağılım}
 $(X,Y)$ ortak PDF'si $f(x,y) = c\,xy$, $0 < x < 1$, $0 < y < 2$.
-(a) $c$'yi bulun. (b) $f_{X|Y}(x \mid y)$'i bulun.
-(c) $P(X > 0.5 \mid Y = 1)$'i hesaplayın.
+(a) $c$'yi bulunuz. (b) $f_{X|Y}(x \mid y)$'i bulunuz.
+(c) $P(X > 0.5 \mid Y = 1)$'i hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\int_0^1 \int_0^2 cxy \, dy \, dx = c \int_0^1 x \, dx \int_0^2 y \, dy = c \cdot \frac{1}{2} \cdot 2 = c$. $c = 1$.\\
@@ -958,7 +958,7 @@ $(X,Y)$ ortak PDF'si $f(x,y) = c\,xy$, $0 < x < 1$, $0 < y < 2$.
 (c) $P(X > 0.5 \mid Y = 1) = \int_{0.5}^1 2x \, dx = [x^2]_{0.5}^1 = 1 - 0.25 = 0.75$.}
 
 \begin{alistirma}[Al.3.4]{B}{Jacobian Dönüşümü}
-$X \sim \mathrm{Uniform}(0,1)$. $Y = -\ln X$ dönüşümü ile $Y$'nin dağılımını bulun.
+$X \sim \mathrm{Uniform}(0,1)$. $Y = -\ln X$ dönüşümü ile $Y$'nin dağılımını bulunuz.
 \end{alistirma}
 \alcozum{%
 $g(x) = -\ln x$ azalan; ters $h(y) = e^{-y}$, $|h'(y)| = e^{-y}$.\\
@@ -968,7 +968,7 @@ $Y \sim \mathrm{Exp}(1)$. Bu quantile dönüşümü yönteminin temelidir:
 herhangi bir dağılımdan örnek üretmek için KDF'nin tersini kullanmak.}
 
 \begin{alistirma}[Al.3.4b]{B}{Dağılım Fonksiyonlarının Türleri}
-Aşağıdaki KDF'lerin her biri için: (i) süreksizlik noktalarını bulun, (ii) dağılım türünü belirtin (sürekli/kesikli/karma), (iii) varsa PDF ya da PMF'yi yazın.
+Aşağıdaki KDF'lerin her biri için: (i) süreksizlik noktalarını bulunuz, (ii) dağılım türünü belirtiniz (sürekli/kesikli/karma), (iii) varsa PDF ya da PMF'yi yazınız.
 
 \noindent (A) $F(x)=\mathbf{1}_{[1,\infty)}(x)$ (Dirac $\delta_1$).\\
 (B) $F(x)=0$ ($x<0$); $F(x)=x/2$ ($0\leq x<1$); $F(x)=x/2+1/4$ ($1\leq x<3/2$); $F(x)=1$ ($x\geq3/2$).\\
@@ -983,10 +983,10 @@ Aşağıdaki KDF'lerin her biri için: (i) süreksizlik noktalarını bulun, (ii
 
 \begin{alistirma}[Al.3.4c]{C}{Değişken Dönüşümü --- Skalar Sistemik}
 $X$ sürekli rasgele değişken, PDF $f_X$, KDF $F_X$ birebir artan ve türevlenebilir.
-(a) $Y=aX+b$ ($a>0$) için $f_Y(y)$'yi bulun.
-(b) $U=F_X(X)$'in dağılımını bulun (Olasılık integral dönüşümü).
-(c) $V=-\log(1-F_X(X))$'in dağılımını bulun.
-(d) (b) ve (c) sonuçlarını simülasyon yöntemi olarak yorumlayın.
+(a) $Y=aX+b$ ($a>0$) için $f_Y(y)$'yi bulunuz.
+(b) $U=F_X(X)$'in dağılımını bulunuz (Olasılık integral dönüşümü).
+(c) $V=-\log(1-F_X(X))$'in dağılımını bulunuz.
+(d) (b) ve (c) sonuçlarını simülasyon yöntemi olarak yorumlayınız.
 \end{alistirma}
 \alcozum{%
 (a) $h(y)=(y-b)/a$, $|h'(y)|=1/a$. $f_Y(y)=f_X((y-b)/a)\cdot(1/a)$, $y\in(ab_1+b,ab_2+b)$ (aralığı ölçekle+kaydır).
@@ -999,31 +999,32 @@ $X$ sürekli rasgele değişken, PDF $f_X$, KDF $F_X$ birebir artan ve türevlen
 
 % ---
 
-\alistirmalar
 
 \begin{alistirma}[Al.3.5]{A}{KDF Özellikleri}
 $F(x) = \frac{1}{1+e^{-x}}$ (lojistik fonksiyon) bir KDF midir?
-Üç temel özelliği kontrol edin. Bu KDF mutlak sürekli bir dağılımı mı temsil eder?
-PDF'yi bulun.
+Üç temel özelliği kontrol ediniz. Bu KDF mutlak sürekli bir dağılımı mı temsil eder?
+PDF'yi bulunuz.
 \end{alistirma}
 \alcozum{%
 Monoton artan: $F'(x) = e^{-x}/(1+e^{-x})^2 > 0$. $\checkmark$\\
 Sağdan sürekli: $F$ her yerde türevlenebilir, dolayısıyla sürekli. $\checkmark$\\
 Sınırlar: $F(-\infty) = 0$, $F(+\infty) = 1$. $\checkmark$\\
 PDF: $f(x) = F'(x) = e^{-x}/(1+e^{-x})^2$. Bu lojistik dağılımdır.}
-
 \begin{alistirma}[Al.3.6]{A}{PMF Doğrulama}
 $p(k) = c \cdot (1/2)^k$, $k = 1, 2, 3, \ldots$
-(a) $c$'yi bulun. (b) $P(X > 3)$'ü hesaplayın. (c) $P(X \text{ çift})$'i bulun.
+(a) $c$'yi bulunuz. (b) $P(X > 3)$'ü hesaplayınız. (c) $P(X \text{ çift})$'i bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $\sum_{k=1}^\infty c(1/2)^k = c \cdot (1/2)/(1-1/2) = c = 1$.\\
 (b) $P(X > 3) = \sum_{k=4}^\infty (1/2)^k = (1/2)^4/(1-1/2) = 1/8$.\\
 (c) $P(\text{çift}) = \sum_{k=1}^\infty (1/2)^{2k} = (1/4)/(1-1/4) = 1/3$.}
+\alistirmalar
+
+
 
 \begin{alistirma}[Al.3.7]{A}{Marjinal Dağılımlar}
 $(X, Y)$ ortak PMF: $p(0,0)=0.1$, $p(0,1)=0.2$, $p(1,0)=0.3$, $p(1,1)=0.4$.
-Marjinal PMF'leri $p_X$ ve $p_Y$'yi bulun. $X$ ve $Y$ bağımsız mıdır?
+Marjinal PMF'leri $p_X$ ve $p_Y$'yi bulunuz. $X$ ve $Y$ bağımsız mıdır?
 \end{alistirma}
 \alcozum{%
 $p_X(0) = 0.3$, $p_X(1) = 0.7$. $p_Y(0) = 0.4$, $p_Y(1) = 0.6$.\\
@@ -1031,7 +1032,7 @@ Bağımsız mı? $p_X(0) \cdot p_Y(0) = 0.3 \cdot 0.4 = 0.12 \neq 0.1 = p(0,0)$.
 
 \begin{alistirma}[Al.3.8]{B}{Evrişim}
 $X, Y$ bağımsız, $X \sim \mathrm{Uniform}(0,1)$, $Y \sim \mathrm{Uniform}(0,1)$.
-$Z = X + Y$'nin PDF'sini evrişim yöntemiyle bulun ve grafiğini çizin.
+$Z = X + Y$'nin PDF'sini evrişim yöntemiyle bulunuz ve grafiğini çiziniz.
 \end{alistirma}
 \alcozum{%
 $f_Z(z) = \int_0^1 f_X(z-y) f_Y(y) \, dy = \int_0^1 \mathbf{1}_{[0,1]}(z-y) \, dy$.\\
@@ -1040,8 +1041,8 @@ $1 < z \leq 2$: $y \in [z-1, 1]$; $f_Z(z) = 2-z$.\\
 Üçgen dağılım: $f_Z(z) = z$ (artan), $2-z$ (azalan). Merkezi Limit Teoremi'nin habercisi.}
 
 \begin{alistirma}[Al.3.9]{B}{Dönüşüm: Karekök}
-$X \sim \mathrm{Exp}(\lambda)$. $Y = \sqrt{X}$'in PDF'sini bulun.
-$E[Y]$'yi $f_Y$ üzerinden ifade edin (Bölüm~\ref{chp:beklenti}'de hesaplanacak).
+$X \sim \mathrm{Exp}(\lambda)$. $Y = \sqrt{X}$'in PDF'sini bulunuz.
+$E[Y]$'yi $f_Y$ üzerinden ifade ediniz (Bölüm~\ref{chp:beklenti}'de hesaplanacak).
 \end{alistirma}
 \alcozum{%
 $g(x) = \sqrt{x}$ artan; $h(y) = y^2$, $|h'(y)| = 2y$.\\
@@ -1051,7 +1052,7 @@ Bu Rayleigh dağılımıdır (parametre $1/\sqrt{2\lambda}$).}
 
 \begin{alistirma}[Al.3.10]{B}{Bağımsızlık Kontrolü}
 $(X,Y)$ PDF'si $f(x,y) = e^{-x-y}$, $x > 0$, $y > 0$. $X$ ve $Y$ bağımsız mıdır?
-Aynı soruyu $f(x,y) = 2e^{-x-y}$, $0 < y < x < \infty$ için yanıtlayın.
+Aynı soruyu $f(x,y) = 2e^{-x-y}$, $0 < y < x < \infty$ için yanıtlayınız.
 \end{alistirma}
 \alcozum{%
 Birinci: $f(x,y) = e^{-x} \cdot e^{-y} = f_X(x) \cdot f_Y(y)$. Evet, bağımsız.\\
@@ -1060,7 +1061,7 @@ $f_X(x) \cdot f_Y(y) \neq f(x,y)$. Hayır, bağımsız değil.}
 
 \begin{alistirma}[Al.3.11]{B}{Çok Boyutlu Jacobian}
 $(X, Y)$ bağımsız $\Normal(0,1)$. $U = X + Y$, $V = X - Y$ dönüşümü ile
-$(U, V)$'nin ortak dağılımını bulun. $U$ ve $V$ bağımsız mıdır?
+$(U, V)$'nin ortak dağılımını bulunuz. $U$ ve $V$ bağımsız mıdır?
 \end{alistirma}
 \alcozum{%
 Ters: $x = (u+v)/2$, $y = (u-v)/2$. $J = \partial(x,y)/\partial(u,v)$:
@@ -1074,9 +1075,9 @@ $U \sim \Normal(0, 2)$, $V \sim \Normal(0, 2)$ ve çarpımlanıyor: bağımsızl
 
 \begin{alistirma}[Al.3.12]{C}{İspat: Bağımsız Değişkenlerin Toplamının KDF'si}
 $X, Y$ bağımsız rasgele değişkenler, $Z = X + Y$ olsun.
-(a) $F_Z(z) = \int_{-\infty}^{+\infty} F_X(z - y) \, dF_Y(y)$ olduğunu ispatlayın
+(a) $F_Z(z) = \int_{-\infty}^{+\infty} F_X(z - y) \, dF_Y(y)$ olduğunu ispatlayınız
 (Lebesgue-Stieltjes integrali).
-(b) Mutlak sürekli durumda bu formülün evrişim formülüne nasıl indirgeneceğini gösterin.
+(b) Mutlak sürekli durumda bu formülün evrişim formülüne nasıl indirgeneceğini gösteriniz.
 \end{alistirma}
 \alcozum{%
 (a) Bağımsızlıktan:
@@ -1086,11 +1087,11 @@ $F_Z(z) = P(X+Y \leq z) = E[\mathbf{1}_{X+Y \leq z}]
 $z$'ye göre türev (Leibniz): $f_Z(z) = \int f_X(z-y) f_Y(y) \, dy = (f_X * f_Y)(z)$.}
 
 \begin{alistirma}[Al.3.13]{B}{Olasılık İntegral Dönüşümü}
-$X \sim \Gama(\alpha, \beta)$. $U = F_X(X)$ dönüşümünü tanımlayın.
-(a) $U$'nun dağılımını bulun.
+$X \sim \Gama(\alpha, \beta)$. $U = F_X(X)$ dönüşümünü tanımlayınız.
+(a) $U$'nun dağılımını bulunuz.
 (b) Geri dönüşüm: $U \sim \Uniform(0,1)$ verildiğinde $\Gama(2,1)$ dağılımı
 nasıl simüle edersiniz? (İpucu: Üstel dağılım üzerinden)
-(c) OID'nin QQ-plot oluşturmadaki rolünü açıklayın.
+(c) OID'nin QQ-plot oluşturmadaki rolünü açıklayınız.
 \end{alistirma}
 \alcozum{%
 (a) OID (Teorem~\ref{thm:oit}): $F_X(X) \sim \Uniform(0,1)$. Sürekli dağılım için geçerli; $\Gama$ sürekli. $U \sim \Uniform(0,1)$.\\
@@ -1103,9 +1104,9 @@ $F_0 = F_X$ ise noktalar doğrusal dizilir.}
 
 \begin{alistirma}[Al.3.14]{B}{İki Boyutlu Normal}
 $(X_1, X_2) \sim \Normal_2\!\left((0,0)^\top, \begin{pmatrix}1 & \rho\\\rho & 1\end{pmatrix}\right)$.
-(a) $X_1 + X_2$ ve $X_1 - X_2$'nin dağılımını bulun.
+(a) $X_1 + X_2$ ve $X_1 - X_2$'nin dağılımını bulunuz.
 (b) $X_1 + X_2$ ve $X_1 - X_2$ bağımsız mıdır?
-(c) $X_1 \mid X_2 = 1$'in dağılımını verin.
+(c) $X_1 \mid X_2 = 1$'in dağılımını veriniz.
 \end{alistirma}
 \alcozum{%
 (a) Lineer dönüşüm: $A = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\boldsymbol{\Sigma} = \begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$.
@@ -1116,8 +1117,8 @@ $X_1+X_2 \sim \Normal(0, 2+2\rho)$; $X_1-X_2 \sim \Normal(0, 2-2\rho)$.\\
 
 \begin{alistirma}[Al.3.15]{C}{Kuantil Fonksiyon --- Karma Dağılım}
 $X$ karma dağılım: $P(X = 0) = 1/2$, $P(X > 0) = 1/2$ ve $X \mid X>0 \sim \Exp(1)$.
-(a) $F_X(x)$'i her $x$ için yazın.
-(b) $F_X^{-1}(u)$'yu $u \in (0,1)$ için hesaplayın.
+(a) $F_X(x)$'i her $x$ için yazınız.
+(b) $F_X^{-1}(u)$'yu $u \in (0,1)$ için hesaplayınız.
 (c) $U \sim \Uniform(0,1)$ kullanarak $X$ dağılımından nasıl örneklem alırsınız?
 \end{alistirma}
 \alcozum{%

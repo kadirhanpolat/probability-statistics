@@ -77,8 +77,8 @@ $= \Gama(1/2, 1/2)$ PDF'si $= \chi^2_1$ PDF'si.
 
 \begin{ispatiskele}[Quantile Dönüşümü --- İspat İskeleti]
 $U \sim \Uniform(0,1)$, $F$ herhangi KDF, $X = F^{-1}(U)$.
-\iskeleadim{1}{$P(X \leq x) = P(F^{-1}(U) \leq x)$ ifadesini yazın.}
-\iskeleadim{2}{$F^{-1}(u) \leq x \Leftrightarrow u \leq F(x)$ eşdeğerliğini kullanın ($F$ sağdan sürekli).}
+\iskeleadim{1}{$P(X \leq x) = P(F^{-1}(U) \leq x)$ ifadesini yazınız.}
+\iskeleadim{2}{$F^{-1}(u) \leq x \Leftrightarrow u \leq F(x)$ eşdeğerliğini kullanınız ($F$ sağdan sürekli).}
 \iskeleadim{3}{$P(U \leq F(x)) = \bosluk{F(x)}$ (uniform KDF).}
 \iskeleadim{4}{Sonuç: $F_X(x) = F(x)$, yani $X \sim F$.}
 \end{ispatiskele}
@@ -95,11 +95,11 @@ Burada sistematik uygulama tekniklerini ve önemli örnekleri işliyoruz.
 \label{prop:jacobian_adim}
 $(X_1, \ldots, X_n) \to (Y_1, \ldots, Y_n)$ dönüşümü için:
 \begin{enumerate}[(1)]
-  \item Ters dönüşümü bulun: $x_i = h_i(y_1,\ldots,y_n)$.
-  \item Jacobian matrisini oluşturun: $J_{ij} = \partial h_i/\partial y_j$.
-  \item $|\det J|$'yi hesaplayın.
-  \item Tanım bölgesini dönüştürün: $\mathcal{X} \to \mathcal{Y}$.
-  \item $f_Y(\mathbf{y}) = f_X(h(\mathbf{y})) \cdot |\det J|$ ile PDF'yi yazın.
+  \item Ters dönüşümü bulunuz: $x_i = h_i(y_1,\ldots,y_n)$.
+  \item Jacobian matrisini oluşturunuz: $J_{ij} = \partial h_i/\partial y_j$.
+  \item $|\det J|$'yi hesaplayınız.
+  \item Tanım bölgesini dönüştürünüz: $\mathcal{X} \to \mathcal{Y}$.
+  \item $f_Y(\mathbf{y}) = f_X(h(\mathbf{y})) \cdot |\det J|$ ile PDF'yi yazınız.
 \end{enumerate}
 \end{onerme}
 
@@ -632,8 +632,8 @@ güven aralığı hesabında standart araçtır (oran tahmincisi, elastisite).
 \begin{itemize}
   \item MÜF yönteminin Jacobian yöntemine göre avantajı nedir? Hangi durumda
         Jacobian daha kullanışlıdır?
-  \item Sıra istatistiklerinin neden bağımlı olduğunu kendi cümlelerinizle açıklayın.
-  \item Delta yönteminin temel fikri nedir? Taylor açılımının bu bağlamda nasıl çalıştığını anlatın.
+  \item Sıra istatistiklerinin neden bağımlı olduğunu kendi cümlelerinizle açıklayınız.
+  \item Delta yönteminin temel fikri nedir? Taylor açılımının bu bağlamda nasıl çalıştığını anlatınız.
   \item Üstel dağılımlı cihazlarda sıra arası boşlukların bağımsız olması sezgiye uygun mu?
 \end{itemize}
 \end{ozyansima}
@@ -658,8 +658,8 @@ yüzdelik tahmincisi ve Böl.~\ref{chp:hipotez_testi}'nde parametresiz testlerde
 
 \begin{alistirma}[Al.6.1]{A}{Tekil Dönüşüm}
 $X \sim \mathrm{Exp}(1)$. $Y = \sqrt{X}$ için:
-(a) $f_Y(y)$'yi Jacobian yöntemiyle bulun.
-(b) $E[Y]$'yi $f_Y$ üzerinden hesaplayın ($\Gamma(3/2) = \sqrt{\pi}/2$).
+(a) $f_Y(y)$'yi Jacobian yöntemiyle bulunuz.
+(b) $E[Y]$'yi $f_Y$ üzerinden hesaplayınız ($\Gamma(3/2) = \sqrt{\pi}/2$).
 \end{alistirma}
 \alcozum{%
 (a) $g(x) = \sqrt{x}$, ters $h(y) = y^2$, $|h'(y)| = 2y$.
@@ -669,9 +669,9 @@ $u = y^2$: $= \int_0^\infty u^{1/2} e^{-u} du = \Gamma(3/2) = \sqrt{\pi}/2$.}
 
 \begin{alistirma}[Al.6.2]{A}{Sıra İstatistikleri}
 $X_1, X_2, X_3 \sim \Uniform(0,1)$ bağımsız.
-(a) $X_{(1)}$ ve $X_{(3)}$'ün PDF'lerini yazın.
-(b) $E[X_{(1)}]$ ve $E[X_{(3)}]$'ü hesaplayın.
-(c) $P(X_{(2)} > 0.5)$'i bulun.
+(a) $X_{(1)}$ ve $X_{(3)}$'ün PDF'lerini yazınız.
+(b) $E[X_{(1)}]$ ve $E[X_{(3)}]$'ü hesaplayınız.
+(c) $P(X_{(2)} > 0.5)$'i bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $f_{X_{(1)}}(x) = 3(1-x)^2$, $f_{X_{(3)}}(x) = 3x^2$, $0<x<1$.\\
@@ -682,10 +682,10 @@ $P(X_{(2)}>0.5) = \int_{0.5}^1 6x(1-x)dx = 6[x^2/2-x^3/3]_{0.5}^1
 
 \begin{alistirma}[Al.6.3]{B}{MÜF Yöntemi}
 $X_1, \ldots, X_n \sim \Pois(\lambda)$ bağımsız. $S_n = \sum X_i$.
-(a) $M_{S_n}(t)$'yi bulun.
-(b) $S_n$'nin dağılımını belirtin.
-(c) $\bar{X}_n = S_n/n$'nin MÜF'ünü yazın ve $n=100$, $\lambda=2$ için
-$P(\bar{X}_{100} \geq 2.5)$'e Chernoff sınırı verin.
+(a) $M_{S_n}(t)$'yi bulunuz.
+(b) $S_n$'nin dağılımını belirtiniz.
+(c) $\bar{X}_n = S_n/n$'nin MÜF'ünü yazınız ve $n=100$, $\lambda=2$ için
+$P(\bar{X}_{100} \geq 2.5)$'e Chernoff sınırı veriniz.
 \end{alistirma}
 \alcozum{%
 (a) $M_{S_n}(t) = \prod M_{X_i}(t) = [e^{\lambda(e^t-1)}]^n = e^{n\lambda(e^t-1)}$.\\
@@ -698,7 +698,7 @@ $P(\bar{X}_{100}\geq2.5) \leq e^{-100\cdot0.058} = e^{-5.8} \approx 0.003$.}
 \begin{alistirma}[Al.6.4]{B}{Delta Yöntemi}
 $X_1, \ldots, X_n$ i.i.d., $E[X_i] = \mu > 0$, $\mathrm{Var}(X_i) = \sigma^2$.
 MLT (bir sonraki bölüm): $\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} \Normal(0,\sigma^2)$.
-Delta yöntemi ile $\sqrt{n}(1/\bar{X}_n - 1/\mu)$'nun limit dağılımını bulun.
+Delta yöntemi ile $\sqrt{n}(1/\bar{X}_n - 1/\mu)$'nun limit dağılımını bulunuz.
 \end{alistirma}
 \alcozum{%
 $g(x) = 1/x$, $g'(x) = -1/x^2$, $g'(\mu) = -1/\mu^2$.
@@ -707,9 +707,9 @@ $\sqrt{n}(1/\bar{X}_n - 1/\mu) \xrightarrow{d} \Normal(0, \sigma^2/\mu^4)$.}
 
 \begin{alistirma}[Al.6.4b]{B}{İki Boyutlu Jacobian --- Polar Dönüşüm}
 $(X,Y)\iid\Normal(0,1)$ bağımsız. $R=\sqrt{X^2+Y^2}$, $\Theta=\arctan(Y/X)$ polar dönüşümü.
-(a) $(R,\Theta)$'nın birleşik yoğunluğunu Jacobian yöntemiyle bulun.
-(b) $R$ ve $\Theta$'nın marjinal dağılımlarını yazın. $R$'nin adı ne?
-(c) Bu sonucu Box-Muller dönüşümüyle ilişkilendirin.
+(a) $(R,\Theta)$'nın birleşik yoğunluğunu Jacobian yöntemiyle bulunuz.
+(b) $R$ ve $\Theta$'nın marjinal dağılımlarını yazınız. $R$'nin adı ne?
+(c) Bu sonucu Box-Muller dönüşümüyle ilişkilendiriniz.
 \end{alistirma}
 \alcozum{%
 (a) Ters dönüşüm: $X=R\cos\Theta$, $Y=R\sin\Theta$. Jacobian:
@@ -725,9 +725,9 @@ $f_{R,\Theta}(r,\theta) = f_{X,Y}(r\cos\theta, r\sin\theta)\cdot|J|^{-1} = \frac
 
 \begin{alistirma}[Al.6.4c]{C}{Konvolüsyon ve Toplam Dağılımı}
 $X\sim\Gama(\alpha,1)$, $Y\sim\Gama(\beta,1)$ bağımsız.
-(a) MÜF yöntemiyle $Z=X+Y$'nin dağılımını bulun.
-(b) $W=X/(X+Y)$'nin dağılımını konvolüsyon + Jacobian ile türetin.
-(c) $\alpha=\beta=1$ durumunda (yani $X,Y\iid\mathrm{Exp}(1)$): $W$'nin dağılımını yazın ve sezgisel yorumunu verin.
+(a) MÜF yöntemiyle $Z=X+Y$'nin dağılımını bulunuz.
+(b) $W=X/(X+Y)$'nin dağılımını konvolüsyon + Jacobian ile türetiniz.
+(c) $\alpha=\beta=1$ durumunda (yani $X,Y\iid\mathrm{Exp}(1)$): $W$'nin dağılımını yazınız ve sezgisel yorumunu veriniz.
 \end{alistirma}
 \alcozum{%
 (a) $M_X(t)=(1-t)^{-\alpha}$, $M_Y(t)=(1-t)^{-\beta}$ (t<1). $M_Z(t)=(1-t)^{-(\alpha+\beta)}$; dolayısıyla $Z\sim\Gama(\alpha+\beta,1)$.
@@ -748,7 +748,7 @@ Marjinal $w$: $f_W(w)=\frac{w^{\alpha-1}(1-w)^{\beta-1}}{B(\alpha,\beta)}$; yani
 
 \begin{alistirma}[Al.6.5]{A}{Dönüşüm Uygulaması}
 $X \sim \Normal(0,1)$. $Y = e^X$ (lognormal).
-(a) $F_Y(y)$'yi $\Phi$ cinsinden yazın. (b) $f_Y(y)$'yi türetin. (c) $P(1 < Y < e)$'yi bulun.
+(a) $F_Y(y)$'yi $\Phi$ cinsinden yazınız. (b) $f_Y(y)$'yi türetiniz. (c) $P(1 < Y < e)$'yi bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $F_Y(y) = P(e^X \leq y) = P(X \leq \ln y) = \Phi(\ln y)$.
@@ -757,8 +757,8 @@ $X \sim \Normal(0,1)$. $Y = e^X$ (lognormal).
 
 \begin{alistirma}[Al.6.6]{A}{Minimum Dağılımı}
 $X_1,\ldots,X_5 \sim \mathrm{Exp}(2)$ bağımsız. $X_{(1)} = \min X_i$.
-(a) $X_{(1)}$'in dağılımını bulun. (b) $P(X_{(1)} > 0.3)$'ü hesaplayın.
-(c) $E[X_{(1)}]$'i bulun.
+(a) $X_{(1)}$'in dağılımını bulunuz. (b) $P(X_{(1)} > 0.3)$'ü hesaplayınız.
+(c) $E[X_{(1)}]$'i bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $X_{(1)} \sim \mathrm{Exp}(5\cdot2) = \mathrm{Exp}(10)$.
@@ -767,9 +767,9 @@ $X_1,\ldots,X_5 \sim \mathrm{Exp}(2)$ bağımsız. $X_{(1)} = \min X_i$.
 
 \begin{alistirma}[Al.6.7]{B}{Çok Boyutlu Jacobian}
 $X, Y$ bağımsız $\Normal(0,1)$. $U = X+Y$, $V = X-Y$.
-(a) $(U,V)$'nin ortak PDF'sini bulun.
-(b) $U$ ve $V$ bağımsız mı? Dağılımlarını belirtin.
-(c) $U$ ve $V$'nin $\mathrm{Cov}(U,V)$'sini hesaplayın.
+(a) $(U,V)$'nin ortak PDF'sini bulunuz.
+(b) $U$ ve $V$ bağımsız mı? Dağılımlarını belirtiniz.
+(c) $U$ ve $V$'nin $\mathrm{Cov}(U,V)$'sini hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (a) Ters: $x=(u+v)/2$, $y=(u-v)/2$. $|\det J| = 1/2$.
@@ -778,8 +778,8 @@ $f_{U,V}(u,v) = \phi((u+v)/2)\phi((u-v)/2)/2 = \frac{1}{4\pi}e^{-(u^2+v^2)/4}$.
 (c) $\mathrm{Cov}(U,V) = \mathrm{Cov}(X+Y,X-Y) = \mathrm{Var}(X)-\mathrm{Var}(Y) = 1-1 = 0$. (Bağımsızlıkla tutarlı.)}
 
 \begin{alistirma}[Al.6.8]{B}{Sıra İstatistikleri --- Beklenti}
-$X_1,\ldots,X_n \sim \Uniform(0,\theta)$. $X_{(n)} = \max X_i$ ile $\theta$'yı tahmin edin.
-(a) $X_{(n)}$'nin PDF'sini bulun. (b) $E[X_{(n)}]$'i hesaplayın.
+$X_1,\ldots,X_n \sim \Uniform(0,\theta)$. $X_{(n)} = \max X_i$ ile $\theta$'yı tahmin ediniz.
+(a) $X_{(n)}$'nin PDF'sini bulunuz. (b) $E[X_{(n)}]$'i hesaplayınız.
 (c) $E[X_{(n)}] \neq \theta$: yansız tahminci nedir?
 \end{alistirma}
 \alcozum{%
@@ -790,7 +790,7 @@ $X_1,\ldots,X_n \sim \Uniform(0,\theta)$. $X_{(n)} = \max X_i$ ile $\theta$'yı 
 \begin{alistirma}[Al.6.9]{C}{Evrişim: Gama Toplamı}
 $X \sim \Gama(\alpha, \beta)$, $Y \sim \Gama(\gamma, \beta)$ bağımsız ($\beta$ aynı).
 Evrişim integraliyle (MÜF kullanmadan) $X+Y \sim \Gama(\alpha+\gamma, \beta)$
-olduğunu ispatlayın.
+olduğunu ispatlayınız.
 \end{alistirma}
 \alcozum{%
 $f_{X+Y}(z) = \int_0^z f_X(t)f_Y(z-t)dt
@@ -803,9 +803,9 @@ $f_{X+Y}(z) = \frac{\beta^{\alpha+\gamma}}{\Gamma(\alpha+\gamma)}z^{\alpha+\gamm
 
 \begin{alistirma}[Al.6.10]{B}{KF Tersçevirme}
 $X$ rasgele değişken, $\varphi_X(t) = e^{-|t|}$ (Cauchy KF).
-(a) $\int_{-\infty}^{+\infty} |\varphi_X(t)|\,dt$'nin varlığını kontrol edin.
-(b) Tersçevirme formülünü kullanarak $f_X(x)$'i hesaplayın.
-(c) Sonucun hangi standart dağılıma karşılık geldiğini belirtin.
+(a) $\int_{-\infty}^{+\infty} |\varphi_X(t)|\,dt$'nin varlığını kontrol ediniz.
+(b) Tersçevirme formülünü kullanarak $f_X(x)$'i hesaplayınız.
+(c) Sonucun hangi standart dağılıma karşılık geldiğini belirtiniz.
 \end{alistirma}
 \alcozum{%
 (a) $\int_{-\infty}^\infty |e^{-|t|}|\,dt = 2\int_0^\infty e^{-t}\,dt = 2 < \infty$. Formül uygulanabilir.\\
@@ -817,9 +817,9 @@ $= \frac{1}{2\pi}\left[\frac{1}{1+ix} + \frac{1}{1-ix}\right] = \frac{1}{2\pi}\c
 \begin{alistirma}[Al.6.11]{B}{İkinci Dereceden Delta Yöntemi}
 $X_1, \ldots, X_n$ i.i.d., $E[X_i] = 0$, $\mathrm{Var}(X_i) = 1$.
 $g(x) = x^2 + 3x$.
-(a) $g'(0)$ ve $g''(0)$'ı hesaplayın.
-(b) $\sqrt{n}(g(\bar{X}_n) - g(0))$ için limit dağılımı verin.
-(c) Eğer $h(x) = x^2$ olsaydı, $n(h(\bar{X}_n) - h(0))$ için limit dağılımını verin.
+(a) $g'(0)$ ve $g''(0)$'ı hesaplayınız.
+(b) $\sqrt{n}(g(\bar{X}_n) - g(0))$ için limit dağılımı veriniz.
+(c) Eğer $h(x) = x^2$ olsaydı, $n(h(\bar{X}_n) - h(0))$ için limit dağılımını veriniz.
 \end{alistirma}
 \alcozum{%
 $g(x) = x^2 + 3x$; $g'(x) = 2x+3$; $g'(0) = 3 \neq 0$; $g''(0) = 2$.\\

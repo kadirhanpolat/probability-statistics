@@ -309,11 +309,15 @@ Yüksek leverage ($h_{ii}$ büyük) mutlaka etkili nokta olmayabilir: $x_i$ uç 
 %% ============================================================
 
 \begin{kesif}
-Normal hata varsayımını kaldıralım: ikili yanıt (0/1), sayma verisi (Poisson), süre (Gama). Bu yanıtlar için doğrusal model uygun değildir --- bağlantı fonksiyonu (link function) devreye girer.
-\kesifcevap{GLM: $g(E[Y])=\mathbf{x}^\top\boldsymbol\beta$ (bağlantı fonksiyonu $g$).
-  Lojistik regresyon: $g=\mathrm{logit}$, $Y\sim\mathrm{Bernoulli}$.
-  Poisson regresyon: $g=\log$, $Y\sim\mathrm{Poisson}$.
-  Üstel aile üyeleri olduğu için MLE'ye IRLS (yinelemeli ağırlıklı EKK) uygulanır.}
+$Y_i \in \{0,1\}$ ikili yanıt için doğrusal model
+$E[Y_i \mid \mathbf{x}_i] = \mathbf{x}_i^\top\boldsymbol\beta$ kullanılabilir mi?
+$\mathbf{x}_i^\top\boldsymbol\beta < 0$ veya $> 1$ olduğunda ne sorun çıkar?
+Olasılıkları $[0,1]$ aralığında tutmak için ne yapılabilir?
+\kesifcevap{Doğrusal model $\hat{p}_i = \mathbf{x}_i^\top\boldsymbol\beta < 0$ veya $> 1$
+  üretebilir --- olasılık yorumu bozulur. Çözüm: $E[Y_i]$'yi doğrudan değil,
+  bir dönüşümünü modellemek. $g(\mu) = \log(\mu/(1-\mu))$ (logit) bağlantısı
+  $\mu \in (0,1)$'i tüm gerçel eksene açar; bu lojistik regresyondur.
+  Sayma verisi için $g = \log$ ile $\hat\mu > 0$ garantisi sağlanır.}
 \end{kesif}
 
 \begin{tanim}[GLM]\label{def:glm}
@@ -520,7 +524,6 @@ Basit regresyonda $\hat\beta_1=S_{xy}/S_{xx}$ ve alternatif yansız doğrusal ta
 $w_i = c_i + d_i$ ($c_i=(x_i-\bar x)/S_{xx}$, $d_i$ kısıtları sağlayan ek terim). Yansızlık: $\sum d_i=0$, $\sum d_i x_i=0$. $\Var(\tilde\beta_1)=\sigma^2\sum w_i^2=\sigma^2(\sum c_i^2+\sum d_i^2)\geq\sigma^2/S_{xx}=\Var(\hat\beta_1)$.%
 }
 
-\alistirmalar
 
 \begin{alistirma}[Al.15.3]{A}{$F$-testi yorumu}
 $n=30$, $p=3$, $\mathrm{SST}=200$, $\mathrm{SSE}=80$. $F$-istatistiğini hesapla ve $\alpha=0.05$'te $H_0:\beta_1=\beta_2=\beta_3=0$'ı test et.
@@ -528,33 +531,35 @@ $n=30$, $p=3$, $\mathrm{SST}=200$, $\mathrm{SSE}=80$. $F$-istatistiğini hesapla
 \alcozum{%
 SSR$=120$. $F=(120/3)/(80/26)=40/3.077=13.0$. $F_{3,26,0.05}\approx2.98$. $F>2.98$: $H_0$ reddedilir.%
 }
-
 \begin{alistirma}[Al.15.4]{B}{Çoklu regresyon --- matris}
 $\mathbf{X}=\begin{pmatrix}1&1\\1&2\\1&3\end{pmatrix}$, $\mathbf{y}=(2,3,6)^\top$. $\hat{\boldsymbol\beta}$ ve $\hat{\mathbf{y}}$'yi hesapla.
 \end{alistirma}
 \alcozum{%
 $\mathbf{X}^\top\mathbf{X}=\begin{pmatrix}3&6\\6&14\end{pmatrix}$; $(\mathbf{X}^\top\mathbf{X})^{-1}=\frac{1}{6}\begin{pmatrix}14&-6\\-6&3\end{pmatrix}$. $\mathbf{X}^\top\mathbf{y}=(11,28)^\top$. $\hat\beta=(14\cdot11-6\cdot28,\ -6\cdot11+3\cdot28)^\top/6=(-14/6,\;18/6)^\top=(-7/3,3)^\top$. $\hat\beta_0=-7/3$, $\hat\beta_1=3$. $\hat{\mathbf{y}}=(2/3,3,4/3+3)^\top=(2/3,3,8/3+\ldots)$--- Doğrudan: $\hat y_i=-7/3+3x_i$: $2/3, 3, 16/3\approx5.33$.%
 }
-
 \begin{alistirma}[Al.15.5]{B}{Ridge vs EKK: OKH}
 Tek değişkenli regresyon; $\beta$ skaler. EKK $\hat\beta$ ve Ridge $\hat\beta_\lambda=\frac{\sum x_i y_i}{\sum x_i^2+\lambda}$ karşılaştır. Ridge OKH'ının $\lambda^*$ için EKK OKH'ından küçük olduğu $\lambda$ aralığını bul.
 \end{alistirma}
 \alcozum{%
 $S_{xx}=\sum x_i^2$. $\hat\beta=S_{xy}/S_{xx}$, $\hat\beta_\lambda=S_{xy}/(S_{xx}+\lambda)$. $\Beklenti[\hat\beta_\lambda]= \beta\cdot S_{xx}/(S_{xx}+\lambda)$; yanlılık $= -\beta\lambda/(S_{xx}+\lambda)$. Varyans$(\hat\beta_\lambda)=\sigma^2 S_{xx}/(S_{xx}+\lambda)^2$. OKH$(\hat\beta_\lambda)=\sigma^2 S_{xx}/(S_{xx}+\lambda)^2 + \beta^2\lambda^2/(S_{xx}+\lambda)^2$. EKK OKH$=\sigma^2/S_{xx}$. Ridge daha iyi: $\lambda<2\sigma^2/\beta^2$. Küçük $\beta^2$ (zayıf sinyal) geniş aralık; $\lambda^*=\sigma^2/(\beta^2)$ optimal.%
 }
-
 \begin{alistirma}[Al.15.6]{C}{Regresyon sertlikası --- sonuç doğrulama}
 Göster: basit regresyon $\hat\beta_1=\mathrm{Cor}(x,Y)\cdot(s_Y/s_x)$ ile $R^2=\mathrm{Cor}(x,Y)^2$ eşitlikleri geçerli ($s_x,s_Y$ örneklem standart sapmaları).
 \end{alistirma}
 \alcozum{%
 $\hat\beta_1=S_{xy}/S_{xx}=\frac{\sum(x_i-\bar x)(Y_i-\bar Y)}{\sum(x_i-\bar x)^2}$. $r=S_{xy}/\sqrt{S_{xx}S_{YY}}$ ile $\hat\beta_1=r\sqrt{S_{YY}/S_{xx}}=r\cdot s_Y/s_x$ ($s_x=\sqrt{S_{xx}/(n-1)}$, $s_Y=\sqrt{S_{YY}/(n-1)}$). $R^2=\mathrm{SSR}/\mathrm{SST}=\hat\beta_1^2 S_{xx}/S_{YY}=r^2$.%
 }
+\alistirmalar
+
+
+
+
 
 \begin{alistirma}[Al.15.7]{B}{WLS hesabı}
 3 gözlem: $(x_i,Y_i,w_i)=(1,3,1),(2,5,4),(3,8,1)$. Ağırlıklı EKK ile $\hat\beta_0,\hat\beta_1$'i bul.
 \end{alistirma}
 \alcozum{%
-$W=\mathrm{diag}(1,4,1)$. $\mathbf{X}^\top W\mathbf{X}=\begin{pmatrix}1&1&1\\1&2&3\end{pmatrix}W\begin{pmatrix}1&1\\1&2\\1&3\end{pmatrix}=\begin{pmatrix}6&9\\9&14\end{pmatrix}$. $\mathbf{X}^\top W\mathbf{Y}=\begin{pmatrix}1&4&1\\1&8&3\end{pmatrix}(3,5,8)^\top=(3+20+8,3+40+24)=(31,67)$. $(\mathbf{X}^\top W\mathbf{X})^{-1}=\frac{1}{3}\begin{pmatrix}14&-9\\-9&6\end{pmatrix}$. $\hat\beta=(14\cdot31-9\cdot67,-9\cdot31+6\cdot67)^\top/3=(434-603,-279+402)^\top/3=(-169/3,123/3)=(-56.3,41)$. Kontrol edin: ağırlıklı ortamada 2. nokta ($w=4$) büyük etkili.%
+$W=\mathrm{diag}(1,4,1)$. $\mathbf{X}^\top W\mathbf{X}=\begin{pmatrix}1&1&1\\1&2&3\end{pmatrix}W\begin{pmatrix}1&1\\1&2\\1&3\end{pmatrix}=\begin{pmatrix}6&9\\9&14\end{pmatrix}$. $\mathbf{X}^\top W\mathbf{Y}=\begin{pmatrix}1&4&1\\1&8&3\end{pmatrix}(3,5,8)^\top=(3+20+8,3+40+24)=(31,67)$. $(\mathbf{X}^\top W\mathbf{X})^{-1}=\frac{1}{3}\begin{pmatrix}14&-9\\-9&6\end{pmatrix}$. $\hat\beta=(14\cdot31-9\cdot67,-9\cdot31+6\cdot67)^\top/3=(434-603,-279+402)^\top/3=(-169/3,123/3)=(-56.3,41)$. Kontrol ediniz: ağırlıklı ortamada 2. nokta ($w=4$) büyük etkili.%
 }
 
 \begin{alistirma}[Al.15.8]{B}{AIC karşılaştırması}
@@ -572,14 +577,14 @@ $D_i=r_i^2 h_{ii}/[(p+1)(1-h_{ii})]$. A: $D=4.41\cdot0.15/(3\cdot0.85)=0.662/2.5
 }
 
 \begin{alistirma}[Al.15.10]{A}{Basit Regresyon --- Skor Fonksiyonu}
-$Y_i=\alpha+\beta x_i+\varepsilon_i$, $\varepsilon_i\iid\Normal(0,\sigma^2)$. (a) Log-olabilirlik $\ell(\alpha,\beta,\sigma^2)$'yi yaz. (b) $\partial\ell/\partial\alpha=0$, $\partial\ell/\partial\beta=0$ denklemlerini çözerek $\hat\alpha,\hat\beta$ EKK formüllerine ulaşın.
+$Y_i=\alpha+\beta x_i+\varepsilon_i$, $\varepsilon_i\iid\Normal(0,\sigma^2)$. (a) Log-olabilirlik $\ell(\alpha,\beta,\sigma^2)$'yi yaz. (b) $\partial\ell/\partial\alpha=0$, $\partial\ell/\partial\beta=0$ denklemlerini çözerek $\hat\alpha,\hat\beta$ EKK formüllerine ulaşınız.
 \end{alistirma}
 \alcozum{%
 (a) $\ell=-\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum(Y_i-\alpha-\beta x_i)^2$.
 (b) $\partial\ell/\partial\alpha=\frac{1}{\sigma^2}\sum(Y_i-\alpha-\beta x_i)=0\Rightarrow\bar Y=\hat\alpha+\hat\beta\bar x$. $\partial\ell/\partial\beta=\frac{1}{\sigma^2}\sum x_i(Y_i-\alpha-\beta x_i)=0\Rightarrow\hat\beta=S_{xy}/S_{xx}$, $\hat\alpha=\bar Y-\hat\beta\bar x$. EKK = MLE ($\Normal$ hatası altında).}
 
 \begin{alistirma}[Al.15.11]{B}{Lojistik Regresyon --- Newton-Raphson}
-$Y\sim\mathrm{Bernoulli}(p)$, $\log\frac{p}{1-p}=\beta_0+\beta_1 x$. $n=5$ gözlem: $(x,y)$: $(0,0),(1,0),(2,1),(3,1),(4,1)$. (a) Log-olabilirliği yaz. (b) $\beta_0=0,\beta_1=1$ başlangıcından Newton adımı için skor $\mathbf{s}$ ve Hessian $\mathbf{H}$'yi numerik hesaplayın.
+$Y\sim\mathrm{Bernoulli}(p)$, $\log\frac{p}{1-p}=\beta_0+\beta_1 x$. $n=5$ gözlem: $(x,y)$: $(0,0),(1,0),(2,1),(3,1),(4,1)$. (a) Log-olabilirliği yaz. (b) $\beta_0=0,\beta_1=1$ başlangıcından Newton adımı için skor $\mathbf{s}$ ve Hessian $\mathbf{H}$'yi numerik hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\ell(\beta)=\sum_{i:y_i=1}(\beta_0+\beta_1x_i)-\sum_{i=1}^5\log(1+e^{\beta_0+\beta_1 x_i})$.

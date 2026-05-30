@@ -399,7 +399,7 @@ Makine $n=25$ vida üretti; $\bar{x}=50.2$ mm, $s=0.3$ mm. \%95 güvenle vidalar
 \end{ornek}
 
 \begin{hataanalizi}
-Üç farklı aralık türünü karıştırmayın:
+Üç farklı aralık türünü karıştırmayınız:
 \begin{itemize}
   \item \textbf{Güven aralığı}: $\mu$ gibi bir parametre için --- aralık ortalamayı kapsar.
   \item \textbf{Tahmin aralığı}: tek bir yeni gözlem için --- $X_{\text{yeni}}\in[L,U]$.
@@ -524,7 +524,7 @@ $n=9$, $\bar{x}=23.1$, $s=4.5$, normal popülasyon. (a) \%95 $t$-aralığı. (b)
 }
 
 \begin{alistirma}[Al.13.2b]{B}{Bootstrap Güven Aralığı}
-$X_1,\ldots,X_{20}$ gözlemi, $\bar{x}=12.4$, $s=3.1$. (a) Nonparametrik bootstrap ile medyan için \%95 GA'nın mantığını açıklayın. (b) $B=1000$ bootstrap örnekleminde medyan standart hatası $\hat\sigma^*=0.82$ bulundu. Normal yaklaşım ile GA'yı kurun. (c) Bootstrap'ın klasik $t$-aralığına göre avantajı nedir?
+$X_1,\ldots,X_{20}$ gözlemi, $\bar{x}=12.4$, $s=3.1$. (a) Nonparametrik bootstrap ile medyan için \%95 GA'nın mantığını açıklayınız. (b) $B=1000$ bootstrap örnekleminde medyan standart hatası $\hat\sigma^*=0.82$ bulundu. Normal yaklaşım ile GA'yı kurunuz. (c) Bootstrap'ın klasik $t$-aralığına göre avantajı nedir?
 \end{alistirma}
 \alcozum{%
 (a) Her bootstrap örnekleminden medyan $\tilde\theta^{*(b)}$ hesaplanır ($b=1,\ldots,B$). Emprik dağılım $F^*$ kullanılarak güven sınırları: $(\tilde\theta^*_{(\alpha/2)},\tilde\theta^*_{(1-\alpha/2)})$ yüzdelik yöntemi ile.
@@ -532,14 +532,13 @@ $X_1,\ldots,X_{20}$ gözlemi, $\bar{x}=12.4$, $s=3.1$. (a) Nonparametrik bootstr
 (c) Bootstrap normallik varsaymaz; medyan, oran ve diğer düzgün olmayan istatistikler için geçerlidir; küçük örneklemde $t$-dağılımı varsayımını aşar.}
 
 \begin{alistirma}[Al.13.2c]{B}{Bayes Güvenilir Aralığı --- Hesap}
-$X_1,\ldots,X_n\iid\Binom(1,p)$, $n=30$, $\sum x_i=18$. Önsel $p\sim\Beta(2,2)$. (a) Sonsal dağılımı bulun. (b) \%95 eşit-kuyruklu güvenilir aralığı Beta kantil tablosuyla kurun. (c) Bu aralığı klasik Wald aralığıyla karşılaştırın.
+$X_1,\ldots,X_n\iid\Binom(1,p)$, $n=30$, $\sum x_i=18$. Önsel $p\sim\Beta(2,2)$. (a) Sonsal dağılımı bulunuz. (b) \%95 eşit-kuyruklu güvenilir aralığı Beta kantil tablosuyla kurunuz. (c) Bu aralığı klasik Wald aralığıyla karşılaştırınız.
 \end{alistirma}
 \alcozum{%
 (a) Sonsal: $p|X\sim\Beta(2+18,2+12)=\Beta(20,14)$.
 (b) \%95 GA: $(\Beta_{0.025}(20,14), \Beta_{0.975}(20,14))$. $\Beta(20,14)$ modu $19/32=0.594$. Yaklaşık hesap: $\mu_1=20/34=0.588$, $\sigma_1^2=20\cdot14/(34^2\cdot35)=0.00696$. Normal yaklaşım: $0.588\pm1.96\cdot0.0834\approx[0.425,0.751]$.
 (c) Wald: $\hat p=18/30=0.6$, $\hat\sigma=\sqrt{0.6\cdot0.4/30}=0.0894$; GA: $0.6\pm1.96\cdot0.0894=[0.425,0.775]$. Bayesçi önceden $\Beta(2,2)$ ortalamaya (0.5) doğru çeker.}
 
-\alistirmalar
 
 \begin{alistirma}[Al.13.3]{A}{Varyans için GA}
 $n=20$, $s^2=16.4$, normal popülasyon. $\sigma^2$ için \%95 güven aralığını kur.
@@ -547,13 +546,15 @@ $n=20$, $s^2=16.4$, normal popülasyon. $\sigma^2$ için \%95 güven aralığın
 \alcozum{%
 $\chi^2_{19,0.025}=32.852$, $\chi^2_{19,0.975}=8.907$. GA: $[19\cdot16.4/32.852,\;19\cdot16.4/8.907]=[9.49,\;34.99]$.%
 }
-
 \begin{alistirma}[Al.13.4]{B}{Wilson oranı aralığı}
 $n=20$ denemede $k=2$ başarı. $p$ için (a) Wald aralığı, (b) Wilson aralığı kur (\%95). Sonuçları yorumla.
 \end{alistirma}
 \alcozum{%
 $\bar{p}=0.1$. (a) Wald: $0.1\pm1.96\sqrt{0.1\cdot0.9/20}=0.1\pm0.131=[-0.031,0.231]$ --- olumsuz değer içeriyor, geçersiz. (b) Wilson: pay=$0.1+1.96^2/40=0.196$; payda=$1+3.84/20=1.192$; merkez$=0.164$; $\pm\approx0.155$; $[0.009,\;0.319]$ --- daha sağlam.%
 }
+\alistirmalar
+
+
 
 \begin{alistirma}[Al.13.5]{B}{Welch güven aralığı}
 İki bağımsız grup: Grup A ($n_1=15$, $\bar{x}_1=42$, $s_1=8$), Grup B ($n_2=20$, $\bar{x}_2=37$, $s_2=12$). Varyansların eşit olmadığını varsayarak $\mu_1-\mu_2$ için \%95 Welch güven aralığını kur.

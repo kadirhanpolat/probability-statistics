@@ -350,7 +350,7 @@ $z_{0.025} = 1.96$: yaklaşık $\%95$ güven aralığı $\bar{X}_n \pm 1.96\sigm
 \label{prop:oran_guven}
 $X_i \sim \mathrm{Bernoulli}(p)$, $\hat{p} = \bar{X}_n$. MLT:
 $\sqrt{n}(\hat{p}-p)/\sqrt{p(1-p)} \xrightarrow{d} \Normal(0,1)$.
-$p$ bilinmiyorsa $\sqrt{\hat{p}(1-\hat{p})}$ ile değiştirin (Slutsky):
+$p$ bilinmiyorsa $\sqrt{\hat{p}(1-\hat{p})}$ ile değiştiriniz (Slutsky):
 yaklaşık $\%95$ GA: $\hat{p} \pm 1.96\sqrt{\hat{p}(1-\hat{p})/n}$.
 \end{onerme}
 
@@ -402,8 +402,8 @@ doğrudan uygulaması değil, $t$ dağılımının kullanımıdır; büyük $n$'
   \item MLT'nin "evrenselliği" size sezgisel olarak neden doğru geliyor (ya da gelmiyor)?
   \item Berry-Esseen teoremi "$n \geq 30$ yeterli" kuralını nasıl sorgular?
   \item Lindeberg koşulu intuisyon olarak ne anlama gelir?
-        "Hiçbir terim baskın değil" yorumunu bir örnekle somutlaştırın.
-  \item YLK ile MLT arasındaki farkı bir grafikle anlatın (sözlü olarak tarif edin).
+        "Hiçbir terim baskın değil" yorumunu bir örnekle somutlaştırınız.
+  \item YLK ile MLT arasındaki farkı bir grafikle anlatınız (sözlü olarak tarif ediniz).
 \end{itemize}
 \end{ozyansima}
 
@@ -577,7 +577,7 @@ Pay MLT ile $\Normal(0,\mathcal{I}(\theta_0))$'a yakınsadı (Martingal MLT §\r
 \begin{alistirma}[Al.8.1]{A}{MLT Uygulaması}
 Bir sigorta şirketinin yıllık hasar başına ödeme miktarı $E[X] = 1000$ TL,
 $\sigma = 200$ TL. $n = 100$ hasar için toplam ödemenin $105\,000$ TL'yi aşma
-olasılığını MLT ile tahmin edin.
+olasılığını MLT ile tahmin ediniz.
 \end{alistirma}
 \alcozum{%
 $S_{100}$: $E[S_{100}] = 100\,000$, $\mathrm{Var}(S_{100}) = 100 \times 200^2 = 4\,000\,000$,
@@ -586,8 +586,8 @@ $P(S_{100} > 105\,000) = P\!\left(Z > \frac{105000-100000}{2000}\right) = P(Z > 
 
 \begin{alistirma}[Al.8.2]{A}{De Moivre-Laplace}
 $S_{400} \sim \Binom(400, 0.4)$.
-(a) $P(150 \leq S_{400} \leq 170)$'i MLT ile hesaplayın (süreklilik düzeltmesiyle).
-(b) $E[S_{400}]$ ve $\sigma_{S_{400}}$'ü hesaplayın.
+(a) $P(150 \leq S_{400} \leq 170)$'i MLT ile hesaplayınız (süreklilik düzeltmesiyle).
+(b) $E[S_{400}]$ ve $\sigma_{S_{400}}$'ü hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (b) $E[S_{400}]=160$, $\sigma=\sqrt{400\cdot0.4\cdot0.6}=\sqrt{96}\approx9.798$.\\
@@ -596,8 +596,8 @@ $z_1=(149.5-160)/9.798\approx-1.072$, $z_2=(170.5-160)/9.798\approx1.072$.
 $P\approx\Phi(1.072)-\Phi(-1.072)=2\Phi(1.072)-1\approx2(0.8582)-1=0.7164$.}
 
 \begin{alistirma}[Al.8.3]{B}{Berry-Esseen Sınırı}
-$X_i \sim \mathrm{Exp}(1)$ bağımsız: $\mu=1$, $\sigma^2=1$, $E[|X_1-1|^3]$'ü hesaplayın.
-Berry-Esseen ile $n=50$ için maksimum KDF hatasına üst sınır verin.
+$X_i \sim \mathrm{Exp}(1)$ bağımsız: $\mu=1$, $\sigma^2=1$, $E[|X_1-1|^3]$'ü hesaplayınız.
+Berry-Esseen ile $n=50$ için maksimum KDF hatasına üst sınır veriniz.
 \end{alistirma}
 \alcozum{%
 $Y_i = X_i-1$ için $E[|Y_i|^3]$.
@@ -609,8 +609,8 @@ $n=50$, üstel dağılım için maksimum KDF hatası yaklaşık $0.134$.}
 
 \begin{alistirma}[Al.8.4]{B}{Delta Yöntemi + MLT}
 $X_1,\ldots,X_n$ i.i.d.\ $\mathrm{Pois}(\lambda)$, $\bar{X}_n$ örneklem ortalaması.
-(a) MLT: $\sqrt{n}(\bar{X}_n-\lambda)$'nın limit dağılımını yazın.
-(b) $g(x) = \sqrt{x}$ dönüşümü ile $\sqrt{n}(\sqrt{\bar{X}_n}-\sqrt{\lambda})$'nın limit dağılımını bulun.
+(a) MLT: $\sqrt{n}(\bar{X}_n-\lambda)$'nın limit dağılımını yazınız.
+(b) $g(x) = \sqrt{x}$ dönüşümü ile $\sqrt{n}(\sqrt{\bar{X}_n}-\sqrt{\lambda})$'nın limit dağılımını bulunuz.
 (c) (b)'nin sonucu neden uygulamada faydalıdır?
 \end{alistirma}
 \alcozum{%
@@ -622,9 +622,9 @@ Bilinmeyen parametre ile güven aralığı genişliğini kontrol etmek mümkün.
 
 \begin{alistirma}[Al.8.4b]{B}{Çok Boyutlu Delta Yöntemi}
 $X_1,\ldots,X_n$ i.i.d.\ $\Normal(\mu,\sigma^2)$ (her ikisi bilinmiyor). $\mathbf{T}_n=(\bar X_n, S_n^2)$.
-(a) $\sqrt{n}(\mathbf{T}_n-\boldsymbol\theta)$ ($\boldsymbol\theta=(\mu,\sigma^2)$) için asimptotik kovaryans matrisini bulun.
-(b) $g(\mu,\sigma^2)=\mu/\sigma$ (varyasyon katsayısı) için çok boyutlu delta yöntemini uygulayın.
-(c) Elde ettiğiniz asimptotik varyansı yorumlayın.
+(a) $\sqrt{n}(\mathbf{T}_n-\boldsymbol\theta)$ ($\boldsymbol\theta=(\mu,\sigma^2)$) için asimptotik kovaryans matrisini bulunuz.
+(b) $g(\mu,\sigma^2)=\mu/\sigma$ (varyasyon katsayısı) için çok boyutlu delta yöntemini uygulayınız.
+(c) Elde ettiğiniz asimptotik varyansı yorumlayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\bar X_n\xrightarrow{d}\Normal(\mu,\sigma^2/n)$; $(n-1)S_n^2/\sigma^2\sim\chi^2_{n-1}$ dolayısıyla $S_n^2\xrightarrow{d}\Normal(\sigma^2,2\sigma^4/(n-1))$. $\bar X_n$ ile $S_n^2$ Normal ailesinde bağımsız. Asimptotik kovaryans matrisi:
@@ -642,8 +642,8 @@ Asimptotik varyans: $\nabla g^\top\Sigma\,\nabla g = \frac{\sigma^2}{\sigma^2}+\
 
 \begin{alistirma}[Al.8.4c]{C}{Karakteristik Fonksiyon ve Süreklilik Teoremi}
 $X_1,X_2,\ldots$ i.i.d., $\varphi(t)=E[e^{itX_1}]$.
-(a) $\bar X_n$'nin karakteristik fonksiyonu $\varphi_{\bar X_n}(t)=\varphi(t/n)^n$ olduğunu gösterin.
-(b) $E[X_1]=\mu$, $\Var(X_1)=\sigma^2<\infty$ varsayımında $\log\varphi(t)\approx i\mu t - \sigma^2t^2/2+o(t^2)$ açılımını kullanarak $\sqrt{n}(\bar X_n-\mu)/\sigma\xrightarrow{d}\Normal(0,1)$'i türetin.
+(a) $\bar X_n$'nin karakteristik fonksiyonu $\varphi_{\bar X_n}(t)=\varphi(t/n)^n$ olduğunu gösteriniz.
+(b) $E[X_1]=\mu$, $\Var(X_1)=\sigma^2<\infty$ varsayımında $\log\varphi(t)\approx i\mu t - \sigma^2t^2/2+o(t^2)$ açılımını kullanarak $\sqrt{n}(\bar X_n-\mu)/\sigma\xrightarrow{d}\Normal(0,1)$'i türetiniz.
 (c) Bu yaklaşım Lindeberg koşuluna neden gerek duymaz?
 \end{alistirma}
 \alcozum{%
@@ -658,22 +658,23 @@ $\log\varphi_{Y_n}(t)\to-t^2/2$. Süreklilik teoremi: $Y_n\xrightarrow{d}\Normal
 
 % ---
 
-\alistirmalar
 
 \begin{alistirma}[Al.8.5]{A}{Örneklem Oranı}
 $n=400$ kişilik ankette $180$ kişi "evet" dedi. $\hat{p}=0.45$.
-(a) $p$ için yaklaşık $\%95$ güven aralığını hesaplayın.
-(b) $p=0.5$ hipotezini $\alpha=0.05$ için test edin ($z$-testi).
+(a) $p$ için yaklaşık $\%95$ güven aralığını hesaplayınız.
+(b) $p=0.5$ hipotezini $\alpha=0.05$ için test ediniz ($z$-testi).
 \end{alistirma}
 \alcozum{%
 (a) $\hat{p}=0.45$, $\sqrt{\hat{p}(1-\hat{p})/n}=\sqrt{0.2475/400}=\sqrt{0.000619}\approx0.02488$.
 GA: $0.45\pm1.96\times0.02488 = (0.401, 0.499)$.
 (b) $z=(0.45-0.5)/\sqrt{0.5\times0.5/400}=(-0.05)/0.025=-2.0$.
 $|z|=2.0>1.96$: $H_0$ reddedilir, $\alpha=0.05$.}
+\alistirmalar
+
 
 \begin{alistirma}[Al.8.6]{A}{Poisson Normal Yaklaşımı}
-$X \sim \Pois(25)$. MLT ile $P(X \leq 30)$ için normal yaklaşım verin.
-Süreklilik düzeltmesini kullanın.
+$X \sim \Pois(25)$. MLT ile $P(X \leq 30)$ için normal yaklaşım veriniz.
+Süreklilik düzeltmesini kullanınız.
 \end{alistirma}
 \alcozum{%
 $E[X]=25$, $\sigma=5$.
@@ -682,9 +683,9 @@ $P(X\leq30)\approx P\!\left(Z\leq\frac{30.5-25}{5}\right)=\Phi(1.10)\approx0.864
 
 \begin{alistirma}[Al.8.7]{B}{Lindeberg Koşulu}
 $X_{ni} = \pm 1/\sqrt{n}$ eşit olasılıkla ($i = 1,\ldots,n$), bağımsız.
-(a) $E[X_{ni}]=0$, $\sigma_{ni}^2=1/n$, $s_n^2=1$ olduğunu gösterin.
-(b) Lindeberg koşulunun sağlandığını kontrol edin.
-(c) $\sum X_{ni}$'nin limit dağılımını belirtin.
+(a) $E[X_{ni}]=0$, $\sigma_{ni}^2=1/n$, $s_n^2=1$ olduğunu gösteriniz.
+(b) Lindeberg koşulunun sağlandığını kontrol ediniz.
+(c) $\sum X_{ni}$'nin limit dağılımını belirtiniz.
 \end{alistirma}
 \alcozum{%
 (a) $\sigma_{ni}^2 = E[X_{ni}^2]=1/n$; $s_n^2=n\cdot(1/n)=1$. \\
@@ -696,8 +697,8 @@ $L_n(\varepsilon)=0$ (tüm büyük $n$). Sağlandı.\\
 
 \begin{alistirma}[Al.8.8]{B}{Çok Boyutlu MLT}
 $(X_i, Y_i)$ i.i.d., $E[X]=E[Y]=0$, $\mathrm{Var}(X)=\mathrm{Var}(Y)=1$, $\mathrm{Cov}(X,Y)=\rho$.
-$(\bar{X}_n, \bar{Y}_n)$'nin büyük örneklem dağılımını yazın.
-$U_n = \bar{X}_n + \bar{Y}_n$'nin yaklaşık dağılımını bulun.
+$(\bar{X}_n, \bar{Y}_n)$'nin büyük örneklem dağılımını yazınız.
+$U_n = \bar{X}_n + \bar{Y}_n$'nin yaklaşık dağılımını bulunuz.
 \end{alistirma}
 \alcozum{%
 $\boldsymbol{\Sigma} = \begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$.
@@ -707,8 +708,8 @@ $\mathrm{Var}(U_n)=\mathbf{a}^\top\boldsymbol{\Sigma}\mathbf{a}/n=(1+1+2\rho)/n=
 $\sqrt{n}\,U_n\xrightarrow{d}\Normal(0,2(1+\rho))$.}
 
 \begin{alistirma}[Al.8.9]{C}{MLT İspat Detayı}
-$(1-t^2/(2n))^n \to e^{-t^2/2}$ limitini $n\to\infty$ için kesin biçimde ispatlayın.
-Daha genel olarak: $a_n \to 0$ ve $na_n \to a$ iken $(1+a_n)^n \to e^a$ olduğunu gösterin.
+$(1-t^2/(2n))^n \to e^{-t^2/2}$ limitini $n\to\infty$ için kesin biçimde ispatlayınız.
+Daha genel olarak: $a_n \to 0$ ve $na_n \to a$ iken $(1+a_n)^n \to e^a$ olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $\ln(1+a_n)^n = n\ln(1+a_n)$.

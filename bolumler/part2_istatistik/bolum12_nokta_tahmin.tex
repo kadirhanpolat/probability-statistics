@@ -366,11 +366,14 @@ GBSK'dan $m_k \asto \mu_k'(\theta_0)$. $g(\mu_1',\ldots,\mu_p')=\theta$ düzgün
 %% ============================================================
 
 \begin{kesif}
-MLE'de $\theta$ sabit ama bilinmeyen parametre idi. Bayes yaklaşımında $\theta$'yı da bir rasgele değişken olarak modelleriz: tahmin öncesinde $\theta$ hakkında bir \emph{önsel} (\emph{prior}) dağılımımız var, veriyi gördükten sonra \emph{sonsal} (\emph{posterior}) dağılıma geçiyoruz.
-\kesifcevap{Önsel $\pi(\theta)$ + olabilirlik $L(\theta;\mathbf{x})$ $\Rightarrow$ sonsal
-  $\pi(\theta|\mathbf{x})\propto L(\theta;\mathbf{x})\pi(\theta)$.
-  Bayes tahmini: kare kayıpta sonsal ortalama, mutlak kayıpta sonsal medyan, MAP ise sonsal mod.
-  Konjugat önsel seçimi ($\pi$ ve sonsal aynı aile) hesabı kapalı formda verir.}
+$X_1,\ldots,X_{10} \iid \mathrm{Ber}(p)$, $\sum x_i = 3$ gözlemlendi.
+MLE $\hat{p} = 0.3$ verir. Elimizde ``$p$'nin $0.5$ civarında olduğunu bekliyoruz''
+şeklinde bir ön bilgi varsa, bunu tahminde nasıl kullanırız?
+Sonuç $0.3$'ten nasıl farklılaşır?
+\kesifcevap{Önsel $\pi(p) = \mathrm{Beta}(5,5)$ ($p \approx 0.5$ sezgisi) seçilirse
+  sonsal $p \mid \mathbf{x} \sim \mathrm{Beta}(5+3, 5+7) = \mathrm{Beta}(8,12)$;
+  Bayes tahmini (kare kayıp) $= 8/20 = 0.4$. Veri az olduğundan önsel ağır çeker;
+  $n \to \infty$ limitinde Bayes tahmini MLE'ye yaklaşır.}
 \end{kesif}
 
 \begin{tanim}[Önsel ve sonsal dağılım]\label{def:onsel_sonsal}
@@ -721,7 +724,6 @@ $(n-1)S^2/\sigma^2\sim\chi^2_{n-1}$: $E[S^2]=\sigma^2$, $\Var(S^2)=2\sigma^4/(n-
 (b) $\mathrm{MSE}(S^2)=\Var(S^2)=\frac{2\sigma^4}{n-1}$.
 (c) $\frac{2n-1}{n^2}<\frac{2}{n-1}$: her $n\geq1$ için $\hat\sigma^2_\mathrm{MLE}$ daha küçük MSE'ye sahip.}
 
-\alistirmalar
 
 \begin{alistirma}[Al.12.3]{A}{Momentler --- Beta}
 $X\sim\Beta(\alpha,\beta)$ için momentler yöntemi tahmin edicilerini $\bar{X}_n$ ve $S^2$ cinsinden yaz.
@@ -729,13 +731,15 @@ $X\sim\Beta(\alpha,\beta)$ için momentler yöntemi tahmin edicilerini $\bar{X}_
 \alcozum{%
 $\mu=\alpha/(\alpha+\beta)$, $\sigma^2=\alpha\beta/[(\alpha+\beta)^2(\alpha+\beta+1)]$. Çöz: $\hat\alpha=\bar{X}[\bar{X}(1-\bar{X})/S^2-1]$, $\hat\beta=(1-\bar{X})[\bar{X}(1-\bar{X})/S^2-1]$.%
 }
-
 \begin{alistirma}[Al.12.4]{B}{Poisson UMVUE --- $e^{-\lambda}$}
 $X_1,\ldots,X_n\iid\Pois(\lambda)$. $\Prob(X=0)=e^{-\lambda}$'nın UMVUE'sünün $g(T)=\left(\frac{n-1}{n}\right)^T$ ($T=\sum X_i$) olduğunu göster. \textit{(İpucu: $\Beklenti[g(T)]$ hesapla.)}
 \end{alistirma}
 \alcozum{%
 $T\sim\Pois(n\lambda)$; $\Beklenti[(1-1/n)^T]=\sum_{t=0}^\infty(1-1/n)^t e^{-n\lambda}(n\lambda)^t/t! = e^{-n\lambda}\exp(n\lambda(1-1/n))=e^{-n\lambda}\cdot e^{(n-1)\lambda}=e^{-\lambda}$. Dolayısıyla yansız; $T$ tamamlayıcı yeterli ve $g(T)$ fonksiyonu, dolayısıyla UMVUE.%
 }
+\alistirmalar
+
+
 
 \begin{alistirma}[Al.12.5]{B}{Normal-Normal Bayes}
 $X_1,\ldots,X_n\mid\mu\iid\Normal(\mu,4)$ ve $\mu\sim\Normal(0,1)$. $n=9$, $\bar{x}=2$ gözlemi için sonsal dağılımı ve Bayes tahmin edicisini hesapla. $n\to\infty$ limitini yorumla.

@@ -162,7 +162,7 @@ Sonlu aile $A_1, \ldots, A_n \in \mathcal{F}$ için:
 
 \begin{proof}
 \textit{Fikir:} Bir $\omega \in \bigcup_k A_k$, tam olarak $r$ adet $A_k$'da
-bulunsun. Bu $\omega$'nın formülün sağ tarafına katkısını hesaplayın.
+bulunsun. Bu $\omega$'nın formülün sağ tarafına katkısını hesaplayınız.
 
 \medskip
 
@@ -241,16 +241,18 @@ Lebesgue ölçüm uzayı tam; Borel kümeler üzerinde Lebesgue ölçüsü tam d
 
 \begin{kesif}[Koşullu olasılık sezgisi]
 Adil bir zar atılıyor. ``Çift sayı geldi'' ($B$) bilgisiyle, ``6 geldi'' ($A$)
-olayının olasılığı nedir? Sezginizi yazın, ardından Tanım~\ref{def:kos_olasilik}'i okuyun.
+olayının olasılığı nedir? Sezginizi yazınız, ardından Tanım~\ref{def:kos_olasilik}'i okuyunuz.
 \kesifcevap{$P(A \mid B) = \dfrac{P(A \cap B)}{P(B)} = \dfrac{1/6}{3/6} = \dfrac{1}{3}$.
   ``Çift geldi'' bilgisi örneklem uzayını $\{2,4,6\}$'ya daraltır; 6 bu kümenin
   $1/3$'üdür. Genel kural: $P(A \mid B) = P(A \cap B)/P(B)$.}
 \end{kesif}
 
 \begin{tanimgerekce}
-$B$ olduğu biliniyorsa örnek uzayımız $\Omega$ yerine $B$ olur. $A$'nın bu
-küçülmüş uzaydaki payı $\Prob(A \cap B) / \Prob(B)$'dir. Payda normalizasyonu
-($B$'nin ölçüsünü 1 yapıyor) sağlıyor.
+Peki ya $\Prob(B) = 0$ ise? Bu formül tanımsız kalır; sıfır olasılıklı koşul
+altında koşullu olasılık çok daha ince bir yapı gerektirir (genel koşullu beklenti
+teorisi, Bölüm~\ref{chp:rasgele_degiskenler}). Şimdilik $\Prob(B) > 0$ varsayımıyla
+çalışıyoruz; bu kısıt Teorem~\ref{thm:kos_olcu}'de $A \mapsto \Prob(A \mid B)$'nin
+tam anlamıyla yeni bir olasılık ölçüsü oluşturduğunu ispat etmemizi sağlar.
 \end{tanimgerekce}
 
 \begin{tanim}[Koşullu Olasılık]\label{def:kos_olasilik}
@@ -404,12 +406,20 @@ hepsi aynı formülün görünümleri.
 \begin{kesif}[Bağımsızlık sezgisi]
 ``$A$ gerçekleşmesinin $B$'ye etkisi yoktur'' ne demektir?
 $\Prob(A \mid B) = \Prob(A)$ formülü bunu yakalar; ama $\Prob(B)=0$ durumunda
-bu yazılamaz. Bundan bağımsız bir tanım olasını düşünün.
+bu yazılamaz. Bundan bağımsız bir tanım olasını düşününüz.
 \kesifcevap{Bağımsızlık tanımı: $P(A \cap B) = P(A) \cdot P(B)$.
   Bu, $P(B)=0$ durumunda da anlamlıdır ve $P(A \mid B)=P(A)$'nın
   tam genellemesidir. ``$B$ bilgisi $A$'nın olasılığını değiştirmez''
   sezgisini $P(B)>0$ olmaksızın ifade eder.}
 \end{kesif}
+
+\begin{tanimgerekce}
+$\Prob(A \mid B) = \Prob(A)$ sezgisi doğru yönü gösterir, ama $\Prob(B) = 0$
+durumunda koşullu olasılık tanımsız kalır. Çarpım kuralı
+$\Prob(A \cap B) = \Prob(A)\Prob(B)$ bu köşe durumu da kapsar ve simetrik bir
+yapı sunar: $A$'nın $B$'ye bağımsızlığı ile $B$'nin $A$'ya bağımsızlığı
+formül düzeyinde özdeştir.
+\end{tanimgerekce}
 
 \begin{tanim}[Bağımsız Olaylar]\label{def:bagimsiz_olay}
 $A, B \in \mathcal{F}$ olayları \textbf{bağımsız} \emph{(independent)} adını alır;
@@ -562,12 +572,12 @@ $\Prob(\text{3 açıldı}) = 1/2 \cdot 1/3 + 1 \cdot 1/3 = 1/2$.
 $\Prob(B_1 \mid \text{3 açıldı}) = (1/6)/(1/2) = 1/3$.
 $\Prob(B_2 \mid \text{3 açıldı}) = (1/3)/(1/2) = 2/3$.
 
-\textbf{Değiştirin!} Değiştirme olasılığı $2/3 > 1/3$.
+\textbf{Değiştiriniz!} Değiştirme olasılığı $2/3 > 1/3$.
 \end{ornek}
 
 \begin{kendinleifade}
 Monty Hall sorusunda sunucunun rastgele değil, \emph{her zaman keçi olan}
-bir kapıyı açtığını not edin. Sunucu rastgele açsaydı sonuç değişir miydi?
+bir kapıyı açtığını not ediniz. Sunucu rastgele açsaydı sonuç değişir miydi?
 \kendinleifadecevap{Sunucu \emph{bilerek} keçi açıyorsa: değiştirmek $P(\text{kazanç})=2/3$.
   Sunucu \emph{rastgele} açıp keçi çıkıyorsa: Bayes ile her iki kalan kapı eşit olasılıklı,
   $P=1/2$ --- değiştirmenin faydası kalmaz.
@@ -773,7 +783,7 @@ Kolmogorov genişlemesi: sonsuz i.i.d.\ dizinin varlığı garanti edilir.
   \item Koşullu olasılığın neden bir olasılık ölçüsü olduğunu üç aksiyomu
         kontrol ederek açıklayabilir misiniz?
   \item Tıbbi test örneğini farklı bir hastalık sıklığı ($1/100$) ile yeniden
-        hesaplayın; sonuç nasıl değişti?
+        hesaplayınız; sonuç nasıl değişti?
   \item Bernstein'ın karşı örneğinde neden karşılıklı bağımsızlık bozuluyor?
 \end{itemize}
 \end{ozyansima}
@@ -804,7 +814,7 @@ Gnedenko~\cite{gnedenko1962} Bölüm~1--3.
 $\Prob(A) = 0.5$, $\Prob(B) = 0.4$, $\Prob(C) = 0.3$,
 $\Prob(A \cap B) = 0.2$, $\Prob(A \cap C) = 0.15$,
 $\Prob(B \cap C) = 0.1$, $\Prob(A \cap B \cap C) = 0.05$.
-$\Prob(A \cup B \cup C)$'yi hesaplayın.
+$\Prob(A \cup B \cup C)$'yi hesaplayınız.
 \end{alistirma}
 \alcozum{%
 Poincaré (Teorem~\ref{thm:poincare}):
@@ -817,7 +827,7 @@ $\blacksquare$%
 
 \begin{alistirma}[Al.2.2]{B}{Bayes teoremi --- fabrika}
 Örnek~\ref{ex:fabrika}'ya devam: Seçilen ürün hatalı çıktı.
-Hangi fabrikadan geldiğinin sonsal olasılıklarını hesaplayın.
+Hangi fabrikadan geldiğinin sonsal olasılıklarını hesaplayınız.
 \end{alistirma}
 \alcozum{%
 $\Prob(A) = 0.032$ (Örnek~\ref{ex:fabrika}'dan).
@@ -861,7 +871,7 @@ Karşılıklı bağımsız \emph{değil}. $\blacksquare$%
 
 \begin{alistirma}[Al.2.4]{B}{Doğum günü --- genelleştirilmiş}
 $n = 50$ kişilik bir grupta aynı doğum gününe sahip iki kişinin olmama
-olasılığını hesaplayın (logaritma kullanın). $\Prob(A)$ nedir?
+olasılığını hesaplayınız (logaritma kullanınız). $\Prob(A)$ nedir?
 \end{alistirma}
 \alcozum{%
 $\Prob(A^c) = \prod_{k=0}^{49}\frac{365-k}{365}$.
@@ -876,9 +886,9 @@ Daha kesin: $\Prob(A^c) \approx 0.0296$; $\Prob(A) \approx 0.970$. $\blacksquare
 
 \begin{alistirma}[Al.2.4b]{B}{Koşullu Olasılık Paradoksu: Monty Hall}
 Monty Hall problemi: 3 kapı, birinde araba diğer ikisinde keçi. Yarışmacı kapı 1'i seçer. Sunucu, keçili bir kapıyı açar (kapı 3). Değiştirmeli mi?
-(a) $A$: kapı 1'de araba; $B$: sunucu kapı 3'ü açar; Bayes teoremi ile $P(A|B)$'yi hesaplayın.
-(b) $P(\text{araba}|\text{değiştirir})$'yi bulun.
-(c) Sezgisiz insanların neden yanıldığını olasılık teorisi açısından açıklayın.
+(a) $A$: kapı 1'de araba; $B$: sunucu kapı 3'ü açar; Bayes teoremi ile $P(A|B)$'yi hesaplayınız.
+(b) $P(\text{araba}|\text{değiştirir})$'yi bulunuz.
+(c) Sezgisiz insanların neden yanıldığını olasılık teorisi açısından açıklayınız.
 \end{alistirma}
 \alcozum{%
 (a) Toplam olasılık: $P(B) = P(B|A)P(A)+P(B|A^c)P(A^c)$.
@@ -898,9 +908,9 @@ $P(A_1|B)=\frac{(1/2)(1/3)}{1/2}=\frac{1}{3}$; $P(A_2|B)=\frac{1\cdot(1/3)}{1/2}
 
 \begin{alistirma}[Al.2.4c]{C}{Olasılık Ölçüsünün Süreklilik Özellikleri}
 $(\Omega,\mathcal{F},\Prob)$ olasılık uzayı.
-(a) $A_n\uparrow A$ (artan limit) için $\Prob(A_n)\to\Prob(A)$ olduğunu kanıtlayın.
-(b) $B_n\downarrow B$ (azalan limit) için $\Prob(B_n)\to\Prob(B)$ olduğunu kanıtlayın.
-(c) $\Prob(\limsup_n A_n)$'ı yorumlayın ve Borel-Cantelli ile bağlantısını kurun.
+(a) $A_n\uparrow A$ (artan limit) için $\Prob(A_n)\to\Prob(A)$ olduğunu kanıtlayınız.
+(b) $B_n\downarrow B$ (azalan limit) için $\Prob(B_n)\to\Prob(B)$ olduğunu kanıtlayınız.
+(c) $\Prob(\limsup_n A_n)$'ı yorumlayınız ve Borel-Cantelli ile bağlantısını kurunuz.
 \end{alistirma}
 \alcozum{%
 (a) \textbf{Arttan süreklilik}: $C_1=A_1$, $C_n=A_n\setminus A_{n-1}$ (ayrık) olsun. $A=\bigcup_n C_n$ (ayrık birleşim).
@@ -916,11 +926,10 @@ Borel-Cantelli 1: $\sum\Prob(A_n)<\infty\Rightarrow\Prob(\limsup A_n)=0$ (sonsuz
 Borel-Cantelli 2: $A_n$ bağımsız, $\sum\Prob(A_n)=\infty\Rightarrow\Prob(\limsup A_n)=1$ (sonsuz sık gerçekleşir).
 Bu iki yönlü sonuç, neredeyse kesin yakınsama kriterleri için temel araçtır.}
 
-\alistirmalar
 
 \begin{alistirma}[Al.2.5]{A}{Olasılık aksiyomlarından türetme}
 $(\Omega,\mathcal{F},\Prob)$ olasılık uzayı, $A, B \in \mathcal{F}$.
-Yalnızca Kolmogorov aksiyomlarını (K1)--(K3) kullanarak gösterin:
+Yalnızca Kolmogorov aksiyomlarını (K1)--(K3) kullanarak gösteriniz:
 \begin{enumerate}[label=(\alph*)]
   \item $\Prob(A) \leq 1$.
   \item $\Prob(A^c) = 1 - \Prob(A)$.
@@ -932,7 +941,6 @@ Yalnızca Kolmogorov aksiyomlarını (K1)--(K3) kullanarak gösterin:
 (b) Aynı ayrışım: $\Prob(A^c) = 1 - \Prob(A)$.
 (c) $B = A \cup (B \setminus A)$ ayrık; $\Prob(B) = \Prob(A)+\Prob(B \setminus A) \geq \Prob(A)$. $\blacksquare$%
 }
-
 \begin{alistirma}[Al.2.6]{A}{Koşullu olasılık zinciri}
 Bir kutuda 3 kırmızı, 4 mavi top var. Geri koymadan iki top çekiliyor.
 (a) İlk kırmızı, ikinci mavi çekme olasılığı.
@@ -946,9 +954,12 @@ Bir kutuda 3 kırmızı, 4 mavi top var. Geri koymadan iki top çekiliyor.
 
 (c) $\Prob(\text{en az bir kırmızı}) = 1 - \Prob(M_1 \cap M_2) = 1 - 2/7 = 5/7$. $\blacksquare$%
 }
+\alistirmalar
+
+
 
 \begin{alistirma}[Al.2.7]{A}{Boole eşitsizliği}
-$n$ olay için Boole eşitsizliğini doğrulayın:
+$n$ olay için Boole eşitsizliğini doğrulayınız:
 $\Prob\!\bigl(\bigcap_{k=1}^n A_k\bigr) \geq 1 - \sum_{k=1}^n \Prob(A_k^c)$.
 Bu eşitsizliğin adı Bonferroni eşitsizliğidir.
 \end{alistirma}
@@ -963,9 +974,9 @@ Dolayısıyla $\Prob(\bigcap_k A_k) \geq 1 - \sum_k \Prob(A_k^c)$. $\blacksquare
 $A$ ve $B$, $C$'ye koşullu bağımsız adını alır; eğer
 $\Prob(A \cap B \mid C) = \Prob(A \mid C)\Prob(B \mid C)$.
 (a) $A$ ve $B$ koşulsuz bağımsızsa, $C$'ye koşullu bağımsız olması gerekir mi?
-    Karşı örnek verin.
+    Karşı örnek veriniz.
 (b) $A$ ve $B$, $C$'ye koşullu bağımsızsa, koşulsuz bağımsız olması gerekir mi?
-    Karşı örnek verin.
+    Karşı örnek veriniz.
 \end{alistirma}
 \alcozum{%
 (a) Hayır. İki adil zar: $A =$ \{1. zar çift\}, $B =$ \{2. zar çift\}, $C = \{$toplam 7$\}$.
@@ -983,9 +994,9 @@ koşullu bağımsız değil. $\blacksquare$%
 \begin{alistirma}[Al.2.9]{B}{Toplam olasılık --- iki aşamalı deney}
 Bir torba 5 beyaz, 3 siyah top içeriyor. Geri koymadan iki top çekiliyor.
 $A_k =$ \{$k$-inci top beyaz\}.
-(a) $\Prob(A_1)$, $\Prob(A_2)$, $\Prob(A_1 \cap A_2)$'yi hesaplayın.
-(b) $\Prob(A_2)$'yi Toplam Olasılık Teoremi ile doğrulayın.
-(c) $\Prob(A_1 \mid A_2)$ ve $\Prob(A_2 \mid A_1)$'i hesaplayın.
+(a) $\Prob(A_1)$, $\Prob(A_2)$, $\Prob(A_1 \cap A_2)$'yi hesaplayınız.
+(b) $\Prob(A_2)$'yi Toplam Olasılık Teoremi ile doğrulayınız.
+(c) $\Prob(A_1 \mid A_2)$ ve $\Prob(A_2 \mid A_1)$'i hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\Prob(A_1) = 5/8$.
@@ -1003,7 +1014,7 @@ $\Prob(A_2|A_1) = \Prob(A_1\cap A_2)/\Prob(A_1) = (5/14)/(5/8) = 4/7$. $\blacksq
 $n$ kişi, $m$ şanslı hat ($m < n$). Hiç kimse önceki seçimi görmeden
 kendi hatını çekiyor (tüm sıralamalar eşit olası).
 $j$-inci kişinin şanslı hat çekme olasılığının $j$'den bağımsız olduğunu
-tümevarımla ispatlayın.
+tümevarımla ispatlayınız.
 \end{alistirma}
 \alcozum{%
 $\Prob(A_j) = m/n$ her $j$ için.
@@ -1022,8 +1033,8 @@ $\mathcal{P}_1 = \{A_1 \times A_2 : A_i \in \mathcal{F}_i\}$ ikili ayrık
 dikdörtgenler ailesi; $\mathcal{P}_1$ bir $\pi$-sistemdir.
 $\Prob_1$ ve $\Prob_2$ aynı $\pi$-sistem üzerinde aynı değerleri alıyorsa,
 $\sigma(\mathcal{P}_1)$ üzerinde eşit olduklarını Dynkin'in $\pi$-$\lambda$
-teoremini kullanarak ispatlayın. Bu teoremin ürün ölçüsünün tekliği ile
-bağlantısını açıklayın.
+teoremini kullanarak ispatlayınız. Bu teoremin ürün ölçüsünün tekliği ile
+bağlantısını açıklayınız.
 \end{alistirma}
 \alcozum{%
 \begin{ipucu}{1}
@@ -1032,7 +1043,7 @@ altında kapalı) ve $\lambda(\mathcal{P}) = \mathcal{P}$ içeren en küçük
 Dynkin sistemi ise $\lambda(\mathcal{P}) = \sigma(\mathcal{P})$.
 \end{ipucu}
 
-$D = \{B \in \sigma(\mathcal{P}_1) : \Prob_1(B) = \Prob_2(B)\}$ tanımlayın.
+$D = \{B \in \sigma(\mathcal{P}_1) : \Prob_1(B) = \Prob_2(B)\}$ tanımlayınız.
 $D$ bir Dynkin sistemidir: (i) $\Omega \in D$; (ii) $A \subseteq B$, $A,B \in D
 \Rightarrow B \setminus A \in D$; (iii) $A_n \nearrow A$, $A_n \in D \Rightarrow A \in D$.
 
@@ -1050,7 +1061,7 @@ $(\Omega, \mathcal{F}, \Prob)$ üzerinde $A_1, A_2, \ldots$ bağımsız,
 $\Prob(A_n) = p \in (0,1)$ her $n$ için.
 (a) $\Prob(A_n \text{ s.s. çok})$ --- yani $\Prob(\limsup_n A_n)$ --- nedir?
 (b) $\Prob(A_n \text{ eninde sonunda hep gerçekleşir})$ nedir?
-(c) Cevaplarınızı $p$ değerine göre yorumlayın.
+(c) Cevaplarınızı $p$ değerine göre yorumlayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\sum_n \Prob(A_n) = \sum_n p = \infty$ (sonsuz toplam).
@@ -1073,7 +1084,7 @@ Sağlık veri tabanında: $D$ = hastada kanser var, $S$ = semptom pozitif, $T$ =
 Verilen: $\Prob(D) = 0.01$, $\Prob(S \mid D) = 0.8$, $\Prob(S \mid D^c) = 0.05$,
 $\Prob(T \mid S) = 0.9$, $\Prob(T \mid S^c) = 0.1$.
 Bayesçi ağ: $D \to S \to T$.
-(a) $\Prob(S)$'yi hesaplayın. (b) $\Prob(T)$'yi hesaplayın. (c) $\Prob(D \mid T)$'yi hesaplayın.
+(a) $\Prob(S)$'yi hesaplayınız. (b) $\Prob(T)$'yi hesaplayınız. (c) $\Prob(D \mid T)$'yi hesaplayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\Prob(S) = 0.8\cdot0.01 + 0.05\cdot0.99 = 0.008 + 0.0495 = 0.0575$.\\
@@ -1102,9 +1113,9 @@ $A \not\perp C \mid B$.}
 \begin{alistirma}[Al.2.15]{B}{Bayesçi Ağ --- Ortak Dağılım}
 $X_1$, $X_2 \mid X_1$, $X_3 \mid X_2$ zinciri (her ikili normal):
 $X_1 \sim \Normal(0,1)$; $X_2 \mid X_1 = x_1 \sim \Normal(x_1, 1)$; $X_3 \mid X_2 = x_2 \sim \Normal(x_2, 1)$.
-(a) $E[X_2]$ ve $\mathrm{Var}(X_2)$'yi hesaplayın.
-(b) $X_1$ ve $X_3$'ün koşulsuz korelasyonunu bulun.
-(c) $X_3 \mid X_2 = 0$ ile $X_3 \mid X_1 = 0$'ı karşılaştırın.
+(a) $E[X_2]$ ve $\mathrm{Var}(X_2)$'yi hesaplayınız.
+(b) $X_1$ ve $X_3$'ün koşulsuz korelasyonunu bulunuz.
+(c) $X_3 \mid X_2 = 0$ ile $X_3 \mid X_1 = 0$'ı karşılaştırınız.
 \end{alistirma}
 \alcozum{%
 (a) $E[X_2] = E[E[X_2|X_1]] = E[X_1] = 0$.

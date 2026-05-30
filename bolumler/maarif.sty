@@ -25,6 +25,11 @@
 \DeclareOption{ogrenci}{\maarifcozumfalse}
 \ProcessOptions\relax
 
+% \ifmaarifcozumlu: \cozumlualistirmalar bölümünde true olur, \alistirmalar'da false.
+% Bu sayede öğrenci PDF'inde de çözümlü alıştırmaların çözümleri görünür.
+\newif\ifmaarifcozumlu
+\maarifcozumlufalse
+
 % ---- Renk paleti ----
 \definecolor{maMotiv}{HTML}{0B5FA5}   % motivasyon  — mavi
 \definecolor{maSorgu}{HTML}{B0006D}   % kritik sorgu — macenta
@@ -239,8 +244,9 @@
   boxrule=0pt, colback=maIpucu!5, colframe=maIpucu,
   borderline west={3pt}{0pt}{maIpucu},
   left=5mm, right=3mm, top=2mm, bottom=2mm,
+  fontupper=\normalfont\mdseries,
   before upper={{\sffamily\bfseries\color{maIpucu}%
-    İpucu~#1\quad\color{black}}}
+    İpucu~#1\quad}\color{black}}
 }
 
 % =====================================================================
@@ -277,18 +283,29 @@
 % =====================================================================
 \definecolor{maCozum}{HTML}{1A5276}
 
+% Çözüm kutusunu gösteren iç komut
+\newcommand{\maarif@showcozum}[1]{%
+  \par\noindent
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    boxrule=0pt, colback=maCozum!4, colframe=maCozum,
+    borderline west={4pt}{0pt}{maCozum},
+    left=5mm, right=3mm, top=2mm, bottom=2mm,
+    fontupper=\normalfont\mdseries,
+    before upper={{\sffamily\bfseries\color{maCozum}%
+      Çözüm\quad}\color{black}}]
+    #1
+  \end{tcolorbox}}
+
+% Eğitmen PDF'inde her zaman görünür.
+% Öğrenci PDF'inde yalnızca \cozumlualistirmalar bölümünde görünür.
 \newcommand{\alcozum}[1]{%
   \ifmaarifcozum
-    \par\noindent
-    \begin{tcolorbox}[
-      enhanced, breakable,
-      boxrule=0pt, colback=maCozum!4, colframe=maCozum,
-      borderline west={4pt}{0pt}{maCozum},
-      left=5mm, right=3mm, top=2mm, bottom=2mm,
-      before upper={{\sffamily\bfseries\color{maCozum}%
-        Çözüm\quad\color{black}}}]
-      #1
-    \end{tcolorbox}
+    \maarif@showcozum{#1}%
+  \else
+    \ifmaarifcozumlu
+      \maarif@showcozum{#1}%
+    \fi
   \fi}
 
 % =====================================================================
@@ -300,25 +317,32 @@
 \definecolor{maAlistirmaB}{HTML}{D68910}
 \definecolor{maAlistirmaC}{HTML}{922B21}
 
+\newcounter{alistirmano}[chapter]
+
 \newenvironment{alistirma}[3][]{%
   \def\maarif@alcol{maAlistirmaB}%
   \if A#2\def\maarif@alcol{maAlistirmaA}\fi
   \if C#2\def\maarif@alcol{maAlistirmaC}\fi
-  \par\noindent
-  \begin{tcolorbox}[
-    enhanced, breakable,
-    rounded corners, arc=5pt,
-    boxrule=1pt, colframe=\maarif@alcol, colback=\maarif@alcol!4,
-    left=3mm, right=3mm, top=4mm, bottom=2.5mm,
-    fonttitle=\bfseries\sffamily, coltitle=white,
-    attach boxed title to top left={xshift=3mm, yshift=-2.5mm},
-    boxed title style={rounded corners, arc=3pt, boxrule=0pt,
-                       colback=\maarif@alcol, left=1.5mm, right=1.5mm},
-    toptitle=0.5mm, bottomtitle=0.5mm,
-    title={\ifx\relax#1\relax\else\texttt{#1}\ \fi Seviye~#2%
-           \ifx\relax#3\relax\else\ ---\ #3\fi}]
+  \stepcounter{alistirmano}%
+  % TikZ kodunu macro'ya bağla: \item[...] içinde ] erken kapatma sorununu önler
+  \def\maarif@daire{%
+    \tikz[baseline=(c.base)]\node[%
+      circle,fill=\maarif@alcol,text=white,
+      font=\sffamily\bfseries\small,
+      inner sep=1pt,minimum size=7mm](c){\thealistirmano};\hspace{1pt}}%
+  \par\addvspace{5pt}%
+  \noindent\begin{list}{}{%
+    \setlength{\leftmargin}{9mm}%
+    \setlength{\labelwidth}{7mm}%
+    \setlength{\labelsep}{2mm}%
+    \setlength{\topsep}{0pt}%
+    \setlength{\parsep}{3pt}%
+    \setlength{\itemsep}{0pt}%
+  }%
+  \item[\maarif@daire]%
+  \ignorespaces
 }{%
-  \end{tcolorbox}}
+  \end{list}\addvspace{5pt}}
 
 % =====================================================================
 % 16) KAZANIM LİSTESİ  (TYMM gereksinimi)
@@ -385,12 +409,14 @@
 % 20) BÖLÜM SONU ALIŞTIRMA BLOKLARI
 % =====================================================================
 \newcommand{\cozumlualistirmalar}{%
+  \maarifcozumlutrue
   \par\vspace{4mm}
   {\sffamily\bfseries\large\color{maCozum}%
    \rule[0.5ex]{2cm}{0.6pt}\quad Çözümlü Alıştırmalar \quad\rule[0.5ex]{2cm}{0.6pt}}
   \par\vspace{2mm}}
 
 \newcommand{\alistirmalar}{%
+  \maarifcozumlufalse
   \par\vspace{4mm}
   {\sffamily\bfseries\large\color{maOzet}%
    \rule[0.5ex]{2cm}{0.6pt}\quad Alıştırmalar \quad\rule[0.5ex]{2cm}{0.6pt}}
@@ -423,8 +449,9 @@
       boxrule=0pt, colback=maIfade!6, colframe=maIfade,
       borderline west={3pt}{0pt}{maIfade},
       left=5mm, right=3mm, top=2mm, bottom=2mm,
+      fontupper=\normalfont\mdseries,
       before upper={{\sffamily\bfseries\color{maIfade}%
-        Model Yanıt\color{black}}\par\smallskip}]
+        Model Yanıt}\color{black}\par\smallskip}]
       #1
     \end{tcolorbox}
   \else
@@ -454,12 +481,19 @@
       boxrule=0pt, colback=maKesif!7, colframe=maKesif,
       borderline west={3pt}{0pt}{maKesif},
       left=5mm, right=3mm, top=2mm, bottom=2mm,
+      fontupper=\normalfont\mdseries,
       before upper={{\sffamily\bfseries\color{maKesif}%
-        Beklenen Yanıt\color{black}}\par\smallskip}]
+        Beklenen Yanıt}\color{black}\par\smallskip}]
       #1
     \end{tcolorbox}
   \else
     \ogrencialani[4cm]%
   \fi}
+
+% =====================================================================
+% Babel Turkish activates = as a shorthand that breaks enumitem key=value
+% parsing ([label=(\alph*)] etc.). \shorthandoff{=} disables it globally;
+% safe for a math textbook where = appears in math mode (not affected).
+\AtBeginDocument{\shorthandoff{=}}
 
 \endinput

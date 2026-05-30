@@ -51,10 +51,12 @@ $\xi_1,\xi_2,\ldots\iid$ ile $\Prob(\xi_i=+1)=p$, $\Prob(\xi_i=-1)=1-p$. $S_0=0$
 %% ============================================================
 
 \begin{kesif}
-Basit rasgele yürüyüşte $S_{n+1}$'in dağılımı, tüm geçmiş $S_0,S_1,\ldots,S_n$ yerine yalnızca $S_n$'e bağlıdır. Bu "geçmişten bağımsızlık" özelliği Markov zincirlerin özüdür.
-\kesifcevap{Markov özelliği: $P(X_{n+1}=j\mid X_0,\ldots,X_n)=P(X_{n+1}=j\mid X_n)=P_{ij}$.
-  Geçiş matrisi $P=(P_{ij})$ tüm dinamiği belirler.
-  Geçmiş bilgisi yalnızca mevcut durum üzerinden etkilidir; gereksiz bilgi depolanmaz.}
+Basit rasgele yürüyüşte $S_{n+1}$'in dağılımı, tüm geçmiş $S_0,S_1,\ldots,S_n$
+yerine yalnızca $S_n$'e bağlıdır. Bu ``geçmişsizlik'' özelliğini koşullu
+olasılık notasyonuyla nasıl yazarsınız?
+\kesifcevap{$P(X_{n+1}=j \mid X_0=i_0,\ldots,X_n=i) = P(X_{n+1}=j \mid X_n=i)$.
+  Tüm geçmiş bilgisi tek bir sayıya, mevcut duruma $X_n=i$, indirgenebilir.
+  Geçiş olasılıkları $p_{ij}$ bu bilgiyi taşır; geçmişin ayrıntısı gereksizdir.}
 \end{kesif}
 
 \begin{tanim}[Markov zinciri]\label{def:markov_zinciri}
@@ -296,11 +298,16 @@ Denge denklemi $\lambda\pi_{i-1}=\mu\pi_i$ (akış denge koşulu). Yinelemeli ç
 %% ============================================================
 
 \begin{kesif}
-Brownian hareketin türevsiz yolları nedeniyle klasik Riemann-Stieltjes integrali $\int g(t)\,dW(t)$ tanımlanamaz. Itô integral yeni bir tanım gerektirir.
-\kesifcevap{Brownian yollar n.k.\ her yerde türevsizdir (Hölder $<1/2$).
-  Itô integrali: $\int_0^T H_s\,dW_s = L^2\text{-}\lim \sum H_{t_k}(W_{t_{k+1}}-W_{t_k})$
-  (sol uç yaklaşımı). Riemann-Stieltjes'ten farkı: ikinci mertebe terim sıfırlanmaz;
-  bu Itô formülünde $\frac{1}{2}f''(X_t)\,dt$ düzeltmesini doğurur.}
+Riemann-Stieltjes toplamında bölüm noktası $t^*_k \in [t_k, t_{k+1}]$ serbestçe
+seçilir ve klasik analizde seçim limiti etkilemez. $W$ Brownian hareketi için
+$t^*_k = t_k$ (sol uç) ile $t^*_k = t_{k+1}$ (sağ uç) seçimlerinin aynı limiti
+verip vermeyeceğini düşününüz.
+\kesifcevap{Hayır --- Brownian artışlar $W_{t_{k+1}}-W_{t_k}$ değerlendirme
+  noktası $t^*_k$'ya bağımsız değildir. Sol uç ($t^*_k=t_k$) Itô integralini,
+  sağ uç Stratonovich integralini tanımlar. Somut fark:
+  $\int_0^T W_s\,dW_s = W_T^2/2 - T/2$ (Itô) vs.\ $W_T^2/2$ (Stratonovich).
+  Sol uç seçimi martingal özelliğini korur; bu istatistiksel uygulamalarda
+  standart tercihdir.}
 \end{kesif}
 
 \begin{tanim}[Itô integrali]\label{def:ito_integral}
@@ -373,7 +380,7 @@ Kısa faiz $r(t)$: $dr = a(b-r)dt + \sigma\,dW$. Bu OU sürecidir; $\theta=a$, d
 \end{ornek}
 
 \begin{hataanalizi}
-OU süreci "ortalamaya dönüş" gösterir --- başlangıçtan uzaklaştığında bir çekme kuvveti etkiler. Brownian hareket ile karıştırmayın: $W(t)$ sınırsız büyür ($\Var(W(t))=t\to\infty$), OU ise durağan dağılıma yakınsar.
+OU süreci "ortalamaya dönüş" gösterir --- başlangıçtan uzaklaştığında bir çekme kuvveti etkiler. Brownian hareket ile karıştırmayınız: $W(t)$ sınırsız büyür ($\Var(W(t))=t\to\infty$), OU ise durağan dağılıma yakınsar.
 \end{hataanalizi}
 
 %% ============================================================
@@ -477,7 +484,6 @@ Bir hastane acil birimine birbirinden bağımsız iki kaynaktan hasta geliyor: 1
 Toplam süreç $\Pois(5)$. $\Prob(N(1)\geq10)=1-\Prob(N(1)\leq9)=1-\sum_{k=0}^9 e^{-5}5^k/k!\approx1-0.9682=0.0318$.%
 }
 
-\alistirmalar
 
 \begin{alistirma}[Al.10.3]{A}{Brownian varyans}
 $W(t)$ standart Brownian hareket. $\Beklenti[W(3)^2]$, $\Cov(W(2),W(5))$ ve $\Cor(W(2),W(5))$'i hesapla.
@@ -485,27 +491,29 @@ $W(t)$ standart Brownian hareket. $\Beklenti[W(3)^2]$, $\Cov(W(2),W(5))$ ve $\Co
 \alcozum{%
 $\Beklenti[W(3)^2]=\Var(W(3))=3$. $\Cov(W(2),W(5))=\min(2,5)=2$. $\Cor=2/\sqrt{2\cdot5}=2/\sqrt{10}$.%
 }
-
 \begin{alistirma}[Al.10.4]{B}{İki durumlu ergodiklik}
 İki durumlu Markov zinciri $P=\begin{pmatrix}1-\alpha&\alpha\\\beta&1-\beta\end{pmatrix}$ ($\alpha,\beta\in(0,1)$). (a) Durağan dağılımı bul. (b) $p_{00}^{(n)}$'in kapalı formülünü türet. (c) $n\to\infty$ limitinin durağan dağılıma yakınsadığını doğrula.
 \end{alistirma}
 \alcozum{%
 (a) $\pi_0=\beta/(\alpha+\beta)$, $\pi_1=\alpha/(\alpha+\beta)$. (b) Özdeğerler $1$ ve $1-\alpha-\beta$: $p_{00}^{(n)}=\pi_0+\pi_1(1-\alpha-\beta)^n$. (c) $|1-\alpha-\beta|<1$ olduğundan ikinci terim $\to0$; $p_{00}^{(n)}\to\pi_0$.%
 }
-
 \begin{alistirma}[Al.10.5]{C}{Gambler's ruin --- genel}
 $p\neq q$ için Gambler's Ruin'de $i$'den başlayıp $N$'ye ulaşma olasılığı $\rho_i=\frac{1-(q/p)^i}{1-(q/p)^N}$ olduğunu fark denklemiyle ispat et. Ortalama oyun uzunluğunu $i=N/2$, $p=q=1/2$ özel durumunda hesapla.
 \end{alistirma}
 \alcozum{%
 Fark denklemi: $\rho_i=p\rho_{i+1}+q\rho_{i-1}$, $\rho_0=0$, $\rho_N=1$. Karakteristik denklem $pr^2-r+q=0$; kökler $1$ ve $q/p$. Genel çözüm $\rho_i=A+B(q/p)^i$; sınır koşullarıyla $\rho_i$ bulunur. $p=q=1/2$, $i=N/2$: ortalama süre $= i(N-i) = N^2/4$.%
 }
-
 \begin{alistirma}[Al.10.6]{B}{M/M/1 kuyruk özellikleri}
 $\lambda=4$ varış/dak., $\mu=6$ hizmet/dak. (a) $\rho$'yu hesapla; sistemin durağan mı? (b) Durağan durumda ortalama kuyruk uzunluğu $L$'yi bul. (c) Little yasasıyla ortalama bekleme süresini (sistemde) hesapla.
 \end{alistirma}
 \alcozum{%
 (a) $\rho=4/6=2/3<1$; durağan. (b) $L=\rho/(1-\rho)=(2/3)/(1/3)=2$ müşteri. (c) Little: $L=\lambda W$; $W=L/\lambda=2/4=0.5$ dak.%
 }
+\alistirmalar
+
+
+
+
 
 \begin{alistirma}[Al.10.7]{B}{Itô integrali hesabı}
 (a) $\int_0^t 1\,dW(s)$'nin beklentisini ve varyansını Itô izometrisi ile bul. (b) $\int_0^t s\,dW(s)$'nin beklentisini ve varyansını bul.
@@ -550,7 +558,7 @@ Itô: $f(x)=\sqrt{x}$, $X(t)=W(t)^2$: $d\sqrt{X}=\frac{1}{2\sqrt{X}}dX-\frac{1}{
 $E[|W(t)|]=E[\sqrt{W(t)^2}]$; $W(t)\sim\Normal(0,t)$: $E[|W(t)|]=\sqrt{t}\cdot E[|Z|]=\sqrt{t}\cdot\sqrt{2/\pi}=\sqrt{2t/\pi}$.}
 
 \begin{alistirma}[Al.10.13]{C}{Gibbs Örnekleyicisi --- Çift Normal}
-$(X,Y)\sim\Normal_2(\mathbf{0},\boldsymbol\Sigma)$, $\boldsymbol\Sigma=\begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$. Gibbs adımlarının geçiş dağılımlarını yazın. Neden durağan dağılım $\Normal_2(\mathbf{0},\boldsymbol\Sigma)$'dır?
+$(X,Y)\sim\Normal_2(\mathbf{0},\boldsymbol\Sigma)$, $\boldsymbol\Sigma=\begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$. Gibbs adımlarının geçiş dağılımlarını yazınız. Neden durağan dağılım $\Normal_2(\mathbf{0},\boldsymbol\Sigma)$'dır?
 \end{alistirma}
 \alcozum{%
 Koşullu dağılımlar: $X|Y=y\sim\Normal(\rho y,1-\rho^2)$; $Y|X=x\sim\Normal(\rho x,1-\rho^2)$.

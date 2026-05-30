@@ -354,7 +354,7 @@ $F=18.67/2\div\mathrm{SS}_{\text{artık}}/6$; artık KT küçük olduğundan $F$
 \end{ornek}
 
 \begin{hataanalizi}
-Tekrarlı ölçüm ANOVA'yı tekrarlı $t$-testleriyle karıştırmayın. Tekrarlı $t$-testleri FWER'i şişirir ve denek korelasyon yapısını dikkate almaz. Tekrarlı ölçüm ANOVA denek etkisini modele dahil eder ve güç avantajı sağlar.
+Tekrarlı ölçüm ANOVA'yı tekrarlı $t$-testleriyle karıştırmayınız. Tekrarlı $t$-testleri FWER'i şişirir ve denek korelasyon yapısını dikkate almaz. Tekrarlı ölçüm ANOVA denek etkisini modele dahil eder ve güç avantajı sağlar.
 \end{hataanalizi}
 
 %% ============================================================
@@ -436,8 +436,8 @@ $\sum_{i,j}(\bar Y_{i.}-\bar Y_{..})(Y_{ij}-\bar Y_{i.}) = \sum_i(\bar Y_{i.}-\b
 }
 
 \begin{alistirma}[Al.16.2b]{B}{Güç Analizi --- Tek Yönlü ANOVA}
-$k=3$ grup, her grupta $n$ gözlem; grup ortalamaları $\mu_1=10$, $\mu_2=12$, $\mu_3=14$; ortak standart sapma $\sigma=4$. $\alpha=0.05$ düzeyinde güç $1-\beta\geq0.80$ için gereken $n$'yi bulun.
-Yönerge: Merkezsizlik parametresi $\lambda = \dfrac{n\sum_i(\mu_i-\bar\mu)^2}{\sigma^2}$ kullanın.
+$k=3$ grup, her grupta $n$ gözlem; grup ortalamaları $\mu_1=10$, $\mu_2=12$, $\mu_3=14$; ortak standart sapma $\sigma=4$. $\alpha=0.05$ düzeyinde güç $1-\beta\geq0.80$ için gereken $n$'yi bulunuz.
+Yönerge: Merkezsizlik parametresi $\lambda = \dfrac{n\sum_i(\mu_i-\bar\mu)^2}{\sigma^2}$ kullanınız.
 \end{alistirma}
 \alcozum{%
 $\bar\mu = (10+12+14)/3=12$. $\sum_i(\mu_i-\bar\mu)^2=(10-12)^2+(12-12)^2+(14-12)^2=4+0+4=8$.
@@ -453,7 +453,7 @@ $n=16$: $\lambda=8$; güç $\approx0.85$ --- $1-\beta=0.80$ koşulunu sağlar.
 Sonuç: Her grupta $n\approx14$--$16$ gözlem yeterlidir.}
 
 \begin{alistirma}[Al.16.2c]{B}{Çoklu Karşılaştırma --- Scheffe ve Bonferroni}
-$k=4$ grup ($n_i=10$, $N=40$, MSE$=25$). Tüm olası çift karşılaştırmalar için (a) Bonferroni düzeltmesiyle $\alpha^*$ hesaplayın; (b) Scheffe kritik değerini yazın; (c) Hangi yöntem daha muhafazakârdır?
+$k=4$ grup ($n_i=10$, $N=40$, MSE$=25$). Tüm olası çift karşılaştırmalar için (a) Bonferroni düzeltmesiyle $\alpha^*$ hesaplayınız; (b) Scheffe kritik değerini yazınız; (c) Hangi yöntem daha muhafazakârdır?
 \end{alistirma}
 \alcozum{%
 (a) \textbf{Bonferroni:} $m=\binom{4}{2}=6$ karşılaştırma. Bireysel düzeltilmiş düzey: $\alpha^* = 0.05/6 \approx 0.0083$. Her karşılaştırma için $t_{36,0.0042}$ (iki yönlü) kullanılır; $\approx t_{36,0.0042}\approx2.77$.
@@ -467,7 +467,6 @@ CI genişliği: $|\bar Y_{i.}-\bar Y_{j.}|\pm 2.93\sqrt{5}\approx|\bar Y_{i.}-\b
 
 (c) $6.55 > 6.19$: Scheffe daha geniş aralık verir, dolayısıyla çift karşılaştırmada Bonferroni daha keskin (muhafazakâr). Scheffe ise \emph{her} doğrusal kontrast için geçerlidir, sadece çiftler için değil.}
 
-\alistirmalar
 
 \begin{alistirma}[Al.16.3]{A}{Tukey HSD}
 Alıştırma~\ref{Al.16.1}'deki veriler için Tukey HSD yöntemiyle (\%95) hangi grup çiftlerinin anlamlı biçimde farklı olduğunu belirle. ($q_{0.05,3,6}\approx4.34$.)
@@ -475,20 +474,22 @@ Alıştırma~\ref{Al.16.1}'deki veriler için Tukey HSD yöntemiyle (\%95) hangi
 \alcozum{%
 MSE$=4$; $n=3$. HSD $=4.34\sqrt{4/3}=4.34\cdot1.155=5.01$. $|A-B|=1<5.01$, $|A-C|=4<5.01$, $|B-C|=5<5.01$ --- Hiç çift anlamlı değil (görece küçük örneklem). Not: $F$-testi anlamlı bulmuştu ama Tukey daha muhafazakâr.%
 }
-
 \begin{alistirma}[Al.16.4]{B}{İki yönlü ANOVA --- etkileşim}
 $a=2$ (A: erkek/kadın), $b=2$ (B: ilaç/plasebo), $n=4$. Hücre ortalamaları: $\bar Y_{11}=20$, $\bar Y_{12}=15$, $\bar Y_{21}=22$, $\bar Y_{22}=25$. MSE$=10$, $N=16$. Etkileşim F-istatistiğini hesapla.
 \end{alistirma}
 \alcozum{%
 $\bar Y_{1.}=17.5$, $\bar Y_{2.}=23.5$, $\bar Y_{.1}=21$, $\bar Y_{.2}=20$; $\bar Y_{..}=20.5$. SSAB $= 4\sum_{ij}[(Y_{ij}-\bar Y_{i.}-\bar Y_{.j}+\bar Y_{..})^2]$. Hücre etkileşim: $(\alpha\beta)_{11}=20-17.5-21+20.5=2$; $(\alpha\beta)_{12}=15-17.5-20+20.5=-2$; $(\alpha\beta)_{21}=22-23.5-21+20.5=-2$; $(\alpha\beta)_{22}=25-23.5-20+20.5=2$. SSAB$=4(4+4+4+4)=64$. MSAB$=64/1=64$. $F=64/10=6.4$. $F_{1,12,0.05}\approx4.75$: etkileşim anlamlı.%
 }
-
 \begin{alistirma}[Al.16.5]{C}{Rasgele etki: ICC tahmin}
 $k=5$ sınıf, her sınıftan $n=10$ öğrenci test skoru. MSA$=120$, MSE$=30$. $\hat\sigma_A^2$ ve $\hat{\mathrm{ICC}}$'yi hesapla. Yorumla.
 \end{alistirma}
 \alcozum{%
 $\Beklenti[\mathrm{MSA}]=\sigma^2+n\sigma_A^2$; $\hat\sigma^2=\mathrm{MSE}=30$; $\hat\sigma_A^2=(\mathrm{MSA}-\mathrm{MSE})/n=(120-30)/10=9$. $\hat{\mathrm{ICC}}=9/(9+30)=9/39\approx0.23$. Yorum: sınıf üyeliği test skoru varyansının \%23'ünü açıklıyor; sınıf etkisi önemli.%
 }
+\alistirmalar
+
+
+
 
 \begin{alistirma}[Al.16.6]{C}{ANOVA --- regresyon eşdeğerliği}
 $k=3$ grup ANOVA'yı gösterge değişkenli regresyon olarak yeniden kur. Tasarım matrisini yaz; EKK tahminlerinin $\hat\mu$, $\hat\alpha_1-\hat\alpha_3$, $\hat\alpha_2-\hat\alpha_3$ olduğunu göster.
@@ -527,7 +528,7 @@ $a=3$ faktör A düzeyi, $b=4$ faktör B düzeyi, $n=2$ tekrar. (a) Ana etkiler 
 (c) Toplam: $abn=3\cdot4\cdot2=24$ gözlem. Toplam SD: $abn-1=23$. Kontrol: $2+3+6+12=23$. \checkmark}
 
 \begin{alistirma}[Al.16.11]{B}{Tekrarlı Ölçüm ANOVA --- Tüm Etkileri}
-$n=10$ denek, $k=4$ zaman noktası, ölçümlerin ANOVA tablosunu kurun. (a) Denekler arası ve içi kaynak ayrımını açıklayın. (b) $\mathrm{SS}_\mathrm{total}=240$, $\mathrm{SS}_\mathrm{subjects}=80$, $\mathrm{SS}_\mathrm{time}=90$ ise $\mathrm{SS}_\mathrm{error}$'ü hesaplayın. (c) $F$-istatistiğini bulun.
+$n=10$ denek, $k=4$ zaman noktası, ölçümlerin ANOVA tablosunu kurunuz. (a) Denekler arası ve içi kaynak ayrımını açıklayınız. (b) $\mathrm{SS}_\mathrm{total}=240$, $\mathrm{SS}_\mathrm{subjects}=80$, $\mathrm{SS}_\mathrm{time}=90$ ise $\mathrm{SS}_\mathrm{error}$'ü hesaplayınız. (c) $F$-istatistiğini bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) Denekler arası: bireyler arası fark ($\mathrm{df}=n-1=9$). Denekler içi: zaman etkisi + hata ($\mathrm{df}=(n-1)(k-1)=27$).
@@ -536,7 +537,7 @@ $n=10$ denek, $k=4$ zaman noktası, ölçümlerin ANOVA tablosunu kurun. (a) Den
 $F=30/2.593\approx11.57$. $F_{3,27,0.05}=2.96$: zaman etkisi anlamlı.}
 
 \begin{alistirma}[Al.16.12]{B}{ANCOVA --- Kovaryatın Giderilmesi}
-$k=2$ tedavi grubu, $n=20$ kişi her grupta. Ön-test puanı $X$ (kovaryat), son-test $Y$ bağımlı. $\mathrm{SS}_\mathrm{res}$(ANCOVA)$=280$, $\mathrm{SS}_\mathrm{res}$(ANOVA)$=340$. (a) Kovaryatın açıkladığı ek varyansı hesapla. (b) ANCOVA'nın güce katkısını yorumlayın.
+$k=2$ tedavi grubu, $n=20$ kişi her grupta. Ön-test puanı $X$ (kovaryat), son-test $Y$ bağımlı. $\mathrm{SS}_\mathrm{res}$(ANCOVA)$=280$, $\mathrm{SS}_\mathrm{res}$(ANOVA)$=340$. (a) Kovaryatın açıkladığı ek varyansı hesapla. (b) ANCOVA'nın güce katkısını yorumlayınız.
 \end{alistirma}
 \alcozum{%
 (a) $\Delta\mathrm{SS}=340-280=60$: kovaryat $X$ dahil edilince artık SS 60 birim azaldı. Bu, $X$'in $Y$'nin bir kısmını açıkladığını gösterir.

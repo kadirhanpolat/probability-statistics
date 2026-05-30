@@ -206,20 +206,21 @@ $T_n = \sqrt{n}(\bar{X}_n-\mu)/S \xrightarrow{d} \Normal(0,1)$ (Slutsky).
 % =====================================================================
 
 \begin{kesif}
-$n$ gözlemden elde edilen tüm bilgi için $T(X_1,\ldots,X_n)$'yi hesaplamak yeterli mi?
-Yani $T$'yi bilince, orijinal veriyi $\theta$ hakkında daha fazla bilgi için kullanabilir miyiz?
-Yanıt "hayır" ise $T$ yeterli istatistik adını alır.
-\kesifcevap{Fisher-Neyman çarpanlanma teoremi: $T$ yeterli $\Leftrightarrow$
-  $f(\mathbf{x};\theta)=g(T(\mathbf{x});\theta)\cdot h(\mathbf{x})$.
-  Yeterli istatistik, $\theta$'ya bağlı tüm bilgiyi içinde taşır;
-  kalan veri $\theta$ için ek bilgi vermez. Normal'de $(\bar X, S^2)$ yeterlidir.}
+$X_1,\ldots,X_{100} \iid \Normal(\mu, 1)$ gözlemlendi.
+$\bar{X}_{100}$'ü not ettikten sonra ham veriyi silsek, $\mu$ tahmini için
+bir şey kaybeder miyiz? Peki ya yalnızca $X_1$'i tutup geri kalan
+$99$ gözlemi silseydik?
+\kesifcevap{$\bar{X}_{100}$'ü bildikten sonra ham veriyi silmek hiçbir bilgi
+  kaybettirmez: $\mu$'ya dair her şey $\bar{X}$'te özetlenmiştir.
+  Yalnızca $X_1$'i tutmak ise $99$ gözlemin bilgisini yok eder.
+  Aradaki fark: $\bar{X}$ yeterli istatistik, $X_1$ tek başına değil.}
 \end{kesif}
 
 \begin{tanimgerekce}
-$X_1,\ldots,X_n$ birlikte $\theta$ hakkında tüm bilgiyi içerir.
-$T$ "yeterli"yse, $T$'nin değeri bilindiğinde verinin $\theta$'dan bağımsız bir kalan dağılımı olur.
-Başka deyişle $T$, $\theta$ bilgisini "özetlemiş"tir ve orijinal veriden geriye kalan
-rasgelelik $\theta$ ile ilgisizdir.
+Sezgi oturduğunda şu soru kalır: $T$'nin veriyi ``ne ölçüde özetlediğini''
+nasıl matematiksel olarak sınarız? Cevap, $T = t$ koşuluyla $\mathbf{X}$'in
+koşullu dağılımının $\theta$'ya bağlı olup olmadığıdır. Bağımlıysa ham veride
+hâlâ $\theta$ bilgisi vardır; değilse $T$ tüm bilgiyi taşıyor demektir.
 \end{tanimgerekce}
 
 \begin{tanim}[Yeterli İstatistik]
@@ -378,10 +379,10 @@ parametre tanımlanabilirliği, bu bölümdeki kavramlarla doğrudan ilişkilidi
 % ---- Öz-Yansıtma ----
 \begin{ozyansima}
 \begin{itemize}
-  \item "Parametrik model" ve "parametrik olmayan model" arasındaki farkı bir örnekle açıklayın.
-  \item Yeterli istatistiğin "veri özetleme" yorumunu ve pratikte neden önemli olduğunu anlatın.
+  \item "Parametrik model" ve "parametrik olmayan model" arasındaki farkı bir örnekle açıklayınız.
+  \item Yeterli istatistiğin "veri özetleme" yorumunu ve pratikte neden önemli olduğunu anlatınız.
   \item $(\bar{X}_n, S^2)$'nin $\sigma^2$ bilinen $\Normal(\mu,\sigma^2)$'de yeterli istatistik olup
-        olmadığını tartışın. Tek bilinmeyen $\mu$ ise ne değişir?
+        olmadığını tartışınız. Tek bilinmeyen $\mu$ ise ne değişir?
   \item OKH ayrışımı $= \mathrm{Var} + \mathrm{Yan}^2$ istatistiksel bir "uzlaşı"yı nasıl yansıtır?
 \end{itemize}
 \end{ozyansima}
@@ -489,11 +490,17 @@ $T$ yeterli ve $V$ herhangi bir istatistik. Eğer $\Prob_\theta(V\leq v\mid T=t)
 % =====================================================================
 
 \begin{kesif}
-Frekansçı istatistikte $\theta$ sabit (bilinmeyen) bir değerdir; Bayesçi istatistikte ise $\theta$ da rasgele bir değişkendir ve ona dair önsel (prior) inancımızı bir olasılık dağılımı olarak ifade ederiz.
-\kesifcevap{Frekansçı: $\theta\in\Theta$ sabit; olasılık büyük örneklem frekansıdır.
-  Bayesçi: $\theta\sim\pi(\theta)$; veriyi görerek $\pi(\theta|\mathbf{x})\propto L(\theta;\mathbf{x})\pi(\theta)$.
-  Temel fark: parametrenin ontolojik statüsü --- sabit mi, rasgele mi?
-  İkisi farklı hedefler seçer; güven aralığı $\neq$ credible interval.}
+Bir madeni para $n = 10$ kez atıldı ve $7$ tura geldi. Frekansçı yaklaşımda
+$\hat{p} = 0.7$ tahmini elde ederiz. ``Bu para adil mi?'' sorusuna
+$P(\text{adil para} \mid \text{veri})$ diyebilir miyiz?
+Bu ifade frekansçı çerçevede neden anlamsızdır; Bayesçi çerçevede ne anlam kazanır?
+\kesifcevap{Frekansçı: $\theta\in\Theta$ sabit ama bilinmeyen; $P(\theta=\text{adil})$
+  tanımsızdır çünkü $\theta$ rasgele değil. Güven aralığı parametreyi değil,
+  prosedürü kapsıyor.
+  Bayesçi: $\theta \sim \pi(\theta)$ önsel; $7$ tura sonrası
+  $\pi(\theta \mid \mathbf{x}) \propto L(\theta;\mathbf{x})\pi(\theta)$ sonsal.
+  ``Adil para'' olasılığı doğrudan $P(\theta=0.5 \mid \mathbf{x})$ ile hesaplanır;
+  bu güven aralığından kavramsal olarak farklıdır.}
 \end{kesif}
 
 \begin{tanim}[Bayes teoremi --- istatistik]\label{def:bayes_istatistik}
@@ -573,9 +580,9 @@ $X_i\iid\mathrm{Ber}(p)$; $T=\sum X_i$ yeterli. Sonsal $\pi(p|T=t)=\pi(p|\mathbf
 
 \begin{alistirma}[Al.11.1]{A}{Örneklem Ortalaması ve Varyansı}
 $X_1,\ldots,X_5$ i.i.d.\ $\Normal(3, 4)$ ($\sigma^2=4$).
-(a) $\bar{X}_5$'in dağılımını yazın.
-(b) $P(\bar{X}_5 > 4)$'ü hesaplayın.
-(c) $(n-1)S^2/\sigma^2$'nin dağılımını yazın ve $E[S^2]$'yi bulun.
+(a) $\bar{X}_5$'in dağılımını yazınız.
+(b) $P(\bar{X}_5 > 4)$'ü hesaplayınız.
+(c) $(n-1)S^2/\sigma^2$'nin dağılımını yazınız ve $E[S^2]$'yi bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $\bar{X}_5 \sim \Normal(3, 4/5)$; $\sigma_{\bar{X}} = 2/\sqrt{5}$.\\
@@ -585,8 +592,8 @@ $E[S^2] = \sigma^2 = 4$.}
 
 \begin{alistirma}[Al.11.2]{A}{Fisher-Neyman --- Poisson}
 $X_1,\ldots,X_n$ i.i.d.\ $\Pois(\lambda)$.
-(a) Ortak PMF'yi yazın. (b) $T = \sum X_i$'nin yeterli istatistik olduğunu F-N teoremi ile gösterin.
-(c) $T \sim \Pois(n\lambda)$ olduğunu belirtin.
+(a) Ortak PMF'yi yazınız. (b) $T = \sum X_i$'nin yeterli istatistik olduğunu F-N teoremi ile gösteriniz.
+(c) $T \sim \Pois(n\lambda)$ olduğunu belirtiniz.
 \end{alistirma}
 \alcozum{%
 (a) $f(\mathbf{x}|\lambda) = \prod \frac{\lambda^{x_i}e^{-\lambda}}{x_i!} = \frac{\lambda^{\sum x_i}e^{-n\lambda}}{\prod x_i!}$.\\
@@ -597,9 +604,9 @@ F-N: $T = \sum X_i$ yeterli.\\
 \begin{alistirma}[Al.11.3]{B}{OKH Hesabı}
 $X_1,\ldots,X_n$ i.i.d.\ $\Normal(\mu,\sigma^2)$.
 $\tilde{S}^2 = \frac{1}{n}\sum(X_i-\bar{X})^2$ (yanlı tahmin edici) için:
-(a) $E[\tilde{S}^2]$ ve $\mathrm{Var}(\tilde{S}^2)$'yi bulun.
-(b) $\mathrm{OKH}(\tilde{S}^2, \sigma^2)$'yi hesaplayın.
-(c) $\mathrm{OKH}(\tilde{S}^2,\sigma^2)$ ile $\mathrm{OKH}(S^2,\sigma^2)$'yi karşılaştırın.
+(a) $E[\tilde{S}^2]$ ve $\mathrm{Var}(\tilde{S}^2)$'yi bulunuz.
+(b) $\mathrm{OKH}(\tilde{S}^2, \sigma^2)$'yi hesaplayınız.
+(c) $\mathrm{OKH}(\tilde{S}^2,\sigma^2)$ ile $\mathrm{OKH}(S^2,\sigma^2)$'yi karşılaştırınız.
 \end{alistirma}
 \alcozum{%
 (a) $\tilde{S}^2 = \frac{n-1}{n}S^2$; $E[\tilde{S}^2] = \frac{n-1}{n}\sigma^2$.
@@ -610,8 +617,8 @@ $n \geq 3$'te $\tilde{S}^2$ daha küçük OKH'ye sahip (küçük yanlılık kaza
 
 \begin{alistirma}[Al.11.4]{B}{Tamamlayıcılık --- Uniform}
 $X_1,\ldots,X_n$ i.i.d.\ $\Uniform(0,\theta)$.
-(a) $T = X_{(n)} = \max X_i$'nin yeterli olduğunu F-N ile gösterin.
-(b) $E_\theta[g(T)] = 0$ tüm $\theta > 0$'da koşulundan $g \equiv 0$ sonucunu türetin.
+(a) $T = X_{(n)} = \max X_i$'nin yeterli olduğunu F-N ile gösteriniz.
+(b) $E_\theta[g(T)] = 0$ tüm $\theta > 0$'da koşulundan $g \equiv 0$ sonucunu türetiniz.
 (c) $T$ tamamlayıcı mı?
 \end{alistirma}
 \alcozum{%
@@ -624,8 +631,8 @@ $\frac{d}{d\theta}[\theta^n \cdot 0] = 0 = ng(\theta)\theta^{n-1}$, yani $g(\the
 
 \begin{alistirma}[Al.11.4b]{B}{GBHK --- Normal Ailede}
 $X_1,\ldots,X_n$ i.i.d.\ $\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinen).
-(a) $T=\bar{X}$ için Cramér-Rao alt sınırını hesaplayın.
-(b) $\bar{X}$'in UMVUE olduğunu gösterin.
+(a) $T=\bar{X}$ için Cramér-Rao alt sınırını hesaplayınız.
+(b) $\bar{X}$'in UMVUE olduğunu gösteriniz.
 (c) $\sigma^2$ de bilinmiyorsa ne değişir? Yeterli ve tamamlayıcı istatistik nedir?
 \end{alistirma}
 \alcozum{%
@@ -654,8 +661,8 @@ $X_1,\ldots,X_n$ i.i.d.\ $\mathrm{Cau}(\theta,1)$; $f(x|\theta)=\dfrac{1}{\pi[1+
 
 \begin{alistirma}[Al.11.5]{A}{Örneklem $t$ Dağılımı}
 $X_1,\ldots,X_{16}$ i.i.d.\ $\Normal(\mu, 9)$.
-$T = \sqrt{16}(\bar{X}_{16}-\mu)/S$'nin dağılımını yazın.
-$P(T > 2.131)$'i $t$ tablosundan söyleyin.
+$T = \sqrt{16}(\bar{X}_{16}-\mu)/S$'nin dağılımını yazınız.
+$P(T > 2.131)$'i $t$ tablosundan söyleyiniz.
 \end{alistirma}
 \alcozum{%
 $T \sim t_{15}$.
@@ -663,7 +670,7 @@ $t_{15,0.025} \approx 2.131$: $P(T > 2.131) = 0.025$.}
 
 \begin{alistirma}[Al.11.6]{A}{Yeterli İstatistik --- Üstel Aile}
 $X_i \sim \Gama(\alpha, \beta)$ ($\alpha$ biliniyor, $\beta$ bilinmiyor).
-(a) Ortak PDF'yi üstel aile formunda yazın. (b) Yeterli istatistiği bulun.
+(a) Ortak PDF'yi üstel aile formunda yazınız. (b) Yeterli istatistiği bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $f(\mathbf{x}|\beta) = \prod \frac{\beta^\alpha}{\Gamma(\alpha)}x_i^{\alpha-1}e^{-\beta x_i}
@@ -673,10 +680,10 @@ $T = \sum X_i$ yeterli.}
 
 \begin{alistirma}[Al.11.7]{B}{Bağımsızlık --- $\bar{X}$ ve $S^2$}
 $X_1, X_2, X_3$ i.i.d.\ $\Normal(\mu, \sigma^2)$.
-$(Y_1, Y_2, Y_3) = (X_1+X_2+X_3, X_1-X_2, X_1+X_2-2X_3)/\sqrt{6}$ dönüşümünü yapın.
-(a) $Y_i$'lerin $\Normal(?, ?)$ dağılımını bulun.
-(b) $Y_1$ ile $(Y_2, Y_3)$'ün bağımsız olduğunu gösterin.
-(c) $\bar{X}$ ve $S^2$'nin bağımsızlığını bu sonuçtan çıkarın.
+$(Y_1, Y_2, Y_3) = (X_1+X_2+X_3, X_1-X_2, X_1+X_2-2X_3)/\sqrt{6}$ dönüşümünü yapınız.
+(a) $Y_i$'lerin $\Normal(?, ?)$ dağılımını bulunuz.
+(b) $Y_1$ ile $(Y_2, Y_3)$'ün bağımsız olduğunu gösteriniz.
+(c) $\bar{X}$ ve $S^2$'nin bağımsızlığını bu sonuçtan çıkarınız.
 \end{alistirma}
 \alcozum{%
 (a) $Y_1 = (X_1+X_2+X_3)/\sqrt{3}\cdot\sqrt{3}/\sqrt{6}\cdot\sqrt{6}$ --- uygun normalize ile
@@ -689,7 +696,7 @@ $\mathrm{Cov}(Y_1,Y_2) = 0$; normal için $\Rightarrow$ bağımsız.\\
 
 \begin{alistirma}[Al.11.8]{B}{En Az Yeterlilik --- Cauchy}
 $X_1,\ldots,X_n$ i.i.d.\ $\mathrm{Cauchy}(\theta, 1)$.
-$f(\mathbf{x}|\theta)/f(\mathbf{y}|\theta)$ oranını yazın.
+$f(\mathbf{x}|\theta)/f(\mathbf{y}|\theta)$ oranını yazınız.
 Bu oranın $\theta$'dan bağımsız olması için hangi koşul gerekir?
 En az yeterli istatistik nedir?
 \end{alistirma}

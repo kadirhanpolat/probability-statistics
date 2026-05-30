@@ -449,7 +449,7 @@ Bu, zaman serisi analizinde koşullu heteroskedastisite modellerinin temelidir.
 % ---- Öz-Yansıtma ----
 \begin{ozyansima}
 \begin{itemize}
-  \item "Martingal = dürüst oyun" metaforunu iki farklı örnekle somutlaştırın.
+  \item "Martingal = dürüst oyun" metaforunu iki farklı örnekle somutlaştırınız.
   \item IBD teoremi neden durma zamanının sınırlı olmasını (veya başka bir koşul) gerektiriyor?
   \item GBSK'nın martingal ispatı neden daha "zarif"tir?
 \end{itemize}
@@ -471,7 +471,7 @@ Bu, zaman serisi analizinde koşullu heteroskedastisite modellerinin temelidir.
 
 \begin{alistirma}[Al.9.1]{A}{Martingal Doğrulama}
 $X_i$ bağımsız, $E[X_i]=1$, $M_n = \prod_{i=1}^n X_i$.
-$E[M_{n+1}\mid\mathcal{F}_n] = M_n$ olduğunu gösterin.
+$E[M_{n+1}\mid\mathcal{F}_n] = M_n$ olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $E[M_{n+1}\mid\mathcal{F}_n] = E[M_n X_{n+1}\mid\mathcal{F}_n] = M_n E[X_{n+1}\mid\mathcal{F}_n]
@@ -480,8 +480,8 @@ $E[M_{n+1}\mid\mathcal{F}_n] = E[M_n X_{n+1}\mid\mathcal{F}_n] = M_n E[X_{n+1}\m
 
 \begin{alistirma}[Al.9.2]{B}{Gamblerın İflası --- Varyans Martingali}
 $S_n$ simetrik rassal yürüyüş ($\xi_i = \pm1$, $\sigma^2=1$). $M_n = S_n^2 - n$.
-(a) $M_n$'nin martingal olduğunu gösterin.
-(b) $\tau = \inf\{n: S_n = a\}$ ($a > 0$) için $E[\tau] = a^2$ olduğunu IBD ile bulun.
+(a) $M_n$'nin martingal olduğunu gösteriniz.
+(b) $\tau = \inf\{n: S_n = a\}$ ($a > 0$) için $E[\tau] = a^2$ olduğunu IBD ile bulunuz.
 \end{alistirma}
 \alcozum{%
 (a) $E[M_{n+1}\mid\mathcal{F}_n] = E[(S_n+\xi_{n+1})^2 - (n+1)\mid\mathcal{F}_n]
@@ -491,9 +491,9 @@ $E[M_\tau] = E[S_\tau^2 - \tau] = E[M_0] = 0$.
 $S_\tau = a$ (emici bariyer): $a^2 - E[\tau] = 0$. $E[\tau] = a^2$.}
 
 \begin{alistirma}[Al.9.3cozum]{B}{Doob Yakınsama --- $L^1$ Martingal}
-$(M_n)_{n\geq0}$ bir martingal ve $\sup_n E[|M_n|]<\infty$. Doob $L^1$ yakınsama teoremine göre $M_n\to M_\infty$ n.k. belirterek, aşağıdaki sonuçları türetin:
+$(M_n)_{n\geq0}$ bir martingal ve $\sup_n E[|M_n|]<\infty$. Doob $L^1$ yakınsama teoremine göre $M_n\to M_\infty$ n.k. belirterek, aşağıdaki sonuçları türetiniz:
 (a) $M_n = E[Z\mid\mathcal{F}_n]$ ise $M_n\to E[Z\mid\mathcal{F}_\infty]$ n.k.\ ve $L^1$'de.
-(b) $M_n = S_n/n$ ($S_n$ bağımsız toplamı, $E[|X_1|]<\infty$) için ZBSK ile ilişkilendirin.
+(b) $M_n = S_n/n$ ($S_n$ bağımsız toplamı, $E[|X_1|]<\infty$) için ZBSK ile ilişkilendiriniz.
 \end{alistirma}
 \alcozum{%
 (a) $E[|M_n|] = E[|E[Z\mid\mathcal{F}_n]|] \leq E[|Z|] < \infty$ (Jensen + koşullu beklenti), dolayısıyla sınır koşulu sağlanır. Doob yakınsama teoremi: $M_n\to M_\infty$ n.k.\ ile $L^1$'de. Levy örtme teoremi (Levy's upward theorem): $E[Z\mid\mathcal{F}_n]\to E[Z\mid\mathcal{F}_\infty]$ n.k., çünkü $\mathcal{F}_\infty = \sigma(\bigcup_n\mathcal{F}_n)$.
@@ -501,10 +501,10 @@ $(M_n)_{n\geq0}$ bir martingal ve $\sup_n E[|M_n|]<\infty$. Doob $L^1$ yakınsam
 (b) $M_n = E[\bar{X}\mid\mathcal{F}_n] = S_n/n$ martingal değildir; ZBSK ise $S_n/n\to\mu$ n.k.\ (Birkhoff--Khintchine). Martingal çerçevesinde GBSK, bağımsız ilerleyen martingale (optional stopping + uniform integrability) indirgenerek ispatlanır.}
 
 \begin{alistirma}[Al.9.4cozum]{B}{Üstel Martingal ve Büyük Sapmalar}
-$X_1,X_2,\ldots\iid$ ile $E[e^{tX_1}] = M(t) < \infty$ ($t>0$). $M_n = e^{tS_n}/M(t)^n$ tanımlayın.
-(a) $M_n$'nin martingal olduğunu gösterin.
-(b) $\tau_a = \inf\{n: S_n\geq a\}$ ve IBD kullanarak $P(S_n\geq a)\leq e^{-ta}M(t)^n/1 = M(t)^n e^{-ta}$ biçiminde Chernoff sınırını elde edin.
-(c) $t$'yi optimize ederek $P(S_n\geq na)\leq e^{-n\Lambda^*(a)}$ gösterin; burada $\Lambda^*(a)=\sup_t(ta - \log M(t))$.
+$X_1,X_2,\ldots\iid$ ile $E[e^{tX_1}] = M(t) < \infty$ ($t>0$). $M_n = e^{tS_n}/M(t)^n$ tanımlayınız.
+(a) $M_n$'nin martingal olduğunu gösteriniz.
+(b) $\tau_a = \inf\{n: S_n\geq a\}$ ve IBD kullanarak $P(S_n\geq a)\leq e^{-ta}M(t)^n/1 = M(t)^n e^{-ta}$ biçiminde Chernoff sınırını elde ediniz.
+(c) $t$'yi optimize ederek $P(S_n\geq na)\leq e^{-n\Lambda^*(a)}$ gösteriniz; burada $\Lambda^*(a)=\sup_t(ta - \log M(t))$.
 \end{alistirma}
 \alcozum{%
 (a) $E[M_{n+1}\mid\mathcal{F}_n] = e^{tS_n}/M(t)^n \cdot E[e^{tX_{n+1}}]/M(t) = M_n \cdot M(t)/M(t) = M_n$. $M_n$ martingal. $E[M_0]=1$.
@@ -515,38 +515,39 @@ $X_1,X_2,\ldots\iid$ ile $E[e^{tX_1}] = M(t) < \infty$ ($t>0$). $M_n = e^{tS_n}/
 
 % ---
 
-\alistirmalar
 
 \begin{alistirma}[Al.9.3]{A}{Doob Maksimal}
-$S_n = \sum_{k=1}^n X_k$ ($X_k$ bağımsız, $E[X_k]=0$, $E[X_k^2]=1$). Doob $L^2$ eşitsizliğini kullanarak $E[\max_{k\leq n}S_k^2]\leq 4E[S_n^2]=4n$ olduğunu gösterin.
+$S_n = \sum_{k=1}^n X_k$ ($X_k$ bağımsız, $E[X_k]=0$, $E[X_k^2]=1$). Doob $L^2$ eşitsizliğini kullanarak $E[\max_{k\leq n}S_k^2]\leq 4E[S_n^2]=4n$ olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $S_n$ martingal; $M^*=\max_{k\leq n}|S_k|$. Doob $L^p$, $p=2$: $E[(M^*)^2]\leq 4E[S_n^2]=4n\cdot\mathrm{Var}(X_1)=4n$.%
 }
-
 \begin{alistirma}[Al.9.4b]{B}{Polya Urnası Momentleri}
-Polya urnası: $r=1$, $b=1$ (başlangıçta eşit). $M_\infty\sim\mathrm{Beta}(1,1)=\mathrm{Uniform}[0,1]$ olduğunu gösterin. Beklenti ve varyansı hesaplayın.
+Polya urnası: $r=1$, $b=1$ (başlangıçta eşit). $M_\infty\sim\mathrm{Beta}(1,1)=\mathrm{Uniform}[0,1]$ olduğunu gösteriniz. Beklenti ve varyansı hesaplayınız.
 \end{alistirma}
 \alcozum{%
 $\mathrm{Beta}(1,1)$ yoğunluğu $f(x)=1$ ($0<x<1$); dolayısıyla $M_\infty\sim\mathrm{Uniform}[0,1]$. $E[M_\infty]=r/(r+b)=1/2$. $\mathrm{Var}(M_\infty)=rb/[(r+b)^2(r+b+1)]=1/12$. $\mathrm{Uniform}[0,1]$ varyansıyla uyuşuyor.%
 }
-
 \begin{alistirma}[Al.9.5b]{B}{UI Kontrolü}
-$M_n = E[Y\mid\mathcal{F}_n]$, $Y\in L^2$. $(M_n)$'nin UI olduğunu gösterin. \textit{(İpucu: $L^2$ aileleri UI'dir.)}
+$M_n = E[Y\mid\mathcal{F}_n]$, $Y\in L^2$. $(M_n)$'nin UI olduğunu gösteriniz. \textit{(İpucu: $L^2$ aileleri UI'dir.)}
 \end{alistirma}
 \alcozum{%
 $E[|M_n|^2]\leq E[E[Y^2\mid\mathcal{F}_n]]=E[Y^2]<\infty$. $(M_n)$ $L^2$-sınırlı. Her $L^2$-sınırlı aile UI'dir: $E[|M_n|\mathbf{1}_{|M_n|>c}]\leq\frac{E[M_n^2]}{c}\leq\frac{E[Y^2]}{c}\to0$ ($c\to\infty$).%
 }
+\alistirmalar
+
+
+
 
 \begin{alistirma}[Al.9.3]{A}{Altmartingal}
 $(X_n)$ martingal. $\varphi(x) = x^2$ için $\varphi(X_n)$'nin altmartingal
-olduğunu Jensen'i kullanarak gösterin.
+olduğunu Jensen'i kullanarak gösteriniz.
 \end{alistirma}
 \alcozum{%
 $E[X_{n+1}^2\mid\mathcal{F}_n] \geq (E[X_{n+1}\mid\mathcal{F}_n])^2 = X_n^2$. (Jensen, $\varphi$ konveks.)}
 
 \begin{alistirma}[Al.9.6]{C}{Olabilirlik Oranı --- $P_0$ altında}
-$X_i\iid\Normal(0,1)$ ($P_0$) veya $\Normal(\mu,1)$ ($P_1$, $\mu\neq0$). $\Lambda_n = \exp(n\mu\bar{X}_n - n\mu^2/2)$. $\Lambda_n\to0$ n.k.\ ($P_0$ altında) olduğunu gösterin.
+$X_i\iid\Normal(0,1)$ ($P_0$) veya $\Normal(\mu,1)$ ($P_1$, $\mu\neq0$). $\Lambda_n = \exp(n\mu\bar{X}_n - n\mu^2/2)$. $\Lambda_n\to0$ n.k.\ ($P_0$ altında) olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $\log\Lambda_n = \mu\sum X_i - n\mu^2/2 = n(\mu\bar{X}_n-\mu^2/2)$. $P_0$ altında $\bar{X}_n\to0$ GBSK. $\log\Lambda_n/n\to-\mu^2/2<0$ ($\mu\neq0$). $\log\Lambda_n\to-\infty$, $\Lambda_n\to0$ n.k.%
@@ -555,7 +556,7 @@ $\log\Lambda_n = \mu\sum X_i - n\mu^2/2 = n(\mu\bar{X}_n-\mu^2/2)$. $P_0$ altın
 \begin{alistirma}[Al.9.4]{B}{Doob Yakınsama Uygulaması}
 $X_i \geq 0$ bağımsız, $E[X_i] = 1$. $M_n = \prod_{i=1}^n X_i$.
 $\sup_n E[M_n] = 1 < \infty$ ise $M_n$ n.k.\ yakınsar.
-$M_\infty = 0$ n.k.\ olduğunu BSK ile gösterin.
+$M_\infty = 0$ n.k.\ olduğunu BSK ile gösteriniz.
 \end{alistirma}
 \alcozum{%
 $\ln M_n = \sum \ln X_i$. BSK: $(\ln M_n)/n \to E[\ln X_1]$.
@@ -563,7 +564,7 @@ Jensen: $E[\ln X_1] \leq \ln E[X_1] = 0$; genellikle $< 0$.
 $\ln M_n / n \to c < 0$ $\Rightarrow$ $M_n = e^{n \cdot c+o(n)} \to 0$ n.k.}
 
 \begin{alistirma}[Al.9.7]{B}{Doob Durma Zamanı}
-$(S_n)$ simetrik basit rassal yürüyüş, $S_0=0$. $T=\min(T_a,T_{-b})$ ($a,b>0$) ilk çıkış zamanı. Opsiyonel örnekleme ile $E[S_T]=0$ ve $E[T]=ab$ olduğunu gösterin.
+$(S_n)$ simetrik basit rassal yürüyüş, $S_0=0$. $T=\min(T_a,T_{-b})$ ($a,b>0$) ilk çıkış zamanı. Opsiyonel örnekleme ile $E[S_T]=0$ ve $E[T]=ab$ olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $S_n$ ve $S_n^2-n$ martingaller. $T$ n.k.\ sonlu (rassal yürüyüş geri döner). Opsiyonel örnekleme: $E[S_T]=E[S_0]=0$; $P(S_T=a)=b/(a+b)$, $P(S_T=-b)=a/(a+b)$.
@@ -571,19 +572,19 @@ $E[S_T]=a\cdot\frac{b}{a+b}+(-b)\cdot\frac{a}{a+b}=0$. \\
 $E[S_T^2-T]=0$: $E[S_T^2]=E[T]$. $E[S_T^2]=a^2\cdot\frac{b}{a+b}+b^2\cdot\frac{a}{a+b}=\frac{ab(a+b)}{a+b}=ab$. Dolayısıyla $E[T]=ab$.}
 
 \begin{alistirma}[Al.9.8]{B}{Üstel Martingal}
-$X_1,X_2,\ldots\iid$, $E[e^{\theta X_1}]=M(\theta)<\infty$. $Z_n=\exp(\theta S_n)/M(\theta)^n$ martingal olduğunu gösterin.
+$X_1,X_2,\ldots\iid$, $E[e^{\theta X_1}]=M(\theta)<\infty$. $Z_n=\exp(\theta S_n)/M(\theta)^n$ martingal olduğunu gösteriniz.
 \end{alistirma}
 \alcozum{%
 $E[Z_{n+1}\mid\mathcal{F}_n]=\frac{\exp(\theta S_n)}{M(\theta)^n}\cdot\frac{E[\exp(\theta X_{n+1})]}{M(\theta)}=Z_n\cdot\frac{M(\theta)}{M(\theta)}=Z_n$. Üstel martingal, Chernoff sınırının ispat aracıdır.}
 
 \begin{alistirma}[Al.9.9]{C}{Levy Martingali}
-$X\in L^1(\Omega,\mathcal{F},P)$ ve $\mathcal{F}_n\nearrow\mathcal{F}$. $M_n=E[X|\mathcal{F}_n]$ martingal olduğunu ve $M_n\to E[X|\mathcal{F}_\infty]=X$ n.k.\ yakınsadığını gösterin ($\mathcal{F}_\infty=\sigma(\bigcup\mathcal{F}_n)$).
+$X\in L^1(\Omega,\mathcal{F},P)$ ve $\mathcal{F}_n\nearrow\mathcal{F}$. $M_n=E[X|\mathcal{F}_n]$ martingal olduğunu ve $M_n\to E[X|\mathcal{F}_\infty]=X$ n.k.\ yakınsadığını gösteriniz ($\mathcal{F}_\infty=\sigma(\bigcup\mathcal{F}_n)$).
 \end{alistirma}
 \alcozum{%
 Martingal özelliği: $E[M_{n+1}|\mathcal{F}_n]=E[E[X|\mathcal{F}_{n+1}]|\mathcal{F}_n]=E[X|\mathcal{F}_n]=M_n$ (kulesi kuralı). $\sup E[|M_n|]\leq E[|X|]<\infty$: Doob $L^1$ yakınsama teoremi $M_n\to M_\infty$ n.k.\ verir. Ölçülebilirlik + tutarlılık: $M_\infty=E[X|\mathcal{F}_\infty]$.}
 
 \begin{alistirma}[Al.9.10]{C}{Submartingal Maksimum Eşitsizliği}
-$(X_n)$ altmartingal, $X_n\geq0$. $M_n^*=\max_{0\leq k\leq n}X_k$. $P(M_n^*\geq\lambda)\leq E[X_n]/\lambda$ ($\lambda>0$) Doob maksimal eşitsizliğini ispatlayın.
+$(X_n)$ altmartingal, $X_n\geq0$. $M_n^*=\max_{0\leq k\leq n}X_k$. $P(M_n^*\geq\lambda)\leq E[X_n]/\lambda$ ($\lambda>0$) Doob maksimal eşitsizliğini ispatlayınız.
 \end{alistirma}
 \alcozum{%
 $A=\{M_n^*\geq\lambda\}$. $T=\min\{k:X_k\geq\lambda\}$ ($T=n$ eğer hiç gerçekleşmezse). $A=\{T\leq n\}$ üzerinde $X_T\geq\lambda$. Opsiyonel örnekleme + altmartingal: $E[X_T\cdot\mathbf{1}_A]\leq E[X_n\cdot\mathbf{1}_A]\leq E[X_n]$. $\lambda P(A)\leq E[X_T\cdot\mathbf{1}_A]\leq E[X_n]$.}

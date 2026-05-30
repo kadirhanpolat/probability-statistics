@@ -459,7 +459,6 @@ $h(x,y) = (x-y)^2/2$ çekirdeğiyle $m=2$ U-istatistiği. (a) $\theta=\Beklenti[
 (a) $\Beklenti[(X-Y)^2/2]=\Beklenti[(X-\mu)^2+(Y-\mu)^2]/2=\sigma^2$ ($X,Y$ bağımsız). (b) $h_1(x)=\Beklenti[h(x,X_2)]-\sigma^2=\Beklenti[(x-X_2)^2/2]-\sigma^2=(x-\mu)^2/2+\sigma^2/2-\sigma^2=(x-\mu)^2/2-\sigma^2/2$. (c) $\sigma_1^2=\Var((X-\mu)^2/2-\sigma^2/2)=\Var((X-\mu)^2)/4=(\mu_4-\sigma^4)/4$ ($\mu_4$=4. merkezi moment). Asimptotik varyans $4\sigma_1^2/n=(\mu_4-\sigma^4)/n$.%
 }
 
-\alistirmalar
 
 \begin{alistirma}[Al.18.3a]{B}{Wald vs LR --- lognormal}
 $X_i\iid\mathrm{LogNormal}(\mu,1)$ ($n=25$, $\hat\mu=2.3$, $\mu_0=2.0$). (a) Wald test istatistiğini hesapla. (b) LR test istatistiğini hesapla. (c) Her iki testi $\alpha=0.05$ düzeyinde uygula ve karşılaştır.
@@ -467,27 +466,29 @@ $X_i\iid\mathrm{LogNormal}(\mu,1)$ ($n=25$, $\hat\mu=2.3$, $\mu_0=2.0$). (a) Wal
 \alcozum{%
 Fisher bilgisi LogNormal$(\mu,1)$ için: $\mathcal{I}(\mu)=1$ (Normal gibi, $Y_i=\log X_i\iid\Normal(\mu,1)$). (a) $W_n=25(2.3-2.0)^2\cdot1=25\cdot0.09=2.25$. (b) $\ell(\mu)=-\frac12\sum(Y_i-\mu)^2$; $\Lambda_n=2[\ell(\hat\mu)-\ell(\mu_0)]=n(\hat\mu-\mu_0)^2=2.25$. (c) $\chi^2_{1,0.05}=3.84$; $2.25<3.84$: $H_0$ reddedilmez. Her iki istatistik çakışır (mükemmel birinci dereceli eşdeğerlik).%
 }
-
 \begin{alistirma}[Al.18.3b]{A}{Bootstrap güven aralığı oluştur}
 $X_i\iid$ bilinmeyen dağılım, $n=50$, $\bar X=12.4$, $B=1000$ bootstrap tekrarından $z_{0.025}^*=-1.96$, $z_{0.975}^*=2.08$ elde edildi (asimetrik). Bootstrap yüzde güven aralığı nedir? Neden $z^*_{0.975}\neq 1.96$?
 \end{alistirma}
 \alcozum{%
 Bootstrap GA: $(\bar X - z_{0.975}^*\hat\sigma/\sqrt{n},\, \bar X - z_{0.025}^*\hat\sigma/\sqrt{n})$. Ters çevirme yöntemiyle (yüzde metodu): $[\hat\theta - z_{0.975}^*\hat{\text{se}}, \hat\theta - z_{0.025}^*\hat{\text{se}}]$. $z^*_{0.975}\neq1.96$ çünkü bootstrap dağılımı asimetriktir (sağa çarpık) --- Normal yakınsama tam gerçekleşmemişken bootstrap bu asimetriyi yakalar; standart normal yaklaşımı yakalayamaz.%
 }
-
 \begin{alistirma}[Al.18.3c]{B}{Silverman bant genişliği}
 $n=200$ gözlem, $\hat\sigma=3.5$. (a) Silverman kuralıyla $h_S$'i hesapla. (b) Gauss çekirdeği için $\|K\|_2^2$'yi hesapla. (c) Bu bant genişliğinde $\Var[\hat f_n(x)]$'ı $f(x)=0.1$ noktasında tahmin et.
 \end{alistirma}
 \alcozum{%
 (a) $h_S=1.06\cdot3.5\cdot200^{-1/5}=1.06\cdot3.5\cdot0.3311=1.228$. (b) Gauss çekirdeği $K(u)=\phi(u)$: $\|K\|_2^2=\int\phi^2(u)\,du=\frac{1}{2\sqrt\pi}\approx0.2821$. (c) $\Var\approx\frac{0.1\cdot0.2821}{200\cdot1.228}\approx\frac{0.02821}{245.6}\approx0.000115$.%
 }
-
 \begin{alistirma}[Al.18.3]{B}{M-tahmin: medyan asimptotik varyansı}
 $X_i\iid F$ sürekli, yoğunluk $f$. $\rho(x,\theta)=|x-\theta|$ seçimiyle M-tahmin edicinin $\hat\theta_n = $ medyan olduğunu ve asimptotik varyansının $1/(4f(m)^2)$ olduğunu göster.
 \end{alistirma}
 \alcozum{%
 $\psi(x,\theta)=\mathrm{sgn}(x-\theta)$; $\Beklenti[\psi^2]=1$. $\dot\psi(x,\theta)=-2\delta(x-\theta)$; $\Beklenti[\dot\psi]=-2f(\theta)$. M-tahmin formülü: asimptotik varyans $=1/(4f(\theta_0)^2)$. $\theta_0=m$ medyan.%
 }
+\alistirmalar
+
+
+
+
 
 \begin{alistirma}[Al.18.4]{C}{ARE: Double-Exponential dağılımı}
 $X_i\iid\mathrm{DE}(\theta)=\frac{1}{2}e^{-|x-\theta|}$. Ortalama ve medyanın ARE'sini hesapla. Hangi tahmin edici daha verimli?
@@ -511,7 +512,7 @@ $\log\frac{dP_{\theta+h/\sqrt n}^{(n)}}{dP_\theta^{(n)}}=\frac{h}{\sqrt n}\sum(X
 }
 
 \begin{alistirma}[Al.18.6]{B}{Delta Yöntemi --- Asimptotik Varyans}
-$X_1,\ldots,X_n\iid\Binom(1,p)$. $\hat p=\bar X_n$. (a) $\sqrt{n}(\hat p-p)\dto\Normal(0,p(1-p))$ olduğunu gösterin. (b) $g(p)=\log(p/(1-p))$ (logit) için $\sqrt{n}(g(\hat p)-g(p))$'nın asimptotik dağılımını bulun. (c) Bu dağılım $p$'ye bağlı mıdır?
+$X_1,\ldots,X_n\iid\Binom(1,p)$. $\hat p=\bar X_n$. (a) $\sqrt{n}(\hat p-p)\dto\Normal(0,p(1-p))$ olduğunu gösteriniz. (b) $g(p)=\log(p/(1-p))$ (logit) için $\sqrt{n}(g(\hat p)-g(p))$'nın asimptotik dağılımını bulunuz. (c) Bu dağılım $p$'ye bağlı mıdır?
 \end{alistirma}
 \alcozum{%
 (a) MLT: $\sqrt{n}(\bar X_n-p)\dto\Normal(0,p(1-p))$.
@@ -519,7 +520,7 @@ $X_1,\ldots,X_n\iid\Binom(1,p)$. $\hat p=\bar X_n$. (a) $\sqrt{n}(\hat p-p)\dto\
 (c) Evet, asimptotik varyans $1/(p(1-p))$ hâlâ $p$'ye bağlı. Varyans stabilize edici dönüşüm: $h(p)=\arcsin\sqrt{p}$, $h'(p)=1/(2\sqrt{p(1-p)})$: $\sqrt{n}(h(\hat p)-h(p))\dto\Normal(0,1/4)$ --- $p$'den bağımsız!}
 
 \begin{alistirma}[Al.18.7]{B}{Moment Tahmin Edici Asimptotik Normalliği}
-$X_1,\ldots,X_n\iid\Gama(\alpha,\beta)$, $E[X]=\alpha\beta$, $E[X^2]=\alpha\beta^2(\alpha+1)$. Momentler yöntemiyle $\hat\alpha,\hat\beta$ tahmin edicilerinin asimptotik dağılımını adım adım kurun.
+$X_1,\ldots,X_n\iid\Gama(\alpha,\beta)$, $E[X]=\alpha\beta$, $E[X^2]=\alpha\beta^2(\alpha+1)$. Momentler yöntemiyle $\hat\alpha,\hat\beta$ tahmin edicilerinin asimptotik dağılımını adım adım kurunuz.
 \end{alistirma}
 \alcozum{%
 $m_1=\bar X\pto\alpha\beta$, $m_2=\overline{X^2}\pto\alpha\beta^2(\alpha+1)=\mu_2'$. $g(m_1,m_2)=(\hat\alpha,\hat\beta)$: $\hat\beta=m_2/m_1-m_1$, $\hat\alpha=m_1/\hat\beta$.
@@ -527,7 +528,7 @@ $m_1=\bar X\pto\alpha\beta$, $m_2=\overline{X^2}\pto\alpha\beta^2(\alpha+1)=\mu_
 $\mathbf{J}_g=\partial(\hat\alpha,\hat\beta)/\partial(m_1,m_2)$ analitik hesaplanır; $\boldsymbol\Sigma=[\mu_{ij}']$ çapraz momentler matrisi.}
 
 \begin{alistirma}[Al.18.8]{C}{Le Cam Defect ve Asimptotik Denklik}
-İki deney $E_n=\{P_\theta^{(n)}\}$ ve $F_n=\{Q_\theta^{(n)}\}$ tanımlayın. Le Cam defect $\delta(E_n,F_n)\to0$ ise asimptotik denklik elde edilir. $X_1,\ldots,X_n\iid P_\theta$ normal deneyi ile $Y_1,\ldots,Y_n\iid N(\theta,1)$ deneyinin asimptotik denkliğini (LAN $\Rightarrow$ normal deney) açıklayın.
+İki deney $E_n=\{P_\theta^{(n)}\}$ ve $F_n=\{Q_\theta^{(n)}\}$ tanımlayınız. Le Cam defect $\delta(E_n,F_n)\to0$ ise asimptotik denklik elde edilir. $X_1,\ldots,X_n\iid P_\theta$ normal deneyi ile $Y_1,\ldots,Y_n\iid N(\theta,1)$ deneyinin asimptotik denkliğini (LAN $\Rightarrow$ normal deney) açıklayınız.
 \end{alistirma}
 \alcozum{%
 LAN koşulu: $\log(dP_{\theta+h/\sqrt{n}}/dP_\theta^{(n)})=h\Delta_n-h^2\mathcal{I}/2+o_P(1)$ ile $\Delta_n\dto\Normal(0,\mathcal{I})$. Normal deney: $Z\sim\Normal(\theta,\mathcal{I}^{-1})$, yani $dP_\theta^{\mathrm{Normal}}\propto\exp(-\mathcal{I}(\theta)(z-\theta)^2/2)$. LAN $\Rightarrow$ log-olabilirlik oranı dağılımı normal deneyinkiyle örtüşür $\Rightarrow\delta(E_n,F_n)\to0$. Her LAN deneyinde yeterli istatistik $\Delta_n$ yeterlidir; kayıp fonksiyonu sınırları normal deneyden türer.}
