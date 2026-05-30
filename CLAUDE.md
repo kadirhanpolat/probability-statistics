@@ -79,7 +79,7 @@ probability-statistics/
 
 | Dosya | Görev |
 |---|---|
-| `bolumler/maarif.sty` | Pedagojik kutular: motivasyon, kesif, kritiksorgu, tanimgerekce, hataanalizi, karsiornek, ispatiskele, kendinleifade, mikroozet, ozyansima, kopru, ipucu, alistirma, alcozum |
+| `bolumler/maarif.sty` | Pedagojik kutular (v0.3): motivasyon, kesif, kritiksorgu, tanimgerekce, hataanalizi, karsiornek, ispatiskele, kendinleifade, mikroozet, ozyansima, kopru, ipucu, alistirma, alcozum + `\kesifcevap{...}` + `\kendinleifadecevap{...}` + `\ogrencialani[yükseklik]` |
 | `bolumler/olasilik.sty` | Teorem ortamları (tanim, teorem, lemma, sonuc…) + olasılık/istatistik makroları |
 
 ### Çift sürüm sistemi
@@ -173,21 +173,23 @@ Bölüm-kaynak eşlemesi: `02_KAYNAK_ANALIZI.md §8`
 
 ## Mevcut Durum (2026-05-30)
 
-**TÜM BÖLÜMLER TAMAMLANDI — KİTAP YAZIM VE DERLEME AŞAMASI BİTTİ**
+**TÜM BÖLÜMLER TAMAMLANDI — KİTAP YAZIM, GÖRSEL TASARIM VE DERLEME AŞAMASI BİTTİ**
 
 **Tamamlananlar:**
 - Tasarım belgeleri v1.0 (7 belge)
-- LaTeX altyapısı: `olasilik.sty`, `maarif.sty`, `main-ogrenci.tex`, `main-egitmen.tex`
+- LaTeX altyapısı: `olasilik.sty`, `maarif.sty` (v0.3), `main-ogrenci.tex`, `main-egitmen.tex`
 - Part I: Böl.0–8 (zorunlu) + Böl.9*, Böl.10* (opsiyonel) — 11 bölüm
 - Part II: Böl.11–16 (zorunlu) + Böl.17*, Böl.18* (opsiyonel) — 8 bölüm
 - Ekler A–G: ölçüm teorisi, dağılım tabloları, istatistik tabloları, terminoloji, ispat teknikleri, kaynakça, kapsamlı örnekler
-- **LaTeX derleme: TAMAMLANDI** — `main-ogrenci.pdf` (300 sayfa, 0 hata) + `main-egitmen.pdf` (340 sayfa, 0 hata)
+- **LaTeX derleme: TAMAMLANDI** — `main-ogrenci.pdf` (310 sayfa, 0 hata) + `main-egitmen.pdf` (344 sayfa, 0 hata)
 
-**Çözülen derleme sorunları (commit 4ee4d2a):**
-- `bolumler/bblopts.cfg` eklendi — arabi paketinin enumitem'a müdahalesi önlendi
-- `maarif.sty`: `shortlabels` seçeneği, `bolumozeti` ortamı, `\if` düzeltmesi
-- Unicode karakterler LaTeX komutlarıyla değiştirildi (σ, ✓, −, ⇒, η, →)
-- 3 yanlış eşleştirilmiş ortam kapanışı düzeltildi (bolum06, bolum11, bolum13)
+**Çözülen sorunlar (bu oturum, commit 3ebcac2):**
+- `maarif.sty` v0.3: 17 ortamın her biri yapısal olarak farklı tasarım aldı (borderline, shadow, rounded, dashed vb.)
+- `\kesifcevap{...}` komutu eklendi: öğrenci PDF'inde kareli ızgara, eğitmen PDF'inde model yanıt
+- `\kendinleifadecevap{...}` komutu eklendi: tüm 11 kendinleifade kutusuna model yanıt
+- `\begin{itemize}[leftmargin=1.8em]` → `\begin{itemize}` (10 dosyada, enumitem hatası giderildi)
+- `\ogrencialani`: `\begin{tcbclipinterior}` → saf TikZ `\tikz{}` (mor çizgi/label artefaktı giderildi)
+- Global Unicode temizliği: U+2014 em dash → `---`, U+2013 en dash → `--`, U+2192 → `$\to$`, U+2713 → `$\checkmark$` (30+ dosyada)
 
 **Sonraki olası adımlar:**
 - Dipnot/çapraz referans (`\ref`, `\label`) tutarlılık kontrolü
