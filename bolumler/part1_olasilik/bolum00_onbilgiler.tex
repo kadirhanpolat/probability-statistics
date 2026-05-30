@@ -681,6 +681,159 @@ ikisi eşittir. Bu dil Bölüm~7'deki Borel-Cantelli lemmalarının tam dilidir.
 
 
 % =====================================================================
+\section{Diziler: Yakınsama ve Cauchy Kriteri}
+\label{sec:dizi_yaklinsama}
+% =====================================================================
+
+\begin{motivasyon}[Neden Dizi Yakınsaması Olasılık Teorisi için Önemli?]
+Olasılık teorisinde neredeyse her önemli sonuç — Büyük Sayılar Kanunu,
+Merkezi Limit Teoremi, martingal teoremi — bir dizi (ya da fonksiyon dizisinin)
+yakınsaması ifadesidir. Bu nedenle dizi yakınsamasının analitik temelleri
+ön koşul bilginin kilit parçasıdır.
+\end{motivasyon}
+
+\begin{tanim}[Yakınsak Dizi]
+$(a_n) \subseteq \mathbb{R}$ dizisi $L \in \mathbb{R}$'ye \textbf{yakınsar} denir ve
+$a_n \to L$ yazılır; eğer her $\varepsilon > 0$ için bir $N \in \mathbb{N}$ vardır
+ve her $n \geq N$ için $|a_n - L| < \varepsilon$.
+\end{tanim}
+
+\begin{tanim}[Cauchy Dizisi]
+$(a_n)$ \textbf{Cauchy dizisi} denir, eğer her $\varepsilon > 0$ için bir $N$ vardır
+ve her $m, n \geq N$ için $|a_m - a_n| < \varepsilon$.
+\end{tanim}
+
+\begin{teorem}[Gerçel Sayıların Tamlığı]
+\label{thm:gercel_tamlik}
+$(a_n) \subseteq \mathbb{R}$ yakınsar $\Leftrightarrow$ $(a_n)$ Cauchy dizisidir.
+\end{teorem}
+
+\begin{proof}
+\textbf{($\Rightarrow$):} $a_n \to L$. $m, n \geq N$: $|a_m - a_n| \leq |a_m - L| + |a_n - L| < 2\varepsilon$.\\
+\textbf{($\Leftarrow$):} Cauchy $\Rightarrow$ sınırlı (sonlu $N$ için $|a_n| \leq |a_N| + 1$).
+Bolzano-Weierstrass: sınırlı diziden yakınsak alt dizi $a_{n_k} \to L$ çıkar.
+Cauchy koşulundan bütün dizi aynı $L$'ye yakınsar.
+\end{proof}
+
+\begin{teorem}[Monoton Dizi Teoremi]
+\label{thm:monoton_dizi}
+$(a_n)$ monoton artan ve yukarıdan sınırlı ise yakınsar; limit $\sup_n a_n$.
+Benzer şekilde: monoton azalan + aşağıdan sınırlı $\Rightarrow$ yakınsar.
+\end{teorem}
+
+\begin{proof}
+$L = \sup_n a_n$ tanımla (üst kenar değer mevcut, sınırlılıktan). Her $\varepsilon > 0$ için
+$a_N > L - \varepsilon$ olan $N$ var. $n \geq N$: $L - \varepsilon < a_N \leq a_n \leq L$;
+yani $|a_n - L| < \varepsilon$. $a_n \to L$.
+\end{proof}
+
+\begin{ornek}[Monoton Dizi Teoremi — Üstel Sınır]
+$a_n = (1 + 1/n)^n$ monoton artan ve $a_n < 3$ (sınırlı): $a_n \to e$.
+Bu hem $e$'nin varlığını kanıtlar hem de Poisson yaklaşımında $(1-\lambda/n)^n \to e^{-\lambda}$ için kullanılır.
+\end{ornek}
+
+\begin{teorem}[Sıkıştırma Teoremi]
+\label{thm:sikistirma}
+$a_n \leq b_n \leq c_n$ ve $a_n \to L$, $c_n \to L$ ise $b_n \to L$.
+\end{teorem}
+
+\begin{proof}
+Her $\varepsilon > 0$ için $N$ seç: $n \geq N \Rightarrow |a_n - L| < \varepsilon$ ve $|c_n - L| < \varepsilon$.
+$L - \varepsilon < a_n \leq b_n \leq c_n < L + \varepsilon$; dolayısıyla $|b_n - L| < \varepsilon$.
+\end{proof}
+
+\begin{teorem}[Bolzano-Weierstrass]
+\label{thm:bolzano}
+Her sınırlı dizi, yakınsak bir alt dizi içerir.
+\end{teorem}
+
+\begin{proof}[İspat Taslağı]
+Araklama (bisection): $[a_0, b_0]$ sınırlı aralık, $a_n \in [a_0, b_0]$.
+Aralığı ikiye böl; sonlu sayıda $a_n$ olan yarıyı seç. Tekrarla.
+Uzunluk $\to 0$: iç içe aralıklar teoremiyle limit var; alt dizi bu limite yakınsar.
+\end{proof}
+
+\begin{ornek}[Cauchy Kriteri Uygulaması]
+$a_n = \sum_{k=1}^n 1/k^2$ (kısmi toplam). Her $m > n$ için:
+$|a_m - a_n| = \sum_{k=n+1}^m 1/k^2 \leq \sum_{k=n+1}^\infty 1/k^2 \leq 1/n \to 0$.
+Cauchy: dizi yakınsar. Limit $= \pi^2/6$ (Euler), ama Cauchy kriteri değeri bilmeden yakınsamayı kanıtlar.
+\end{ornek}
+
+\begin{hataanalizi}
+"Yakınsak alt dizi $\Rightarrow$ yakınsak dizi."
+Yanlış: $a_n = (-1)^n$; alt dizi $a_{2k} = 1 \to 1$ ama $a_n$ ıraksak.
+Ek koşul (Cauchy) gerekir: alt dizi yakınsama + Cauchy $\Rightarrow$ dizi yakınsar.
+\end{hataanalizi}
+
+\begin{mikroozet}
+$\mathbb{R}$ tam: Cauchy $\Leftrightarrow$ yakınsak.
+Monoton + sınırlı $\Rightarrow$ yakınsar.
+Bolzano-Weierstrass: sınırlı dizi alt dizi içerir.
+Sıkıştırma: $a_n \leq b_n \leq c_n$, $a_n,c_n \to L$ $\Rightarrow$ $b_n \to L$.
+\end{mikroozet}
+
+% =====================================================================
+\section{Fonksiyonların Sürekliliği ve Düzgün Yakınsama}
+\label{sec:sureklilik_yakinsama}
+% =====================================================================
+
+\begin{tanim}[Süreklilik ve Düzgün Süreklilik]
+$f : \mathbb{R} \to \mathbb{R}$. $f$, $x_0$'da \textbf{sürekli}: her $\varepsilon > 0$ için
+$\delta > 0$ ile $|x - x_0| < \delta \Rightarrow |f(x) - f(x_0)| < \varepsilon$.
+
+$f$, $A \subseteq \mathbb{R}$ üzerinde \textbf{düzgün sürekli}: aynı $\delta$, tüm $x_0 \in A$ için.
+\end{tanim}
+
+\begin{teorem}[Heine-Cantor]
+\label{thm:heine_cantor}
+$f : [a,b] \to \mathbb{R}$ sürekli ise $f$, $[a,b]$ üzerinde düzgün süreklidir.
+\end{teorem}
+
+\begin{tanim}[Nokta ve Düzgün Yakınsama]
+$(f_n)$ fonksiyon dizisi.
+\textbf{Nokta yakınsama}: her $x$'te $f_n(x) \to f(x)$.
+\textbf{Düzgün yakınsama}: $\sup_x |f_n(x) - f(x)| \to 0$.
+\end{tanim}
+
+\begin{teorem}[Düzgün Yakınsama Sürekliliği Korur]
+\label{thm:duzgun_yaklinsama}
+$f_n : A \to \mathbb{R}$ sürekli ve $f_n \to f$ düzgün ise $f$ süreklidir.
+\end{teorem}
+
+\begin{proof}
+$|f(x) - f(x_0)| \leq |f(x) - f_n(x)| + |f_n(x) - f_n(x_0)| + |f_n(x_0) - f(x_0)|$.
+Düzgün yakınsama: $n$ büyük için ilk ve son terim $< \varepsilon/3$.
+$f_n$ sürekli: $|x-x_0| < \delta$ için orta terim $< \varepsilon/3$.
+Toplam: $|f(x)-f(x_0)| < \varepsilon$.
+\end{proof}
+
+\begin{karsiornek}[Nokta Yakınsama Sürekliliği Korumaz]
+$f_n(x) = x^n$, $x \in [0,1]$: $f_n(x) \to f(x) = \mathbf{1}_{\{1\}}(x)$.
+Her $f_n$ sürekli; limit $f$ süreksiz ($x=1$'de sıçrama).
+Yakınsama nokta-düzgün değil: $\sup_x |f_n(x) - f(x)| = 1$ her $n$ için.
+\end{karsiornek}
+
+\begin{onerme}[Türev ve Limit İnterchangeability Koşulu]
+$(f_n)$ türevlenebilir, $f_n \to f$ nokta; $f_n' \to g$ düzgün ise $f' = g$.
+Yani: türev ile limit değiştirilebilir \emph{ancak} düzgün yakınsama koşuluyla.
+\end{onerme}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Nümerik analiz:} Cauchy kriteri, yineleme (iterasyon) algoritmalarının
+yakınsamasının doğrulanmasında temel araçtır.\\
+\textbf{Fonksiyonel analiz:} $L^p$ uzaylarında fonksiyon dizisi yakınsaması,
+Cauchy kriteriyle tanımlanan Banach uzayı yapısına dayanır.\\
+\textbf{Olasılık:} Monoton Yakınsama Teoremi (Bölüm~1) doğrudan Monoton Dizi
+Teoremi'nin integral analoji'sidir.
+\end{disiplinlerarasibaglan}
+
+\begin{mikroozet}
+Süreklilik: $\varepsilon$-$\delta$; düzgün süreklilik: tek $\delta$ herkese.
+Düzgün yakınsama: $\sup|f_n - f| \to 0$; sürekliliği miras bırakır.
+Nokta yakınsama: sürekliliği miras bırakmaz ($x^n$ örneği).
+\end{mikroozet}
+
+% =====================================================================
 %  BÖLÜM SONU ÖZETİ
 % =====================================================================
 \section*{Bölüm Özeti}
@@ -1072,3 +1225,41 @@ ve üçgen eşitsizliği $A \triangle C \subseteq (A \triangle B) \cup (B \trian
 özdeşliğinden gelir. Bu ``ölçü teorik metrik'', $L^1$ normunun gösterge
 fonksiyonları üzerindeki karşılığıdır. $\blacksquare$%
 }
+
+\begin{alistirma}[Al.0.16]{A}{Cauchy Kriteri}
+$a_n = \sum_{k=1}^n (-1)^{k+1}/k$ (alternatif harmonik seri kısmi toplamları).
+(a) Cauchy kriterini kullanarak $(a_n)$'nin yakınsadığını gösterin.
+(b) Bu serinin limitinin $\ln 2$ olduğunu biliyorsunuz. Limiti kullanmadan yakınsama göstermenin avantajını tartışın.
+\end{alistirma}
+\alcozum{%
+(a) $m > n$ için $|a_m - a_n| = \left|\sum_{k=n+1}^m (-1)^{k+1}/k\right|$.
+Alternatif seri: terimlerin mutlak değeri azalıyor ($1/k \searrow$) ve $\to 0$.
+Leibniz kriterinden $|a_m - a_n| \leq 1/(n+1) \to 0$.
+Her $\varepsilon > 0$ için $N > 1/\varepsilon - 1$ seç: $n \geq N \Rightarrow |a_m-a_n| \leq 1/(n+1) < \varepsilon$.\\
+(b) Avantaj: Limit bilinmese bile yakınsama kanıtlanabilir. Birçok olasılık teoremi sınır değerini hesaplamadan yakınsamayı kanıtlar (örn.\ martingal yakınsama teoremi).}
+
+\begin{alistirma}[Al.0.17]{B}{Düzgün Yakınsama}
+$f_n(x) = \sin(nx)/n$, $x \in \mathbb{R}$.
+(a) Nokta limit $f(x) = \lim_{n\to\infty} f_n(x)$'i bulun.
+(b) Yakınsama düzgün mü? $\sup_{x\in\mathbb{R}}|f_n(x) - f(x)|$'i hesaplayın.
+(c) $f_n$ her $n$ için sürekli. $f$ sürekli mi?
+\end{alistirma}
+\alcozum{%
+(a) $|f_n(x)| = |\sin(nx)|/n \leq 1/n \to 0$ her $x$'te. $f(x) = 0$.\\
+(b) $\sup_x|f_n(x) - 0| = \sup_x |\sin(nx)|/n = 1/n \to 0$.
+Düzgün yakınsama: evet! $\sup|f_n - f| = 1/n \to 0$.\\
+(c) $f_n$ her $n$ için sürekli ve $f_n \to 0$ düzgün; Teorem~\ref{thm:duzgun_yaklinsama}: $f = 0$ sürekli. Evet.}
+
+\begin{alistirma}[Al.0.18]{B}{Monoton Dizi ve Sıkıştırma}
+$a_n = n^{1/n}$ ($n \geq 1$).
+(a) $n \geq 3$ için $a_n$ azalan olduğunu gösterin ($a_n > a_{n+1}$).
+(b) $a_n \geq 1$ olduğunu gösterin.
+(c) Sıkıştırma veya monoton dizi teoremiyle $a_n \to 1$ olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+(a) $a_n > a_{n+1} \Leftrightarrow n^{1/n} > (n+1)^{1/(n+1)}$.
+$g(x) = x^{1/x}$: $g'(x) = g(x)(1-\ln x)/x^2 < 0$ ($x > e$). Yani $n \geq 3 > e$'de azalan.\\
+(b) $n^{1/n} \geq 1^{1/n} = 1$.\\
+(c) Monoton azalan + sınırlı alttan ($\geq 1$): limit $L = \inf_n a_n \geq 1$ var.
+$a_n = n^{1/n}$: $\ln a_n = \ln n/n \to 0$, dolayısıyla $a_n \to e^0 = 1$.
+Sıkıştırma: $1 \leq a_n \leq 1 + \ln n/n$ (Bernoulli eşitsizliği kullanılabilir); her iki taraf $\to 1$.}
