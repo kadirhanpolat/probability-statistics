@@ -702,6 +702,134 @@ Monte Carlo simülasyonu \texttt{bolum03\_donusumler.ipynb} defterinde.
 \end{kopru}
 
 % =====================================================================
+\section{Çok Boyutlu Normal Dağılım}
+\label{sec:cok_boyutlu_normal}
+% =====================================================================
+
+\begin{motivasyon}[Neden Çok Boyutlu Normal?]
+Tek boyutlu Normal dağılım, pek çok bağımsız etkinin toplamının limit dağılımı
+(MLT) olarak doğal biçimde ortaya çıkar.
+Çok boyutlu uzantısı, bağımlı Normal rasgele değişkenlerin tam ailesini verir
+ve lineer dönüşümler altında kapalıdır.
+İstatistik, makine öğrenmesi ve sinyal işlemede varsayılan "default" dağılımdır.
+\end{motivasyon}
+
+\begin{tanim}[Çok Boyutlu Normal Dağılım]
+\label{def:cok_boyutlu_normal}
+$\mathbf{X} = (X_1, \ldots, X_k)^\top$ rasgele vektör.
+$\mathbf{X} \sim \Normal_k(\boldsymbol{\mu}, \boldsymbol{\Sigma})$
+(\textbf{$k$-boyutlu Normal}, multivariate normal) denir eğer:
+\begin{enumerate}[(i)]
+  \item $\boldsymbol{\mu} = E[\mathbf{X}] \in \mathbb{R}^k$ ortalama vektör.
+  \item $\boldsymbol{\Sigma} = \mathrm{Cov}(\mathbf{X}) \in \mathbb{R}^{k\times k}$ simetrik pozitif yarı-belirli kovaryans matrisi.
+  \item $\boldsymbol{\Sigma}$ pozitif belirli ise ortak PDF:
+  \[
+    f(\mathbf{x}) = \frac{1}{(2\pi)^{k/2}|\boldsymbol{\Sigma}|^{1/2}}
+    \exp\!\left(-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^\top \boldsymbol{\Sigma}^{-1}(\mathbf{x}-\boldsymbol{\mu})\right).
+  \]
+\end{enumerate}
+Eşdeğer tanım: $\mathbf{X} = \boldsymbol{\mu} + A\mathbf{Z}$, $\mathbf{Z} \sim \Normal_m(\mathbf{0}, I_m)$ bağımsız,
+$\boldsymbol{\Sigma} = AA^\top$.
+\end{tanim}
+
+\begin{teorem}[Çok Boyutlu Normal'in Temel Özellikleri]
+\label{thm:cb_normal}
+$\mathbf{X} \sim \Normal_k(\boldsymbol{\mu}, \boldsymbol{\Sigma})$:
+\begin{enumerate}[(i)]
+  \item \textbf{Marjinaller:} $X_i \sim \Normal(\mu_i, \sigma_{ii})$ (marjinallar normal).
+  \item \textbf{Lineer dönüşüm:} $A\mathbf{X} + \mathbf{b} \sim \Normal(A\boldsymbol{\mu}+\mathbf{b}, A\boldsymbol{\Sigma}A^\top)$.
+  \item \textbf{Bağımsızlık:} $X_i$ ve $X_j$ bağımsız $\Leftrightarrow$ $\sigma_{ij} = 0$ (Normal için korelasyonsuzluk = bağımsızlık!).
+  \item \textbf{Koşullu dağılım:} $\mathbf{X}$'i $(\mathbf{X}_1, \mathbf{X}_2)$ şeklinde parçalayın.
+  $\mathbf{X}_1 \mid \mathbf{X}_2 = \mathbf{x}_2 \sim \Normal(\boldsymbol{\mu}_{1|2},\, \boldsymbol{\Sigma}_{11|2})$:
+  \begin{align*}
+    \boldsymbol{\mu}_{1|2} &= \boldsymbol{\mu}_1 + \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}(\mathbf{x}_2 - \boldsymbol{\mu}_2),\\
+    \boldsymbol{\Sigma}_{11|2} &= \boldsymbol{\Sigma}_{11} - \boldsymbol{\Sigma}_{12}\boldsymbol{\Sigma}_{22}^{-1}\boldsymbol{\Sigma}_{21}.
+  \end{align*}
+\end{enumerate}
+\end{teorem}
+
+\begin{proof}[(i) ve (ii)]
+(i) Marjinal: $X_i = \mathbf{e}_i^\top \mathbf{X}$ ($\mathbf{e}_i$ birim vektör); (ii) özel durumu.\\
+(ii) KF: $\varphi_{A\mathbf{X}+\mathbf{b}}(\mathbf{t}) = e^{i\mathbf{t}^\top \mathbf{b}} \varphi_{\mathbf{X}}(A^\top \mathbf{t})$.
+$\varphi_{\mathbf{X}}(\mathbf{t}) = e^{i\mathbf{t}^\top\boldsymbol{\mu} - \mathbf{t}^\top\boldsymbol{\Sigma}\mathbf{t}/2}$ (Normal KF).
+$\varphi_{A\mathbf{X}+\mathbf{b}}(\mathbf{t}) = e^{i\mathbf{t}^\top(A\boldsymbol{\mu}+\mathbf{b}) - \mathbf{t}^\top A\boldsymbol{\Sigma}A^\top\mathbf{t}/2}$: $\Normal(A\boldsymbol{\mu}+\mathbf{b}, A\boldsymbol{\Sigma}A^\top)$ KF'si.
+\end{proof}
+
+\begin{ornek}[İki Boyutlu Normal]
+$k=2$: $\boldsymbol{\mu} = (\mu_1, \mu_2)^\top$,
+$\boldsymbol{\Sigma} = \begin{pmatrix}\sigma_1^2 & \rho\sigma_1\sigma_2 \\ \rho\sigma_1\sigma_2 & \sigma_2^2\end{pmatrix}$.
+PDF:
+\[
+  f(x_1,x_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}
+  \exp\!\left(-\frac{1}{2(1-\rho^2)}\left[\frac{(x_1-\mu_1)^2}{\sigma_1^2}
+  - \frac{2\rho(x_1-\mu_1)(x_2-\mu_2)}{\sigma_1\sigma_2}
+  + \frac{(x_2-\mu_2)^2}{\sigma_2^2}\right]\right).
+\]
+$X_1 \mid X_2 = x_2 \sim \Normal\!\left(\mu_1 + \rho\frac{\sigma_1}{\sigma_2}(x_2-\mu_2),\,
+\sigma_1^2(1-\rho^2)\right)$.
+\end{ornek}
+
+\begin{hataanalizi}
+"Marjinalleri Normal olan rasgele vektör çok boyutlu Normal'dir."
+Yanlış: Korrelasyon yapısı yanlış olabilir. Örnek: $Z \sim \Normal(0,1)$,
+$W = Z \cdot \mathrm{sgn}(Z)$; hem $Z$ hem $W$ normal marjinale sahip
+ama $(Z, W)$ çift boyutlu normal değil (ortak PDF oval konturlar çizmiyor).
+Çok boyutlu Normal tanımı KF veya affine dönüşüm koşuluyla yapılmalı.
+\end{hataanalizi}
+
+\begin{mikroozet}
+$\mathbf{X}\sim\Normal_k(\boldsymbol{\mu},\boldsymbol{\Sigma})$: marjinaller normal; lineer dönüşümler kapalı;
+Normal'de korelasyonsuzluk = bağımsızlık; koşullu dağılım da normaldir.
+\end{mikroozet}
+
+% =====================================================================
+\section{Kuantil Fonksiyon ve Olasılık İntegral Dönüşümü}
+\label{sec:kuantil_fonksiyon}
+% =====================================================================
+
+\begin{tanim}[Kuantil Fonksiyon]
+\label{def:kuantil_fonksiyon}
+$F$ KDF için \textbf{kuantil fonksiyon} (quantile function), genelleştirilmiş ters:
+\[
+  F^{-1}(u) = \inf\{x : F(x) \geq u\}, \quad u \in (0,1).
+\]
+$u$'nun $p$. yüzdelik (\textit{percentile}): $F^{-1}(p)$.
+$F^{-1}(1/2)$: medyan. $F^{-1}(1/4), F^{-1}(3/4)$: çeyrekler.
+\end{tanim}
+
+\begin{teorem}[Olasılık İntegral Dönüşümü]
+\label{thm:oit}
+\textbf{İleri:} $X$ sürekli rasgele değişken, $F_X$ KDF. $F_X(X) \sim \Uniform(0,1)$.\\
+\textbf{Geri:} $U \sim \Uniform(0,1)$. $X = F^{-1}(U)$ rasgele değişkeni $F$ KDF'ye sahip.
+\end{teorem}
+
+\begin{proof}
+\textbf{İleri:} $P(F_X(X) \leq u) = P(X \leq F_X^{-1}(u)) = F_X(F_X^{-1}(u)) = u$.
+(Son eşitlik: $F_X$ sürekli ise $F_X \circ F_X^{-1} = \mathrm{id}$.)\\
+\textbf{Geri:} $P(F^{-1}(U) \leq x) = P(U \leq F(x)) = F(x)$ ($U$ uniform).
+\end{proof}
+
+\begin{ornek}[Simülasyon Uygulaması]
+$\Exp(\lambda)$ dağılımından örneklem üretmek:
+$F^{-1}(u) = -\ln(1-u)/\lambda$.
+$U \sim \Uniform(0,1)$: $X = -\ln(1-U)/\lambda \sim \Exp(\lambda)$.
+Bu standart simülasyon tekniğinin (Inverse Transform Method) matematiksel temelidir.
+Normal: $\Phi^{-1}(U)$ kapalı form yok; sayısal yöntemler ($\Phi^{-1} \approx$ probit fonksiyon) kullanılır.
+\end{ornek}
+
+\begin{teorem}[Kuantil-Kuantil İlişkisi]
+\label{thm:qq_iliskisi}
+$X \sim F_X$, $Y \sim F_Y$. $Y \overset{d}{=} F_Y^{-1}(F_X(X))$.
+\emph{QQ-plot} prensibi: $X$ örneklemi ile $F_Y^{-1}$ karşılaştırılarak $F_Y$ uyumu test edilir.
+\end{teorem}
+
+\begin{mikroozet}
+$F^{-1}(u) = \inf\{x: F(x)\geq u\}$: kuantil fonksiyon.
+OID: $F(X)\sim\Uniform$; $F^{-1}(U)\sim F$.
+Simülasyon: her sürekli dağılım $\Uniform(0,1)$'den üretilir.
+\end{mikroozet}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
@@ -838,6 +966,47 @@ $F_Z(z) = P(X+Y \leq z) = E[\mathbf{1}_{X+Y \leq z}]
 = E_Y[E_X[\mathbf{1}_{X \leq z-Y}]] = \int P(X \leq z-y) \, dF_Y(y) = \int F_X(z-y) \, dF_Y(y)$.\\
 (b) Sürekli $Y$: $dF_Y(y) = f_Y(y) \, dy$. O zaman $F_Z(z) = \int F_X(z-y) f_Y(y) \, dy$.
 $z$'ye göre türev (Leibniz): $f_Z(z) = \int f_X(z-y) f_Y(y) \, dy = (f_X * f_Y)(z)$.}
+
+\begin{alistirma}[Al.3.13]{B}{Olasılık İntegral Dönüşümü}
+$X \sim \Gama(\alpha, \beta)$. $U = F_X(X)$ dönüşümünü tanımlayın.
+(a) $U$'nun dağılımını bulun.
+(b) Geri dönüşüm: $U \sim \Uniform(0,1)$ verildiğinde $\Gama(2,1)$ dağılımı
+nasıl simüle edersiniz? (İpucu: Üstel dağılım üzerinden)
+(c) OID'nin QQ-plot oluşturmadaki rolünü açıklayın.
+\end{alistirma}
+\alcozum{%
+(a) OID (Teorem~\ref{thm:oit}): $F_X(X) \sim \Uniform(0,1)$. Sürekli dağılım için geçerli; $\Gama$ sürekli. $U \sim \Uniform(0,1)$.\\
+(b) $\Gama(2,1) = \Exp(1)+\Exp(1)$ (iki bağımsız Üstel toplamı).
+$U_1, U_2 \sim \Uniform(0,1)$ bağımsız.
+$X = -\ln(1-U_1) - \ln(1-U_2) = -\ln((1-U_1)(1-U_2))$.
+Bu $\Gama(2,1)$ dağılımını verir.\\
+(c) Veri $\{X_i\}$ için $\{F_0^{-1}(i/(n+1))\}$ teorik kuantiller ile sıralı örneklem karşılaştırılır.
+$F_0 = F_X$ ise noktalar doğrusal dizilir.}
+
+\begin{alistirma}[Al.3.14]{B}{İki Boyutlu Normal}
+$(X_1, X_2) \sim \Normal_2\!\left((0,0)^\top, \begin{pmatrix}1 & \rho\\\rho & 1\end{pmatrix}\right)$.
+(a) $X_1 + X_2$ ve $X_1 - X_2$'nin dağılımını bulun.
+(b) $X_1 + X_2$ ve $X_1 - X_2$ bağımsız mıdır?
+(c) $X_1 \mid X_2 = 1$'in dağılımını verin.
+\end{alistirma}
+\alcozum{%
+(a) Lineer dönüşüm: $A = \begin{pmatrix}1&1\\1&-1\end{pmatrix}$, $\boldsymbol{\Sigma} = \begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$.
+$A\boldsymbol{\Sigma}A^\top = \begin{pmatrix}2+2\rho & 0 \\ 0 & 2-2\rho\end{pmatrix}$.
+$X_1+X_2 \sim \Normal(0, 2+2\rho)$; $X_1-X_2 \sim \Normal(0, 2-2\rho)$.\\
+(b) Kovaryans sıfır (matris köşegen) $\Rightarrow$ Normal için bağımsız. Evet, bağımsız.\\
+(c) $X_1|X_2=1 \sim \Normal(\rho, 1-\rho^2)$.}
+
+\begin{alistirma}[Al.3.15]{C}{Kuantil Fonksiyon — Karma Dağılım}
+$X$ karma dağılım: $P(X = 0) = 1/2$, $P(X > 0) = 1/2$ ve $X \mid X>0 \sim \Exp(1)$.
+(a) $F_X(x)$'i her $x$ için yazın.
+(b) $F_X^{-1}(u)$'yu $u \in (0,1)$ için hesaplayın.
+(c) $U \sim \Uniform(0,1)$ kullanarak $X$ dağılımından nasıl örneklem alırsınız?
+\end{alistirma}
+\alcozum{%
+(a) $x < 0$: $F(x) = 0$. $x = 0$: $F(0) = 1/2$. $x > 0$: $F(x) = 1/2 + (1/2)(1-e^{-x})$.\\
+(b) $u \leq 1/2$: $F^{-1}(u) = 0$. $u > 1/2$: $F(x) = u \Rightarrow 1-e^{-x} = 2u-1 \Rightarrow x = -\ln(2-2u)$.
+$F^{-1}(u) = -\ln(2(1-u))$ ($u > 1/2$).\\
+(c) $U \sim \Uniform(0,1)$: $U \leq 1/2$ ise $X = 0$; $U > 1/2$ ise $X = -\ln(2(1-U))$.}
 
 % =====================================================================
 \endinput
