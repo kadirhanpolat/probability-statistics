@@ -644,10 +644,98 @@ bağımsızlık mı, durağanlık mı, yoksa ergodiklik mi? Ergodikliğin 0-1 Ka
 ile ilişkisini açıklayın.
 \end{kritiksorgu}
 
+% =====================================================================
+\section{Yavaş Değişen Fonksiyonlar ve Düzenli Değişim}
+\label{sec:duzenli_degisim}
+% =====================================================================
+
+\begin{tanim}[Yavaş değişen fonksiyon]\label{def:yavas_degisen}
+$L:(0,\infty)\to(0,\infty)$ fonksiyonu \emph{yavaş değişen} (\emph{slowly varying}) denir, her $c>0$ için
+\[
+  \lim_{x\to\infty}\frac{L(cx)}{L(x)}=1.
+\]
+\end{tanim}
+
+\begin{ornek}[Yavaş değişen fonksiyon örnekleri]\label{ex:yavas_ornekler}
+\begin{enumerate}
+  \item Sabitler: $L(x)=c>0$.
+  \item $L(x)=\log x$, $L(x)=(\log\log x)^2$, $L(x)=\log(1+x^2)$.
+  \item İterated logarithm: $L(x)=\log_k(x)$ ($k$'ıncı yinelenmiş logaritma).
+\end{enumerate}
+\emph{Düzenli değişen}: $R(x)=x^\alpha L(x)$ ($L$ yavaş değişen, $\alpha\in\mathbb{R}$ indeks).
+\end{ornek}
+
+\begin{teorem}[Karamata temsil teoremi]\label{thm:karamata}
+$L$ yavaş değişen $\iff$ $L(x)=c(x)\exp\!\left(\int_1^x \frac{\varepsilon(t)}{t}dt\right)$,
+burada $c(x)\to c>0$ ve $\varepsilon(t)\to0$.
+\end{teorem}
+
+\begin{teorem}[Potter sınırları]\label{thm:potter}
+$L$ yavaş değişen. Her $\delta>0$ için $x_0>0$ mevcut:
+$x,y\geq x_0$ ise
+\[
+  \frac{L(y)}{L(x)} \leq 2\max\!\left\{\left(\frac{y}{x}\right)^\delta, \left(\frac{x}{y}\right)^\delta\right\}.
+\]
+\end{teorem}
+
+\begin{ornek}[Ağır kuyruklu dağılımlar]\label{ex:agir_kuyruk}
+$P(X>x)\sim x^{-\alpha}L(x)$ ($\alpha>0$, $L$ yavaş değişen): \emph{düzenli değişen kuyruk}.
+\begin{itemize}
+  \item $\alpha>2$: $E[X^2]<\infty$ — standart MLT geçerli.
+  \item $1<\alpha\leq2$: $E[X]<\infty$ ama $E[X^2]=\infty$ — kararlı dağılımlara yakınsama, ölçek $n^{1/\alpha}$.
+  \item $0<\alpha\leq1$: $E[X]=\infty$ — büyük sayılar kanunu çöker.
+\end{itemize}
+Pareto$(\alpha)$, Cauchy $(\alpha=1)$, Student-$t_\nu$ ($\nu=\alpha$) bu sınıftadır.
+\end{ornek}
+
+\begin{hataanalizi}
+"Büyük sayılar kanunu her zaman geçerlidir" yanlıştır. $E[|X|]=\infty$ durumunda ZBSK ve GBSK çöker: Cauchy dağılımında örneklem ortalaması hiçbir değere yakınsamaz, her örneklem için farklı bir değer verir. Bu, finansta "ağır kuyruklu" kayıpların klasik istatistikle modellenememesinin matematiksel gerekçesidir.
+\end{hataanalizi}
+
+% =====================================================================
+\section{Büyük Sapmalar İçin Üst Sınırlar}
+\label{sec:buyuk_sapma_sinir}
+% =====================================================================
+
+\begin{teorem}[Markov eşitsizliği — hatırlatma]\label{thm:markov_hatirlatma}
+$X\geq0$, $a>0$: $P(X\geq a)\leq E[X]/a$.
+\end{teorem}
+
+\begin{teorem}[Chebyshev eşitsizliği]\label{thm:chebyshev_hatirlatma}
+$E[X]=\mu$, $\Var(X)=\sigma^2<\infty$, $k>0$:
+$P(|X-\mu|\geq k\sigma)\leq 1/k^2$.
+\end{teorem}
+
+\begin{teorem}[Chernoff sınırı]\label{thm:chernoff}
+$X_1,\ldots,X_n\iid$, MGF $M(\lambda)=E[e^{\lambda X}]$ $\lambda_0>0$ için sonlu. $S_n=\sum_{i=1}^n X_i$. Her $t>E[X]$ için:
+\[
+  P(S_n\geq nt) \leq e^{-n\sup_{\lambda\geq0}[\lambda t - \log M(\lambda)]}.
+\]
+Üstel $[\lambda t - \log M(\lambda)]$ büyük sapma hızıdır (\emph{rate function} $I(t)$).
+\end{teorem}
+
+\begin{proof}
+$P(S_n\geq nt)=P(e^{\lambda S_n}\geq e^{n\lambda t})\leq e^{-n\lambda t}E[e^{\lambda S_n}]=e^{-n\lambda t}[M(\lambda)]^n=e^{-n[\lambda t-\log M(\lambda)]}$.
+$\lambda\geq0$'da supremum alınır.
+\end{proof}
+
+\begin{ornek}[Hoeffding eşitsizliği]\label{ex:hoeffding}
+$X_i\in[a_i,b_i]$ sınırlı bağımsız, $E[X_i]=0$. $P(S_n\geq t)\leq\exp\!\left(-\frac{2t^2}{\sum(b_i-a_i)^2}\right)$.
+Özellikle $a_i=0$, $b_i=1$, $t=n\varepsilon$: $P(\bar X_n\geq\varepsilon)\leq e^{-2n\varepsilon^2}$.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Makine Öğrenmesi — PAC öğrenimi:} Hoeffding eşitsizliği, bir öğrenme algoritmasının eğitim hatasının test hatasına $\varepsilon$ içinde yakınsadığını yüksek olasılıkla garanti eden PAC (\emph{probably approximately correct}) öğrenimi sınırının temelidir.
+
+\textbf{Finansal Risk:} Düzenli değişen kuyruklar (Pareto, $t_\nu$) piyasa çöküşlerini modellemek için kullanılır; Basle III sermaye yeterliliği hesaplamalarında VaR (değer-risk) bu dağılımlara dayanır.
+\end{disiplinlerarasibaglan}
+
 \begin{mikroozet}
 Durağan + ergodik dizilerde $\frac{1}{n}\sum_{k=0}^{n-1}X_k \to E[X_0]$ n.k.
 Bu, GBSK'nın i.i.d.\ ötesine genellemesidir; Markov zincirleri ve zaman serisi
 analizinin matematiksel temelidir.
+Düzenli değişen kuyruklar ($P(X>x)\sim x^{-\alpha}L(x)$): $\alpha\leq1$'de BSK çöker.
+Chernoff/Hoeffding: üstel büyük sapma sınırları; makine öğrenmesinde PAC sınırlarının temeli.
 \end{mikroozet}
 
 % =====================================================================
