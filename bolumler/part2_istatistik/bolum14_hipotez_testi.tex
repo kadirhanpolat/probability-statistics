@@ -251,6 +251,80 @@ $C(\mathbf{x}) = \{\theta_0: \phi(\mathbf{x};\theta_0)=0\}$ tanımla. $\Prob_{\t
 \end{kendinleifade}
 
 %% ============================================================
+\section{Eşleştirilmiş Örneklem Testleri}
+\label{sec:eslestirme}
+%% ============================================================
+
+\begin{tanim}[Eşleştirilmiş çift]\label{def:eslestirme}
+$(X_i,Y_i)$ $n$ eşleştirilmiş çift; $D_i=X_i-Y_i$ farkları. $D_i\iid\Normal(\delta,\sigma_D^2)$ ise tek örneklem $t$-testi $D_i$'lere uygulanır.
+\end{tanim}
+
+\begin{teorem}[Eşleştirilmiş $t$-testi]\label{thm:eslestirme_t}
+$H_0:\delta=0$:
+\[
+  T = \frac{\bar{D}}{S_D/\sqrt{n}} \overset{H_0}{\sim} t_{n-1}.
+\]
+\end{teorem}
+
+\begin{ornek}[Tedavi öncesi/sonrası]\label{ex:eslestirme_ornek}
+10 hasta; tedavi öncesi $(X_i)$ ve sonrası $(Y_i)$. $D_i = X_i-Y_i$: $\bar d=2.3$, $s_D=1.8$. $T=2.3/(1.8/\sqrt{10})=4.04$. $t_{9,0.025}=2.262$; $H_0:\delta=0$ reddedilir.
+\end{ornek}
+
+\begin{teorem}[İşaret testi]\label{thm:isaret_testi}
+Normallik varsayımı olmadan: $D_i>0$ sayısı $B=\sum\mathbf{1}[D_i>0]$. $H_0:\delta=0$ altında $B\sim\mathrm{Binom}(n,1/2)$. Büyük $n$: $Z=(B-n/2)/\sqrt{n/4}\dto\Normal(0,1)$.
+\end{teorem}
+
+%% ============================================================
+\section{Test Gücü ve Örneklem Büyüklüğü}
+\label{sec:guc_hesap}
+%% ============================================================
+
+\begin{tanim}[Güç fonksiyonu]\label{def:guc_fonksiyon}
+$\pi(\theta)=\Prob_\theta(T\in R)$; $\theta\in\Theta_0$ için $\pi(\theta)\leq\alpha$; $\theta\in\Theta_1$ için $1-\pi(\theta)=\beta(\theta)$ (Tip II hata oranı).
+
+\textbf{İstenen güç:} $1-\beta\geq0.80$ (çoğu alanda); $0.90$ veya $0.95$ yüksek hassasiyet gerektiren alanlarda.
+\end{tanim}
+
+\begin{teorem}[İki örneklem $t$-testinde $n$]\label{thm:iki_orneklem_n}
+$m=n$, $\sigma$ bilinen. $H_0:\mu_1-\mu_2=0$ vs $H_1:\mu_1-\mu_2=\Delta$ (\%$1-\beta$ güç):
+\[
+  n = \left\lceil\frac{2\sigma^2(z_{\alpha/2}+z_\beta)^2}{\Delta^2}\right\rceil.
+\]
+\end{teorem}
+
+\begin{proof}
+Güç $=\Prob(|Z|>z_{\alpha/2})$ yaklaşık $\Phi(-z_{\alpha/2}+\Delta\sqrt{n}/({\sigma\sqrt{2}}))$; $=1-\beta$ koşulundan $n$ çözülür.
+\end{proof}
+
+\begin{ornek}[Klinik deney örneklem büyüklüğü]\label{ex:klinik_n}
+İlaç grubunda $\mu_1-\mu_2=5$ mmHg fark bekleniyor; $\sigma=10$. $\alpha=0.05$, $1-\beta=0.80$. $n=\lceil 2\cdot100\cdot(1.96+0.842)^2/25\rceil=\lceil 200\cdot7.84/25\rceil=\lceil62.7\rceil=63$ (her grup).
+\end{ornek}
+
+%% ============================================================
+\section{İstatistiksel ve Pratik Anlamlılık}
+\label{sec:etki_buyuklugu}
+%% ============================================================
+
+\begin{kesif}
+$n\to\infty$ limitinde herhangi $\Delta\neq0$ istatistiksel olarak anlamlı hâle gelir. Bu "büyük veri tuzağı"dır: anlamlılık $\neq$ önem.
+\end{kesif}
+
+\begin{tanim}[Cohen's $d$ — etki büyüklüğü]\label{def:etki_buyuklugu}
+\[
+  d = \frac{|\mu_1-\mu_2|}{\sigma} \quad \text{(standartlaştırılmış fark)}.
+\]
+Yorumlama: $d<0.2$ küçük, $0.2\leq d<0.5$ orta, $d\geq0.8$ büyük etki.
+\end{tanim}
+
+\begin{teorem}[$t$-test istatistiği ve $d$ ilişkisi]\label{thm:t_d}
+İki örneklemde $T=d\sqrt{n/2}$ ($m=n$). Sabit $\alpha$'da $n\to\infty$: $T\to\infty$, her $d>0$ için $p\to0$. Ama $d=0.001$ (pratik olarak sıfır etki) de anlamlı olabilir.
+\end{teorem}
+
+\begin{hataanalizi}
+Yalnızca $p$-değerini raporlamak yeterli değildir: etki büyüklüğü ($d$, $\eta^2$, vb.) ve güven aralığı da raporlanmalıdır. APA standartları her ikisini zorunlu kılar.
+\end{hataanalizi}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
@@ -258,6 +332,8 @@ $C(\mathbf{x}) = \{\theta_0: \phi(\mathbf{x};\theta_0)=0\}$ tanımla. $\Prob_{\t
   \item NP lemması: basit hipotezler için olabilirlik oranı en güçlü test verir.
   \item UMP: üstel ailede tek yönlü alternatif için her zaman mevcuttur.
   \item ORT: genel, asimptotik $\chi^2_r$; $p$-değeri yorumu dikkat gerektirir.
+  \item Etki büyüklüğü (Cohen's $d$): istatistiksel anlamlılık pratik önemi garantilemez.
+  \item Örneklem büyüklüğü: güç analizinden belirlenir; $n=(z_\alpha+z_\beta)^2\cdot2\sigma^2/\Delta^2$.
 \end{itemize}
 \end{mikroozet}
 
@@ -326,4 +402,25 @@ $m=10$ hipotez testi, $p$-değerleri: $0.001, 0.008, 0.039, 0.041, 0.042, 0.06, 
 \end{alistirma}
 \alcozum{%
 (a) Bonferroni: $0.05/10=0.005$; sadece $p=0.001$ ve $p=0.008$ bu eşiğin altında; 2 red. (b) BH: $p_{(k)}\leq k\cdot0.05/10=0.005k$. $k=1:0.001\leq0.005$\checkmark; $k=2:0.008\leq0.010$\checkmark; $k=3:0.039\leq0.015$ — hayır. $k^*=2$; 2 red. (Bu örnekte eşit sonuç; genel olarak BH daha fazla reddeder.)%
+}
+
+\begin{alistirma}[Al.14.8]{B}{Eşleştirilmiş $t$ vs bağımsız $t$}
+8 hasta; tedavi öncesi $(X)$: 120,125,118,130,115,122,128,116 ve sonrası $(Y)$: 115,120,112,125,110,118,122,112 (mmHg). (a) Eşleştirilmiş $t$-testi uygula ($\alpha=0.05$). (b) Eğer çiftleri görmezden gelerek bağımsız iki örneklem testi yapılsaydı güç ne yönde değişirdi?
+\end{alistirma}
+\alcozum{%
+$D_i=X_i-Y_i$: 5,5,6,5,5,4,6,4. $\bar d=5$, $s_D=\sqrt{\sum(D_i-5)^2/7}=\sqrt{4/7}=0.756$. $T=5/(0.756/\sqrt{8})=5/0.267=18.7$. $t_{7,0.025}=2.365$; $H_0$ kuvvetle reddedilir. (b) Bağımsız test: bireysel varyasyon (kişiden kişiye fark) varyansı şişirir, güç azalır. Eşleştirme kişi içi kovaryansı ortadan kaldırır; aynı $n$'de çok daha güçlü.%
+}
+
+\begin{alistirma}[Al.14.9]{B}{Cohen's d ve örneklem büyüklüğü}
+$d=0.5$ (orta etki), $\alpha=0.05$, istenen güç \%90. İki örneklemli $z$-testi için gereken $n$'yi hesapla. Güç \%80'e düşürülürse $n$ nasıl değişir?
+\end{alistirma}
+\alcozum{%
+$n=2(z_{\alpha/2}+z_\beta)^2/d^2$. \%90 güç: $z_{0.05}=1.645$, $z_{0.10}=1.282$. $n=2(1.96+1.282)^2/0.25=2\cdot10.51/0.25=84.1\Rightarrow n=85$. \%80 güç: $z_{0.20}=0.842$. $n=2(1.96+0.842)^2/0.25=2\cdot7.85/0.25=62.8\Rightarrow n=63$. Güç \%10 düşürülünce örneklem \%26 azalır.%
+}
+
+\begin{alistirma}[Al.14.10]{C}{İşaret testi}
+$n=15$ eşleştirilmiş çift; fark $D_i>0$ olanlar: 11 çift. $H_0:\delta=0$ için işaret testi ($\alpha=0.05$). Normallik gerektirmeden karar ver.
+\end{alistirma}
+\alcozum{%
+$B=11\sim\mathrm{Binom}(15,1/2)$ altında $H_0$. $p$-değeri (iki yönlü): $2\Prob(B\geq11)=2[P(11)+P(12)+P(13)+P(14)+P(15)]$. $P(B\geq11)=\sum_{k=11}^{15}\binom{15}{k}(0.5)^{15}=[455+105+15+1]\cdot2^{-15}/4096\cdot\ldots$ Hesap: $P(B\geq11)=(455+105+15+1+0)\cdot(0.5)^{15}=576/32768\approx0.0176$. $p=2\cdot0.0176=0.0352<0.05$: $H_0$ reddedilir.%
 }
