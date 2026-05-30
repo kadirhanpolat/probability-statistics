@@ -654,10 +654,77 @@ temel matematiksel çerçevesidir; teşhis sistemleri, konuşma tanıma ve robot
 \textbf{Makine öğrenmesi:} Naive Bayes sınıflandırıcısı, özellikler sınıf koşulunda bağımsız varsayımına dayanır.
 \end{disiplinlerarasibaglan}
 
+% =====================================================================
+\section{Bilgi Teorisi Temelleri: Entropi ve Karşılıklı Bilgi}
+\label{sec:entropi}
+% =====================================================================
+
+\begin{tanim}[Shannon entropisi]\label{def:entropi}
+Sonlu $\Omega=\{x_1,\ldots,x_n\}$, $p_i=P(X=x_i)$. $X$'in \emph{Shannon entropisi} (\emph{entropy}):
+\[
+  H(X) = -\sum_{i=1}^n p_i \log_2 p_i,\quad (0\log 0:=0)
+\]
+bit cinsinden. $H(X)\geq0$; $H(X)=0\iff X$ deterministik; $H(X)\leq\log_2 n$ (maksimum: düzgün dağılım).
+\end{tanim}
+
+\begin{teorem}[Maksimum entropi]\label{thm:maks_entropi}
+$P(X=x_i)=1/n$ için $H(X)=\log_2 n$; bu $n$-durumlu herhangi bir dağılımın maksimum entropisidir.
+\end{teorem}
+
+\begin{proof}
+Jensen eşitsizliği: $H(p)=-\sum p_i\log p_i\leq\log_2(\sum p_i/p_i \cdot n^{-1})^{-1}$ ... Doğrudan: Gibbs eşitsizliği, $-\sum p_i\log p_i\leq-\sum p_i\log(1/n)=\log n$, eşitlik $p_i=1/n$.
+\end{proof}
+
+\begin{tanim}[Koşullu entropi ve karşılıklı bilgi]\label{def:karsılikli_bilgi}
+\begin{align*}
+  H(X|Y) &= -\sum_{x,y}P(X=x,Y=y)\log P(X=x|Y=y) \quad \text{(koşullu entropi)}\\
+  I(X;Y) &= H(X)-H(X|Y) = H(Y)-H(Y|X) \quad \text{(karşılıklı bilgi)}\\
+  D_{\mathrm{KL}}(P\|Q) &= \sum_x P(x)\log\frac{P(x)}{Q(x)} \geq 0 \quad \text{(KL iraksaması)}
+\end{align*}
+$X\perp Y\iff I(X;Y)=0$.
+\end{tanim}
+
+\begin{teorem}[Veri işleme eşitsizliği]\label{thm:veri_isleme}
+$X\to Y\to Z$ Markov zinciri ise $I(X;Z)\leq I(X;Y)$: yeterli istatistikler bilgiyi korur, diğer işlemler azaltır.
+\end{teorem}
+
+\begin{ornek}[KL iraksaması ile olabilirlik]\label{ex:kl_olasilik}
+$P$ gerçek dağılım, $Q_\theta$ model. $D_{\mathrm{KL}}(P\|Q_\theta)=H(P,Q_\theta)-H(P)$; çapraz entropi minimize etmek KL minimize etmekle eşdeğer. MLE = empirik dağılıma en küçük KL olan model.
+\end{ornek}
+
+% =====================================================================
+\section{Olasılık Uzaylarının Genişlemesi: Sonsuz Dizi Uzayları}
+\label{sec:sonsuz_uzay}
+% =====================================================================
+
+\begin{tanim}[Ürün uzayı]\label{def:urun_uzayi}
+$(\Omega_n,\mathcal{F}_n,P_n)$ olasılık uzayları. Sonsuz ürün $\Omega=\prod_{n=1}^\infty\Omega_n$, $\mathcal{F}=\bigotimes_{n=1}^\infty\mathcal{F}_n$ (silindir kümeler tarafından üretilen $\sigma$-cebir).
+\end{tanim}
+
+\begin{teorem}[Kolmogorov genişleme teoremi]\label{thm:kolmogorov_genisleme}
+Her tutarlı sonlu boyutlu dağılım ailesi $\{P_{n_1,\ldots,n_k}\}$ için, bu dağılımları marjinal olarak veren tek bir olasılık ölçüsü $P$ sonsuz ürün uzayında mevcuttur.
+\end{teorem}
+
+\begin{ornek}[İ.i.d.\ dizi uzayı]\label{ex:iid_uzay}
+$X_1,X_2,\ldots\iid F$. Kolmogorov teoremi bu dizinin bir olasılık uzayında var olduğunu garanti eder. Bu, GBSK ve MLT ispatlarının gizli temelidir: sonsuz bir dizi tanımlamak için $(\Omega,\mathcal{F},P)$'nin var olduğunu kabul ederiz.
+\end{ornek}
+
+\begin{ispatiskele}
+\textbf{Kolmogorov genişleme teoremi ispatı taslağı}
+\begin{enumerate}
+  \item Sonlu boyutlu dağılımların tutarlılık koşulunu yaz (marjinalizasyon kapalı).
+  \item Silindir kümeleri üzerinde $P$'yi tüm tutarlı dağılımları kullanarak tanımla.
+  \item Carathéodory genişleme teoremini uygulayarak $\sigma$-cebirde $P$'yi genişlet.
+  \item $\sigma$-toplamsallığını (sayılabilir toplanabilirlik) topolojik argümanla doğrula.
+\end{enumerate}
+\end{ispatiskele}
+
 \begin{mikroozet}
 Koşullu bağımsızlık: $\Prob(A\cap B|C) = \Prob(A|C)\Prob(B|C)$.
 Koşullu bağımsızlık mutlak bağımsızlığı ne gerektirir ne de garantiler.
 Bayesçi ağlar: DAG + koşullu olasılık tabloları $\Rightarrow$ ortak dağılım.
+Entropi: belirsizlik ölçüsü; KL iraksaması $\geq0$; MLE = minimum KL.
+Kolmogorov genişlemesi: sonsuz i.i.d.\ dizinin varlığı garanti edilir.
 \end{mikroozet}
 
 % =====================================================================
