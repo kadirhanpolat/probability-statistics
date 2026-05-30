@@ -1,0 +1,282 @@
+%% ============================================================
+%% BÖLÜM 17 — Parametresiz İstatistik  [OPSİYONEL]
+%% Olasılık Teorisi ve Matematiksel İstatistik
+%% ============================================================
+\chapter{Parametresiz İstatistik}
+\label{chp:parametresiz}
+
+\bolumalinti{%
+  The great advantage of the nonparametric approach is that we need not make
+  any assumption about the form of the underlying population.
+}{Frank Wilcoxon}
+
+\begin{kazanimlar}
+Bu bölümün sonunda okuyucu:
+\begin{itemize}
+  \item Parametresiz yöntemlerin motivasyonunu ve güç-sağlamlık dengesini açıklar.
+  \item İşaret testi ve Wilcoxon işaret-sıra testini uygular ve asimptotik dağılımlarını türetir.
+  \item Mann-Whitney $U$-testini iki bağımsız örneklem karşılaştırması için kullanır.
+  \item Kruskal-Wallis ve Friedman testlerini çok grup karşılaştırmasında uygular.
+  \item Kolmogorov-Smirnov testini dağılım uyum testi olarak kullanır.
+  \item Bootstrap yöntemini standart hata ve güven aralığı hesabında uygular.
+\end{itemize}
+\end{kazanimlar}
+
+\begin{motivasyon}
+Normal dağılım varsayımı zaman zaman geçersizdir: çarpık dağılımlar, aykırı değerler, sıralı ölçek. Parametresiz yöntemler dağılım hakkında minimal varsayımla çalışır. "Sağlamlık" (robustness) modern istatistikte kritik önem taşır.
+
+\medskip
+\noindent\textbf{Köprü:} Bölüm~\ref{chp:hipotez_testi}'deki test çerçevesi burada da geçerlidir; fark, test istatistiklerinin sıralardan ya da işaretlerden inşa edilmesidir.
+\end{motivasyon}
+
+%% ============================================================
+\section{İşaret Testi}
+\label{sec:isaret_testi}
+%% ============================================================
+
+\begin{kesif}
+Sürekli dağılım medyanı $m$ için $X_i>m$ veya $X_i<m$ ikili bilgisi kullanılabilir. $H_0:m=m_0$ altında bu ikili değerlerin dağılımı nedir?
+\end{kesif}
+
+\begin{tanim}[İşaret testi]\label{def:isaret_testi}
+$X_1,\ldots,X_n\iid F$ sürekli. $H_0: F(m_0)=1/2$ (medyan $m_0$). $B = \#\{i:X_i>m_0\}$. $H_0$ altında $B\sim\Binom(n,1/2)$.
+
+Test istatistiği $B$ (veya $\min(B,n-B)$ iki yönlü test için). Küçük $n$'de kesin Binom dağılımı; büyük $n$'de $B$ yaklaşık $\Normal(n/2,n/4)$.
+\end{tanim}
+
+\begin{teorem}[İşaret testinin asimptotik dağılımı]
+$H_0$ altında $Z=(2B-n)/\sqrt{n}\dto\Normal(0,1)$.
+\end{teorem}
+
+\begin{proof}
+$B=\sum_{i=1}^n\mathbf{1}[X_i>m_0]$; her terim i.i.d.\ $\mathrm{Ber}(1/2)$. MLT uygulanır.
+\end{proof}
+
+%% ============================================================
+\section{Wilcoxon İşaret-Sıra Testi}
+\label{sec:wilcoxon_isaret}
+%% ============================================================
+
+\begin{tanim}[Wilcoxon işaret-sıra istatistiği]\label{def:wilcoxon_isaret}
+$X_1,\ldots,X_n$ simetrik sürekli dağılımdan (simetri merkezi $\theta$), $H_0:\theta=0$. $|X_1|,\ldots,|X_n|$'yi küçükten büyüğe sırala; $R_i = |X_i|$'nin sırası.
+
+\textbf{Wilcoxon istatistiği:} $W^+ = \sum_{i=1}^n R_i\,\mathbf{1}[X_i>0]$.
+\end{tanim}
+
+\begin{teorem}[Wilcoxon asimptotik dağılımı]\label{thm:wilcoxon_asimptotik}
+$H_0$ altında:
+\[
+  \Beklenti[W^+] = \frac{n(n+1)}{4}, \qquad \Var(W^+) = \frac{n(n+1)(2n+1)}{24}.
+\]
+Standartlaştırılmış $Z = (W^+ - n(n+1)/4)/\sqrt{n(n+1)(2n+1)/24} \dto \Normal(0,1)$.
+\end{teorem}
+
+\begin{proof}[Proof — beklenti]
+$H_0$ altında her $X_i$ için $\Prob(X_i>0)=1/2$ (simetri). $W^+=\sum_{i=1}^n R_i\,\psi_i$ ($\psi_i=\mathbf{1}[X_i>0]$). $\psi_i\perp R_i$ (simetri) ve $\Beklenti[\psi_i]=1/2$.
+\[
+  \Beklenti[W^+] = \sum_{i=1}^n\Beklenti[R_i]\cdot\Beklenti[\psi_i] = \frac{1}{2}\sum_{i=1}^n i = \frac{n(n+1)}{4}.
+\]
+\end{proof}
+
+\begin{ispatiskele}
+Varyans hesabı: $\psi_i,\psi_j$ ve $R_i,R_j$ bağımsız olduğundan $\Cov(R_i\psi_i,R_j\psi_j)=0$ ($i\neq j$). $\Var(R_i\psi_i)=\Beklenti[R_i^2]/4$; $\sum_{i=1}^n i^2=n(n+1)(2n+1)/6$. Bölünce $n(n+1)(2n+1)/24$.
+\end{ispatiskele}
+
+%% ============================================================
+\section{Mann-Whitney $U$-Testi}
+\label{sec:mann_whitney}
+%% ============================================================
+
+\begin{tanim}[Mann-Whitney istatistiği]\label{def:mann_whitney}
+$X_1,\ldots,X_m\iid F$ ve $Y_1,\ldots,Y_n\iid G$ bağımsız. $H_0:F=G$.
+
+$U = \#\{(i,j): X_i < Y_j\} = \sum_{i=1}^m\sum_{j=1}^n\mathbf{1}[X_i<Y_j]$.
+\end{tanim}
+
+\begin{teorem}[Mann-Whitney asimptotik dağılımı]\label{thm:mann_whitney}
+$H_0$ altında:
+\[
+  \Beklenti[U] = \frac{mn}{2}, \qquad \Var(U) = \frac{mn(m+n+1)}{12}.
+\]
+$Z = (U - mn/2)/\sqrt{mn(m+n+1)/12}\dto\Normal(0,1)$.
+\end{teorem}
+
+\begin{proof}[Proof — beklenti]
+$H_0:F=G$ altında $\Prob(X_i<Y_j)=1/2$ (sürekli dağılım). $U=\sum_{ij}\mathbf{1}[X_i<Y_j]$, her biri $\mathrm{Ber}(1/2)$; $\Beklenti[U]=mn/2$.
+\end{proof}
+
+\begin{teorem}[Wilcoxon sıra-toplam — eşdeğerlik]\label{thm:wilcoxon_mann}
+İki örneklem birleştirilip sıralanır; $W_X = $ X değerlerinin sıra toplamı. $U = W_X - m(m+1)/2$ (sıra toplamından Mann-Whitney elde edilir). İki test eşdeğerdir.
+\end{teorem}
+
+%% ============================================================
+\section{Kruskal-Wallis ve Friedman Testleri}
+\label{sec:kruskal_friedman}
+%% ============================================================
+
+\begin{tanim}[Kruskal-Wallis testi]\label{def:kruskal_wallis}
+$k$ grup, grup $i$'de $n_i$ gözlem; toplam $N=\sum n_i$. Tüm gözlemler birleştirilip sıralanır; $\bar{R}_i$ = $i$. grubun ortalama sırası. Kruskal-Wallis istatistiği:
+\[
+  H = \frac{12}{N(N+1)}\sum_{i=1}^k n_i(\bar{R}_i - \bar{R})^2
+\]
+$\bar{R}=(N+1)/2$ (genel ortalama sıra).
+\end{tanim}
+
+\begin{teorem}[Kruskal-Wallis asimptotiği]\label{thm:kruskal_asimptotik}
+$H_0$ (tüm gruplar aynı dağılım) altında $H\dto\chi^2_{k-1}$.
+\end{teorem}
+
+\begin{ispatiskele}
+ANOVA sıra dönüşümü: sıraların $F$-istatistiği formülü uygulanınca $H$ elde edilir; $\chi^2$ asimptotiği normal yakınsama argümanından gelir.
+\end{ispatiskele}
+
+\begin{tanim}[Friedman testi]\label{def:friedman}
+$n$ blok, $k$ muamele; blok içi sıralar $r_{ij}$ ($j=1,\ldots,k$). Friedman istatistiği:
+\[
+  F_r = \frac{12n}{k(k+1)}\sum_{j=1}^k\!\left(\bar{r}_j - \frac{k+1}{2}\right)^{\!2}
+\]
+$\bar{r}_j$ = $j$-inci muamelenin ortalama sırası. $H_0$ altında $F_r\dto\chi^2_{k-1}$.
+\end{tanim}
+
+%% ============================================================
+\section{Kolmogorov-Smirnov Testi}
+\label{sec:ks_testi}
+%% ============================================================
+
+\begin{tanim}[Ampirik dağılım fonksiyonu]\label{def:ampirik_df}
+$X_1,\ldots,X_n$ gözlemi için \textbf{ampirik dağılım fonksiyonu} \emph{(empirical CDF)}:
+\[
+  F_n(x) = \frac{1}{n}\sum_{i=1}^n\mathbf{1}[X_i\leq x].
+\]
+\end{tanim}
+
+\begin{teorem}[Glivenko-Cantelli]\label{thm:glivenko_cantelli}
+$X_i\iid F$. O zaman
+\[
+  \sup_x |F_n(x)-F(x)| \asto 0.
+\]
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+Her sabit $x$ için GBSK'dan $F_n(x)\asto F(x)$. Üst limit geçirgenliği (üstel sınır argümanı) sayılabilir yoğun $\{x_k\}$ kümesi üzerinden $\sup$'u kapsar; sol süreklilik ve sınırlılık ile genel sonuç elde edilir.
+\end{proof}
+
+\begin{tanim}[KS istatistiği]\label{def:ks_istatistik}
+$H_0:F=F_0$ (belirtilmiş sürekli dağılım). \textbf{Kolmogorov-Smirnov istatistiği:}
+\[
+  D_n = \sup_x |F_n(x) - F_0(x)|.
+\]
+\end{tanim}
+
+\begin{teorem}[Kolmogorov dağılımı]\label{thm:kolmogorov_dagilim}
+$H_0$ altında $F_0$ sürekli ise:
+\[
+  \sqrt{n}\,D_n \dto K
+\]
+$K$'nın dağılım fonksiyonu: $\Prob(K\leq t) = \sum_{k=-\infty}^{\infty}(-1)^k e^{-2k^2t^2}$.
+\end{teorem}
+
+\begin{ispatiskele}
+$U_i = F_0(X_i)\iid\Uniform[0,1]$ ($F_0$ sürekli). $F_n$ yerine uniform ampirik süreç $\sqrt{n}(\hat{F}_n(u)-u)$ incelenir; bu Brownian köprüye yakınsar (Donsker). Brownian köprünün sonsuz normu Kolmogorov dağılımını verir.
+\end{ispatiskele}
+
+%% ============================================================
+\section{Bootstrap}
+\label{sec:bootstrap}
+%% ============================================================
+
+\begin{kesif}
+Tahmin edicimizin standart hatasını analitik olarak hesaplayamıyorsak ne yaparız? Bootstrap fikri: gerçek popülasyondan örnekleme yerine, elimizdeki veriyi popülasyon gibi kullan ve yeniden örnekle.
+\end{kesif}
+
+\begin{tanim}[Bootstrap]\label{def:bootstrap}
+$\mathbf{x}=(x_1,\ldots,x_n)$ gözlem. Bootstrap algoritması:
+\begin{enumerate}
+  \item $b=1,\ldots,B$ için: $\mathbf{x}^{*b}=(x_1^*,\ldots,x_n^*)$ yerine koyarak $\mathbf{x}$'den çek.
+  \item $\hat\theta^{*b} = T(\mathbf{x}^{*b})$ hesapla.
+  \item Bootstrap standart hata: $\hat{\mathrm{SE}}_B = \sqrt{\frac{1}{B-1}\sum_{b=1}^B(\hat\theta^{*b}-\bar{\hat\theta}^*)^2}$.
+\end{enumerate}
+\end{tahin}
+
+\begin{tanim}[Bootstrap güven aralıkları]\label{def:bootstrap_ga}
+\begin{itemize}
+  \item \textbf{Yüzdelik GA:} $[\hat\theta^*_{(\alpha/2)}, \hat\theta^*_{(1-\alpha/2)}]$.
+  \item \textbf{BCa (bias-corrected and accelerated):} Yüzdelik yöntemini çarpıklık ve ivme için düzeltir.
+\end{itemize}
+\end{tanim}
+
+\begin{teorem}[Bootstrap tutarlılığı]\label{thm:bootstrap_tutarlilik}
+Geniş koşullar altında bootstrap dağılımı, gerçek örnekleme dağılımına yakınsar. Özellikle $\sqrt{n}$-tutarlı ve asimptotik normal $T(\mathbf{X})$ için bootstrap standart hata tutarlıdır.
+\end{teorem}
+
+\begin{ispatiskele}
+Genelleşmiş delta yöntemi: $T(\mathbf{X})=g(\bar{X})$ biçimindeyse, $T^* - T$ dağılımının, $T - \theta$ dağılımına bootstrap yakınsaması MLT + Slütseva argümanıyla kurulur.
+\end{ispatiskele}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Biyoistatistik:} Küçük klinik örneklemlerde bootstrap güven aralıkları standart. \textbf{Makine öğrenmesi:} Bootstrap + bagging ile varyans azaltma (rastgele ormanlar). \textbf{Ekonometri:} Küme-sağlamlı standart hatalar bootstrap ile hesaplanır.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
+
+\begin{mikroozet}
+\begin{itemize}
+  \item Parametresiz testler: minimal dağılım varsayımı; sıra veya işaret tabanlı.
+  \item İşaret: medyan testi; Wilcoxon: simetri testi; Mann-Whitney: iki örneklem; KW/Friedman: çok grup.
+  \item KS testi: ampirik ile teorik KDF farkı; $\sqrt{n}D_n\to$ Kolmogorov.
+  \item Bootstrap: yeniden örnekleme ile standart hata ve GA; dağılım varsayımı gerektirmez.
+\end{itemize}
+\end{mikroozet}
+
+\begin{ozyansima}
+Parametresiz testler normallik varsayımı bozulduğunda her zaman parametrik testlerden daha iyi midir? Normallik geçerliyken ne kadar güç kaybı olur?
+\end{ozyansima}
+
+\begin{kopru}
+\textbf{Nereden geldik:} Bölüm~\ref{chp:hipotez_testi}'deki test çerçevesi parametresiz yöntemleri de kapsar; temel fark test istatistiğinin seçimindedir.
+
+\textbf{Nereye gidiyoruz:} Bölüm~\ref{chp:asimptotik}'da bootstrap tutarlılığının arkasındaki asimptotik teoriye, fonksiyonel MLT'ye ve Donsker teoreminin kesin formülasyonuna bakacağız.
+\end{kopru}
+
+%% ============================================================
+%% ALISTIRMALAR
+%% ============================================================
+
+\cozumlualistirmalar
+
+\begin{alistirma}[Al.17.1]{A}{İşaret testi}
+$n=15$ hastada plasebo ile karşılaştırılan ilacın etkisi: 11 hasta iyileşti, 4 kötüleşti. $H_0:m=0$ (medyan fark sıfır) vs $H_1:m>0$. $\alpha=0.05$ için karar ver.
+\end{alistirma}
+\alcozum{%
+$B=11\sim\Binom(15,0.5)$ ($H_0$ altında). $p=\Prob(B\geq11)=\sum_{k=11}^{15}\binom{15}{k}(0.5)^{15}=(1+15+105+455+3003\cdot0)/32768$. Doğrudan: $\Prob(B\geq11)=0.059>0.05$. $H_0$ reddedilemez (tam Binom ile $p=0.059$).%
+}
+
+\begin{alistirma}[Al.17.2]{B}{Mann-Whitney}
+Grup A: $\{3,5,7,9,11\}$, Grup B: $\{2,4,8,10,12\}$. $H_0:F_A=F_B$. $U$ istatistiğini hesapla ve asimptotik $z$ ile test yap.
+\end{alistirma}
+\alcozum{%
+$U=\#\{(A_i,B_j):A_i<B_j\}$. $3<4,8,10,12$ (4), $5<8,10,12$ (3), $7<8,10,12$ (3), $9<10,12$ (2), $11<12$ (1): $U=13$. $\Beklenti=12.5$, $\Var=5\cdot5\cdot11/12=22.9$. $Z=(13-12.5)/\sqrt{22.9}=0.1$. $H_0$ reddedilemez.%
+}
+
+\alistirmalar
+
+\begin{alistirma}[Al.17.3]{A}{KS testi uygulaması}
+$n=5$ gözlem: $\{0.2, 0.5, 0.6, 0.8, 0.9\}$. $H_0: F_0 = \Uniform[0,1]$. $D_5$'i hesapla.
+\end{alistirma}
+\alcozum{%
+$F_5(x_i)=i/5$, $F_0(x_i)=x_i$. Farklar: $|0.2-0.2|=0$, $|0.4-0.5|=0.1$, $|0.6-0.6|=0$, $|0.8-0.8|=0$, $|1.0-0.9|=0.1$. Sol sınır farkları da hesapla: max$=0.1$. $D_5=0.1$. $\sqrt{5}\cdot0.1=0.224$ — KS tablosundan $\alpha=0.05$ kritik değeri $0.565$; $H_0$ reddedilemez.%
+}
+
+\begin{alistirma}[Al.17.4]{B}{Bootstrap standart hata}
+$n=6$ gözlem: $\{2,4,5,7,9,12\}$. Medyanın bootstrap standart hatasını $B=5$ bootstrap yinelemesiyle elle hesapla (rastgele çekimler verildiğinde: $\{2,4,4,7,9,9\}$, $\{4,5,7,7,12,12\}$, $\{2,2,5,9,9,12\}$, $\{4,5,7,9,9,12\}$, $\{2,4,5,5,7,12\}$).
+\end{alistirma}
+\alcozum{%
+Medyan(orijinal)$=6$. Bootstrap medyanları: $m_1=(4+7)/2=5.5$, $m_2=(7+7)/2=7$, $m_3=(5+9)/2=7$, $m_4=(7+9)/2=8$, $m_5=(5+5)/2=5$. $\bar{m}^*=6.5$. $\hat{SE}=\sqrt{[(5.5-6.5)^2+(7-6.5)^2+(7-6.5)^2+(8-6.5)^2+(5-6.5)^2]/4}=\sqrt{(1+0.25+0.25+2.25+2.25)/4}=\sqrt{1.5}=1.22$.%
+}
+
+\begin{alistirma}[Al.17.5]{C}{Glivenko-Cantelli hızı}
+$X_1,\ldots,X_n\iid\Uniform[0,1]$. $\Beklenti[\sup_x|F_n(x)-x|]$'in üst sınırını Dvoretzky-Kiefer-Wolfowitz eşitsizliğini kullanarak ver: $\Prob(\sup_x|F_n(x)-F(x)|>\varepsilon)\leq 2e^{-2n\varepsilon^2}$.
+\end{alistirma}
+\alcozum{%
+DKW'den $\Prob(D_n>\varepsilon)\leq2e^{-2n\varepsilon^2}$. $\Beklenti[D_n]=\int_0^\infty\Prob(D_n>t)\,dt\leq\int_0^\infty2e^{-2nt^2}\,dt=2\cdot\frac{\sqrt{\pi}}{2\sqrt{2n}}=\sqrt{\pi/(2n)}$. Dolayısıyla $\Beklenti[D_n]=O(1/\sqrt{n})$.%
+}
