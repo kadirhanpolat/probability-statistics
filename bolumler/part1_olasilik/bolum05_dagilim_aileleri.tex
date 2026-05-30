@@ -718,10 +718,84 @@ karışım modelleri yaygın kullanılır? Karışımların MLE tahmini neden st
 doğrudan yapılamaz? (İpucu: EM algoritması bu soruyu yanıtlar.)
 \end{kritiksorgu}
 
+% =====================================================================
+\section{Çok Değişkenli Normal Dağılım}
+\label{sec:cok_normal}
+% =====================================================================
+
+\begin{tanim}[Çok değişkenli normal]\label{def:cok_normal}
+$\mathbf{X}=(X_1,\ldots,X_p)^\top$ \emph{çok değişkenli normal} dağılımlıdır, $\mathbf{X}\sim\Normal_p(\boldsymbol\mu,\boldsymbol\Sigma)$, her doğrusal kombinasyon $\mathbf{a}^\top\mathbf{X}$'in univariant normal dağılımlı olması koşuluyla.
+\end{tanim}
+
+\begin{teorem}[Çok değişkenli normal yoğunluğu]\label{thm:cok_normal_yogunluk}
+$\boldsymbol\Sigma$ simetrik pozitif tanımlı ($p\times p$). $\mathbf{X}\sim\Normal_p(\boldsymbol\mu,\boldsymbol\Sigma)$:
+\[
+  f(\mathbf{x}) = \frac{1}{(2\pi)^{p/2}|\boldsymbol\Sigma|^{1/2}}
+  \exp\!\left(-\tfrac{1}{2}(\mathbf{x}-\boldsymbol\mu)^\top\boldsymbol\Sigma^{-1}(\mathbf{x}-\boldsymbol\mu)\right).
+\]
+\end{teorem}
+
+\begin{teorem}[Bağımsızlık koşulları]\label{thm:cok_normal_bagimsiz}
+$\mathbf{X}\sim\Normal_p(\boldsymbol\mu,\boldsymbol\Sigma)$. Alt vektörler $\mathbf{X}_1,\mathbf{X}_2$ bağımsız $\iff$ $\Cov(\mathbf{X}_1,\mathbf{X}_2)=\mathbf{0}$ (korelasyonsuzluk = bağımsızlık, yalnızca normal için!).
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+MGF ayrışımı: $M_\mathbf{X}(\mathbf{t})=\exp(\boldsymbol\mu^\top\mathbf{t}+\tfrac12\mathbf{t}^\top\boldsymbol\Sigma\mathbf{t})$. $\Cov(\mathbf{X}_1,\mathbf{X}_2)=\mathbf{0}$ ise $\boldsymbol\Sigma$ blok köşegendir; MGF ayrışır: $M_{\mathbf{X}_1}(\mathbf{t}_1)\cdot M_{\mathbf{X}_2}(\mathbf{t}_2)$.
+\end{proof}
+
+\begin{ornek}[Koşullu normal]\label{ex:kosullu_normal}
+$\mathbf{X}=(\mathbf{X}_1^\top,\mathbf{X}_2^\top)^\top\sim\Normal_{p+q}$, $\boldsymbol\Sigma=\begin{pmatrix}\boldsymbol\Sigma_{11}&\boldsymbol\Sigma_{12}\\\boldsymbol\Sigma_{21}&\boldsymbol\Sigma_{22}\end{pmatrix}$. Koşullu dağılım:
+\[
+  \mathbf{X}_1|\mathbf{X}_2=\mathbf{x}_2\sim\Normal_p\!\left(\boldsymbol\mu_1+\boldsymbol\Sigma_{12}\boldsymbol\Sigma_{22}^{-1}(\mathbf{x}_2-\boldsymbol\mu_2),\;\boldsymbol\Sigma_{11}-\boldsymbol\Sigma_{12}\boldsymbol\Sigma_{22}^{-1}\boldsymbol\Sigma_{21}\right).
+\]
+Koşullu ortalama, $\mathbf{x}_2$'nin doğrusal fonksiyonudur — çok değişkenli regresyonun temeli.
+\end{ornek}
+
+\begin{teorem}[Kareler dağılımı: ki-kare bağlantısı]\label{thm:kare_dagilimlari}
+$\mathbf{X}\sim\Normal_p(\mathbf{0},\mathbf{I}_p)$. O zaman $\|\mathbf{X}\|^2=\sum X_i^2\sim\chi^2_p$.
+Genel: $(\mathbf{X}-\boldsymbol\mu)^\top\boldsymbol\Sigma^{-1}(\mathbf{X}-\boldsymbol\mu)\sim\chi^2_p$ ($\boldsymbol\Sigma$ pozitif tanımlı).
+Bu, Mahalanobis mesafesinin dağılımıdır.
+\end{teorem}
+
+\begin{proof}
+$\boldsymbol\Sigma=\mathbf{A}\mathbf{A}^\top$ (Cholesky). $\mathbf{Z}=\mathbf{A}^{-1}(\mathbf{X}-\boldsymbol\mu)\sim\Normal_p(\mathbf{0},\mathbf{I}_p)$. $\|\mathbf{Z}\|^2\sim\chi^2_p$.
+\end{proof}
+
+\begin{hataanalizi}
+Genel olarak, korelasyonsuzluk bağımsızlık gerektirmez. Bu yalnızca normal dağılımda geçerlidir. $X\sim\Normal(0,1)$, $Y=X^2$: $\Cov(X,Y)=E[X^3]=0$ ama $Y$, $X$'e kesinlikle bağımlıdır.
+\end{hataanalizi}
+
+% =====================================================================
+\section{Yüksek Boyutlu Dağılımlar: Wishart ve Hotelling}
+\label{sec:wishart_hotelling}
+% =====================================================================
+
+\begin{tanim}[Wishart dağılımı]\label{def:wishart}
+$\mathbf{X}_1,\ldots,\mathbf{X}_n\iid\Normal_p(\mathbf{0},\boldsymbol\Sigma)$. $\mathbf{W}=\sum_{i=1}^n\mathbf{X}_i\mathbf{X}_i^\top$ \emph{Wishart dağılımlıdır}: $\mathbf{W}\sim W_p(n,\boldsymbol\Sigma)$.
+$\Beklenti[\mathbf{W}]=n\boldsymbol\Sigma$.
+\end{tanim}
+
+\begin{ornek}[Örneklem kovaryans matrisi]\label{ex:onek_kovaryans}
+$\mathbf{X}_1,\ldots,\mathbf{X}_n\iid\Normal_p(\boldsymbol\mu,\boldsymbol\Sigma)$. $(n-1)\mathbf{S}=\sum_{i=1}^n(\mathbf{X}_i-\bar{\mathbf{X}})(\mathbf{X}_i-\bar{\mathbf{X}})^\top\sim W_p(n-1,\boldsymbol\Sigma)$.
+$\mathbf{S}$ ve $\bar{\mathbf{X}}$ bağımsızdır (çok değişkenli Cochran teoremi).
+\end{ornek}
+
+\begin{tanim}[Hotelling $T^2$ istatistiği]\label{def:hotelling}
+$T^2 = n(\bar{\mathbf{X}}-\boldsymbol\mu_0)^\top\mathbf{S}^{-1}(\bar{\mathbf{X}}-\boldsymbol\mu_0)$. $\boldsymbol\mu=\boldsymbol\mu_0$ altında: $\frac{n-p}{p(n-1)}T^2\sim F(p,n-p)$ (Hotelling dağılımı).
+\end{tanim}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Makine Öğrenmesi:} Çok değişkenli normal, Gaussian Naive Bayes ve LDA (Doğrusal Diskriminant Analizi) sınıflandırıcılarının temeli. Wishart, Bayesçi kovaryans tahminin konjugat önselidir.
+
+\textbf{Nörobilim:} Mahalanobis mesafesi, beyin görüntüleme verilerinde sinyal gürültü ayırt etmede kullanılır; Hotelling $T^2$ çok değişkenli FMRI analizi testlerinin temelidir.
+\end{disiplinlerarasibaglan}
+
 \begin{mikroozet}
 Weibull: esnek ömür modeli; $k=1$ üstel, $k>1$ artan arıza oranı.
 Pareto: ağır kuyruk (heavy tail); $\alpha \leq 2$ sonsuz varyans.
 Karışım: $f = \sum\pi_k f_k$; bileşke varyans = içsel + dışsal.
+$\Normal_p$: korelasyonsuzluk $\iff$ bağımsızlık; koşullu dağılım $\Normal_p$; ki-kare bağlantısı.
+Wishart: örneklem kovaryans matrisi dağılımı; Hotelling $T^2$: çok boyutlu $t$-testi.
 \end{mikroozet}
 
 % =====================================================================
