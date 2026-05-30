@@ -436,6 +436,68 @@ Beta-Binom Bayes tahmin edicisini MLE olan $\bar{X}_n$ ile karşılaştır. $\al
 \end{kendinleifade}
 
 %% ============================================================
+\section{Minimax Tahmin ve Kabul Edilebilirlik}
+\label{sec:minimax}
+%% ============================================================
+
+\begin{tanim}[Minimax tahmin edici]\label{def:minimax}
+Tüm $\delta$ karar kuralları arasında $\delta^*$ \textbf{minimax}:
+\[
+  \sup_\theta R(\theta,\delta^*) = \inf_\delta\sup_\theta R(\theta,\delta).
+\]
+Worst-case riski minimize eder; $\theta$ hakkında bilgisiz (en kötümser) karar.
+\end{tanim}
+
+\begin{tanim}[Kabul edilemezlik]\label{def:kabul_edilemez}
+$\delta$ karar kuralı \textbf{kabul edilemez} \emph{(inadmissible)} eğer başka bir $\delta'$ ile $R(\theta,\delta')\leq R(\theta,\delta)$ tüm $\theta$'da ve en az bir $\theta^*$'da $R(\theta^*,\delta')<R(\theta^*,\delta)$. Aksi hâlde \textbf{kabul edilebilir} \emph{(admissible)}.
+\end{tanim}
+
+\begin{teorem}[Stein paradoksu]\label{thm:stein}
+$\mathbf{X}\sim\Normal_p(\boldsymbol\mu,I_p)$, $p\geq3$, karesel kayıp. O zaman $\bar{\mathbf{X}}$ (yansız MLE) kabul edilemezdir: \textbf{James-Stein tahmini}
+\[
+  \hat{\boldsymbol\mu}^{JS} = \left(1 - \frac{p-2}{\|\mathbf{X}\|^2}\right)\mathbf{X}
+\]
+her $\boldsymbol\mu$ için daha küçük OKH'a sahip.
+\end{teorem}
+
+\begin{ispatiskele}
+$\Beklenti[\|\hat{\boldsymbol\mu}^{JS}-\boldsymbol\mu\|^2]=p-(p-2)^2\Beklenti[1/\|\mathbf{X}\|^2]<p=\mathrm{OKH}(\mathbf{X})$. Detay: Efron-Morris (1977). Paradoks: $p=1,2$'de yansız tahmin kabul edilebilir; $p\geq3$'te değil.
+\end{ispatiskele}
+
+%% ============================================================
+\section{Skor Fonksiyonu ve Fisher Bilgisi — İleri}
+\label{sec:fisher_ileri}
+%% ============================================================
+
+\begin{teorem}[Fisher bilgisi birleşimi]\label{thm:fisher_birlesen}
+$X_1,\ldots,X_n\iid f(x;\theta)$. Birleşik Fisher bilgisi $\mathcal{I}_n(\theta)=n\mathcal{I}(\theta)$.
+\end{teorem}
+
+\begin{proof}
+Bağımsız gözlemlerden skor toplamı: $\ell_n'(\theta)=\sum_{i=1}^n\partial\log f(X_i;\theta)/\partial\theta$. $\Var(\ell_n')=n\Var(\partial\log f/\partial\theta)=n\mathcal{I}(\theta)$.
+\end{proof}
+
+\begin{teorem}[Çok parametreli Cramér-Rao]\label{thm:cr_cok}
+$\theta\in\mathbb{R}^p$, Fisher bilgi matrisi $\mathbf{I}(\theta)=[I_{jk}]$ ile $I_{jk}=\Beklenti[-\partial^2\log f/\partial\theta_j\partial\theta_k]$. Her yansız $W$:
+\[
+  \Cov_\theta(W) \succeq \mathbf{I}(\theta)^{-1}
+\]
+(matris sıralaması anlamında).
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+Tek boyutlu Cauchy-Schwarz'ın matris versiyonu. $\Cov(W,\ell'(\theta))=I_p$ (normal denklem); Cauchy-Schwarz: $\Cov(W)\cdot\Cov(\ell')\succeq[\Cov(W,\ell')]^2$. $\Cov(\ell')=\mathbf{I}(\theta)$.
+\end{proof}
+
+\begin{ornek}[Normal Fisher bilgi matrisi]\label{ex:normal_fisher}
+$X\sim\Normal(\mu,\sigma^2)$, $\theta=(\mu,\sigma^2)$. $\log f = -\frac12\log\sigma^2 - \frac{(x-\mu)^2}{2\sigma^2}+$sabit. Fisher matrisi:
+\[
+  \mathbf{I}(\theta) = \begin{pmatrix}1/\sigma^2 & 0 \\ 0 & 1/(2\sigma^4)\end{pmatrix}.
+\]
+Cramér-Rao: $\Var(\hat\mu)\geq\sigma^2/n$, $\Var(\hat\sigma^2)\geq2\sigma^4/n$ — yansız MLE her ikisini sağlar.
+\end{ornek}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
@@ -443,6 +505,7 @@ Beta-Binom Bayes tahmin edicisini MLE olan $\bar{X}_n$ ile karşılaştır. $\al
   \item Yeterli + tamamlayıcı $\Rightarrow$ Rao-Blackwell + Lehmann-Scheffé $\Rightarrow$ UMVUE.
   \item MLE: kolay hesap, invaryant, tutarlı, asimptotik verimli; ama yanlı olabilir.
   \item Bayes: önsel + olabilirlik $\to$ sonsal; konjugat önsel analitik çözüm verir; güvenilir aralık Bayesçi belirsizlik ölçüsü.
+  \item Minimax: worst-case optimal; Stein paradoksu $p\geq3$'te yansız MLE'nin kabul edilemez olduğunu gösterir.
 \end{itemize}
 \end{mikroozet}
 
@@ -518,4 +581,18 @@ $X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$. $\hat\sigma^2=\frac{1}{n}\sum(X_i-\ba
 \end{alistirma}
 \alcozum{%
 $\hat\sigma^2=\frac{n-1}{n}S^2$. $S^2$'nin dağılımı $\sigma^2\chi^2_{n-1}/(n-1)$; $\Var(S^2)=2\sigma^4/(n-1)$. $\mathrm{OKH}(\hat\sigma^2)=\Var(\hat\sigma^2)+[\mathrm{Yanlılık}]^2=\frac{(n-1)^2}{n^2}\frac{2\sigma^4}{n-1}+\frac{\sigma^4}{n^2}=\frac{(2n-1)\sigma^4}{n^2}$. $\mathrm{OKH}(S^2)=\Var(S^2)=\frac{2\sigma^4}{n-1}$. Karşılaştır: $\frac{2n-1}{n^2}$ vs $\frac{2}{n-1}$. İlki her $n\geq2$ için daha küçük. Dolayısıyla yanlı $\hat\sigma^2$ daha küçük OKH'a sahip.%
+}
+
+\begin{alistirma}[Al.12.9]{B}{Çok parametreli Fisher bilgisi}
+$X\sim\Normal(\mu,\sigma^2)$ (her ikisi bilinmiyor). (a) Fisher bilgi matrisini hesapla. (b) $\mu$ için Cramér-Rao alt sınırını yaz. (c) $\sigma^2$ için yansız tahmin edici Cramér-Rao sınırına ulaşıyor mu?
+\end{alistirma}
+\alcozum{%
+(a) $\mathbf{I}(\mu,\sigma^2)=\begin{pmatrix}1/\sigma^2&0\\0&1/(2\sigma^4)\end{pmatrix}$ (köşegen: $\mu,\sigma^2$ bilgi ayrışır). (b) $\Var(\hat\mu)\geq\sigma^2/n$. (c) $S^2$'nin varyansı $2\sigma^4/(n-1)$; Cramér-Rao sınırı $2\sigma^4/n$. $2/(n-1)>2/n$: sınıra ulaşılmaz. Sadece Normal$(μ,σ^2$ bilinmez) için MLE $\hat\sigma^2_{\mathrm{MLE}}=\hat\sigma^2$ (yanlı) daha küçük varyansa sahip ama yanlı.%
+}
+
+\begin{alistirma}[Al.12.10]{C}{James-Stein tahmini}
+$p=3$, $\mathbf{X}\sim\Normal_3(\boldsymbol\mu,I_3)$, $\mathbf{x}=(2,1,0)$ gözlendi. (a) $\|\mathbf{x}\|^2$'yi hesapla. (b) James-Stein tahmini $\hat{\boldsymbol\mu}^{JS}$'yi hesapla. (c) OKH farkı ne kadar?
+\end{alistirma}
+\alcozum{%
+(a) $\|\mathbf{x}\|^2=4+1+0=5$. (b) $c=1-(p-2)/\|\mathbf{x}\|^2=1-1/5=0.8$. $\hat{\boldsymbol\mu}^{JS}=0.8\cdot(2,1,0)=(1.6,0.8,0)$. (c) OKH$(\mathbf{X})=p=3$. OKH$(JS)=p-(p-2)^2E[1/\|\mathbf{X}\|^2]<3$. OKH kazancı: $(p-2)^2/\|\mathbf{x}\|^2\approx1/5=0.2$ mertebesinde (bu sadece bireysel veri için tahmin; gerçek kazanç beklenti üzerinden hesaplanır).%
 }
