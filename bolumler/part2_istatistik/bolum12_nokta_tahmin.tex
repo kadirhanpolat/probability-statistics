@@ -498,6 +498,109 @@ Cramér-Rao: $\Var(\hat\mu)\geq\sigma^2/n$, $\Var(\hat\sigma^2)\geq2\sigma^4/n$ 
 \end{ornek}
 
 %% ============================================================
+\section{Tahmin Teorisinde Kayıp Fonksiyonları ve Risk}
+\label{sec:kayip_risk}
+%% ============================================================
+
+\begin{kesif}
+Bir tahmin edici ne zaman \emph{iyi}dir? Yansızlık tek ölçüt değildir. Karar teorisi, bir \emph{kayıp fonksiyonu} $L(\theta,d)$ aracılığıyla tahmin hatasının maliyetini sayısallaştırır.
+\end{kesif}
+
+\begin{tanim}[Kayıp fonksiyonu ve risk]\label{def:kayip_risk}
+$\theta\in\Theta$ parametre, $d\in\mathcal{D}$ karar (tahmin). \emph{Kayıp fonksiyonu} $L:\Theta\times\mathcal{D}\to[0,\infty)$ hata maliyetini ölçer. Bir tahmin edici $\delta(X)$'in \emph{riski}:
+\[
+  R(\theta,\delta) = \Beklenti_\theta[L(\theta,\delta(X))].
+\]
+\end{tanim}
+
+\begin{ornek}[Yaygın kayıp fonksiyonları]\label{ex:kayip_ornekleri}
+\begin{enumerate}
+  \item \textbf{Karesel kayıp} (\emph{squared error loss}): $L(\theta,d)=(\theta-d)^2$; risk = MSE $= \Var(\delta)+\text{bias}^2$.
+  \item \textbf{Mutlak kayıp} (\emph{absolute error loss}): $L(\theta,d)=|\theta-d|$; optimal tahmin edici posterior medyanıdır.
+  \item \textbf{0-1 kayıp}: $L(\theta,d)=\mathbf{1}[\theta\neq d]$; kesikli parametrelerde sık kullanılır; optimal tahmin edici moddur.
+  \item \textbf{LINEX kayıp} (\emph{linear-exponential}): $L(\theta,d)=e^{a(\theta-d)}-a(\theta-d)-1$; asimetrik maliyet durumlarında.
+\end{enumerate}
+\end{ornek}
+
+\begin{tanim}[MSE ayrışımı]\label{def:mse_ayrisim}
+Karesel kayıp altında
+\[
+  \mathrm{MSE}(\delta) = \Beklenti_\theta[(\delta(X)-\theta)^2]
+  = \Var_\theta(\delta(X)) + [\mathrm{bias}_\theta(\delta)]^2.
+\]
+\end{tanim}
+
+\begin{teorem}[Yanlı-varyans dengesi]\label{thm:yanlı_varyans}
+Küçük varyans ile küçük yanlılık aynı anda elde edilemeyebilir. MLE, $\hat\sigma^2_{\mathrm{MLE}}=\frac{1}{n}\sum(X_i-\bar X)^2$ örneğinde yanlı ama $\frac{n}{n-1}$ ile düzeltilince ($S^2$) varyans artar: $\mathrm{MSE}(\hat\sigma^2_{\mathrm{MLE}})<\mathrm{MSE}(S^2)$ tüm $n$ için.
+\end{teorem}
+
+\begin{proof}
+$\Beklenti[\hat\sigma^2_{\mathrm{MLE}}]=\frac{n-1}{n}\sigma^2$ (yanlı), $\Var(\hat\sigma^2_{\mathrm{MLE}})=\frac{2(n-1)\sigma^4}{n^2}$.
+$\mathrm{MSE}(\hat\sigma^2_{\mathrm{MLE}})=\frac{2(n-1)\sigma^4}{n^2}+\frac{\sigma^4}{n^2}=\frac{(2n-1)\sigma^4}{n^2}$.
+$\mathrm{MSE}(S^2)=\Var(S^2)=\frac{2\sigma^4}{n-1}$.
+$\frac{2n-1}{n^2}<\frac{2}{n-1}$ eşdeğerliği $(2n-1)(n-1)<2n^2$, yani $2n^2-3n+1<2n^2$, yani $-3n+1<0$: $n\geq1$ için doğru.
+\end{proof}
+
+\begin{hataanalizi}
+"Yansız tahmin edici her zaman daha iyidir" yanlıştır. MSE kriteri altında küçük yanlılık + küçük varyans ikilisi, büyük varyans + sıfır yanlılıktan üstün olabilir. Özellikle regresyon ve Lasso gibi yöntemler bilinçli yanlılık ekleyerek MSE'yi düşürür.
+\end{hataanalizi}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Makine Öğrenmesi:} Ridge regresyon ve Lasso, yanlı tahmin edicilerdir; ancak yüksek boyutlu ortamda MSE'yi sıfır yanlılıklı OLS'den düşük tutar. Varyans-yanlılık dengesi ("bias-variance tradeoff") derin öğrenme optimizasyonunun temel kavramlarından biridir.
+
+\textbf{Ekonometri:} LINEX kayıp, döviz kuru tahmininde asimetrik hata maliyetini modellemek için kullanılır: aşırı tahmin ile eksik tahminin maliyetleri farklıdır.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
+\section{MLE'nin Varlığı, Tekliği ve Düzenlilik Koşulları}
+\label{sec:mle_duzenlilk}
+%% ============================================================
+
+\begin{motivasyon}[MLE her zaman var mı?]
+MLE'nin skor denklemi $\ell_n'(\theta)=0$'ın çözümü her zaman mevcut olmayabilir ya da birden fazla olabilir. Bu bölüm MLE'nin varlık ve teklik koşullarını inceler.
+\end{motivasyon}
+
+\begin{tanim}[Düzenlilik koşulları (Cramér)]\label{def:duzenlilik}
+Aşağıdaki koşullar \emph{Cramér düzenlilik koşulları} olarak adlandırılır:
+\begin{enumerate}
+  \item[(R1)] Destek $\{x:f(x;\theta)>0\}$, $\theta$'ya bağlı değil.
+  \item[(R2)] $\log f(x;\theta)$ ikinci kez türevlenebilir; türevler integrasyon sırası ile değiştirilebilir.
+  \item[(R3)] Fisher bilgisi $0<\mathcal{I}(\theta)<\infty$.
+  \item[(R4)] Skor fonksiyonu $\ell_n'(\theta)=0$'ın $\hat\theta_n$ tek çözümü vardır ve bu \emph{global maksimum}dur.
+\end{enumerate}
+\end{tanim}
+
+\begin{teorem}[MLE tekliği — üstel aile]\label{thm:mle_teklik}
+$\{f(x;\theta):\theta\in\Theta\}$ tam düzenli üstel aile olsun. O zaman $\hat\theta_n^{\mathrm{MLE}}$ her $n$ için vardır, tektir ve Rao-Blackwell'e göre UMVUE ile çakışır.
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+Tam düzenli üstel ailede $\ell_n(\theta)=n\bar T\cdot\eta(\theta)-nA(\eta(\theta))$ (doğal parametreli). $A(\eta)$ (log-normalizing constant) $\eta$'da kesinlikle dışbükeydir: $A''(\eta)=\Var(T)>0$. Bu nedenle $\ell_n(\eta)$ kesinlikle içbükeydir ve skor denkleminin tek çözümü vardır. Yeterlilik + tamlık + Lehmann-Scheffé $\Rightarrow$ bu tahmin edici UMVUE'dir.
+\end{proof}
+
+\begin{ornek}[Üstel ailede MLE]\label{ex:ustel_mle}
+\begin{enumerate}
+  \item $X_i\iid\Binom(m,p)$: $\hat p_n=\bar X/m$ — tek çözüm, UMVUE.
+  \item $X_i\iid\Pois(\lambda)$: $\hat\lambda_n=\bar X$ — tek çözüm, UMVUE.
+  \item $X_i\iid\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinmiyor): $(\hat\mu_n,\hat\sigma^2_n)=(\bar X,\frac1n\sum(X_i-\bar X)^2)$ — $\mu$ için UMVUE ama $\sigma^2$ için yanlı.
+\end{enumerate}
+\end{ornek}
+
+\begin{kritiksorgu}
+Düzenlilik koşulları (R1) ihlal edilirse MLE ne olur? Örnek: $X_i\iid\Uniform(0,\theta)$. Destek $\theta$'ya bağlı olduğundan skor denklemi anlamsız olur; MLE $\hat\theta_n=X_{(n)}$ (maksimum) ama normal teori geçerli değildir ve $n(\theta-X_{(n)})\dto\Exp(1/\theta)$ (üstel yakınsama).
+\end{kritiksorgu}
+
+\begin{ispatiskele}
+\textbf{İspat taslağı: MLE tekliği — üstel aile}
+\begin{enumerate}
+  \item $f(x;\theta)$'yı doğal parametreli üstel aile biçiminde yaz.
+  \item Log-olabilirlik $\ell_n(\eta)$'nun içbükeyliğini $A''(\eta)=\Var_\eta(T)>0$ ile göster.
+  \item Kesinlikle içbükey fonksiyonun en çok bir stasyoner noktası olduğunu belirt.
+  \item Bu stasyoner noktanın global maksimum olduğunu sonuçlandır.
+\end{enumerate}
+\end{ispatiskele}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
@@ -506,6 +609,8 @@ Cramér-Rao: $\Var(\hat\mu)\geq\sigma^2/n$, $\Var(\hat\sigma^2)\geq2\sigma^4/n$ 
   \item MLE: kolay hesap, invaryant, tutarlı, asimptotik verimli; ama yanlı olabilir.
   \item Bayes: önsel + olabilirlik $\to$ sonsal; konjugat önsel analitik çözüm verir; güvenilir aralık Bayesçi belirsizlik ölçüsü.
   \item Minimax: worst-case optimal; Stein paradoksu $p\geq3$'te yansız MLE'nin kabul edilemez olduğunu gösterir.
+  \item Kayıp fonksiyonu + risk: MSE = varyans + yanlılık$^2$; yanlı tahmin edici daha düşük MSE verebilir.
+  \item Üstel ailede MLE tekdir ve UMVUE ile çakışır; düzenlilik koşulları ihlalinde MLE farklı davranır.
 \end{itemize}
 \end{mikroozet}
 
