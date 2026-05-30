@@ -589,6 +589,78 @@ Hat çekme: sıranın önemi yok.
 
 
 % =====================================================================
+\section{Koşullu Bağımsızlık ve Bayesçi Ağlar}
+\label{sec:kosullu_bagimsizlik}
+% =====================================================================
+
+\begin{tanim}[Koşullu Bağımsızlık]
+\label{def:kosullu_bagimsizlik}
+$A$ ve $B$ olayları $C$ verildiğinde \textbf{koşullu bağımsız}
+(conditionally independent) denir ve $A \perp B \mid C$ gösterilir, eğer
+\[
+  \Prob(A \cap B \mid C) = \Prob(A \mid C)\,\Prob(B \mid C).
+\]
+\end{tanim}
+
+\begin{ornek}[Koşullu Bağımsızlık $\neq$ Mutlak Bağımsızlık]
+Bir kişi iki gün üst üste hasta olsun ($A$: 1. gün hasta, $B$: 2. gün hasta).
+$C$ = "grip mevsiminde". $A$ ve $B$ koşulsuz bağımlı (grip yakalanmak sürer).
+$C$ verildiğinde $A$ ve $B$ koşullu bağımsız olabilir: gribi olan kişide
+birinci ve ikinci günün durumları hastalığın seyrine bağlı, ama $C$'yi bilirsek
+korelasyon büyük ölçüde $C$'den kaynaklanıyor.
+
+Ters yön: $A \perp B$ ama $A \not\perp B \mid C$.
+Örnek: $A = \{\text{Türkiye'de yağmur}\}$, $B = \{\text{Japonya'da yağmur}\}$, $C = \{\text{El Niño}\}$.
+$A \perp B$ (bağımsız ülkeler) ama $A \not\perp B \mid C$ (El Niño her ikisini etkiler).
+\end{ornek}
+
+\begin{teorem}[Koşullu Bağımsızlık Özellikleri]
+\label{thm:kosullu_bagimsizlik}
+$A \perp B \mid C$ ise:
+\begin{enumerate}[(i)]
+  \item $A^c \perp B \mid C$ (tümleme kapalı).
+  \item $\Prob(A \cap B \cap C) = \Prob(A \mid C)\Prob(B \mid C)\Prob(C)$ (zincir kuralı ile).
+  \item $A \perp B \mid C$ ve $A \perp D \mid C$ ise $A \perp (B \cup D) \mid C$ (belirli koşullarla).
+\end{enumerate}
+\end{teorem}
+
+\begin{proof}[(i)]
+$\Prob(A^c \cap B \mid C) = \Prob(B \mid C) - \Prob(A \cap B \mid C)
+= \Prob(B \mid C) - \Prob(A \mid C)\Prob(B \mid C) = (1-\Prob(A \mid C))\Prob(B \mid C)
+= \Prob(A^c \mid C)\Prob(B \mid C)$.
+\end{proof}
+
+\begin{tanim}[Olasılıklı Grafik Model — Bayesçi Ağ]
+\label{def:bayesci_ag}
+Rasgele değişkenler $X_1, \ldots, X_n$; bir yönlü asiklik graf (DAG).
+Her $X_i$, ebeveynleri $\mathrm{Pa}(X_i)$ koşulunda diğer atalardan bağımsız:
+\[
+  X_i \perp \{X_j : j \notin \mathrm{Pa}(X_i), j \text{ torun değil}\} \mid \mathrm{Pa}(X_i).
+\]
+Ortak dağılım: $\Prob(X_1 = x_1, \ldots, X_n = x_n) = \prod_{i=1}^n \Prob(X_i = x_i \mid \mathrm{Pa}(X_i))$.
+\end{tanim}
+
+\begin{ornek}[Basit Bayesçi Ağ]
+$D$ (hastalık) $\to$ $S$ (semptom) $\to$ $T$ (test).
+$S \perp T \mid D$ değil, ama $D \perp T \mid S$ (test sadece semptomla ilgili).
+Ortak: $\Prob(D, S, T) = \Prob(D)\Prob(S \mid D)\Prob(T \mid S)$.
+$\Prob(D \mid T)$: Bayes teoremi ile hesaplanır.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Yapay zeka:} Bayesçi ağlar, belirsizlik altında akıl yürütmenin
+temel matematiksel çerçevesidir; teşhis sistemleri, konuşma tanıma ve robotik karar sistemlerinde kullanılır.\\
+\textbf{Epidemiyoloji:} Bulaşıcı hastalık modelleri DAG yapısıyla koşullu bağımsızlıkları kodlar.\\
+\textbf{Makine öğrenmesi:} Naive Bayes sınıflandırıcısı, özellikler sınıf koşulunda bağımsız varsayımına dayanır.
+\end{disiplinlerarasibaglan}
+
+\begin{mikroozet}
+Koşullu bağımsızlık: $\Prob(A\cap B|C) = \Prob(A|C)\Prob(B|C)$.
+Koşullu bağımsızlık mutlak bağımsızlığı ne gerektirir ne de garantiler.
+Bayesçi ağlar: DAG + koşullu olasılık tabloları $\Rightarrow$ ortak dağılım.
+\end{mikroozet}
+
+% =====================================================================
 %  BÖLÜM SONU ÖZETİ
 % =====================================================================
 \section*{Bölüm Özeti}
@@ -877,3 +949,50 @@ $\Prob(\liminf_n A_n) = 0$.
 (c) Her $p \in (0,1)$ için: sonsuz bağımsız denemede her olay sonsuz sık
 gerçekleşir (a.s.), ama hiçbir zaman sonunda \emph{sürekli} gerçekleşmez. $\blacksquare$%
 }
+
+\begin{alistirma}[Al.2.13]{A}{Koşullu Bağımsızlık}
+Sağlık veri tabanında: $D$ = hastada kanser var, $S$ = semptom pozitif, $T$ = test pozitif.
+Verilen: $\Prob(D) = 0.01$, $\Prob(S \mid D) = 0.8$, $\Prob(S \mid D^c) = 0.05$,
+$\Prob(T \mid S) = 0.9$, $\Prob(T \mid S^c) = 0.1$.
+Bayesçi ağ: $D \to S \to T$.
+(a) $\Prob(S)$'yi hesaplayın. (b) $\Prob(T)$'yi hesaplayın. (c) $\Prob(D \mid T)$'yi hesaplayın.
+\end{alistirma}
+\alcozum{%
+(a) $\Prob(S) = 0.8\cdot0.01 + 0.05\cdot0.99 = 0.008 + 0.0495 = 0.0575$.\\
+(b) $\Prob(T) = 0.9\cdot\Prob(S) + 0.1\cdot\Prob(S^c) = 0.9(0.0575) + 0.1(0.9425) = 0.05175 + 0.09425 = 0.146$.\\
+(c) $\Prob(D \mid T) = \Prob(T \mid D)\Prob(D)/\Prob(T)$.
+$\Prob(T \mid D) = 0.9\cdot0.8 + 0.1\cdot0.2 = 0.74$.
+$\Prob(D \mid T) = 0.74\cdot0.01/0.146 \approx 0.051$. Yüksek test duyarlılığına rağmen düşük: nadir hastalık etkisi.}
+
+\begin{alistirma}[Al.2.14]{B}{Koşullu Bağımsızlık vs Mutlak Bağımsızlık}
+$\Omega = \{1,2,3,4\}$, eşit olası.
+$A = \{1,2\}$, $B = \{1,3\}$, $C = \{1,4\}$.
+(a) $A$ ve $B$ bağımsız mı? (b) $A$ ve $B$, $C$ koşulunda bağımsız mı?
+(c) $A$ ve $C$ bağımsız mı? $A$ ve $C$, $B$ koşulunda?
+\end{alistirma}
+\alcozum{%
+$\Prob(A) = \Prob(B) = \Prob(C) = 1/2$.
+$\Prob(A\cap B) = \Prob(\{1\}) = 1/4 = \Prob(A)\Prob(B)$: (a) evet, $A \perp B$.\\
+(b) $\Prob(C) = 1/2$; $\Prob(A\cap B\cap C) = \Prob(\{1\}) = 1/4$.
+$\Prob(A\cap B \mid C) = \Prob(A\cap B\cap C)/\Prob(C) = (1/4)/(1/2) = 1/2$.
+$\Prob(A\mid C)\Prob(B\mid C) = (1/2)(1/2) = 1/4 \neq 1/2$.
+Koşullu bağımsız değil!\\
+(c) $A \perp C$: $\Prob(A\cap C) = 1/4 = \Prob(A)\Prob(C)$. Evet.
+$\Prob(A\cap C\mid B) = \Prob(A\cap B\cap C)/\Prob(B) = (1/4)/(1/2) = 1/2 \neq \Prob(A|B)\Prob(C|B) = (1/2)(1/2)$.
+$A \not\perp C \mid B$.}
+
+\begin{alistirma}[Al.2.15]{B}{Bayesçi Ağ — Ortak Dağılım}
+$X_1$, $X_2 \mid X_1$, $X_3 \mid X_2$ zinciri (her ikili normal):
+$X_1 \sim \Normal(0,1)$; $X_2 \mid X_1 = x_1 \sim \Normal(x_1, 1)$; $X_3 \mid X_2 = x_2 \sim \Normal(x_2, 1)$.
+(a) $E[X_2]$ ve $\mathrm{Var}(X_2)$'yi hesaplayın.
+(b) $X_1$ ve $X_3$'ün koşulsuz korelasyonunu bulun.
+(c) $X_3 \mid X_2 = 0$ ile $X_3 \mid X_1 = 0$'ı karşılaştırın.
+\end{alistirma}
+\alcozum{%
+(a) $E[X_2] = E[E[X_2|X_1]] = E[X_1] = 0$.
+$\mathrm{Var}(X_2) = E[\mathrm{Var}(X_2|X_1)] + \mathrm{Var}(E[X_2|X_1]) = 1 + \mathrm{Var}(X_1) = 1+1 = 2$.\\
+(b) Aynı şekilde: $E[X_3] = 0$, $\mathrm{Var}(X_3) = 3$.
+$\mathrm{Cov}(X_1,X_3) = E[X_1 X_3]$. Kule beklentisi: $E[X_1 X_3] = E[X_1 E[X_3|X_1,X_2]]$... zincirde: $E[X_3|X_2] = X_2$; $E[X_1 X_3] = E[X_1 X_2] = E[X_1^2] = 1$.
+$\mathrm{Cor}(X_1,X_3) = 1/\sqrt{1\cdot3} = 1/\sqrt{3} \approx 0.577$.\\
+(c) $X_3|X_2=0 \sim \Normal(0,1)$. $X_3|X_1=0$: $X_2|X_1=0 \sim \Normal(0,1)$, sonra $X_3|X_2 \sim \Normal(X_2,1)$; marjinal $X_3|X_1=0 \sim \Normal(0,2)$.
+Daha geniş: $X_1$ bilgisi $X_2$ üzerinden dolaylı.}
