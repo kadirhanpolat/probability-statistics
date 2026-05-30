@@ -478,6 +478,93 @@ $X_1,X_2,\ldots$ i.i.d.\ $f(x;\theta_0)$. $M_n=\sum_{k=1}^n\partial\log f(X_k;\t
 \end{ornek}
 
 % =====================================================================
+\section{Delta Yöntemi ve İşlev MLT'si}
+\label{sec:delta_yontemi}
+% =====================================================================
+
+\begin{tanim}[Delta yöntemi]\label{def:delta}
+$\sqrt{n}(\bar X_n - \mu)\dto\Normal(0,\sigma^2)$ ve $g:\mathbb{R}\to\mathbb{R}$ diferansiyel ise $g'(\mu)\neq0$ koşulunda:
+\[
+  \sqrt{n}(g(\bar X_n)-g(\mu))\dto\Normal(0,[g'(\mu)]^2\sigma^2).
+\]
+\end{tanim}
+
+\begin{proof}
+Taylor açılımı: $g(\bar X_n)=g(\mu)+g'(\mu)(\bar X_n-\mu)+O_p(n^{-1})$. Slutsky teoremi ile ikinci terim $\pto0$:
+$\sqrt{n}(g(\bar X_n)-g(\mu))\approx g'(\mu)\cdot\sqrt{n}(\bar X_n-\mu)\dto\Normal(0,[g'(\mu)]^2\sigma^2)$.
+\end{proof}
+
+\begin{ornek}[Delta yöntemi uygulamaları]\label{ex:delta_uyg}
+\begin{enumerate}
+  \item \textbf{Log-dönüşüm:} $g(x)=\log x$, $\bar X_n\pto\mu>0$. $\sqrt{n}(\log\bar X_n-\log\mu)\dto\Normal(0,\sigma^2/\mu^2)$.
+  \item \textbf{Oran tahmini:} $\hat p=\bar X_n\in(0,1)$, $g(p)=\log(p/(1-p))$ (logit). $g'(p)=1/(p(1-p))$: $\sqrt{n}(\hat\ell-\ell)\dto\Normal(0,1/(p(1-p)))$.
+  \item \textbf{MLE varyans stabilizasyonu:} Poisson $\lambda$: $g(\lambda)=\sqrt{\lambda}$ ile $\sqrt{n}(\sqrt{\bar X}-\sqrt\lambda)\dto\Normal(0,1/4)$ — varyans $\lambda$'dan bağımsız.
+\end{enumerate}
+\end{ornek}
+
+\begin{teorem}[Çok boyutlu delta yöntemi]\label{thm:delta_cok}
+$\sqrt{n}(\bar{\mathbf{X}}_n-\boldsymbol\mu)\dto\Normal_p(\mathbf{0},\boldsymbol\Sigma)$ ve $g:\mathbb{R}^p\to\mathbb{R}^q$ diferansiyel ise:
+\[
+  \sqrt{n}(g(\bar{\mathbf{X}}_n)-g(\boldsymbol\mu))\dto\Normal_q(\mathbf{0},\mathbf{J}_g\boldsymbol\Sigma\mathbf{J}_g^\top),
+\]
+burada $\mathbf{J}_g=\partial g/\partial\boldsymbol\mu^\top$ Jacobi matrisidir.
+\end{teorem}
+
+\begin{ispatiskele}
+\textbf{Delta yöntemi ispatı}
+\begin{enumerate}
+  \item $g(\bar X_n)$'yi $\mu$ çevresinde birinci dereceden Taylor açılımı yap.
+  \item Hata teriminin $o_p(1/\sqrt{n})$ olduğunu göster.
+  \item $\sqrt{n}(\bar X_n-\mu)\dto\Normal(0,\sigma^2)$ ve Slutsky lemmasını uygula.
+  \item $[g'(\mu)]^2\cdot\Normal(0,\sigma^2)=\Normal(0,[g'(\mu)]^2\sigma^2)$ sonucunu yaz.
+\end{enumerate}
+\end{ispatiskele}
+
+% =====================================================================
+\section{Merkezi Limit Teoreminin İstatistiksel Uygulamaları}
+\label{sec:mlt_istatistik}
+% =====================================================================
+
+\begin{motivasyon}[MLT neden istatistiğin temeli?]
+MLT, büyük örneklem istatistiğinin çoğunun teorik temelini oluşturur. Güven aralıkları, Wald testleri ve MLE asimptotik normalliği doğrudan MLT'ye dayanır.
+\end{motivasyon}
+
+\begin{teorem}[Wald güven aralığı]\label{thm:wald_ga}
+$X_1,\ldots,X_n\iid$ $E[X]=\mu$, $\Var(X)=\sigma^2<\infty$. MLT'ye göre büyük $n$ için $\mu$'nun $(1-\alpha)$ düzeyinde yaklaşık güven aralığı:
+\[
+  \bar X_n \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.
+\]
+$\sigma$ bilinmiyorsa $S_n$ ile değiştirilir (Slutsky: $S_n\pto\sigma$ nedeniyle geçerlidir).
+\end{teorem}
+
+\begin{proof}
+$Z_n=\sqrt{n}(\bar X_n-\mu)/\sigma\dto\Normal(0,1)$. Sürekli dağılımlar için: $P(|Z_n|\leq z_{\alpha/2})\to1-\alpha$. Eşitsizliği $\mu$ için çöz: $\mu\in[\bar X_n-z_{\alpha/2}\sigma/\sqrt{n},\;\bar X_n+z_{\alpha/2}\sigma/\sqrt{n}]$.
+\end{proof}
+
+\begin{teorem}[MLE asimptotik normalliği]\label{thm:mle_asimptotik}
+Cramér düzenlilik koşulları altında $\hat\theta_n^{\mathrm{MLE}}$:
+\[
+  \sqrt{n}(\hat\theta_n-\theta_0)\dto\Normal(0,\mathcal{I}(\theta_0)^{-1}).
+\]
+Bu sonuç, Böl.~12'deki MLE teorisinin temel asimptotik gerekçesidir.
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+Skor fonksiyonu $\ell_n'(\hat\theta_n)=0$'ı $\theta_0$ çevresinde Taylor açılımı yap:
+$0=\ell_n'(\theta_0)+(\hat\theta_n-\theta_0)\ell_n''(\theta^*)$.
+$\sqrt{n}(\hat\theta_n-\theta_0)=-\frac{\ell_n'(\theta_0)/\sqrt{n}}{\ell_n''(\theta^*)/n}$.
+Pay MLT ile $\Normal(0,\mathcal{I}(\theta_0))$'a yakınsadı (Martingal MLT §\ref{sec:martingal_mlt}); payda BSKK ile $-\mathcal{I}(\theta_0)$'a yakınsadı. Bölme Slutsky ile sonucu verir.
+\end{proof}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Güvenilirlik Mühendisliği:} Delta yöntemi, bileşen ömür ortalamalarından sistem güvenilirlik tahmininin varyansını hesaplamak için kullanılır.
+
+\textbf{Epidemiyoloji:} Log-risk oranı için delta yöntemi: $\log(\hat p_1/\hat p_2)$'nin standart hatası delta yöntemiyle hesaplanır ve güven aralığı kurulur.
+
+\textbf{Finansal Matematik:} Black-Scholes delta ($\partial V/\partial S$) portföy riskini ölçer — delta yönteminin sürekli zamana genişlemesi.
+\end{disiplinlerarasibaglan}
+
+% =====================================================================
 %  ALIŞTIRMALAR
 % =====================================================================
 
