@@ -329,6 +329,101 @@ Klasik hesap $\int_0^t W\,dW = W^2(t)/2$ verir — Itô fazladan $-t/2$ terimi e
 \end{ornek}
 
 %% ============================================================
+\section{Ornstein-Uhlenbeck Süreci}
+\label{sec:ou_sureci}
+%% ============================================================
+
+\begin{tanim}[Ornstein-Uhlenbeck süreci]\label{def:ou}
+Stokastik diferansiyel denklem (SDD):
+\[
+  dX(t) = -\theta X(t)\,dt + \sigma\,dW(t), \qquad \theta>0,\;\sigma>0.
+\]
+$\theta$: geri çekme hızı \emph{(mean reversion rate)}, denge nokta $0$ (genel: $dX=\theta(\mu-X)dt+\sigma dW$). OU süreci durağan, Gauss ve Markov özelliklerine sahiptir.
+\end{tanim}
+
+\begin{teorem}[OU sürecinin açık çözümü]\label{thm:ou_cozum}
+$X(0)=x_0$ başlangıç koşuluyla:
+\[
+  X(t) = x_0 e^{-\theta t} + \sigma\int_0^t e^{-\theta(t-s)}\,dW(s).
+\]
+Dağılım: $X(t)\sim\Normal\!\bigl(x_0 e^{-\theta t},\;\tfrac{\sigma^2}{2\theta}(1-e^{-2\theta t})\bigr)$.
+\end{teorem}
+
+\begin{proof}
+$f(t,x)=e^{\theta t}x$ formunu dene; Itô:
+\[
+  d(e^{\theta t}X) = e^{\theta t}(\theta X\,dt + dX) = e^{\theta t}\sigma\,dW.
+\]
+Entegre: $e^{\theta t}X(t) - x_0 = \sigma\int_0^t e^{\theta s}\,dW(s)$; $e^{-\theta t}$ ile böl. Dağılım: Itô izometrisi ile varyans hesaplanır.
+\end{proof}
+
+\begin{teorem}[OU — durağan dağılım]\label{thm:ou_duraganlik}
+$t\to\infty$: $X(t)\dto X_\infty\sim\Normal(0,\sigma^2/(2\theta))$. Bu durağan dağılım: $\Beklenti[X_\infty]=0$, $\Var(X_\infty)=\sigma^2/(2\theta)$.
+\end{teorem}
+
+\begin{ornek}[Faiz oranı modeli — Vasicek]
+Kısa faiz $r(t)$: $dr = a(b-r)dt + \sigma\,dW$. Bu OU sürecidir; $\theta=a$, denge $b$. $t\to\infty$: $r\to\Normal(b, \sigma^2/(2a))$. Negatif faiz olasılığı var — gerçekçi sınırlama için CIR modeli kullanılır.
+\end{ornek}
+
+\begin{hataanalizi}
+OU süreci "ortalamaya dönüş" gösterir — başlangıçtan uzaklaştığında bir çekme kuvveti etkiler. Brownian hareket ile karıştırmayın: $W(t)$ sınırsız büyür ($\Var(W(t))=t\to\infty$), OU ise durağan dağılıma yakınsar.
+\end{hataanalizi}
+
+%% ============================================================
+\section{Markov Zinciri Monte Carlo (MCMC)}
+\label{sec:mcmc}
+%% ============================================================
+
+\begin{kesif}
+Bir yoğunluk $\pi(x)$'den örnekleme yapmak istiyoruz; normalleştirme sabiti $Z=\int\pi(x)dx$ hesaplanamıyor. Fikir: durağan dağılımı $\pi$ olan bir Markov zinciri kur; uzun vadede zincirin yolu $\pi$'den örnekler üretir.
+\end{kesif}
+
+\begin{tanim}[Ayrıntılı denge]\label{def:ayrintili_denge}
+Olasılık dağılımı $\pi$ ve geçiş çekirdeği $K(x,y)$ arasındaki \textbf{ayrıntılı denge} \emph{(detailed balance)} koşulu:
+\[
+  \pi(x)K(x,y) = \pi(y)K(y,x) \quad \text{tüm } x,y \text{ için}.
+\]
+Bu koşul $\pi K = \pi$'yi (durağanlık) garanti eder.
+\end{tanim}
+
+\begin{proof}
+$\int\pi(x)K(x,y)\,dx = \int\pi(y)K(y,x)\,dx = \pi(y)\int K(y,x)\,dx = \pi(y)$.
+\end{proof}
+
+\begin{tanim}[Metropolis-Hastings algoritması]\label{def:metropolis_hastings}
+Hedef $\pi(x)$; öneri dağılımı $q(x\to y)$. Her adımda:
+\begin{enumerate}
+  \item $y\sim q(x\to\cdot)$ öner.
+  \item Kabul oranı: $\alpha(x,y) = \min\!\left(1,\;\frac{\pi(y)q(y\to x)}{\pi(x)q(x\to y)}\right)$.
+  \item $U\sim\Uniform[0,1]$: $U\leq\alpha$ ise $X_{n+1}=y$; değilse $X_{n+1}=x$.
+\end{enumerate}
+\end{tanim}
+
+\begin{teorem}[Metropolis-Hastings geçerliliği]\label{thm:mh_gecerlilik}
+MH algoritmasıyla oluşturulan zincir ayrıntılı dengeyi sağlar; $\pi$ durağan dağılımdır. Zincir geri dönülemez ve aperiyodik ise $\pi$'ye yakınsar.
+\end{teorem}
+
+\begin{proof}[Proof — ayrıntılı denge]
+$\pi(x)K_{\mathrm{MH}}(x,y) = \pi(x)q(x,y)\alpha(x,y)$. $\alpha(x,y)=\min(1,r)$ ($r=\pi(y)q(y,x)/[\pi(x)q(x,y)]$): $r\leq1$ ise $\alpha(x,y)=r=\pi(y)q(y,x)/[\pi(x)q(x,y)]$, yani $\pi(x)K=\pi(y)q(y,x)=\pi(y)K_{\mathrm{MH}}(y,x)$. Simetri; $r\geq1$ durumu benzer.
+\end{proof}
+
+\begin{ornek}[Random-walk Metropolis]
+Öneri: $q(x\to y)=\phi(y-x;0,\tau^2)$ (Gaussian yürüyüş). $q$ simetrik olduğundan $q(x,y)=q(y,x)$; $\alpha(x,y)=\min(1,\pi(y)/\pi(x))$. Hedef $\pi\propto e^{-x^2/2}$ için her adımda yalnızca $\pi(y)/\pi(x)$ oranı hesaplanır — normalleştirme gerekmez.
+\end{ornek}
+
+\begin{teorem}[Gibbs örneklemesi]\label{thm:gibbs}
+$\pi(x_1,\ldots,x_d)$ çok değişkenli hedef. Gibbs örneklemesi her adımda tek bir bileşeni koşullu dağılımından örnekler: $X_j^{(t+1)}\sim\pi(x_j\mid x_{-j}^{(t)})$. MH'nin $\alpha=1$ özel durumudur.
+\end{teorem}
+
+\begin{ispatiskele}
+Her Gibbs adımının hedef dağılımın marjinalini koruduğunu göster: tek boyutlu koşullu örneklem ayrıntılı dengeyi sağlar. Bileşen yenilemelerinin birleşimi tüm $\pi$'yi durağan tutar.
+\end{ispatiskele}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Bayesçi istatistik:} Posterior dağılımdan örnekleme için MCMC; tahmin ve model karşılaştırmasında temel araç. \textbf{Fizik:} Metropolis algoritması istatistik mekanikte (Ising modeli) doğdu (1953). \textbf{Makine öğrenmesi:} Latent Dirichlet Allocation (LDA) konu modellemesinde Gibbs kullanılır.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
@@ -406,6 +501,20 @@ $\lambda=4$ varış/dak., $\mu=6$ hizmet/dak. (a) $\rho$'yu hesapla; sistemin du
 \end{alistirma}
 \alcozum{%
 (a) $g=1$: $\Beklenti[\int_0^t dW]=0$ (martingal); Itô izometrisi $\Var=\Beklenti[\int_0^t 1^2\,ds]=t$. (b) $g(s)=s$: beklenti $=0$; varyans $=\Beklenti[\int_0^t s^2\,ds]=t^3/3$.%
+}
+
+\begin{alistirma}[Al.10.9]{B}{OU süreci varyansı}
+$X(0)=0$, $\theta=1$, $\sigma=2$. (a) $\Var(X(t))$'yi bul. (b) $t\to\infty$'da durağan varyansı hesapla. (c) $\Var(X(1))$'i numerik olarak ver.
+\end{alistirma}
+\alcozum{%
+(a) $\Var(X(t))=\frac{\sigma^2}{2\theta}(1-e^{-2\theta t})=2(1-e^{-2t})$. (b) $t\to\infty$: $\Var=2$. (c) $\Var(X(1))=2(1-e^{-2})\approx2(1-0.135)=1.73$.%
+}
+
+\begin{alistirma}[Al.10.10]{B}{Metropolis-Hastings — kabul oranı}
+Hedef $\pi(x)\propto e^{-x^2/2}$ (standart Normal). $x=-1$'deyken $y=0.5$ önerildi. Kabul oranı $\alpha(-1,0.5)$'i simetrik öneri dağılımında hesapla ve yorumla.
+\end{alistirma}
+\alcozum{%
+$\alpha=\min(1,\pi(0.5)/\pi(-1))=\min(1,e^{-0.125}/e^{-0.5})=\min(1,e^{0.375})=\min(1,1.455)=1$. Kabul oranı $1$ — önerilen nokta daha yüksek yoğunlukta, her zaman kabul edilir.%
 }
 
 \begin{alistirma}[Al.10.8]{C}{Doğum-ölüm durağan dağılım}
