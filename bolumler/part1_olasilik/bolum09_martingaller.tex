@@ -490,6 +490,29 @@ $S_n$ simetrik rassal yürüyüş ($\xi_i = \pm1$, $\sigma^2=1$). $M_n = S_n^2 -
 $E[M_\tau] = E[S_\tau^2 - \tau] = E[M_0] = 0$.
 $S_\tau = a$ (emici bariyer): $a^2 - E[\tau] = 0$. $E[\tau] = a^2$.}
 
+\begin{alistirma}[Al.9.3cozum]{B}{Doob Yakınsama — $L^1$ Martingal}
+$(M_n)_{n\geq0}$ bir martingal ve $\sup_n E[|M_n|]<\infty$. Doob $L^1$ yakınsama teoremine göre $M_n\to M_\infty$ n.k. belirterek, aşağıdaki sonuçları türetin:
+(a) $M_n = E[Z\mid\mathcal{F}_n]$ ise $M_n\to E[Z\mid\mathcal{F}_\infty]$ n.k.\ ve $L^1$'de.
+(b) $M_n = S_n/n$ ($S_n$ bağımsız toplamı, $E[|X_1|]<\infty$) için ZBSK ile ilişkilendirin.
+\end{alistirma}
+\alcozum{%
+(a) $E[|M_n|] = E[|E[Z\mid\mathcal{F}_n]|] \leq E[|Z|] < \infty$ (Jensen + koşullu beklenti), dolayısıyla sınır koşulu sağlanır. Doob yakınsama teoremi: $M_n\to M_\infty$ n.k.\ ile $L^1$'de. Levy örtme teoremi (Levy's upward theorem): $E[Z\mid\mathcal{F}_n]\to E[Z\mid\mathcal{F}_\infty]$ n.k., çünkü $\mathcal{F}_\infty = \sigma(\bigcup_n\mathcal{F}_n)$.
+
+(b) $M_n = E[\bar{X}\mid\mathcal{F}_n] = S_n/n$ martingal değildir; ZBSK ise $S_n/n\to\mu$ n.k.\ (Birkhoff–Khintchine). Martingal çerçevesinde GBSK, bağımsız ilerleyen martingale (optional stopping + uniform integrability) indirgenerek ispatlanır.}
+
+\begin{alistirma}[Al.9.4cozum]{B}{Üstel Martingal ve Büyük Sapmalar}
+$X_1,X_2,\ldots\iid$ ile $E[e^{tX_1}] = M(t) < \infty$ ($t>0$). $M_n = e^{tS_n}/M(t)^n$ tanımlayın.
+(a) $M_n$'nin martingal olduğunu gösterin.
+(b) $\tau_a = \inf\{n: S_n\geq a\}$ ve IBD kullanarak $P(S_n\geq a)\leq e^{-ta}M(t)^n/1 = M(t)^n e^{-ta}$ biçiminde Chernoff sınırını elde edin.
+(c) $t$'yi optimize ederek $P(S_n\geq na)\leq e^{-n\Lambda^*(a)}$ gösterin; burada $\Lambda^*(a)=\sup_t(ta - \log M(t))$.
+\end{alistirma}
+\alcozum{%
+(a) $E[M_{n+1}\mid\mathcal{F}_n] = e^{tS_n}/M(t)^n \cdot E[e^{tX_{n+1}}]/M(t) = M_n \cdot M(t)/M(t) = M_n$. $M_n$ martingal. $E[M_0]=1$.
+
+(b) Markov eşitsizliği (pozitif r.d.): $P(M_n\geq e^{ta}/M(t)^n) \leq E[M_n]/(e^{ta}/M(t)^n)$. Fakat $E[M_n]=E[M_0]=1$, dolayısıyla $P(e^{tS_n}/M(t)^n\geq e^{ta}/M(t)^n) = P(S_n\geq a)\leq M(t)^n e^{-ta}$. $\checkmark$
+
+(c) $n$ gözlem için $P(S_n\geq na)\leq M(t)^n e^{-tna} = e^{n(\log M(t)-ta)}$. İnf üzerinden $t>0$: $\inf_t e^{n(\log M(t)-ta)} = e^{-n\sup_t(ta-\log M(t))} = e^{-n\Lambda^*(a)}$. Cramér büyük sapma ilkesi.}
+
 % ---
 
 \alistirmalar

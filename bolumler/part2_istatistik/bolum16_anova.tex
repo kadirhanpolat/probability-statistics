@@ -431,6 +431,38 @@ Genel formel: $(Y_{ij}-\bar Y_{..}) = (\bar Y_{i.}-\bar Y_{..}) + (Y_{ij}-\bar Y
 $\sum_{i,j}(\bar Y_{i.}-\bar Y_{..})(Y_{ij}-\bar Y_{i.}) = \sum_i(\bar Y_{i.}-\bar Y_{..})\sum_j(Y_{ij}-\bar Y_{i.})$. Her $i$ için iç toplam $\sum_j(Y_{ij}-\bar Y_{i.})=0$. Dolayısıyla çift çarpım $=0$; SST = SSA + SSE.%
 }
 
+\begin{alistirma}[Al.16.2b]{B}{Güç Analizi — Tek Yönlü ANOVA}
+$k=3$ grup, her grupta $n$ gözlem; grup ortalamaları $\mu_1=10$, $\mu_2=12$, $\mu_3=14$; ortak standart sapma $\sigma=4$. $\alpha=0.05$ düzeyinde güç $1-\beta\geq0.80$ için gereken $n$'yi bulun.
+Yönerge: Merkezsizlik parametresi $\lambda = \dfrac{n\sum_i(\mu_i-\bar\mu)^2}{\sigma^2}$ kullanın.
+\end{alistirma}
+\alcozum{%
+$\bar\mu = (10+12+14)/3=12$. $\sum_i(\mu_i-\bar\mu)^2=(10-12)^2+(12-12)^2+(14-12)^2=4+0+4=8$.
+
+Merkezsizlik parametresi: $\lambda = n\cdot8/16 = n/2$.
+
+$F_{2,\,3(n-1)}$ dağılımı $\lambda$ merkezsizliğiyle; $\alpha=0.05$ kritik değeri $F_{2,\infty,0.05}=3.00$ (yaklaşık). Güç $=P(F_{2,3(n-1),\lambda}\geq F_{crit})$.
+
+$n=10$: $\lambda=5$; $F_{2,27}$ ile merkezsi güç $\approx0.70$ (yeterli değil).\\
+$n=14$: $\lambda=7$; $F_{2,39}$ ile güç $\approx0.80$. (Tablolar veya \texttt{pf(qf(0.95,2,39), 2,39, ncp=7, lower.tail=FALSE)}.)\\
+$n=16$: $\lambda=8$; güç $\approx0.85$ — $1-\beta=0.80$ koşulunu sağlar.
+
+Sonuç: Her grupta $n\approx14$–$16$ gözlem yeterlidir.}
+
+\begin{alistirma}[Al.16.2c]{B}{Çoklu Karşılaştırma — Scheffe ve Bonferroni}
+$k=4$ grup ($n_i=10$, $N=40$, MSE$=25$). Tüm olası çift karşılaştırmalar için (a) Bonferroni düzeltmesiyle $\alpha^*$ hesaplayın; (b) Scheffe kritik değerini yazın; (c) Hangi yöntem daha muhafazakârdır?
+\end{alistirma}
+\alcozum{%
+(a) \textbf{Bonferroni:} $m=\binom{4}{2}=6$ karşılaştırma. Bireysel düzeltilmiş düzey: $\alpha^* = 0.05/6 \approx 0.0083$. Her karşılaştırma için $t_{36,0.0042}$ (iki yönlü) kullanılır; $\approx t_{36,0.0042}\approx2.77$.
+
+CI genişliği: $|\bar Y_{i.}-\bar Y_{j.}|\pm 2.77\sqrt{25(1/10+1/10)} = |\bar Y_{i.}-\bar Y_{j.}|\pm 2.77\cdot\sqrt{5}\approx|\bar Y_{i.}-\bar Y_{j.}|\pm 6.19$.
+
+(b) \textbf{Scheffe:} Kritik değer $S = \sqrt{(k-1)F_{k-1,N-k,\alpha}} = \sqrt{3\cdot F_{3,36,0.05}}$.
+$F_{3,36,0.05}\approx2.87$; $S=\sqrt{3\cdot2.87}=\sqrt{8.61}\approx2.93$.
+
+CI genişliği: $|\bar Y_{i.}-\bar Y_{j.}|\pm 2.93\sqrt{5}\approx|\bar Y_{i.}-\bar Y_{j.}|\pm6.55$.
+
+(c) $6.55 > 6.19$: Scheffe daha geniş aralık verir, dolayısıyla çift karşılaştırmada Bonferroni daha keskin (muhafazakâr). Scheffe ise \emph{her} doğrusal kontrast için geçerlidir, sadece çiftler için değil.}
+
 \alistirmalar
 
 \begin{alistirma}[Al.16.3]{A}{Tukey HSD}

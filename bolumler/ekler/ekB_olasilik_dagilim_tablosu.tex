@@ -188,3 +188,146 @@ $\alpha$ & $0.200$ & $0.100$ & $0.050$ & $0.025$ & $0.010$ & $0.005$ \\
   \item $t_\nu^2\sim F_{1,\nu}$; $F_{\nu_1,\nu_2,\alpha}=1/F_{\nu_2,\nu_1,1-\alpha}$.
   \item $X\sim F_{\nu_1,\nu_2}$: $\nu_2\to\infty$'da $\nu_1 X\dto\chi^2_{\nu_1}$.
 \end{itemize}
+
+%% ============================================================
+\section{Çarpıklık ve Basıklık Tablosu}
+\label{app:carpiklik_basiklik}
+%% ============================================================
+
+Çarpıklık (skewness) $\gamma_1 = \Beklenti[(X-\mu)^3]/\sigma^3$ ve fazla basıklık (excess kurtosis) $\gamma_2 = \Beklenti[(X-\mu)^4]/\sigma^4 - 3$ değerleri:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\small
+\begin{tabular}{p{3cm}cc}
+\hline
+\textbf{Dağılım} & \textbf{Çarpıklık} $\gamma_1$ & \textbf{Fazla Basıklık} $\gamma_2$ \\
+\hline
+$\Normal(\mu,\sigma^2)$ & $0$ & $0$ \\
+$\Uniform[a,b]$ & $0$ & $-6/5$ \\
+$\Exp(\lambda)$ & $2$ & $6$ \\
+$\Gama(\alpha,\beta)$ & $2/\sqrt{\alpha}$ & $6/\alpha$ \\
+$\chi^2_\nu$ & $\sqrt{8/\nu}$ & $12/\nu$ \\
+$\Beta(\alpha,\beta)$ & $\dfrac{2(\beta-\alpha)\sqrt{\alpha+\beta+1}}{(\alpha+\beta+2)\sqrt{\alpha\beta}}$ & $\dfrac{6[(\alpha-\beta)^2(\alpha+\beta+1)-\alpha\beta(\alpha+\beta+2)]}{\alpha\beta(\alpha+\beta+2)(\alpha+\beta+3)}$ \\
+$\Pois(\lambda)$ & $1/\sqrt{\lambda}$ & $1/\lambda$ \\
+$\Binom(n,p)$ & $(1-2p)/\sqrt{np(1-p)}$ & $[1-6p(1-p)]/[np(1-p)]$ \\
+$t_\nu$ ($\nu>4$) & $0$ & $6/(\nu-4)$ \\
+$\mathrm{LN}(\mu,\sigma^2)$ & $(e^{\sigma^2}+2)\sqrt{e^{\sigma^2}-1}$ & $e^{4\sigma^2}+2e^{3\sigma^2}+3e^{2\sigma^2}-6$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Yorumlama:} $\gamma_1>0$ sağa çarpık (kuyruk sağda), $\gamma_1<0$ sola çarpık; $\gamma_2>0$ sivri dağılım (leptokurtik), $\gamma_2<0$ basık dağılım (platikurtik).
+
+%% ============================================================
+\section{Kuantil Fonksiyonları ve Seçilmiş Yüzdelikler}
+\label{app:kuantil_fonk}
+%% ============================================================
+
+$F^{-1}(p) = \inf\{x : F(x)\geq p\}$ kuantil fonksiyonu (tersi dağılım fonksiyonu):
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\small
+\begin{tabular}{p{2.8cm}p{8cm}}
+\hline
+\textbf{Dağılım} & \textbf{Kuantil Fonksiyonu} $F^{-1}(p)$ \\
+\hline
+$\Uniform[a,b]$ & $a + p(b-a)$ \\
+$\Exp(\lambda)$ & $-\log(1-p)/\lambda$ \\
+$\Normal(0,1)$ & $\Phi^{-1}(p)$ (probit; kapalı form yok, sayısal hesap) \\
+$\Gama(\alpha,\beta)$ & $\beta \cdot F^{-1}_{\chi^2_{2\alpha}}(p)/2$ ($\chi^2_{2\alpha}$ kuantili ile) \\
+$\Beta(\alpha,\beta)$ & Düzenli eksik Beta tersinin sayısal çözümü \\
+$\chi^2_\nu$ & $\nu\left(1 - \frac{2}{9\nu} + z_p\sqrt{\frac{2}{9\nu}}\right)^3$ (Wilson-Hilferty yaklaşımı) \\
+$t_\nu$ & İki yönlü: $\pm t_{\nu,\alpha/2}$ tablolardan \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Seçilmiş Normal Yüzdelikler}
+
+\begin{center}
+\small
+\begin{tabular}{ccccccccc}
+\hline
+$p$ & 0.80 & 0.90 & 0.95 & 0.975 & 0.99 & 0.995 & 0.999 \\
+$\Phi^{-1}(p)$ & 0.842 & 1.282 & 1.645 & 1.960 & 2.326 & 2.576 & 3.090 \\
+\hline
+\end{tabular}
+\end{center}
+
+%% ============================================================
+\section{Sıra İstatistikleri}
+\label{app:sira_istatistikleri}
+%% ============================================================
+
+$X_{(1)}\leq X_{(2)}\leq\cdots\leq X_{(n)}$ sıra istatistikleri, $X_1,\ldots,X_n\iid F$ için:
+
+\begin{teorem}[Sıra istatistiği yoğunluğu]
+$k$. sıra istatistiğinin yoğunluğu:
+\[
+  f_{X_{(k)}}(x) = \frac{n!}{(k-1)!(n-k)!}[F(x)]^{k-1}[1-F(x)]^{n-k}f(x).
+\]
+\end{teorem}
+
+\begin{teorem}[Birleşik dağılım]
+$(X_{(j)}, X_{(k)})$ birleşik yoğunluğu ($j<k$):
+\[
+  f_{X_{(j)},X_{(k)}}(u,v) = \frac{n!}{(j-1)!(k-j-1)!(n-k)!}[F(u)]^{j-1}[F(v)-F(u)]^{k-j-1}[1-F(v)]^{n-k}f(u)f(v), \quad u<v.
+\]
+\end{teorem}
+
+\subsection{Uniform Dağılımda Sıra İstatistikleri}
+
+$X_1,\ldots,X_n\iid\Uniform[0,1]$ için:
+\begin{align*}
+  X_{(k)} &\sim \Beta(k, n-k+1), \\
+  \Beklenti[X_{(k)}] &= \frac{k}{n+1}, \quad \Var(X_{(k)}) = \frac{k(n-k+1)}{(n+1)^2(n+2)}.
+\end{align*}
+
+\subsection{Seçilmiş Dağılımlarda Min ve Max}
+
+$X_1,\ldots,X_n\iid F$ için:
+\begin{align*}
+  F_{X_{(n)}}(x) &= [F(x)]^n \quad\text{(maksimum, }X_{(n)}\text{)} \\
+  F_{X_{(1)}}(x) &= 1-[1-F(x)]^n \quad\text{(minimum, }X_{(1)}\text{)}
+\end{align*}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\small
+\begin{tabular}{p{2.5cm}p{5cm}p{4cm}}
+\hline
+\textbf{Ana dağılım} & \textbf{Maksimum} $X_{(n)}$ & \textbf{Minimum} $X_{(1)}$\\
+\hline
+$\Exp(\lambda)$ & $f(x)=n\lambda e^{-\lambda x}(1-e^{-\lambda x})^{n-1}$ & $\Exp(n\lambda)$ \\
+$\Uniform[0,1]$ & $\Beta(n,1)$: $f(x)=nx^{n-1}$ & $\Beta(1,n)$: $f(x)=n(1-x)^{n-1}$ \\
+$\Normal$ & Gumbel yaklaşımı: $\Beklenti[X_{(n)}]\approx\sqrt{2\log n}$ & $-X_{(n)}\text{'ye bakın}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+%% ============================================================
+\section{Konjugat Dağılım Çiftleri}
+\label{app:konjugat_dagilimlar}
+%% ============================================================
+
+Bayesian analizde önsel--sonsal konjugat çiftler:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\small
+\begin{tabular}{p{3cm}p{3cm}p{4cm}p{3cm}}
+\hline
+\textbf{Örneklem dağılımı} & \textbf{Bilinmeyen} $\theta$ & \textbf{Konjugat önsel} & \textbf{Sonsal} \\
+\hline
+$\Binom(n,\theta)$ & $\theta\in(0,1)$ & $\Beta(\alpha,\beta)$ & $\Beta(\alpha+x, \beta+n-x)$ \\
+$\Pois(\theta)$ & $\theta>0$ & $\Gama(\alpha,\beta)$ & $\Gama(\alpha+\sum x_i, \beta+n)$ \\
+$\Normal(\theta,\sigma^2)$ & $\theta\in\mathbb{R}$ ($\sigma^2$ bilinen) & $\Normal(\mu_0,\tau^2)$ & $\Normal(\mu_n,\tau_n^2)$* \\
+$\Normal(\mu,1/\theta)$ & $\theta>0$ (kesinlik) & $\Gama(\alpha,\beta)$ & $\Gama(\alpha+n/2, \beta+S^2/2)$ \\
+$\mathrm{Geom}(\theta)$ & $\theta\in(0,1)$ & $\Beta(\alpha,\beta)$ & $\Beta(\alpha+n, \beta+\sum x_i-n)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent*$\mu_n = \dfrac{\tau^2\bar{x}+\sigma^2\mu_0/n}{\tau^2+\sigma^2/n}$, $\tau_n^{-2} = \tau^{-2}+n\sigma^{-2}$.
