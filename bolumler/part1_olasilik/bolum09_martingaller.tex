@@ -184,6 +184,117 @@ Bu, GBSK'nın martingal teorisi aracılığıyla zarif alternatif ispatıdır.
 \end{onerme}
 
 % =====================================================================
+\section{Doob'un Maksimal Eşitsizliği}
+\label{sec:doob_maksimal}
+% =====================================================================
+
+\begin{teorem}[Doob Maksimal Eşitsizliği]
+\label{thm:doob_maksimal}
+$(M_n)_{n=0}^N$ altmartingal. $\lambda>0$ için:
+\[
+  \lambda\,\Prob\!\left(\max_{0\leq k\leq N}M_k \geq \lambda\right)
+  \leq E[M_N^+].
+\]
+$(M_n)$ martingal ise $M_n^+$ altmartingal; özel durum:
+\[
+  \Prob\!\left(\max_{0\leq k\leq N}|M_k| \geq \lambda\right)
+  \leq \frac{E[|M_N|]}{\lambda}.
+\]
+\end{teorem}
+
+\begin{proof}
+$A = \{k: k, \max_{j<k}M_j<\lambda, M_k\geq\lambda\}$ ilk geçiş kümesi; $A_k = \{\max_{j\leq k}M_j\geq\lambda, \max_{j<k}M_j<\lambda\}$ ayrık:
+\begin{align*}
+  E[M_N^+] &\geq E[M_N^+ \mathbf{1}_{\max M_k\geq\lambda}]
+  = \sum_{k=0}^N E[M_N^+\mathbf{1}_{A_k}]
+  \geq \sum_k E[M_k\mathbf{1}_{A_k}]
+  \geq \lambda\sum_k\Prob(A_k) = \lambda\,\Prob(\max M_k\geq\lambda).
+\end{align*}
+İkinci eşitsizlik: altmartingal özelliği $E[M_N\mathbf{1}_{A_k}]\geq E[M_k\mathbf{1}_{A_k}]$ ($A_k\in\mathcal{F}_k$).
+\end{proof}
+
+\begin{sonuc}[Doob $L^p$ eşitsizliği]
+$(M_n)$ martingal, $p>1$, $M^* = \max_{k\leq N}|M_k|$:
+\[
+  \|M^*\|_p \leq \frac{p}{p-1}\|M_N\|_p.
+\]
+$p=2$: $E[(M^*)^2] \leq 4E[M_N^2]$.
+\end{sonuc}
+
+\begin{ornek}[GBSK — maksimal eşitsizlikle]
+$S_n = \sum_{k=1}^n X_k$ ($X_k$ bağımsız, $E[X_k]=0$, $E[X_k^2]=\sigma^2$). Doob eşitsizliği:
+$\Prob(\max_{k\leq n}|S_k|\geq\lambda)\leq E[S_n^2]/\lambda^2 = n\sigma^2/\lambda^2$.
+Bu Kolmogorov maksimal eşitsizliğini verir ve GBSK ispatında temel araçtır.
+\end{ornek}
+
+% =====================================================================
+\section{Düzgün İntegrallenebilirlik}
+\label{sec:duzgun_integral}
+% =====================================================================
+
+\begin{tanim}[Düzgün İntegrallenebilirlik]
+\label{def:duzgun_integral}
+$(X_\alpha)$ indisli ailenin \textbf{düzgün integrallenebilir} \emph{(uniformly integrable, UI)} olması:
+\[
+  \lim_{c\to\infty}\sup_\alpha E[|X_\alpha|\mathbf{1}_{|X_\alpha|>c}] = 0.
+\]
+Sezgi: kuyruk kütlesi üniform küçüktür; tek bir değişken büyüse diğerleri "tutarlı" kalır.
+\end{tanim}
+
+\begin{teorem}[UI Karakterizasyon]
+\label{thm:ui_karakt}
+$(X_n)$ UI $\iff$
+\begin{enumerate}[(a)]
+  \item $\sup_n E[|X_n|]<\infty$, ve
+  \item Her $\varepsilon>0$ için $\exists\delta>0$: $\Prob(A)<\delta\Rightarrow\sup_n E[|X_n|\mathbf{1}_A]<\varepsilon$.
+\end{enumerate}
+\end{teorem}
+
+\begin{teorem}[UI Martingal Yakınsaması]
+\label{thm:ui_mart_yakinsama}
+$(M_n)$ martingal. Eşdeğerler:
+\begin{enumerate}[(i)]
+  \item $(M_n)$ UI'dir.
+  \item $M_n\to M_\infty$ n.k.\ \emph{ve} $L^1$'de; $M_n = E[M_\infty\mid\mathcal{F}_n]$.
+  \item $M_n = E[Y\mid\mathcal{F}_n]$ bazı $Y\in L^1$ için.
+\end{enumerate}
+\end{teorem}
+
+\begin{ornek}[Koşullu beklenti martingali — kapanma]
+$Y\in L^1$; $M_n = E[Y\mid\mathcal{F}_n]$. Ailenin UI olduğunu göster:
+$E[|M_n|\mathbf{1}_{|M_n|>c}] \leq E[E[|Y|\mid\mathcal{F}_n]\mathbf{1}_{|M_n|>c}] = E[|Y|\mathbf{1}_{|M_n|>c}]$.
+Markov: $\Prob(|M_n|>c)\leq E[|Y|]/c\to0$. Mutlak süreklilik ile UI.
+\end{ornek}
+
+% =====================================================================
+\section{Geri Martingaller ve GBSK}
+\label{sec:geri_martingal}
+% =====================================================================
+
+\begin{tanim}[Geri Martingal]
+\label{def:geri_martingal}
+Azalan $\sigma$-cebirleri $\mathcal{F}_n\supseteq\mathcal{F}_{n+1}\supseteq\cdots$ \textbf{geri filtrasyon}. $(M_n)_{n\geq1}$ \textbf{geri martingal} (reverse martingale):
+\[
+  E[M_n\mid\mathcal{F}_{n+1}] = M_{n+1} \quad \text{n.k.}
+\]
+\end{tanim}
+
+\begin{teorem}[Geri Martingal Yakınsaması]
+\label{thm:geri_yaklinsama}
+$(M_n)$ geri martingal, $E[|M_1|]<\infty$. O zaman $M_\infty = \lim_{n\to\infty}M_n$ n.k.\ ve $L^1$'de var; $M_\infty = E[M_1\mid\mathcal{F}_\infty]$ ($\mathcal{F}_\infty = \bigcap_n\mathcal{F}_n$).
+\end{teorem}
+
+\begin{teorem}[GBSK — Geri Martingal İspatı]
+\label{thm:gbsk_geri}
+$X_1,X_2,\ldots\iid$, $E[|X_1|]<\infty$. $\bar{X}_n = n^{-1}\sum_{k=1}^n X_k$.
+$\mathcal{G}_n = \sigma(\bar{X}_n, \bar{X}_{n+1}, \ldots)$ geri filtrasyon. $\bar{X}_n$ geri martingal:
+\[
+  E[\bar{X}_n\mid\mathcal{G}_{n+1}] = \bar{X}_{n+1}.
+\]
+Geri martingal yakınsaması: $\bar{X}_n\to E[X_1\mid\mathcal{G}_\infty]$ n.k.; $\mathcal{G}_\infty$ simetrik olaylara denk gelir; Hewitt-Savage 0-1 kanunu ile $E[X_1\mid\mathcal{G}_\infty]=E[X_1]$ n.k.
+\end{teorem}
+
+% =====================================================================
 \section{$L^2$ Martingalleri}
 \label{sec:l2_martingal}
 % =====================================================================
@@ -207,6 +318,48 @@ Ama $M_n/\sqrt{\ln n} \to 0$ n.k.\ (YLK'nın sonucu),
 $M_n$ ise $\Normal(0,\sigma^2)$'e dağılımla yakınsar (MLT).
 $L^2$ sınırlılık n.k.\ yakınsamayı garanti etmez (sınır değişkenlik gösterebilir).
 \end{ornek}
+
+% =====================================================================
+\section{Uygulamalar: Polya Urnası ve Olabilirlik Oranı}
+\label{sec:martingal_uyg}
+% =====================================================================
+
+\begin{ornek}[Polya Urnası]
+\label{ex:polya_urna}
+Urna başlangıçta $r$ kırmızı, $b$ mavi top içeriyor ($r+b=n_0$). Her adımda bir top çekilir, aynı renkte ek bir topla birlikte geri koyulur. $X_n$ = $n$. adımda çekilen kırmızı topların oranı (kümülatif).
+
+$R_n$ = $n$ adım sonra urnadaki kırmızı top sayısı. $M_n = R_n/(r+b+n)$ olarak tanımla.
+\[
+  E[M_{n+1}\mid\mathcal{F}_n] = \frac{R_n+1}{r+b+n+1}\cdot\frac{R_n}{r+b+n} + \frac{R_n}{r+b+n+1}\cdot\frac{r+b+n-R_n}{r+b+n} = \frac{R_n}{r+b+n} = M_n.
+\]
+$(M_n)$ [0,1]'de değerler alan UI martingal; Doob yakınsaması: $M_n\to M_\infty$ n.k. Şaşırtıcı: $M_\infty\sim\mathrm{Beta}(r,b)$ dağılımına sahip.
+\end{ornek}
+
+\begin{teorem}[Polya Urna Sınırı]
+\label{thm:polya_sinir}
+Polya urnasında $M_\infty\sim\mathrm{Beta}(r,b)$ ve $E[M_\infty]=r/(r+b)$.
+\end{teorem}
+
+\begin{ornek}[Olabilirlik Oranı Martingali]
+\label{ex:ort_martingal}
+$X_1,X_2,\ldots$ dizisi; iki olasılık modeli $P_0$ ve $P_1$ (yoğunluklar $f_0$, $f_1$). \textbf{Olabilirlik oranı}:
+\[
+  \Lambda_n = \frac{f_1(X_1)\cdots f_1(X_n)}{f_0(X_1)\cdots f_0(X_n)} = \prod_{k=1}^n\frac{f_1(X_k)}{f_0(X_k)}.
+\]
+$P_0$ altında: $E_0[\Lambda_n\mid\mathcal{F}_{n-1}] = \Lambda_{n-1}E_0[f_1(X_n)/f_0(X_n)] = \Lambda_{n-1}\cdot1 = \Lambda_{n-1}$.
+
+$(\Lambda_n,\mathcal{F}_n)$ $P_0$ altında \textbf{martingal}. Doob: $\Lambda_n\to\Lambda_\infty$ n.k.\ ($P_0$ altında).
+
+$P_0\neq P_1$ için $\Lambda_\infty=0$ n.k.\ ($P_0$) — Hellinger yakınsama ile. Bu Neyman-Pearson ispatının temeli.
+\end{ornek}
+
+\begin{ornek}[Koşullu Olasılıklar Martingali]
+$A\in\mathcal{F}$; $M_n = \Prob(A\mid\mathcal{F}_n)$. Kule özelliğinden martingal. Doob yakınsaması: $M_n\to\mathbf{1}_A$ n.k.\ ($\mathcal{F}_n\uparrow\mathcal{F}$ ise). Yorum: daha fazla bilgi edindikçe olayın olup olmadığı netleşir.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Finans:} Martingal fiyatlama — etkin piyasada hisse senedi fiyatı martingal. Opsiyon fiyatlaması: risksiz ölçü altında indirgenmiş fiyat martingal. \textbf{Sıralı istatistik:} İsteğe bağlı durma ile SPRT (Wald sıralı olabilirlik oranı testi). \textbf{Enformasyon teorisi:} Olabilirlik oranı martingali, iki model arasındaki ayrışmayı ölçer.
+\end{disiplinlerarasibaglan}
 
 % ---- Öz-Yansıtma ----
 \begin{ozyansima}
@@ -256,12 +409,40 @@ $S_\tau = a$ (emici bariyer): $a^2 - E[\tau] = 0$. $E[\tau] = a^2$.}
 
 \alistirmalar
 
+\begin{alistirma}[Al.9.3]{A}{Doob Maksimal}
+$S_n = \sum_{k=1}^n X_k$ ($X_k$ bağımsız, $E[X_k]=0$, $E[X_k^2]=1$). Doob $L^2$ eşitsizliğini kullanarak $E[\max_{k\leq n}S_k^2]\leq 4E[S_n^2]=4n$ olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+$S_n$ martingal; $M^*=\max_{k\leq n}|S_k|$. Doob $L^p$, $p=2$: $E[(M^*)^2]\leq 4E[S_n^2]=4n\cdot\mathrm{Var}(X_1)=4n$.%
+}
+
+\begin{alistirma}[Al.9.4b]{B}{Polya Urnası Momentleri}
+Polya urnası: $r=1$, $b=1$ (başlangıçta eşit). $M_\infty\sim\mathrm{Beta}(1,1)=\mathrm{Uniform}[0,1]$ olduğunu gösterin. Beklenti ve varyansı hesaplayın.
+\end{alistirma}
+\alcozum{%
+$\mathrm{Beta}(1,1)$ yoğunluğu $f(x)=1$ ($0<x<1$); dolayısıyla $M_\infty\sim\mathrm{Uniform}[0,1]$. $E[M_\infty]=r/(r+b)=1/2$. $\mathrm{Var}(M_\infty)=rb/[(r+b)^2(r+b+1)]=1/12$. $\mathrm{Uniform}[0,1]$ varyansıyla uyuşuyor.%
+}
+
+\begin{alistirma}[Al.9.5b]{B}{UI Kontrolü}
+$M_n = E[Y\mid\mathcal{F}_n]$, $Y\in L^2$. $(M_n)$'nin UI olduğunu gösterin. \textit{(İpucu: $L^2$ aileleri UI'dir.)}
+\end{alistirma}
+\alcozum{%
+$E[|M_n|^2]\leq E[E[Y^2\mid\mathcal{F}_n]]=E[Y^2]<\infty$. $(M_n)$ $L^2$-sınırlı. Her $L^2$-sınırlı aile UI'dir: $E[|M_n|\mathbf{1}_{|M_n|>c}]\leq\frac{E[M_n^2]}{c}\leq\frac{E[Y^2]}{c}\to0$ ($c\to\infty$).%
+}
+
 \begin{alistirma}[Al.9.3]{A}{Altmartingal}
 $(X_n)$ martingal. $\varphi(x) = x^2$ için $\varphi(X_n)$'nin altmartingal
 olduğunu Jensen'i kullanarak gösterin.
 \end{alistirma}
 \alcozum{%
 $E[X_{n+1}^2\mid\mathcal{F}_n] \geq (E[X_{n+1}\mid\mathcal{F}_n])^2 = X_n^2$. (Jensen, $\varphi$ konveks.)}
+
+\begin{alistirma}[Al.9.6]{C}{Olabilirlik Oranı — $P_0$ altında}
+$X_i\iid\Normal(0,1)$ ($P_0$) veya $\Normal(\mu,1)$ ($P_1$, $\mu\neq0$). $\Lambda_n = \exp(n\mu\bar{X}_n - n\mu^2/2)$. $\Lambda_n\to0$ n.k.\ ($P_0$ altında) olduğunu gösterin.
+\end{alistirma}
+\alcozum{%
+$\log\Lambda_n = \mu\sum X_i - n\mu^2/2 = n(\mu\bar{X}_n-\mu^2/2)$. $P_0$ altında $\bar{X}_n\to0$ GBSK. $\log\Lambda_n/n\to-\mu^2/2<0$ ($\mu\neq0$). $\log\Lambda_n\to-\infty$, $\Lambda_n\to0$ n.k.%
+}
 
 \begin{alistirma}[Al.9.4]{B}{Doob Yakınsama Uygulaması}
 $X_i \geq 0$ bağımsız, $E[X_i] = 1$. $M_n = \prod_{i=1}^n X_i$.
