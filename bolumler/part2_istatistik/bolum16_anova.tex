@@ -304,6 +304,93 @@ Tasarım matrisi $\mathbf{X}$ (intercept + $k-1$ gösterge sütunu): $\hat{\bold
 \end{disiplinlerarasibaglan}
 
 %% ============================================================
+\section{Tekrarlı Ölçüm ANOVA}
+\label{sec:tekrarli_olcum}
+%% ============================================================
+
+\begin{tanim}[Tekrarlı ölçüm modeli]\label{def:tekrarli_olcum}
+Aynı $n$ denek, $k$ koşulda ölçüm: $Y_{ij}$, $i$. deneğin $j$. koşuldaki ölçümü. Model:
+\[
+  Y_{ij} = \mu + \pi_i + \tau_j + \varepsilon_{ij},
+\]
+$\pi_i\iid\Normal(0,\sigma_\pi^2)$ (denek etkisi), $\tau_j$ sabit koşul etkisi, $\varepsilon_{ij}\iid\Normal(0,\sigma^2)$ bağımsız.
+\end{tanim}
+
+\begin{teorem}[Tekrarlı ölçüm SST ayrışımı]\label{thm:tekrarli_sst}
+\[
+  \mathrm{SST} = \mathrm{SS}_{\text{koşul}} + \mathrm{SS}_{\text{denek}} + \mathrm{SS}_{\text{artık}}.
+\]
+\[
+  F_{\text{koşul}} = \frac{\mathrm{SS}_{\text{koşul}}/(k-1)}{\mathrm{SS}_{\text{artık}}/[(n-1)(k-1)]} \sim F_{k-1,(n-1)(k-1)}.
+\]
+\end{teorem}
+
+\begin{proof}[Proof — özet]
+$\bar Y_{i.}$ denek $i$'nin ortalaması; $\bar Y_{.j}$ koşul $j$'nin ortalaması; $\bar Y_{..}$ genel ortalama. Ayrışım: $Y_{ij}-\bar Y_{..} = (\bar Y_{.j}-\bar Y_{..}) + (\bar Y_{i.}-\bar Y_{..}) + (Y_{ij}-\bar Y_{i.}-\bar Y_{.j}+\bar Y_{..})$. Üç terim ortogonal; karelerin toplamı $\mathrm{SS}_{\text{koşul}}+\mathrm{SS}_{\text{denek}}+\mathrm{SS}_{\text{artık}}$. Denek terimi paydadan çıktığından $F$ daha keskin olur.
+\end{proof}
+
+\begin{teorem}[Sfersite varsayımı]\label{thm:sferisite}
+Tekrarlı ölçüm $F$-testinin geçerliliği için Mauchly sfersite koşulu gereklidir: tüm koşul çiftleri arasındaki farkların varyansları eşit. Sferisite bozulunca Greenhouse-Geisser veya Huynh-Feldt düzeltmesi uygulanır: SD'ler $\hat\varepsilon$ ile çarpılır.
+\end{teorem}
+
+\begin{ornek}[Tekrarlı ölçüm — basit hesap]
+$n=4$ denek, $k=3$ koşul:
+\[
+\begin{array}{c|ccc|c}
+\text{Denek} & A & B & C & \bar{Y}_{i.} \\ \hline
+1 & 5 & 8 & 6 & 6.33 \\
+2 & 4 & 7 & 5 & 5.33 \\
+3 & 6 & 9 & 7 & 7.33 \\
+4 & 7 & 10 & 8 & 8.33 \\ \hline
+\bar{Y}_{.j} & 5.5 & 8.5 & 6.5 & 6.83
+\end{array}
+\]
+$\mathrm{SS}_{\text{koşul}}=4[(5.5-6.83)^2+(8.5-6.83)^2+(6.5-6.83)^2]=4[1.77+2.79+0.11]=18.67$.
+$F=18.67/2\div\mathrm{SS}_{\text{artık}}/6$; artık KT küçük olduğundan $F$ büyür — denek farklılığı elimine edildi.
+\end{ornek}
+
+\begin{hataanalizi}
+Tekrarlı ölçüm ANOVA'yı tekrarlı $t$-testleriyle karıştırmayın. Tekrarlı $t$-testleri FWER'i şişirir ve denek korelasyon yapısını dikkate almaz. Tekrarlı ölçüm ANOVA denek etkisini modele dahil eder ve güç avantajı sağlar.
+\end{hataanalizi}
+
+%% ============================================================
+\section{Kovaryans Analizi (ANCOVA)}
+\label{sec:ancova}
+%% ============================================================
+
+\begin{tanim}[ANCOVA modeli]\label{def:ancova}
+$k$ grup; her birimde ön-test ölçümü (kovaryat) $X_{ij}$:
+\[
+  Y_{ij} = \mu + \alpha_i + \beta(X_{ij}-\bar X) + \varepsilon_{ij},
+\]
+$\beta$ ortak eğim (grupların kovaryata eğimi eşit varsayılır). Amaç: kovaryatın etkisini gidererek grup farklılığını daha keskin test etmek.
+\end{tanim}
+
+\begin{teorem}[ANCOVA $F$-testi]\label{thm:ancova_f}
+Kovaryat için düzeltme sonrası $\mathrm{SSE}_{\mathrm{ANCOVA}}\leq\mathrm{SSE}_{\mathrm{ANOVA}}$; bu da $\mathrm{MSE}$'yi düşürür ve $F$-testini güçlendirir. $F_{\mathrm{ANCOVA}}\sim F_{k-1,N-k-1}$ ($\beta$ tahmini için bir SD harcanır).
+\end{teorem}
+
+\begin{proof}[Proof — özet]
+ANCOVA EKK: $\hat\beta=\mathrm{SPXY}/\mathrm{SSXX}$ (her grup içi kovaryans/varyans). Düzeltilmiş hata: $\mathrm{SSE}_{\mathrm{ANCOVA}}=\mathrm{SSE}_{\mathrm{ANOVA}}-\hat\beta^2\cdot\mathrm{SSXX}$. $\hat\beta^2\cdot\mathrm{SSXX}\geq0$ olduğundan $\mathrm{SSE}_{\mathrm{ANCOVA}}\leq\mathrm{SSE}_{\mathrm{ANOVA}}$.
+\end{proof}
+
+\begin{tanim}[ANCOVA varsayımları]\label{def:ancova_varsayim}
+\begin{enumerate}
+  \item \textbf{Homojen eğim:} $\beta$ tüm gruplarda eşit (grup $\times$ kovaryat etkileşimi anlamlı değil).
+  \item \textbf{Kovaryatın rasgele olmadığı:} $X_{ij}$ rastgeleleştirilmiş deney tasarımında kovaryatla grup ataması bağımsız olmalı.
+  \item Normallik ve eşit varyans (standart ANOVA varsayımları).
+\end{enumerate}
+\end{tanim}
+
+\begin{ornek}[ANCOVA — ön/son test tasarımı]
+İki öğretim yöntemi ($k=2$), $n_1=n_2=15$. Ön test skoru kovaryat; son test skoru yanıt. ANOVA ile $F=2.1$ (anlamsız); ANCOVA ile ön test eğimi $\hat\beta=0.8$ ve düzeltilmiş $F=4.3>F_{1,28,0.05}=4.20$: yöntem etkisi anlamlı. Kovaryatın giderilmesi denek heterojenliğini azalttı.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Klinik denemeler:} Ön-test kovaryat olarak kullanılan randomize kontrollü denemeler (RCT). \textbf{Eğitim araştırmaları:} IQ veya geçmiş not ortalaması kovaryat; öğretim yöntemi etkisi daha net. \textbf{Davranışsal ekonomi:} Temel ölçüm kontrol edilerek müdahale etkisi izole edilir.
+\end{disiplinlerarasibaglan}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}
