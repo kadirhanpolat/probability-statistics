@@ -401,6 +401,72 @@ Bonferroni düzeltmesiyle $\alpha$ düzeyinde aykırı değer testi.
 \end{teorem}
 
 %% ============================================================
+\section{Doğrusal Modelde Tahmin Bölgesi ve Eşzamanlı Çıkarım}
+\label{sec:tahmibolgesi}
+%% ============================================================
+
+\begin{tanim}[Ortalama yanıt güven bandı]\label{def:guven_bandi}
+$\mathbf{x}_0^*=(1,x_{01},\ldots,x_{0,p-1})^\top$ verilen bir kovaryat vektörü. $E[Y|\mathbf{x}_0]=\mathbf{x}_0^\top\boldsymbol\beta$ için $(1-\alpha)$ güven aralığı:
+\[
+  \hat Y_0 \pm t_{n-p,\alpha/2}\cdot S_e\sqrt{\mathbf{x}_0^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}_0}.
+\]
+\end{tanim}
+
+\begin{tanim}[Yeni gözlem tahmin bandı]\label{def:tahmin_bandi}
+Yeni $Y_0=\mathbf{x}_0^\top\boldsymbol\beta+\varepsilon_0$ için $(1-\alpha)$ tahmin aralığı:
+\[
+  \hat Y_0 \pm t_{n-p,\alpha/2}\cdot S_e\sqrt{1+\mathbf{x}_0^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}_0}.
+\]
+Güven aralığından $S_e^2$ (yeni gözlem belirsizliği) kadar geniş.
+\end{tanim}
+
+\begin{teorem}[Scheffe eşzamanlı güven bandı]\label{thm:scheffe_guven}
+Tüm $\mathbf{x}_0\in\mathbb{R}^p$ için eşzamanlı $(1-\alpha)$ güven bandı:
+\[
+  \hat Y_0 \pm \sqrt{p\cdot F_{p,n-p,\alpha}}\cdot S_e\sqrt{\mathbf{x}_0^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}_0}.
+\]
+Ayrı ayrı $t$ bantlarından geniştir; her $\mathbf{x}_0$ için eşzamanlı kapsama garantisi sunar.
+\end{teorem}
+
+\begin{proof}[Taslak]
+$\mathbf{c}^\top\hat{\boldsymbol\beta}-\mathbf{c}^\top\boldsymbol\beta$ için tüm $\mathbf{c}$ üzerindeki uniform supremum $F_{p,n-p}$ dağılımına oturur; $F=t^2/p$ bağlantısı ile Scheffe kritik değeri türetilir.
+\end{proof}
+
+\begin{ornek}[Regresyon güven ve tahmin bandı karşılaştırması]
+$n=30$, $p=2$, $S_e=2.5$; $\mathbf{x}_0=(1,5)^\top$, $\mathbf{x}_0^\top(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{x}_0=0.08$; $\hat Y_0=12$.
+\begin{itemize}
+  \item Güven bandı (ortalama): $12\pm2.048\cdot2.5\sqrt{0.08}=12\pm1.45$; $[10.55,\;13.45]$.
+  \item Tahmin bandı (yeni): $12\pm2.048\cdot2.5\sqrt{1.08}=12\pm5.32$; $[6.68,\;17.32]$.
+  \item Scheffe ($p=2$): $12\pm\sqrt{2\cdot3.35}\cdot2.5\sqrt{0.08}=12\pm2.58\cdot0.707=12\pm1.82$; $[10.18,\;13.82]$.
+\end{itemize}
+Tahmin bandı çok daha geniş (bireysel belirsizlik). Scheffe, standart $t$-bandından $2.58/2.048=1.26$ kat geniş — eşzamanlılık maliyeti.
+\end{ornek}
+
+%% ============================================================
+\section{Hiyerarşik ve Karışık Modeller: Giriş}
+\label{sec:hiyerarsik_model}
+%% ============================================================
+
+\begin{tanim}[Karışık lineer model]\label{def:karisik_model}
+$\mathbf{Y}=\mathbf{X}\boldsymbol\beta+\mathbf{Z}\mathbf{b}+\boldsymbol\varepsilon$; $\mathbf{b}\sim\Normal(0,G)$ rasgele etki, $\boldsymbol\varepsilon\sim\Normal(0,R)$. Marjinal dağılım: $\mathbf{Y}\sim\Normal(\mathbf{X}\boldsymbol\beta,\mathbf{Z}G\mathbf{Z}^\top+R)=\Normal(\mathbf{X}\boldsymbol\beta,V)$.
+\end{tanim}
+
+\begin{teorem}[BLUE ve BLUP]\label{thm:blup}
+Sabit etki $\boldsymbol\beta$ için \emph{en iyi doğrusal yansız tahminci} (BLUE):
+\[
+  \hat{\boldsymbol\beta}_{\mathrm{GLS}} = (\mathbf{X}^\top V^{-1}\mathbf{X})^{-1}\mathbf{X}^\top V^{-1}\mathbf{Y}.
+\]
+Rasgele etki $\mathbf{b}$ için \emph{en iyi doğrusal yansız öngörü} (BLUP):
+\[
+  \hat{\mathbf{b}} = G\mathbf{Z}^\top V^{-1}(\mathbf{Y}-\mathbf{X}\hat{\boldsymbol\beta}).
+\]
+\end{teorem}
+
+\begin{ornek}[İki seviyeli hiyerarşik model]
+$Y_{ij}=\mu+u_i+\varepsilon_{ij}$; $u_i\iid\Normal(0,\sigma_u^2)$ okul etkisi, $\varepsilon_{ij}\iid\Normal(0,\sigma^2)$ öğrenci hatası. $k=10$ okul, her okuldan $n_i=20$ öğrenci. $V=\sigma_u^2\mathbf{1}\mathbf{1}^\top+\sigma^2 I$. REML ile $\hat\sigma_u^2$, $\hat\sigma^2$ tahmini; ICC$=\hat\sigma_u^2/(\hat\sigma_u^2+\hat\sigma^2)$.
+\end{ornek}
+
+%% ============================================================
 
 \begin{mikroozet}
 \begin{itemize}

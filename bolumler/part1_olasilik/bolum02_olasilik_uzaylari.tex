@@ -865,6 +865,48 @@ $\Prob(A) \approx 0.965$.
 Daha kesin: $\Prob(A^c) \approx 0.0296$; $\Prob(A) \approx 0.970$. $\blacksquare$%
 }
 
+\begin{alistirma}[Al.2.4b]{B}{Koşullu Olasılık Paradoksu: Monty Hall}
+Monty Hall problemi: 3 kapı, birinde araba diğer ikisinde keçi. Yarışmacı kapı 1'i seçer. Sunucu, keçili bir kapıyı açar (kapı 3). Değiştirmeli mi?
+(a) $A$: kapı 1'de araba; $B$: sunucu kapı 3'ü açar; Bayes teoremi ile $P(A|B)$'yi hesaplayın.
+(b) $P(\text{araba}|\text{değiştirir})$'yi bulun.
+(c) Sezgisiz insanların neden yanıldığını olasılık teorisi açısından açıklayın.
+\end{alistirma}
+\alcozum{%
+(a) Toplam olasılık: $P(B) = P(B|A)P(A)+P(B|A^c)P(A^c)$.
+$P(A)=1/3$; $P(A^c)=2/3$.
+$P(B|A)=1/2$ (sunucu 2 veya 3'ü eşit olasılıkla açar; biz kapı 3'ü koşullandırdık).
+$P(B|A^c)=1$ eğer araba kapı 2'deyse sunucu sadece kapı 3'ü açabilir; $P(B|A^c=\text{kapı 2})=1$, $P(B|A^c=\text{kapı 3})=0$.
+
+Daha dikkatli: $A_k$: araba kapı $k$'da.
+$P(A_1)=P(A_2)=P(A_3)=1/3$.
+Sunucu kapı 3'ü açar: $P(B|A_1)=1/2$, $P(B|A_2)=1$, $P(B|A_3)=0$.
+$P(B)=\frac{1}{3}\cdot\frac{1}{2}+\frac{1}{3}\cdot1+\frac{1}{3}\cdot0=\frac{1}{2}$.
+$P(A_1|B)=\frac{(1/2)(1/3)}{1/2}=\frac{1}{3}$; $P(A_2|B)=\frac{1\cdot(1/3)}{1/2}=\frac{2}{3}$.
+
+(b) Değiştirir $\to$ kapı 2 seçer: $P(\text{araba})=P(A_2|B)=2/3$. Değiştirmez: $1/3$. Değiştirmek iki kat daha iyi!
+
+(c) Yanılgı: Sunucunun ek bilgi verdiği göz ardı ediliyor. Sunucunun kapı açması rastgele değil — keçi içeren kapıyı bilinçli açar. Bu bilgi kapı 2'nin olasılığını günceller. İnsanlar genellikle sunucunun hamlesi bağımsız diye düşünür ($P=1/3$ değişmez sanır); Bayes teoremi bu bağımlılığı doğru biçimde yakalar.}
+
+\begin{alistirma}[Al.2.4c]{C}{Olasılık Ölçüsünün Süreklilik Özellikleri}
+$(\Omega,\mathcal{F},\Prob)$ olasılık uzayı.
+(a) $A_n\uparrow A$ (artan limit) için $\Prob(A_n)\to\Prob(A)$ olduğunu kanıtlayın.
+(b) $B_n\downarrow B$ (azalan limit) için $\Prob(B_n)\to\Prob(B)$ olduğunu kanıtlayın.
+(c) $\Prob(\limsup_n A_n)$'ı yorumlayın ve Borel-Cantelli ile bağlantısını kurun.
+\end{alistirma}
+\alcozum{%
+(a) \textbf{Arttan süreklilik}: $C_1=A_1$, $C_n=A_n\setminus A_{n-1}$ (ayrık) olsun. $A=\bigcup_n C_n$ (ayrık birleşim).
+$\Prob(A)=\sum_{k=1}^\infty\Prob(C_k)=\lim_{n\to\infty}\sum_{k=1}^n\Prob(C_k)=\lim_{n\to\infty}\Prob(A_n)$.
+(Sayılabilir toplamsellik ve dizi yakınsaması birlikte.)
+
+(b) \textbf{Azalan süreklilik}: $D_n=B_1\setminus B_n\uparrow B_1\setminus B$.
+(a)'dan $\Prob(D_n)\to\Prob(B_1\setminus B)$.
+$\Prob(D_n)=\Prob(B_1)-\Prob(B_n)$ (tek yönlü kapsama); $\Prob(B_n)\to\Prob(B)$. $\checkmark$
+
+(c) $\limsup_n A_n=\{A_n\text{ sonsuz sık gerçekleşir}\}=\bigcap_{n=1}^\infty\bigcup_{k=n}^\infty A_k$.
+Borel-Cantelli 1: $\sum\Prob(A_n)<\infty\Rightarrow\Prob(\limsup A_n)=0$ (sonsuz sık gerçekleşmez).
+Borel-Cantelli 2: $A_n$ bağımsız, $\sum\Prob(A_n)=\infty\Rightarrow\Prob(\limsup A_n)=1$ (sonsuz sık gerçekleşir).
+Bu iki yönlü sonuç, neredeyse kesin yakınsama kriterleri için temel araçtır.}
+
 \alistirmalar
 
 \begin{alistirma}[Al.2.5]{A}{Olasılık aksiyomlarından türetme}

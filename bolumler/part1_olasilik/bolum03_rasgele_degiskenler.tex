@@ -947,6 +947,36 @@ $f_Y(y) = f_X(e^{-y}) \cdot e^{-y} = 1 \cdot e^{-y} = e^{-y}$, $y > 0$.\\
 $Y \sim \mathrm{Exp}(1)$. Bu quantile dönüşümü yönteminin temelidir:
 herhangi bir dağılımdan örnek üretmek için KDF'nin tersini kullanmak.}
 
+\begin{alistirma}[Al.3.4b]{B}{Dağılım Fonksiyonlarının Türleri}
+Aşağıdaki KDF'lerin her biri için: (i) süreksizlik noktalarını bulun, (ii) dağılım türünü belirtin (sürekli/kesikli/karma), (iii) varsa PDF ya da PMF'yi yazın.
+
+\noindent (A) $F(x)=\mathbf{1}_{[1,\infty)}(x)$ (Dirac $\delta_1$).\\
+(B) $F(x)=0$ ($x<0$); $F(x)=x/2$ ($0\leq x<1$); $F(x)=x/2+1/4$ ($1\leq x<3/2$); $F(x)=1$ ($x\geq3/2$).\\
+(C) $F(x)=1-e^{-x}$ ($x>0$); $F(x)=0$ ($x\leq0$).
+\end{alistirma}
+\alcozum{%
+(A) $F(x)=\mathbf{1}_{[1,\infty)}(x)$: $x=1$'de atlama $\Delta F(1)=1$. \textbf{Kesikli} (tekil nokta); $P(X=1)=1$, Dirac kütlesi. PDF yoktur.
+
+(B) Süreksizlik: $\Delta F(1)=F(1)-F(1^-)=5/4-1/2=1/4>0$; $x=1$ bir atom. $x\in[0,1)$'de $F(x)=x/2$ türevlenebilir: $f(x)=1/2$ (düzgün). $x\in[1,3/2)$'de $f(x)=1/2$. \textbf{Karma dağılım}: $P(X=1)=1/4$ ve $X|X\neq1$ dağılımı $f(x)=1/2$ üzerinde $[0,3/2)$.
+
+(C) $F$ her yerde sürekli, $f(x)=e^{-x}$ ($x>0$). \textbf{Mutlak sürekli}; $X\sim\mathrm{Exp}(1)$.}
+
+\begin{alistirma}[Al.3.4c]{C}{Değişken Dönüşümü — Skalar Sistemik}
+$X$ sürekli rasgele değişken, PDF $f_X$, KDF $F_X$ birebir artan ve türevlenebilir.
+(a) $Y=aX+b$ ($a>0$) için $f_Y(y)$'yi bulun.
+(b) $U=F_X(X)$'in dağılımını bulun (Olasılık integral dönüşümü).
+(c) $V=-\log(1-F_X(X))$'in dağılımını bulun.
+(d) (b) ve (c) sonuçlarını simülasyon yöntemi olarak yorumlayın.
+\end{alistirma}
+\alcozum{%
+(a) $h(y)=(y-b)/a$, $|h'(y)|=1/a$. $f_Y(y)=f_X((y-b)/a)\cdot(1/a)$, $y\in(ab_1+b,ab_2+b)$ (aralığı ölçekle+kaydır).
+
+(b) $P(U\leq u)=P(F_X(X)\leq u)=P(X\leq F_X^{-1}(u))=F_X(F_X^{-1}(u))=u$ ($0<u<1$). Dolayısıyla $U\sim\mathrm{Uniform}(0,1)$.
+
+(c) $W=1-F_X(X)\sim\mathrm{Uniform}(0,1)$ (simetri, (b)'den). $V=-\log W$ ve $W\sim U(0,1)$: $P(V\leq v)=P(-\log W\leq v)=P(W\geq e^{-v})=1-e^{-v}$ ($v>0$). $V\sim\mathrm{Exp}(1)$.
+
+(d) Simülasyon: (b) tersi $X=F_X^{-1}(U)$ ile $U\sim\mathrm{Uniform}(0,1)$'den $X$ dağılımını örnekle. (c): $X=F_X^{-1}(1-e^{-V})$ ile $\mathrm{Exp}(1)$'den $X$ örnekle. Her ikisi de \emph{invers dönüşüm} veya \emph{quantile} yöntemidir.}
+
 % ---
 
 \alistirmalar

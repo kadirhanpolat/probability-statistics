@@ -1066,6 +1066,42 @@ $n = 1-2z$ tek, $f(1-2z) = z$.
 $f$ bijektiftir; dolayısıyla $\Z$ sayılabilir sonsuzdur. $\blacksquare$%
 }
 
+\begin{alistirma}[Al.0.4b]{B}{Sayılabilirlik ve Güç Kümesi}
+(a) $\mathbb{Q}$ (rasyonel sayılar) sayılabilir olduğunu gösterin.
+(b) $[0,1]$'in sayılamaz sonsuz olduğunu Cantor'un diyagonal argümanıyla gösterin.
+(c) $\mathcal{P}(\mathbb{N})$ (doğal sayıların güç kümesi) neden sayılamaz?
+\end{alistirma}
+\alcozum{%
+(a) $\mathbb{Q}^+ = \{p/q: p,q\in\mathbb{N},\gcd(p,q)=1\}$. Cantor saydırma şeması:
+\[
+  \frac{1}{1},\frac{1}{2},\frac{2}{1},\frac{1}{3},\frac{3}{1},\frac{1}{4},\frac{2}{3},\frac{3}{2},\frac{4}{1},\ldots
+\]
+(aynı değerleri atlayarak). Bu bir $\mathbb{N}\to\mathbb{Q}^+$ bijeksiyonu verir. $\mathbb{Q}=\mathbb{Q}^+\cup\{0\}\cup(-\mathbb{Q}^+)$ de sayılabilir (sayılabilir birleşim sayılabilir).
+
+(b) \textbf{Cantor diyagonal argümanı}: $[0,1]$'in sayılabilir olduğunu varsay; ikili temsil: $f:\mathbb{N}\to[0,1]$ bijeksiyonu. Listele: $r_1=0.a_{11}a_{12}a_{13}\ldots$, $r_2=0.a_{21}a_{22}a_{23}\ldots$, vb. Yeni sayı: $d=0.d_1d_2d_3\ldots$ burada $d_n=1-a_{nn}$ (diyagonali çevir). $d\neq r_n$ her $n$ için (en az $n$. basamak farklı). Dolayısıyla $d\notin\{r_1,r_2,\ldots\}$: liste eksik, çelişki. $[0,1]$ sayılamaz.
+
+(c) $f:\mathbb{N}\to\mathcal{P}(\mathbb{N})$ bijeksiyonu olduğunu varsay. $D=\{n\in\mathbb{N}: n\notin f(n)\}$ (Russel türevi). $D\in\mathcal{P}(\mathbb{N})$, dolayısıyla $D=f(k)$ için bir $k$ var. $k\in D\iff k\notin f(k)=D$: çelişki. $\mathcal{P}(\mathbb{N})$ sayılamaz.}
+
+\begin{alistirma}[Al.0.4c]{C}{Metrik Uzaylar ve Tam Uzay}
+$(X,d)$ metrik uzay. (a) $\mathbb{R}^n$ ile $d(\mathbf{x},\mathbf{y})=\max_i|x_i-y_i|$ (Chebyshev metriği) bir metrik mi? (b) $[0,1]$ tam metrik uzay mıdır ($\mathbb{R}$ ile)? (c) $(0,1)$ tam metrik uzay mıdır? Bunu eşdeğer bir tam metrikle nasıl kurtarırsınız?
+\end{alistirma}
+\alcozum{%
+(a) Üç aksiyom kontrolü: (M1) $d(\mathbf{x},\mathbf{x})=0$ $\checkmark$; (M2) $d(\mathbf{x},\mathbf{y})=d(\mathbf{y},\mathbf{x})$ $\checkmark$; (M3) Üçgen eşitsizliği: $\max_i|x_i-z_i|\leq\max_i(|x_i-y_i|+|y_i-z_i|)\leq\max_i|x_i-y_i|+\max_i|y_i-z_i|$ $\checkmark$. Chebyshev metriği geçerlidir; $\|\cdot\|_\infty$ normu ile ilişkilidir.
+
+(b) $[0,1]\subset\mathbb{R}$; $\mathbb{R}$ tam, $[0,1]$ kapalı alt küme. Her kapalı alt küme tam uzayın tam alt uzayıdır. $[0,1]$ tam.
+
+(c) $(0,1)$ tam değildir: $x_n=1/n$ Cauchy dizisi ama $\lim x_n=0\notin(0,1)$. Kurtarma: $g:(0,1)\to\mathbb{R}$, $g(x)=\tan(\pi(x-1/2))$ homeomorfizm (sürekli ve tersi sürekli). $\mathbb{R}$ üzerindeki standart metriğin geri çekimi: $d^*(x,y)=|g(x)-g(y)|$, bu $(0,1)$'de tam metriktir (eşdeğer topoloji ama $d^*$ ile tüm Cauchy diziler yakınsar).}
+
+\begin{alistirma}[Al.0.4d]{B}{Fonksiyon Sınıfları ve Süreklilik}
+$f:[0,1]\to\mathbb{R}$ sürekli. (a) $f$'nin $[0,1]$'de üniform sürekli olduğunu Heine-Cantor teoremi ile açıklayın. (b) Weierstrass yaklaşım teoremini ifade edin ve $f(x)=|x-1/2|$ için sezgisel uygulayın. (c) $g:(0,1)\to\mathbb{R}$, $g(x)=1/x$ sürekli ama üniform sürekli değil — kanıtlayın.
+\end{alistirma}
+\alcozum{%
+(a) \textbf{Heine-Cantor}: Kompakt metrik uzayda sürekli fonksiyon üniform süreklidir. $[0,1]$ kompakt (sınırlı ve kapalı, Heine-Borel). $f$ sürekli $\Rightarrow$ $f$ üniform sürekli: $\forall\varepsilon>0$, $\exists\delta>0$: $|x-y|<\delta\Rightarrow|f(x)-f(y)|<\varepsilon$, $\delta$ $x$'e bağlı değil.
+
+(b) \textbf{Weierstrass}: $[a,b]$'de her sürekli $f$ için $\forall\varepsilon>0$, bir $p$ polinomu var ki $\|f-p\|_\infty<\varepsilon$. $f(x)=|x-1/2|$: polinom dizisi $p_n(x)=\sqrt{(x-1/2)^2+1/n}$ üniform yaklaşır (köşeyi yumuşatır). Bernstein polinomları $B_n(f;x)=\sum_{k=0}^n f(k/n)\binom{n}{k}x^k(1-x)^{n-k}$ üniform yakınsar.
+
+(c) $g(x)=1/x$, $(0,1)$. Üniform sürekli değil: $\varepsilon=1$, $x_n=1/n$, $y_n=1/(n+1)$; $|x_n-y_n|=1/(n(n+1))\to0$ ama $|g(x_n)-g(y_n)|=|n-(n+1)|=1\geq\varepsilon$. $\delta$ bağımsız olamaz; $x\to0^+$'da türev sınırsız büyür.}
+
 \alistirmalar
 
 % ─── A Seviyesi ───────────────────────────────────────────────────
