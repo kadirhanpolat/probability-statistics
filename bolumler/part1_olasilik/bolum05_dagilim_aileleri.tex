@@ -846,6 +846,44 @@ $P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!} = \frac{1}{k!} \exp(k\ln\lambda - \l
 $T(k) = k$, $h(k) = 1/k!$, $B(\eta) = e^\eta = \lambda$.\\
 $B'(\eta) = e^\eta = \lambda = E[T(X)] = E[X]$. \checkmark}
 
+\begin{alistirma}[Al.5.5cozum]{B}{Çok Değişkenli Normal: Koşullu Dağılım}
+$(X,Y)\sim\Normal_2(\boldsymbol\mu,\Sigma)$; $\mu_X=2$, $\mu_Y=5$, $\sigma_X^2=4$, $\sigma_Y^2=9$, $\rho=0.6$.
+(a) $Y|X=x$'in koşullu dağılımını yazın.
+(b) $E[Y|X=4]$ ve $\Var(Y|X=4)$'ü hesaplayın.
+(c) $X$ ve $Y-0.9X$ bağımsız mıdır? Neden?
+\end{alistirma}
+\alcozum{%
+(a) Koşullu dağılım: $Y|X=x \sim \Normal(\mu_{Y|x},\,\sigma^2_{Y|x})$ ile
+\[
+  \mu_{Y|x} = \mu_Y + \rho\frac{\sigma_Y}{\sigma_X}(x-\mu_X) = 5 + 0.6\cdot\frac{3}{2}(x-2) = 5+0.9(x-2),
+\]
+\[
+  \sigma^2_{Y|x} = \sigma_Y^2(1-\rho^2) = 9(1-0.36) = 5.76.
+\]
+
+(b) $x=4$: $\mu_{Y|4}=5+0.9(4-2)=5+1.8=6.8$; $\Var(Y|X=4)=5.76$. Dolayısıyla $Y|X=4\sim\Normal(6.8,5.76)$.
+
+(c) $W=Y-0.9X$. $\Cov(X,W)=\Cov(X,Y)-0.9\Var(X)=\rho\sigma_X\sigma_Y-0.9\sigma_X^2=0.6\cdot2\cdot3-0.9\cdot4=3.6-3.6=0$. Ortak normal dağılımda kovaryans sıfır bağımsızlığa denk. Evet, $X$ ve $W=Y-0.9X$ bağımsız.}
+
+\begin{alistirma}[Al.5.5b]{C}{Beta Dağılımı ve Bayes Güncellemesi}
+$p\sim\Beta(\alpha,\beta)$ önsel. $n$ bağımsız Bernoulli($p$) denemesinde $x$ başarı gözlemleniyor.
+(a) Sonsal $p|x$'i bulun.
+(b) $\alpha=3$, $\beta=2$, $n=10$, $x=7$ için $E[p|x]$ ve $\mathrm{Mo}[p|x]$ (tepe) hesaplayın.
+(c) $\alpha+\beta\to\infty$ (sabit $\alpha/(\alpha+\beta)=p_0$) durumunda sonsal beklenti ne olur?
+\end{alistirma}
+\alcozum{%
+(a) Olabilirlik: $L(p|x)=p^x(1-p)^{n-x}$. Önsel: $\pi(p)\propto p^{\alpha-1}(1-p)^{\beta-1}$. Sonsal:
+\[
+  \pi(p|x)\propto p^{x+\alpha-1}(1-p)^{n-x+\beta-1} \implies p|x\sim\Beta(\alpha+x,\,\beta+n-x).
+\]
+Konjugat aile özelliği.
+
+(b) $\alpha'=3+7=10$, $\beta'=2+3=5$. $E[p|x]=\dfrac{10}{15}=\dfrac{2}{3}$; $\mathrm{Mo}[p|x]=\dfrac{\alpha'-1}{\alpha'+\beta'-2}=\dfrac{9}{13}\approx0.692$.
+
+Karşılaştır: MLE $\hat p=7/10=0.700$. Bayes beklenti $2/3\approx0.667$ (önsel $p_0=3/5=0.6$'ya doğru çekilmiş).
+
+(c) Önsel ağırlık $\alpha+\beta$, veri ağırlığı $n$. $E[p|x]=\dfrac{\alpha+x}{\alpha+\beta+n}\to\dfrac{\alpha/(\alpha+\beta)\cdot(\alpha+\beta)+x}{\alpha+\beta+n}\to p_0$ çünkü $\alpha+\beta\gg n$. Çok güçlü önsel; veri baskın gelemez.}
+
 % ---
 
 \alistirmalar

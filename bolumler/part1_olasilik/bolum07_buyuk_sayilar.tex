@@ -789,6 +789,32 @@ $\approx 0.6(0.1823)+0.4(-0.2231) = 0.1094-0.0892 = 0.0202$.
 $P(\bar{X}_{100}\geq 0.6)\leq e^{-100\times0.0202} = e^{-2.02} \approx 0.133$.
 Chebyshev: 0.25; Chernoff: 0.133. Gerçek değer $\approx 0.028$ (Chernoff daha yakın).}
 
+\begin{alistirma}[Al.7.4b]{B}{Bağımsızlık Olmadan BSK — Ergodik Teorem}
+$(X_n)_{n\geq1}$ \emph{durağan ergodik} dizi; $E[|X_1|]<\infty$, $\mu=E[X_1]$.
+(a) Birkhoff ergodik teoremi ne söyler? Güçlü BSK ile nasıl kıyaslanır?
+(b) Markov zinciri $X_n$ durağan dağılım $\pi$ ile ergodikse $\frac{1}{n}\sum_{k=1}^n f(X_k)\to\sum_x f(x)\pi(x)$ n.k. Bunu simülasyon bağlamında yorumlayın.
+(c) $X_1,X_2,\ldots$ i.i.d.\ ama simetrik Cauchy dağılımlı. $\bar X_n$ ne yapar? Neden BSK çalışmaz?
+\end{alistirma}
+\alcozum{%
+(a) \textbf{Birkhoff ergodik teoremi}: Durağan ergodik $(X_n)$ için $\bar X_n=\frac{1}{n}\sum_{k=1}^n X_k\xrightarrow{\text{n.k.}}\mu=E[X_1]$. Güçlü BSK, i.i.d.\ varsayımı altında ergodikliğin özel halidir; Birkhoff bağımlı ama durağan-ergodik dizilere geneller.
+
+(b) Markov Monte Carlo (MCMC) temeli: Zinciri durağan dağılımdan başlatın (veya yeterince uzun ısın sonra) ve $\frac{1}{n}\sum f(X_k)$ ile $E_\pi[f]$'yi tahmin edin. Ergodiklik garantisi yakınsamayı sağlar; bağımsız örnekleme yerine geçer.
+
+(c) Cauchy için $E[|X_1|]=\infty$ (beklenti var olmaz). Güçlü BSK'nın koşulu $E[|X_1|]<\infty$ ihlal edilir. Gerçekte $\bar X_n$ Cauchy($0,1$) dağılımlı kalır: $n$ büyüse de dağılım daralmaz. Büyük sayılar kanunları geçerli değil.}
+
+\begin{alistirma}[Al.7.4c]{C}{Yavaş Değişen Fonksiyonlar ve Kuyruğun Ağırlığı}
+$L$ yavaş değişen (slowly varying) demek: her $c>0$ için $L(cx)/L(x)\to1$ ($x\to\infty$).
+(a) $L(x)=\log x$ ve $L(x)=(\log x)^2$'nin yavaş değişen olduğunu doğrulayın.
+(b) $P(X>x)=L(x)/x^\alpha$ ($\alpha>0$) ise $X$'in ortalaması ne zaman sonlu?
+(c) $\alpha=1$, $L(x)=1$ durumunda (Cauchy benzeri), $S_n/n\to?$ Limitin ne olduğunu belirtin.
+\end{alistirma}
+\alcozum{%
+(a) $L(x)=\log x$: $\frac{\log(cx)}{\log x}=\frac{\log c+\log x}{\log x}=1+\frac{\log c}{\log x}\to1$. $\checkmark$ Benzer şekilde $(\log x)^2$ için de aynı argüman.
+
+(b) $E[X]=\int_0^\infty P(X>x)dx=\int_0^1 dx+\int_1^\infty \frac{L(x)}{x^\alpha}dx$. İkinci integral $\int_1^\infty x^{-\alpha}dx$ ile karşılaştırılır (Potter lemması: $L(x)\leq Cx^\varepsilon$ yeterince büyük $x$'te). Sonlu olması için $\alpha>1$ gerekir ($\alpha=1$ sınır: $\log$ düzeltmesiyle ince analiz).
+
+(c) $\alpha=1$, $P(X>x)\sim1/x$ ($L=1$): Cauchy dağılımı modeli. Stabil dağılım teorisi: $S_n/(n\log n)^{1/\alpha}$ için uygun normalleştirme gerekir; $S_n/n$ hiçbir sonlu limite yakınsamaz ($\bar X_n$ Cauchy kalır). BSK ve CLT her ikisi de çöker.}
+
 % ---
 
 \alistirmalar
