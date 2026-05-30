@@ -444,6 +444,13 @@ $n=20$ deneme, $\sum x_i=14$ başarı; $p\sim\Beta(1,1)$ (düzgün önsel). Sons
 
 \begin{kendinleifade}
 Beta-Binom Bayes tahmin edicisini MLE olan $\bar{X}_n$ ile karşılaştır. $\alpha+\beta$ "hayali örneklem büyüklüğü" yorumunu açıkla. $n\to\infty$ limitinde ne olur?
+\kendinleifadecevap{Önsel $\mathrm{Beta}(\alpha,\beta)$ + $k$ başarı, $n$ deneme $\Rightarrow$
+  sonsal $\mathrm{Beta}(\alpha+k,\,\beta+n-k)$.
+  Bayes tahmincisi (kare kayıp): $\hat{p}_B = \frac{\alpha+k}{\alpha+\beta+n}
+  = \frac{n}{n+\alpha+\beta}\underbrace{\frac{k}{n}}_{\hat{p}_\mathrm{MLE}}
+  + \frac{\alpha+\beta}{n+\alpha+\beta}\underbrace{\frac{\alpha}{\alpha+\beta}}_{\text{önsel ort.}}$.
+  $\alpha+\beta$ "hayali örneklem": öncel inancın ağırlığı bu kadar gerçek gözleme eşdeğer.
+  $n\to\infty$: $\hat{p}_B\to\hat{p}_\mathrm{MLE}$ --- veri önsel'i bunaltır.}
 \end{kendinleifade}
 
 %% ============================================================

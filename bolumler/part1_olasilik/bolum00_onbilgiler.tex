@@ -285,7 +285,12 @@ $f: X \to Y$ bir fonksiyon olsun.
 Teorem~\ref{thm:tergoriuntu}'nun (iii) maddesini kendi cümlenizle ifade edin:
 ``$f^{-1}(B^c) = (f^{-1}(B))^c$ ifadesi ne anlama geliyor?''
 Özellikle $B = Y$ ve $B = \emptyset$ özel durumlarını kontrol edin.
-\ogrencialani[2cm]
+\kendinleifadecevap{$f^{-1}(B^c)=(f^{-1}(B))^c$: "tümleyen alma" ve "ters görüntü" işlemleri
+  değiş tokuşludur.
+  $B=Y$: $f^{-1}(Y^c)=f^{-1}(\emptyset)=\emptyset=(f^{-1}(Y))^c=X^c$ $\checkmark$
+  $B=\emptyset$: $f^{-1}(\emptyset^c)=f^{-1}(Y)=X=(\emptyset)^c=X$ $\checkmark$
+  Genel anlam: $f$'nin neyin \emph{dışında} kaldığını görmek ile
+  neyin görüntüsünün \emph{dışında} kalmak aynı şeydir.}
 \end{kendinleifade}
 
 \begin{mikroozet}[§0.2 özeti]
@@ -672,7 +677,14 @@ yalnızca $(0,1)$ kümesi eninde sonunda tüm $A_n$'lerde yer alır.
 $(A_n)$ ile $B_n = A_n^c$ arasındaki $\limsup$ ve $\liminf$ ilişkisini
 De~Morgan yasasını kullanarak türetin. Beklenen sonuç:
 $\left(\limsup_n A_n\right)^c = \liminf_n A_n^c$.
-\ogrencialani[2.5cm]
+\kendinleifadecevap{De Morgan iki kez uygula:
+  $\Bigl(\bigcap_n\bigcup_{k\geq n}A_k\Bigr)^c
+  =\bigcup_n\Bigl(\bigcup_{k\geq n}A_k\Bigr)^c
+  =\bigcup_n\bigcap_{k\geq n}A_k^c
+  =\liminf_n A_k^c$.
+  Sezgi: "$A_n$ sonsuz çok gerçekleşmez"
+  $=$ "$A_n^c$ eninde sonunda hep gerçekleşir."
+  Yani $\limsup$ ve $\liminf$ tümleyen alarak birbirine geçer.}
 \end{kendinleifade}
 
 \begin{mikroozet}[§0.5 özeti]

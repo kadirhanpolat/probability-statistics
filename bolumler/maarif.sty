@@ -410,7 +410,29 @@
   \end{tcolorbox}\par}
 
 % =====================================================================
-% 22) KEŞİF YAZMA ALANI
+% 22) KENDİNLE İFADE CEVAP ALANI
+%     \kendinleifadecevap{model yanıt}
+%     Öğrencide: 3cm ızgara yazı alanı
+%     Eğitmende: maIfade rengiyle sol çizgili model yanıt kutusu
+% =====================================================================
+\newcommand{\kendinleifadecevap}[1]{%
+  \ifmaarifcozum
+    \par\noindent
+    \begin{tcolorbox}[
+      enhanced, breakable,
+      boxrule=0pt, colback=maIfade!6, colframe=maIfade,
+      borderline west={3pt}{0pt}{maIfade},
+      left=5mm, right=3mm, top=2mm, bottom=2mm,
+      before upper={{\sffamily\bfseries\color{maIfade}%
+        Model Yanıt\color{black}}\par\smallskip}]
+      #1
+    \end{tcolorbox}
+  \else
+    \ogrencialani[3cm]%
+  \fi}
+
+% =====================================================================
+% 23) KEŞİF YAZMA ALANI
 %     \ogrencialani[yükseklik]  — TikZ kareli ızgara
 %     \kesifcevap{metin}        — öğrencide ızgara, eğitmende yanıt
 % =====================================================================

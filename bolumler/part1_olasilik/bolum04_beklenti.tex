@@ -658,7 +658,13 @@ Doğrusal kısıt altında ($g(X) = a + bX$): $b = \mathrm{Cov}(X,Y)/\mathrm{Var
 \begin{kendinleifade}
 Koşullu beklentinin "bilgiyi güncellemek" yorumunu kendi cümlelerinizle açıklayın.
 "Kule özelliği" ne anlama gelir? Somut bir örnek üretin.
-\ogrencialani[2.5cm]
+\kendinleifadecevap{$E[Y|\mathcal{G}]$: "$\mathcal{G}$ bilgisi verilince $Y$ için en iyi tahmin."
+  Daha fazla bilgi ($\mathcal{G}_1\subset\mathcal{G}_2$) tahmini iyileştirir.
+  \textbf{Kule özelliği:} $E\bigl[E[Y|\mathcal{G}_2]\bigm|\mathcal{G}_1\bigr]=E[Y|\mathcal{G}_1]$
+  ($\mathcal{G}_1\subset\mathcal{G}_2$) --- önce geniş bilgiyle, sonra dar bilgiyle ortalama almak,
+  direkt dar bilgiyle ortalama almaya eşit.
+  \textbf{Örnek:} $Y$=sınav notu; $\mathcal{G}_2=\sigma(\text{öğrenci})$, $\mathcal{G}_1=\sigma(\text{bölüm})$.
+  Öğrenci ortalamasının bölüm ortalaması = direkt bölüm ortalaması.}
 \end{kendinleifade}
 
 % ---- Disiplinlerarası Bağlantı (TYMM) ----

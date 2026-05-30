@@ -248,6 +248,12 @@ $C(\mathbf{x}) = \{\theta_0: \phi(\mathbf{x};\theta_0)=0\}$ tanımla. $\Prob_{\t
 
 \begin{kendinleifade}
 İki yönlü $t$-testi ile $t$-güven aralığı arasındaki dualliği somutlaştır. "$H_0:\mu=5$, $\alpha=0.05$ reddediliyor" ile "$5$, \%95 GA'ya dahil değil" ifadelerinin eşdeğer olduğunu göster.
+\kendinleifadecevap{$t=\frac{\bar{X}-\mu_0}{S/\sqrt{n}}$.
+  Reddetme bölgesi: $|t|>t_{n-1,\,\alpha/2}$
+  $\Leftrightarrow \mu_0\notin\bigl[\bar{X}\pm t_{n-1,\,\alpha/2}\tfrac{S}{\sqrt{n}}\bigr]$.
+  Yani "$H_0:\mu_0$ reddedilir" $\Leftrightarrow$ "$\mu_0$, \%95 GA'nın dışında."
+  Duallik: tüm reddedilemeyen $H_0$ değerleri tam olarak güven aralığını oluşturur.
+  Örnek: $n=25,\,\bar{X}=6.8,\,S=3\Rightarrow$ GA$=[5.56,8.04]$; $\mu_0=5\notin$ GA, reddedilir.}
 \end{kendinleifade}
 
 %% ============================================================

@@ -157,7 +157,12 @@ fonksiyonlar olarak tanımlanır.
 "Rasgele değişken" neden bir "değişken" değil, bir "fonksiyondur"?
 Hangi uzaydan hangi uzaya gider? Ölçülebilirlik koşulu ne anlama gelir?
 Bir arkadaşınıza matematiksiz bir dille açıklayın.
-\ogrencialani[2.5cm]
+\kendinleifadecevap{$X:\Omega\to\mathbb{R}$ --- her deney sonucuna ($\omega$) deterministik bir sayı atar.
+  "Değişken" değil çünkü $X$ sabit bir kural, rastlantı $\omega$'dedir.
+  Ölçülebilirlik: $\{X\leq c\}\in\mathcal{F}$ --- "en fazla $c$" olayının tanımlı olasılığı var;
+  olmasa $P(X\leq c)$ hesaplanamaz.
+  \textbf{Arkadaşa açıklama:} "Zar atmak gibi. Zar atmak rastlantı; ama 'kaç puan aldım'
+  sorusu deterministik bir fonksiyon --- her yüze bir sayı atıyorsun."}
 \end{kendinleifade}
 
 \begin{mikroozet}
@@ -253,7 +258,12 @@ Sağdan sürekli tanım $P(X \leq x) = F(x)$'i verir; $P(X < x)$ farklıdır.
 KDF'nin üç temel özelliğini (monoton, sağdan sürekli, sınırlar)
 bir yabancı dil örneğiyle canlandırın: örneğin "dil testi skoru"nun
 KDF'si nasıl görünürdü? Sürekli mi olurdu, yoksa sıçramalı mı?
-\ogrencialani[2.5cm]
+\kendinleifadecevap{Dil testi puanı genelde tam sayı $\Rightarrow$ KDF \textbf{sıçramalı} (basamak fonksiyonu).
+  \textbf{Monoton artan:} $P(X\leq 70)\leq P(X\leq 80)$ --- daha yüksek eşiği aşmak daha kolay.
+  \textbf{Sağdan sürekli:} $F(70)=P(X\leq70)$ --- "70 dahil" sağdan limit sağlanır.
+  \textbf{Sınırlar:} $F(-\infty)=0$, $F(+\infty)=1$.
+  Sürekli olurdu mu? Ancak puan gerçek değerli (kesirli) olsaydı;
+  o zaman her noktada olasılık sıfır, yoğunluk fonksiyonu gerekir.}
 \end{kendinleifade}
 
 \begin{mikroozet}
