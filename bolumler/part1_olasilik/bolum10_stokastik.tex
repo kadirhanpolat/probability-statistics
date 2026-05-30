@@ -523,3 +523,24 @@ Doğum-ölüm süreci: $\lambda_i=\lambda/(i+1)$ (artan yükle azalan varış), 
 \alcozum{%
 (a) $\pi_i=\pi_0\prod_{k=0}^{i-1}\frac{\lambda_k}{\mu_{k+1}}=\pi_0\prod_{k=0}^{i-1}\frac{\lambda/(k+1)}{\mu}=\pi_0\frac{\lambda^i}{\mu^i\cdot i!}$. (b) $\lambda=\mu$: $\pi_i=\pi_0/i!$. Normalleştirme: $\pi_0\sum_{i=0}^\infty 1/i!=\pi_0 e^1=1$; $\pi_0=e^{-1}$; $\pi_i=e^{-1}/i!$ — Poisson$(1)$ dağılımı!%
 }
+
+\begin{alistirma}[Al.10.11]{B}{Wiener Süreci — Kovaryans}
+$W(t)$ standart Brownian hareket. (a) $(W(s),W(t))$ ($s<t$) birleşik dağılımını bul. (b) $\Cov(W(s),W(t))=\min(s,t)$ olduğunu ispat et.
+\end{alistirma}
+\alcozum{%
+(a) Bağımsız artışlar: $W(s)\sim\Normal(0,s)$; $W(t)-W(s)\sim\Normal(0,t-s)$ bağımsız. Birleşik: $(W(s),W(t))\sim\Normal_2(\mathbf{0},\begin{pmatrix}s&s\\s&t\end{pmatrix})$.
+(b) $\Cov(W(s),W(t))=E[W(s)(W(s)+(W(t)-W(s)))]=E[W(s)^2]+0=s=\min(s,t)$.}
+
+\begin{alistirma}[Al.10.12]{B}{Itô Formülü: Karekök}
+$f(x)=\sqrt{x}$, $X(t)=|W(t)|$ (yansıyan Brownian). Resmi Itô formülü $d(\sqrt{W^2+\varepsilon})\to d|W|$ limitinde ne önerir? $E[|W(t)|]$'i hesapla.
+\end{alistirma}
+\alcozum{%
+Itô: $f(x)=\sqrt{x}$, $X(t)=W(t)^2$: $d\sqrt{X}=\frac{1}{2\sqrt{X}}dX-\frac{1}{8X^{3/2}}(dX)^2$. $dX=2W\,dW+dt$: $(dX)^2=4W^2\,dt$. $d|W|=\frac{W}{|W|}dW+\frac{1}{2|W|}dt$ (Tanaka formülü).
+$E[|W(t)|]=E[\sqrt{W(t)^2}]$; $W(t)\sim\Normal(0,t)$: $E[|W(t)|]=\sqrt{t}\cdot E[|Z|]=\sqrt{t}\cdot\sqrt{2/\pi}=\sqrt{2t/\pi}$.}
+
+\begin{alistirma}[Al.10.13]{C}{Gibbs Örnekleyicisi — Çift Normal}
+$(X,Y)\sim\Normal_2(\mathbf{0},\boldsymbol\Sigma)$, $\boldsymbol\Sigma=\begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$. Gibbs adımlarının geçiş dağılımlarını yazın. Neden durağan dağılım $\Normal_2(\mathbf{0},\boldsymbol\Sigma)$'dır?
+\end{alistirma}
+\alcozum{%
+Koşullu dağılımlar: $X|Y=y\sim\Normal(\rho y,1-\rho^2)$; $Y|X=x\sim\Normal(\rho x,1-\rho^2)$.
+Gibbs: (1) $x^{(t+1)}\sim\Normal(\rho y^{(t)},1-\rho^2)$; (2) $y^{(t+1)}\sim\Normal(\rho x^{(t+1)},1-\rho^2)$. Bu koşullu dağılımlar $\Normal_2$ tarafından sağlandığı için $\Normal_2$ durağandır; ayrıntılı denge $\Rightarrow$ Ergodik Teorem $\Rightarrow$ örnekler $\Normal_2$'ye yakınsar.}

@@ -505,3 +505,25 @@ $X_1,\ldots,X_n\iid\Normal(\theta,1)$. LAN koşulunun sağlandığını göster 
 \alcozum{%
 $\log\frac{dP_{\theta+h/\sqrt n}^{(n)}}{dP_\theta^{(n)}}=\frac{h}{\sqrt n}\sum(X_i-\theta)-\frac{h^2}{2}$. $\Delta_n(\theta)=\frac{1}{\sqrt{n}}\sum(X_i-\theta)\dto\Normal(0,1)=\Normal(0,\mathcal{I})$ ($\mathcal{I}(\theta)=1$). Kalan terim $o_P(1)$: LAN sağlanır.%
 }
+
+\begin{alistirma}[Al.18.6]{B}{Delta Yöntemi — Asimptotik Varyans}
+$X_1,\ldots,X_n\iid\Binom(1,p)$. $\hat p=\bar X_n$. (a) $\sqrt{n}(\hat p-p)\dto\Normal(0,p(1-p))$ olduğunu gösterin. (b) $g(p)=\log(p/(1-p))$ (logit) için $\sqrt{n}(g(\hat p)-g(p))$'nın asimptotik dağılımını bulun. (c) Bu dağılım $p$'ye bağlı mıdır?
+\end{alistirma}
+\alcozum{%
+(a) MLT: $\sqrt{n}(\bar X_n-p)\dto\Normal(0,p(1-p))$.
+(b) Delta yöntemi: $g'(p)=1/(p(1-p))$. $\sqrt{n}(g(\hat p)-g(p))\dto\Normal(0,[g'(p)]^2p(1-p))=\Normal(0,1/(p(1-p)))$.
+(c) Evet, asimptotik varyans $1/(p(1-p))$ hâlâ $p$'ye bağlı. Varyans stabilize edici dönüşüm: $h(p)=\arcsin\sqrt{p}$, $h'(p)=1/(2\sqrt{p(1-p)})$: $\sqrt{n}(h(\hat p)-h(p))\dto\Normal(0,1/4)$ — $p$'den bağımsız!}
+
+\begin{alistirma}[Al.18.7]{B}{Moment Tahmin Edici Asimptotik Normalliği}
+$X_1,\ldots,X_n\iid\Gama(\alpha,\beta)$, $E[X]=\alpha\beta$, $E[X^2]=\alpha\beta^2(\alpha+1)$. Momentler yöntemiyle $\hat\alpha,\hat\beta$ tahmin edicilerinin asimptotik dağılımını adım adım kurun.
+\end{alistirma}
+\alcozum{%
+$m_1=\bar X\pto\alpha\beta$, $m_2=\overline{X^2}\pto\alpha\beta^2(\alpha+1)=\mu_2'$. $g(m_1,m_2)=(\hat\alpha,\hat\beta)$: $\hat\beta=m_2/m_1-m_1$, $\hat\alpha=m_1/\hat\beta$.
+Çok boyutlu delta yöntemi: $\sqrt{n}(\hat{\boldsymbol\mu}-\boldsymbol\mu)\dto\Normal(\mathbf{0},\boldsymbol\Sigma)$ ile $\sqrt{n}(g(\hat{\boldsymbol\mu})-g(\boldsymbol\mu))\dto\Normal(\mathbf{0},\mathbf{J}_g\boldsymbol\Sigma\mathbf{J}_g^\top)$.
+$\mathbf{J}_g=\partial(\hat\alpha,\hat\beta)/\partial(m_1,m_2)$ analitik hesaplanır; $\boldsymbol\Sigma=[\mu_{ij}']$ çapraz momentler matrisi.}
+
+\begin{alistirma}[Al.18.8]{C}{Le Cam Defect ve Asimptotik Denklik}
+İki deney $E_n=\{P_\theta^{(n)}\}$ ve $F_n=\{Q_\theta^{(n)}\}$ tanımlayın. Le Cam defect $\delta(E_n,F_n)\to0$ ise asimptotik denklik elde edilir. $X_1,\ldots,X_n\iid P_\theta$ normal deneyi ile $Y_1,\ldots,Y_n\iid N(\theta,1)$ deneyinin asimptotik denkliğini (LAN $\Rightarrow$ normal deney) açıklayın.
+\end{alistirma}
+\alcozum{%
+LAN koşulu: $\log(dP_{\theta+h/\sqrt{n}}/dP_\theta^{(n)})=h\Delta_n-h^2\mathcal{I}/2+o_P(1)$ ile $\Delta_n\dto\Normal(0,\mathcal{I})$. Normal deney: $Z\sim\Normal(\theta,\mathcal{I}^{-1})$, yani $dP_\theta^{\mathrm{Normal}}\propto\exp(-\mathcal{I}(\theta)(z-\theta)^2/2)$. LAN $\Rightarrow$ log-olabilirlik oranı dağılımı normal deneyinkiyle örtüşür $\Rightarrow\delta(E_n,F_n)\to0$. Her LAN deneyinde yeterli istatistik $\Delta_n$ yeterlidir; kayıp fonksiyonu sınırları normal deneyden türer.}
