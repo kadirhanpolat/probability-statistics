@@ -614,6 +614,32 @@ $E[g(T)] = \int_0^\theta g(t)\frac{nt^{n-1}}{\theta^n}dt = 0$.
 $\frac{d}{d\theta}[\theta^n \cdot 0] = 0 = ng(\theta)\theta^{n-1}$, yani $g(\theta)=0$ tüm $\theta>0$.
 (c) Evet, tamamlayıcı.}
 
+\begin{alistirma}[Al.11.4b]{B}{GBHK — Normal Ailede}
+$X_1,\ldots,X_n$ i.i.d.\ $\Normal(\mu,\sigma^2)$ ($\sigma^2$ bilinen).
+(a) $T=\bar{X}$ için Cramér-Rao alt sınırını hesaplayın.
+(b) $\bar{X}$'in UMVUE olduğunu gösterin.
+(c) $\sigma^2$ de bilinmiyorsa ne değişir? Yeterli ve tamamlayıcı istatistik nedir?
+\end{alistirma}
+\alcozum{%
+(a) $\log f(x|\mu) = -\frac{(x-\mu)^2}{2\sigma^2} + C$; $\frac{\partial\log f}{\partial\mu}=\frac{x-\mu}{\sigma^2}$; Fisher bilgisi $I(\mu) = \frac{1}{\sigma^2}$. $n$ gözlem için $I_n(\mu)=n/\sigma^2$. GBHK: $\Var(\hat\mu)\geq\sigma^2/n$. $\Var(\bar{X})=\sigma^2/n$ alt sınıra eşit.
+
+(b) $\bar{X}$ yansız. $T=\sum X_i$ yeterli ve tamamlayıcı (üstel aile). Lehmann-Scheffé: $T$'nin yansız fonksiyonu UMVUE'dir. $\bar{X}=T/n$ $\mu$'nün yansız tahmincisi, $T$'nin fonksiyonu $\Rightarrow$ UMVUE.
+
+(c) $\sigma^2$ bilinmiyorsa, $(T_1,T_2)=(\sum X_i, \sum X_i^2)$ iki boyutlu yeterli ve tamamlayıcı istatistik (iki parametreli üstel aile). UMVUE çifti: $\bar{X}$ için $\mu$, $S^2$ için $\sigma^2$.}
+
+\begin{alistirma}[Al.11.4c]{C}{Eksik Yeterlilik — Cauchy Ailesi}
+$X_1,\ldots,X_n$ i.i.d.\ $\mathrm{Cau}(\theta,1)$; $f(x|\theta)=\dfrac{1}{\pi[1+(x-\theta)^2]}$.
+(a) $\bar{X}$'in yeterli istatistik olduğunu Fisher-Neyman ile kontrol etmeyi deneyin. Ne gözlemliyorsunuz?
+(b) $X_{(1)}<\cdots<X_{(n)}$ sıra istatistikleri birlikte yeterli mi? Bu ne anlama gelir?
+(c) Neden Cauchy ailesinde GBHK genellikle uygulanamaz?
+\end{alistirma}
+\alcozum{%
+(a) Ortak yoğunluk: $f(\mathbf{x}|\theta)=\pi^{-n}\prod[1+(x_i-\theta)^2]^{-1}$. Bu çarpım $\theta$'dan kolay ayrışmaz; $g(T(\mathbf{x}),\theta)\cdot h(\mathbf{x})$ biçimine getirilemiyor çünkü $\theta$ her faktörde. $\bar X$ yeterli \emph{değildir}.
+
+(b) $(X_{(1)},\ldots,X_{(n)})$ sıra istatistikleri her zaman \emph{tamamlayıcı} yeterli istatistik sağlar (Halmos-Savage). Bu, veriyi sıralama dışında bilgisiz perütmasyonla sunmaya eşdeğer. Fakat boyut azaltma sağlamaz; boyut yine $n$.
+
+(c) GBHK için Fisher bilgisi $I(\theta)=\int\left(\frac{\partial\log f}{\partial\theta}\right)^2 f\,dx$'nin varlığı gerekir. Cauchy için $\partial\log f/\partial\theta = 2(x-\theta)/[1+(x-\theta)^2]$; $I(\theta)=1/2<\infty$. Teknik olarak GBHK var, fakat maksimum olabilirlik tahmincisi $\hat\theta_{\mathrm{MLE}}$ \emph{açık formda yok} (sayısal çözüm gerekir) ve $\bar X$'in Cauchy dağılımlı olup varyansı sonsuz olduğundan GBHK anlamsız.}
+
 % ---
 
 \alistirmalar
