@@ -533,10 +533,87 @@ Ama $h(x) = 1 - \cos(x)$: $h'(0) = 0$, $h''(0) = 1$.
 $n(1 - \cos(\bar{X}_n)) \xrightarrow{d} \frac{\sigma^2}{2}\chi^2_1$.
 \end{ornek}
 
+% =====================================================================
+\section{Olasılık İntegral Dönüşümü ve Kuantil Dönüşümü}
+\label{sec:prob_integral}
+% =====================================================================
+
+\begin{teorem}[Olasılık İntegral Dönüşümü (OİD)]\label{thm:oid}
+$X$ sürekli rasgele değişken, KDF $F$ kesinlikle artan ve sürekli. O zaman
+\[
+  U = F(X) \sim \Uniform(0,1).
+\]
+\end{teorem}
+
+\begin{proof}
+$P(U \leq u) = P(F(X)\leq u) = P(X\leq F^{-1}(u)) = F(F^{-1}(u)) = u$, $u\in(0,1)$. Bu, $\Uniform(0,1)$ KDF'sidir.
+\end{proof}
+
+\begin{teorem}[Kuantil dönüşümü]\label{thm:kuantil}
+$U\sim\Uniform(0,1)$ ve $F$ herhangi bir KDF, $F^{-1}$ genelleştirilmiş tersi. O zaman $X=F^{-1}(U)$ dağılımı $F$'dir.
+\end{teorem}
+
+\begin{proof}
+$P(X\leq x)=P(F^{-1}(U)\leq x)=P(U\leq F(x))=F(x)$.
+\end{proof}
+
+\begin{ornek}[Simülasyon yöntemi]\label{ex:simulasyon}
+$\Exp(\lambda)$ simülasyonu: $F(x)=1-e^{-\lambda x}$, $F^{-1}(u)=-\log(1-u)/\lambda$. $U\sim\Uniform(0,1)$ üret; $X=-\log U/\lambda$ hesapla ($1-U\overset{d}{=}U$).
+Box-Muller ($\Normal(0,1)$): $U_1,U_2\iid\Uniform(0,1)$:
+\[
+  Z_1=\sqrt{-2\log U_1}\cos(2\pi U_2),\quad Z_2=\sqrt{-2\log U_1}\sin(2\pi U_2)\iid\Normal(0,1).
+\]
+\end{ornek}
+
+\begin{hataanalizi}
+OİD yalnızca sürekli dağılımlar için geçerlidir. Kesikli $X$ için $F(X)$ $\Uniform(0,1)$'e dağılmaz; bunun yerine $U\in(F(X^-),F(X)]$ aralığında üretilmiş $\Uniform$ ile çalışmak gerekir.
+\end{hataanalizi}
+
+% =====================================================================
+\section{Çarpışma Transformasyonları ve Simetri}
+\label{sec:simetri_donusumler}
+% =====================================================================
+
+\begin{tanim}[Simetrik dağılım]\label{def:simetrik}
+$X$ dağılımı $0$ çevresinde simetriktir: $X\overset{d}{=}-X$.
+\end{tanim}
+
+\begin{teorem}[Mutlak değer dönüşümü]\label{thm:mutlak}
+$X$, $0$ çevresinde simetrik, $f$ yoğunluğu mevcut. $Y=|X|$'in yoğunluğu:
+\[
+  f_Y(y) = 2f(y),\quad y>0.
+\]
+\end{teorem}
+
+\begin{proof}
+$P(|X|\leq y)=P(-y\leq X\leq y)=F(y)-F(-y)$. Türev: $f_Y(y)=f(y)+f(-y)=2f(y)$ (simetri).
+\end{proof}
+
+\begin{ornek}[Yarı-normal]\label{ex:yari_normal}
+$Z\sim\Normal(0,1)$: $|Z|$ yarı-normal (\emph{half-normal}), $f_{|Z|}(y)=2\phi(y)$, $y>0$.
+$\Beklenti[|Z|]=\sqrt{2/\pi}$, $\Var(|Z|)=1-2/\pi$.
+\end{ornek}
+
+\begin{teorem}[İşaret-büyüklük bağımsızlığı]\label{thm:isaret_buyukluk}
+$X$ $0$ çevresinde simetrik. $S=\mathrm{sgn}(X)$ ve $M=|X|$ bağımsızdır; $S\sim\mathrm{Bernoulli}(1/2)$.
+\end{teorem}
+
+\begin{proof}
+$P(S=1,M\leq m)=P(0<X\leq m)=F(m)-1/2=\tfrac12 P(M\leq m)$. Benzer şekilde $P(S=-1,M\leq m)=\tfrac12 P(M\leq m)$: bağımsızlık.
+\end{proof}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Finansal Matematik:} OİD, Monte Carlo risk simülasyonunun temelidir. Sklar teoremi: her ortak dağılım $F(\mathbf{x})=C(F_1(x_1),\ldots,F_p(x_p))$ biçiminde yazılır; $C$ \emph{copula}'dır — CDO kredi riski modellemesinde kullanılır.
+
+\textbf{Kalite Mühendisliği:} Yarı-normal dağılım, Taguchi yönteminde tek taraflı üretim toleranslarını modellemek için kullanılır.
+\end{disiplinlerarasibaglan}
+
 \begin{mikroozet}
 $g'(\mu) = 0$: standart delta yöntemi çöker.
 İkinci derecede Delta: $n(g(X_n)-g(\mu)) \to \frac{\sigma^2 g''(\mu)}{2}\chi^2_1$.
 Limit dağılım ki-kare; ölçek $\sqrt{n}$ yerine $n$.
+OİD: $F(X)\sim\Uniform(0,1)$ — simülasyon ve copula modellemesinin temeli.
+Simetrik dağılım: işaret ve büyüklük bağımsız; yarı-normal $\Beklenti[|Z|]=\sqrt{2/\pi}$.
 \end{mikroozet}
 
 % ---- Disiplinlerarası Bağlantı (TYMM) ----
