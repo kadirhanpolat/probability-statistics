@@ -836,10 +836,90 @@ $X \sim \Beta(2,5)$: $\gamma_1 = 2(5-2)\sqrt{(2+5+1)/((2\cdot5)\cdot 1)} / (2+5+
 Gelir dağılımları tipik olarak pozitif çarpık: kalabalık düşük-orta, seyrek yüksek gelirler.
 \end{ornek}
 
+% =====================================================================
+\section{L$^p$ Uzayları ve Beklenti Eşitsizlikleri}
+\label{sec:lp_uzaylari}
+% =====================================================================
+
+\begin{tanim}[$L^p$ normu]\label{def:lp_norm}
+$p\geq1$. Rasgele değişken $X$ için
+\[
+  \|X\|_p = (\Beklenti[|X|^p])^{1/p}.
+\]
+$L^p(\Omega,\mathcal{F},P)=\{X:\|X\|_p<\infty\}$: $p$'inci mutlak moment sonlu olan rasgele değişkenler sınıfı.
+\end{tanim}
+
+\begin{teorem}[Lyapunov eşitsizliği]\label{thm:lyapunov_esit}
+$1\leq r<s$: $\|X\|_r\leq\|X\|_s$.
+Yani $L^s\subset L^r$ ve $r < s$ için $r$'inci moment $s$'inci momentten daha sık sonludur.
+\end{teorem}
+
+\begin{proof}
+Jensen: $\phi(x)=x^{s/r}$ dışbükey ($s>r$). $\Beklenti[|X|^r]^{s/r}\leq\Beklenti[|X|^s]$. Her iki tarafın $r/s$'inci kuvveti: $\Beklenti[|X|^r]^{1}\leq\Beklenti[|X|^s]^{r/s}$, yani $\|X\|_r^r\leq\|X\|_s^r$, bu da $\|X\|_r\leq\|X\|_s$.
+\end{proof}
+
+\begin{teorem}[Hölder eşitsizliği]\label{thm:holder}
+$1/p+1/q=1$, $p,q\geq1$:
+\[
+  \Beklenti[|XY|] \leq \|X\|_p\cdot\|Y\|_q.
+\]
+Özel durum $p=q=2$: Cauchy-Schwarz $\Beklenti[|XY|]\leq\sqrt{\Beklenti[X^2]\Beklenti[Y^2]}$.
+\end{teorem}
+
+\begin{proof}[Proof (Young ile)]
+Young eşitsizliği: $ab\leq a^p/p+b^q/q$. $a=|X|/\|X\|_p$, $b=|Y|/\|Y\|_q$: $\frac{|XY|}{\|X\|_p\|Y\|_q}\leq\frac{|X|^p}{p\|X\|_p^p}+\frac{|Y|^q}{q\|Y\|_q^q}$. Beklenti alınca sağ taraf $1/p+1/q=1$.
+\end{proof}
+
+\begin{teorem}[Minkowski eşitsizliği]\label{thm:minkowski}
+$p\geq1$: $\|X+Y\|_p\leq\|X\|_p+\|Y\|_p$ (üçgen eşitsizliği).
+\end{teorem}
+
+\begin{ornek}[$L^p$ dahil olma ilişkisi]\label{ex:lp_dahil}
+Sonlu $\Omega=\{1,\ldots,n\}$ (her eleman eşit olasılıklı). $\|X\|_p=(\frac1n\sum|x_i|^p)^{1/p}$: RMS$(p=2)>$ortalama$(p=1)$ — karesel ortalamanın aritmetik ortalamayı aşması. $\|X\|_\infty=\max|x_i|$ = supremum norm.
+\end{ornek}
+
+% =====================================================================
+\section{Koşullu Beklentinin Geometrisi}
+\label{sec:kb_geometri}
+% =====================================================================
+
+\begin{tanim}[Projeksiyon yorumu]\label{def:projeksiyon}
+$L^2(\Omega,\mathcal{F},P)$ Hilbert uzayı, iç çarpım $\langle X,Y\rangle=\Beklenti[XY]$. $\Beklenti[X|\mathcal{G}]$ (alt $\sigma$-cebir $\mathcal{G}$ üzerine koşullu beklenti), $X$'in $L^2(\Omega,\mathcal{G},P)$ altuzayına \emph{ortogonal projeksiyonudur}:
+\[
+  \Beklenti[\Beklenti[X|\mathcal{G}]Y] = \Beklenti[XY] \quad \forall Y\in L^2(\Omega,\mathcal{G},P).
+\]
+\end{tanim}
+
+\begin{teorem}[Projeksiyon karakterizasyonu]\label{thm:projeksiyon}
+$Z=\Beklenti[X|\mathcal{G}]$ iki koşulu sağlayan tek $\mathcal{G}$-ölçülebilir rasgele değişkendir:
+\begin{enumerate}[(i)]
+  \item $\Beklenti[ZY]=\Beklenti[XY]$ her $\mathcal{G}$-ölçülebilir $Y\in L^2$ için.
+  \item $Z$, $\Beklenti[X-Z)^2]$'yi minimize eden — MMSE tahmincisi.
+\end{enumerate}
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+(ii): $\Beklenti[(X-Z')^2]\geq\Beklenti[(X-Z)^2]$ her $\mathcal{G}$-ölçülebilir $Z'$ için. Genişlet: $\Beklenti[(X-Z')^2]=\Beklenti[(X-Z)^2]+\Beklenti[(Z-Z')^2]\geq\Beklenti[(X-Z)^2]$; orta terim sıfır (ortogonallik).
+\end{proof}
+
+\begin{ornek}[Lineer MMSE]\label{ex:lineer_mmse}
+$(X,Y)$ ortak $L^2$. Lineer tahminci $\hat X = aY+b$ üzerinde MMSE:
+$a^*=\Cov(X,Y)/\Var(Y)$, $b^*=E[X]-a^*E[Y]$.
+$(X,Y)$ birlikte normal ise bu tahmin edici optimal (doğrusal olmayan gerekmez) ve $\hat X=\Beklenti[X|Y]$.
+\end{ornek}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Sinyal İşleme:} Wiener filtresi, gürültülü sinyalden MMSE tahmincisidir — koşullu beklentinin projeksiyon yorumunun mühendislik uygulaması.
+
+\textbf{Ekonometri:} OLS (En Küçük Kareler) tahmincisi, $Y$'yi doğrusal $\mathbf{x}$ fonksiyonlarına projeksiyon olarak yorumlanır; $E[Y|\mathbf{X}=\mathbf{x}]$ doğrusal ise OLS MMSE elde eder.
+\end{disiplinlerarasibaglan}
+
 \begin{mikroozet}
 CV: boyutsuz göreli değişkenlik; $\sigma/|\mu|$.
 Çarpıklık: $\mu_3'/\sigma^3$; yönsel asimetri.
 Basıklık fazlası: $\mu_4'/\sigma^4 - 3$; Normal'e göre kuyruk ağırlığı.
+$L^p$ uzayları: Lyapunov ($\|X\|_r\leq\|X\|_s$, $r<s$), Hölder, Minkowski.
+Koşullu beklenti = ortogonal projeksiyon $\Rightarrow$ MMSE tahmincisi.
 \end{mikroozet}
 
 % =====================================================================
