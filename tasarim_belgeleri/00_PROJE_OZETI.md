@@ -1,11 +1,13 @@
 # Olasılık Teorisi ve Matematiksel İstatistik — Proje Özeti
 
+> **Yazım Durumu:** TÜM BÖLÜMLER VE EKLER TAMAMLANDI (2026-05-30) — LaTeX derleme aşamasına hazır.
+
 ## Kitabın Kimliği
 
 **Başlık:** Olasılık Teorisi ve Matematiksel İstatistik  
-**Hedef Kitle:** Matematik bölümü lisans ve lisansüstü öğrencileri  
+**Hedef Kitle:** Matematik bölümü 3-4. yıl lisans öğrencileri  
 **Dil:** Türkçe  
-**Yapı:** İki bölümlü (Part I: Olasılık Teorisi, Part II: Matematiksel İstatistik)
+**Yapı:** İki bölümlü (Part I: 11 bölüm, Part II: 8 bölüm) + 6 ek
 
 ## Neden Bu Kitap?
 

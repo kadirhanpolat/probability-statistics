@@ -1,7 +1,7 @@
 # İçindekiler Taslağı — Olasılık Teorisi ve Matematiksel İstatistik
 
-> **Durum:** v0.3 — Klasik olasılık ve modern kitap bulguları ile güncellendi; istatistik kısmı bekleniyor  
-> **Son güncelleme:** 2026-05-29
+> **Durum:** v1.0 — TÜM BÖLÜMLER VE EKLER YAZILDI; LaTeX derleme bekliyor  
+> **Son güncelleme:** 2026-05-30
 
 ---
 
@@ -262,13 +262,12 @@
 
 ## EKLER
 
-**Ek A.** Gerçel Analiz Araç Kutusu (temel teoremler listesi)  
-**Ek B.** Ölçüm Teorisi Özeti  
-**Ek C.** Matris Cebiri (lineer cebir araçları)  
-**Ek D.** Önemli Dağılımların Özet Tablosu  
-**Ek E.** İstatistik Tabloları (Normal, t, χ², F)  
-**Ek F.** Problem Çözüm Kılavuzu ve Seçilmiş Yanıtlar  
-**Kaynakça**  
+**Ek A.** Ölçüm Teorisi Özeti (Carathéodory, Fubini, Radon-Nikodym, Levy) ✓  
+**Ek B.** Olasılık Dağılımları Özet Tablosu (kesikli + sürekli + çok boyutlu) ✓  
+**Ek C.** İstatistik Tabloları (Normal, t, χ², F kritik değerleri) ✓  
+**Ek D.** Türkçe-İngilizce Terminoloji Sözlüğü ✓  
+**Ek E.** Sık Kullanılan İspat Teknikleri (π-λ, kırpma, CS, Slütseva, KF akışı) ✓  
+**Ek F.** Kaynakça ve İleri Okuma (16 kaynak + ileri düzey referanslar) ✓  
 **Dizin**
 
 ---

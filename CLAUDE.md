@@ -24,15 +24,39 @@ probability-statistics/
 ├── ornek_stil/            ← referans LaTeX dosyaları
 │   ├── maarif.sty             — pedagojik kutular (kaynak)
 │   └── topoloji.sty           — matematik ortamları şablonu
-└── bolumler/              ← asıl LaTeX içerik (YAZIM AŞAMASINDA)
-    ├── maarif.sty             — ornek_stil/'dan kopya
-    ├── olasilik.sty           ← TEK YENİ: teorem ortamları + 50+ makro
-    ├── main-ogrenci.tex       ← öğrenci PDF (alcozum gizli)
-    ├── main-egitmen.tex       ← eğitmen PDF (alcozum görünür)
+└── bolumler/              ← asıl LaTeX içerik (TAMAMLANDI)
+    ├── maarif.sty             — pedagojik kutular
+    ├── olasilik.sty           — teorem ortamları + 50+ makro
+    ├── main-ogrenci.tex       — öğrenci PDF (alcozum gizli)
+    ├── main-egitmen.tex       — eğitmen PDF (alcozum görünür)
     ├── part1_olasilik/
-    │   └── bolum00_onbilgiler.tex  ← SIRADAKI: yazılacak
+    │   ├── bolum00_onbilgiler.tex
+    │   ├── bolum01_olcum_teorisi.tex
+    │   ├── bolum02_olasilik_uzaylari.tex
+    │   ├── bolum03_rasgele_degiskenler.tex
+    │   ├── bolum04_beklenti.tex
+    │   ├── bolum05_dagilim_aileleri.tex
+    │   ├── bolum06_donusumler.tex
+    │   ├── bolum07_buyuk_sayilar.tex
+    │   ├── bolum08_merkezi_limit.tex
+    │   ├── bolum09_martingaller.tex   ← opsiyonel
+    │   └── bolum10_stokastik.tex      ← opsiyonel
     ├── part2_istatistik/
+    │   ├── bolum11_istatistik_temelleri.tex
+    │   ├── bolum12_nokta_tahmin.tex
+    │   ├── bolum13_guven_araliklari.tex
+    │   ├── bolum14_hipotez_testi.tex
+    │   ├── bolum15_dogrusal_modeller.tex
+    │   ├── bolum16_anova.tex
+    │   ├── bolum17_parametresiz.tex   ← opsiyonel
+    │   └── bolum18_asimptotik.tex     ← opsiyonel
     └── ekler/
+        ├── ekA_olcum_teorisi.tex
+        ├── ekB_olasilik_dagilim_tablosu.tex
+        ├── ekC_istatistik_tablolari.tex
+        ├── ekD_terminoloji_sozlugu.tex
+        ├── ekE_ispat_teknikleri.tex
+        └── ekF_kaynaklar.tex
 ```
 
 ---
@@ -149,24 +173,29 @@ Bölüm-kaynak eşlemesi: `02_KAYNAK_ANALIZI.md §8`
 
 ## Mevcut Durum (2026-05-30)
 
+**TÜM BÖLÜMLER TAMAMLANDI — KİTAP YAZIM AŞAMASI BİTTİ**
+
 **Tamamlananlar:**
 - Tasarım belgeleri v1.0 (7 belge)
-- LaTeX altyapısı: `olasilik.sty`, `maarif.sty` (güncellenmiş), `main-ogrenci.tex`, `main-egitmen.tex`
-- Yazım sırası kararlaştırıldı (19 bölüm, bağımsızdan bağımlıya)
+- LaTeX altyapısı: `olasilik.sty`, `maarif.sty`, `main-ogrenci.tex`, `main-egitmen.tex`
+- Part I: Böl.0–8 (zorunlu) + Böl.9*, Böl.10* (opsiyonel) — 11 bölüm
+- Part II: Böl.11–16 (zorunlu) + Böl.17*, Böl.18* (opsiyonel) — 8 bölüm
+- Ekler A–F: ölçüm teorisi, dağılım tabloları, istatistik tabloları, terminoloji, ispat teknikleri, kaynakça
 
-**Siradaki adım:**
-- `bolumler/part1_olasilik/bolum00_onbilgiler.tex` — **Bölüm 0'ı yaz**
+**Sonraki olası adımlar:**
+- LaTeX derleme testi (`pdflatex main-ogrenci.tex`)
+- Dipnot/çapraz referans (`\ref`, `\label`) tutarlılık kontrolü
+- Alıştırma numaralandırma gözden geçirme
+- Dizin (`\index`) ekleme
 
 ---
 
-## Bölüm Yazım Sırası (Özet)
+## Bölüm Yazım Sırası (Tamamlandı)
 
-1→ Böl.0, 2→ Böl.1, 3→ Böl.2, 4→ Böl.3, 5→ Böl.4,
-6→ Böl.5, 7→ Böl.7, 8→ Böl.6, 9→ Böl.8, 10→ Böl.11,
-11→ Böl.9*, 12→ Böl.12, 13→ Böl.10*, 14→ Böl.13,
-15→ Böl.14, 16→ Böl.17*, 17→ Böl.18*, 18→ Böl.15, 19→ Böl.16
-
-Detay: `tasarim_belgeleri/06_YAZIM_SIRASI.md`
+1→ Böl.0 ✓, 2→ Böl.1 ✓, 3→ Böl.2 ✓, 4→ Böl.3 ✓, 5→ Böl.4 ✓,
+6→ Böl.5 ✓, 7→ Böl.7 ✓, 8→ Böl.6 ✓, 9→ Böl.8 ✓, 10→ Böl.11 ✓,
+11→ Böl.9* ✓, 12→ Böl.12 ✓, 13→ Böl.10* ✓, 14→ Böl.13 ✓,
+15→ Böl.14 ✓, 16→ Böl.17* ✓, 17→ Böl.18* ✓, 18→ Böl.15 ✓, 19→ Böl.16 ✓
 
 ---
 
