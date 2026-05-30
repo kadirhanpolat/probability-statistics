@@ -1,0 +1,329 @@
+%% ============================================================
+%% BÖLÜM 14 — Hipotez Testi
+%% Olasılık Teorisi ve Matematiksel İstatistik
+%% ============================================================
+\chapter{Hipotez Testi}
+\label{chp:hipotez_testi}
+
+\bolumalinti{%
+  To call in the statistician after the experiment is done may be no more than asking him to perform a post-mortem examination; he may be able to say what the experiment died of.
+}{Ronald A. Fisher}
+
+\begin{kazanimlar}
+Bu bölümün sonunda okuyucu:
+\begin{itemize}
+  \item Hipotez testi çerçevesini (H0/H1, tip I/II hata, güç) tanımlar.
+  \item Neyman-Pearson lemmasını uygulayarak en güçlü test türetir.
+  \item Tek parametreli üstel ailede UMP test oluşturur.
+  \item $z$, $t$, $\chi^2$, $F$ testlerini uygun durumlarda seçer ve uygular.
+  \item Olabilirlik oran testini asimptotik dağılımıyla birlikte kullanır.
+  \item $p$-değerini hesaplar ve doğru yorumlar.
+\end{itemize}
+\end{kazanimlar}
+
+\begin{motivasyon}
+Bir ilaç firması yeni ilacın plasebodan daha etkili olduğunu iddia ediyor. Bu iddiayı verilerle nasıl test ederiz? Rasgelelikten kaynaklanan farklılıkla gerçek bir etkiyi nasıl ayırt ederiz? Hipotez testi bu sorunun matematiksel yanıtıdır.
+
+\medskip
+\noindent\textbf{Köprü:} Bölüm~\ref{chp:guven_araliklari}'daki güven aralığı ve hipotez testi dual kavramlar: $\theta_0$'ın $(1-\alpha)$ GA dışında olması, $\alpha$ düzeyinde $H_0:\theta=\theta_0$'ı reddetmeye eşdeğer.
+\end{motivasyon}
+
+%% ============================================================
+\section{Test Çerçevesi}
+\label{sec:test_cercevesi}
+%% ============================================================
+
+\begin{tanim}[İstatistiksel test]\label{def:istatistiksel_test}
+$\Theta_0\cap\Theta_1=\emptyset$, $\Theta_0\cup\Theta_1=\Theta$ ile:
+\begin{align*}
+  H_0 &: \theta\in\Theta_0 \quad \text{(sıfır hipotezi, null hypothesis)}\\
+  H_1 &: \theta\in\Theta_1 \quad \text{(alternatif hipotez, alternative hypothesis)}
+\end{align*}
+\textbf{Test istatistiği} $T=T(\mathbf{X})$; \textbf{red bölgesi} $R\subseteq\mathcal{X}$: $\mathbf{x}\in R$ ise $H_0$ reddedilir.
+
+$|\Theta_0|=|\Theta_1|=1$ ise \textbf{basit}, aksi hâlde \textbf{bileşik} hipotez.
+\end{tanim}
+
+\begin{tanim}[Hata türleri]\label{def:hata_turleri}
+\[
+  \alpha = \Prob_{\theta\in\Theta_0}(\mathbf{X}\in R) \quad \text{(Tip I hata oranı, anlamlılık düzeyi)}
+\]
+\[
+  \beta = \Prob_{\theta\in\Theta_1}(\mathbf{X}\notin R) \quad \text{(Tip II hata oranı)}
+\]
+\textbf{Güç fonksiyonu:} $\pi(\theta) = \Prob_\theta(\mathbf{X}\in R)$.
+Test $\alpha$ düzeyinde ise $\sup_{\theta\in\Theta_0}\pi(\theta)\leq\alpha$.
+\end{tanim}
+
+\begin{tanim}[$p$-değeri]\label{def:p_degeri}
+$T$ test istatistiği, büyük $T$ değerlerinin $H_1$ lehine olduğu bir test için $p$\textbf{-değeri}:
+\[
+  p = \sup_{\theta\in\Theta_0}\Prob_\theta(T(\mathbf{X})\geq T(\mathbf{x}_{\mathrm{gözlem}})).
+\]
+$p\leq\alpha$ ise $H_0$ reddedilir.
+\end{tanim}
+
+\begin{tanimgerekce}
+$p$-değeri "$H_0$ doğru olduğunda bu kadar veya daha uç bir gözlemi alma olasılığı"dır. $p<0.05$ "$H_0$'ın doğru olma olasılığı \%5'tir" anlamına \emph{gelmez}. Bu yaygın yorum hatasına düşmemeye dikkat.
+\end{tanimgerekce}
+
+%% ============================================================
+\section{Neyman-Pearson Lemması}
+\label{sec:neyman_pearson}
+%% ============================================================
+
+\begin{teorem}[Neyman-Pearson]\label{thm:neyman_pearson}
+Basit hipotezler $H_0:\theta=\theta_0$ ve $H_1:\theta=\theta_1$. Olabilirlik oranı:
+\[
+  \Lambda(\mathbf{x}) = \frac{f(\mathbf{x};\theta_1)}{f(\mathbf{x};\theta_0)}.
+\]
+$k>0$ ve red bölgesi $R = \{\mathbf{x}: \Lambda(\mathbf{x})>k\}$ ile belirlenen testin anlamlılık düzeyi $\alpha^* = \Prob_{\theta_0}(\Lambda(\mathbf{X})>k)$ olsun. Bu test, aynı $\alpha\leq\alpha^*$ düzeyindeki tüm testler arasında en güçlüdür (güç fonksiyonu en yüksek).
+\end{teorem}
+
+\begin{proof}
+$\phi^*$ NP testi, $\phi$ başka herhangi $\alpha$-düzeyinde test olsun. Göster: $\Beklenti_{\theta_1}[\phi^*]\geq\Beklenti_{\theta_1}[\phi]$.
+
+Anahtar gözlem: $(\phi^*-\phi)(f(\mathbf{x};\theta_1)-kf(\mathbf{x};\theta_0))\geq0$ her $\mathbf{x}$ için (işaret kontrolü yapılır). Dolayısıyla:
+\[
+  0\leq\int(\phi^*-\phi)(f_1-kf_0)\,d\mathbf{x}
+  = \Beklenti_{\theta_1}[\phi^*]-\Beklenti_{\theta_1}[\phi] - k(\Beklenti_{\theta_0}[\phi^*]-\Beklenti_{\theta_0}[\phi]).
+\]
+$\Beklenti_{\theta_0}[\phi^*]=\alpha^*\geq\Beklenti_{\theta_0}[\phi]$ olduğundan $k\geq0$ ile ikinci terim $\geq0$. Sonuç: $\Beklenti_{\theta_1}[\phi^*]\geq\Beklenti_{\theta_1}[\phi]$.
+\end{proof}
+
+\begin{ornek}[Normal NP testi]\label{ex:normal_np}
+$X_1,\ldots,X_n\iid\Normal(\mu,1)$. $H_0:\mu=0$ vs $H_1:\mu=1$. NP testi:
+\[
+  \Lambda(\mathbf{x}) = \exp\!\left(n\bar{x} - \frac{n}{2}\right)>k \iff \bar{X}_n > c.
+\]
+$c = z_\alpha/\sqrt{n}$. Bu en güçlü test; güç: $\pi(1)=\Phi(\sqrt{n}-z_\alpha)$.
+\end{ornek}
+
+%% ============================================================
+\section{UMP Testleri}
+\label{sec:ump}
+%% ============================================================
+
+\begin{tanim}[UMP]\label{def:ump}
+$\alpha$ düzeyinde test $\phi^*$, aynı düzeydeki tüm testlere göre her $\theta\in\Theta_1$ için daha yüksek güce sahipse \textbf{UMP} \emph{(uniformly most powerful)} test adını alır.
+\end{tanim}
+
+\begin{teorem}[Üstel ailede UMP]\label{thm:ustel_ump}
+Tek parametreli üstel aile $f(x;\theta)=h(x)\exp[\eta(\theta)T(x)-B(\theta)]$; $\eta(\theta)$ artan. $H_0:\theta\leq\theta_0$ vs $H_1:\theta>\theta_0$ için UMP test:
+\[
+  \phi(\mathbf{x}) = \begin{cases}1&T(\mathbf{x})>c_\alpha\\0&T(\mathbf{x})<c_\alpha\end{cases}
+\]
+$c_\alpha$: $\Prob_{\theta_0}(T>c_\alpha)=\alpha$.
+\end{teorem}
+
+\begin{ispatiskele}
+Karmonotonik olabilirlik oranı (MLR) özelliği: üstel ailede $\Lambda(\mathbf{x};\theta_1,\theta_0)$ yalnızca $T(\mathbf{x})$'in artan fonksiyonu. NP lemması her $(\theta_0,\theta_1)$ çifti için aynı red bölgesini ($T>c$) verir; bu nedenle "düzgün" en güçlü olur.
+\end{ispatiskele}
+
+\begin{ornek}[Poisson UMP]\label{ex:poisson_ump}
+$X_1,\ldots,X_n\iid\Pois(\lambda)$. $H_0:\lambda\leq\lambda_0$ vs $H_1:\lambda>\lambda_0$. UMP: $T=\sum X_i>c_\alpha$. $T\sim\Pois(n\lambda_0)$ altında $c_\alpha$ belirlenir.
+\end{ornek}
+
+\begin{kritiksorgu}
+İki yönlü alternatifler ($H_1:\theta\neq\theta_0$) için UMP test neden genellikle yoktur? Çünkü $\theta>\theta_0$ için büyük $T$ yönünde, $\theta<\theta_0$ için küçük $T$ yönünde güç artar — tek bir red bölgesi her ikisini optimize edemez.
+\end{kritiksorgu}
+
+%% ============================================================
+\section{Yaygın Parametrik Testler}
+\label{sec:parametrik_testler}
+%% ============================================================
+
+\subsection{Tek Örneklem $z$ ve $t$ Testleri}
+
+\begin{teorem}[$z$-testi]\label{thm:z_testi}
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$, $\sigma^2$ bilinen. $H_0:\mu=\mu_0$ için test istatistiği:
+\[
+  Z = \frac{\overline{X}_n-\mu_0}{\sigma/\sqrt{n}} \overset{H_0}{\sim} \Normal(0,1).
+\]
+\begin{itemize}
+  \item $H_1:\mu>\mu_0$: red $Z>z_\alpha$.
+  \item $H_1:\mu<\mu_0$: red $Z<-z_\alpha$.
+  \item $H_1:\mu\neq\mu_0$: red $|Z|>z_{\alpha/2}$.
+\end{itemize}
+\end{teorem}
+
+\begin{teorem}[$t$-testi]\label{thm:t_testi}
+$\sigma^2$ bilinmiyor. Test istatistiği:
+\[
+  T = \frac{\overline{X}_n-\mu_0}{S/\sqrt{n}} \overset{H_0}{\sim} t_{n-1}.
+\]
+Red bölgeleri $t_{n-1}$ kantilleri ile belirlenir.
+\end{teorem}
+
+\subsection{Varyans Testi}
+
+\begin{teorem}[$\chi^2$-testi]\label{thm:chi2_testi}
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$. $H_0:\sigma^2=\sigma_0^2$ için:
+\[
+  Q = \frac{(n-1)S^2}{\sigma_0^2} \overset{H_0}{\sim} \chi^2_{n-1}.
+\]
+\end{teorem}
+
+\subsection{İki Örneklem Testleri}
+
+\begin{teorem}[İki örneklem $t$-testi]\label{thm:iki_t_testi}
+$X_1,\ldots,X_m\iid\Normal(\mu_1,\sigma^2)$ ve $Y_1,\ldots,Y_n\iid\Normal(\mu_2,\sigma^2)$ bağımsız. $H_0:\mu_1=\mu_2$:
+\[
+  T = \frac{\overline{X}-\overline{Y}}{S_p\sqrt{1/m+1/n}} \overset{H_0}{\sim} t_{m+n-2}.
+\]
+\end{teorem}
+
+\begin{teorem}[$F$-testi: varyans oranı]\label{thm:f_testi}
+$X_1,\ldots,X_m\iid\Normal(\mu_1,\sigma_1^2)$ ve $Y_1,\ldots,Y_n\iid\Normal(\mu_2,\sigma_2^2)$ bağımsız. $H_0:\sigma_1^2=\sigma_2^2$:
+\[
+  F = \frac{S_X^2}{S_Y^2} \overset{H_0}{\sim} F_{m-1,n-1}.
+\]
+\end{teorem}
+
+%% ============================================================
+\section{Olabilirlik Oran Testi}
+\label{sec:lrt}
+%% ============================================================
+
+\begin{tanim}[Olabilirlik oran istatistiği]\label{def:lrt}
+\[
+  \Lambda(\mathbf{x}) = \frac{\sup_{\theta\in\Theta_0}L(\theta;\mathbf{x})}{\sup_{\theta\in\Theta}L(\theta;\mathbf{x})}.
+\]
+$\Lambda\in[0,1]$; küçük $\Lambda$ değeri $H_0$'a karşı kanıt. Test: $\Lambda(\mathbf{x})\leq c_\alpha$ ise $H_0$ reddedilir.
+\end{tanim}
+
+\begin{teorem}[Wilks — asimptotik $\chi^2$]\label{thm:wilks}
+Regularity koşulları altında $H_0:\theta\in\Theta_0$ doğruyken ($\dim\Theta-\dim\Theta_0 = r$):
+\[
+  -2\log\Lambda(\mathbf{X}) \dto \chi^2_r.
+\]
+\end{teorem}
+
+\begin{ispatiskele}
+\textbf{Fikir:} $\log L$ etrafında Taylor açılımı: kısıtlı MLE'yi kısıtsız MLE ile karşılaştır. İkinci türev Fisher bilgisini verir; Cauchy-Schwarz argümanıyla $\chi^2$ sınırı çıkar. Tam ispat: Hogg-Craig §10.4.
+\end{ispatiskele}
+
+\begin{ornek}[ORT: Normal iki parametre]\label{ex:ort_normal}
+$X_1,\ldots,X_n\iid\Normal(\mu,\sigma^2)$; $H_0:\mu=\mu_0$ (bilinen $\sigma^2$ olmaksızın). $-2\log\Lambda=n\log(1+T^2/(n-1))$ ile $T=(\bar{X}-\mu_0)/(S/\sqrt{n})$; büyük $n$'de $t_{n-1}$'e ve $\chi^2_1$'e yakınsar.
+\end{ornek}
+
+%% ============================================================
+\section{Çoklu Test Düzeltmesi}
+\label{sec:coklu_test}
+%% ============================================================
+
+\begin{tanim}[FWER ve FDR]\label{def:coklu_hata}
+$m$ hipotez testi yapılıyor.
+\begin{itemize}
+  \item \textbf{FWER} \emph{(family-wise error rate)}: en az bir yanlış red olasılığı.
+  \item \textbf{Bonferroni düzeltmesi:} Her testi $\alpha/m$ düzeyinde yap; $\mathrm{FWER}\leq\alpha$.
+  \item \textbf{FDR} \emph{(false discovery rate)}: yanlış redlerin tüm redlere oranının beklentisi.
+  \item \textbf{Benjamini-Hochberg:} $p_{(1)}\leq\cdots\leq p_{(m)}$; $k^*=\max\{k:p_{(k)}\leq k\alpha/m\}$; $k^*$ kadar red.
+\end{itemize}
+\end{tanim}
+
+\begin{teorem}[Bonferroni eşitsizliği]\label{thm:bonferroni}
+$A_i$ = "$i$-inci testte yanlış red" olayları. Bonferroni eşitsizliği:
+\[
+  \Prob\!\left(\bigcup_{i=1}^m A_i\right) \leq \sum_{i=1}^m \Prob(A_i) \leq m\cdot\frac{\alpha}{m} = \alpha.
+\]
+\end{teorem}
+
+%% ============================================================
+\section{Güven Aralığı — Test Dualliği}
+\label{sec:ga_test_dual}
+%% ============================================================
+
+\begin{teorem}[Duallik]\label{thm:duallik}
+$C(\mathbf{x})$ $(1-\alpha)$ güven kümesi; $\phi(\mathbf{x};\theta_0)$ her $\theta_0$ için $\alpha$ düzeyinde test. O zaman:
+\[
+  \phi(\mathbf{x};\theta_0) = 1 \iff \theta_0\notin C(\mathbf{x}).
+\]
+Bu ilişki iki yönde de kurulabilir.
+\end{teorem}
+
+\begin{proof}
+$C(\mathbf{x}) = \{\theta_0: \phi(\mathbf{x};\theta_0)=0\}$ tanımla. $\Prob_{\theta_0}(\theta_0\notin C(\mathbf{X})) = \Prob_{\theta_0}(\phi(\mathbf{X};\theta_0)=1)\leq\alpha$, dolayısıyla $\Prob_{\theta_0}(\theta_0\in C(\mathbf{X}))\geq1-\alpha$.
+\end{proof}
+
+\begin{kendinleifade}
+İki yönlü $t$-testi ile $t$-güven aralığı arasındaki dualliği somutlaştır. "$H_0:\mu=5$, $\alpha=0.05$ reddediliyor" ile "$5$, \%95 GA'ya dahil değil" ifadelerinin eşdeğer olduğunu göster.
+\end{kendinleifade}
+
+%% ============================================================
+
+\begin{mikroozet}
+\begin{itemize}
+  \item Test: karar kuralı; Tip I = yanlış red ($\alpha$), Tip II = yanlış kabul ($\beta$); güç = $1-\beta$.
+  \item NP lemması: basit hipotezler için olabilirlik oranı en güçlü test verir.
+  \item UMP: üstel ailede tek yönlü alternatif için her zaman mevcuttur.
+  \item ORT: genel, asimptotik $\chi^2_r$; $p$-değeri yorumu dikkat gerektirir.
+\end{itemize}
+\end{mikroozet}
+
+\begin{ozyansima}
+Bir test istatistiksel olarak anlamlı ama pratik açıdan önemsiz olabilir mi? $n\to\infty$ limitinde ne olur? Büyük veri istatistiksel hipotez testini nasıl etkiler?
+\end{ozyansima}
+
+\begin{kopru}
+\textbf{Nereden geldik:} Bölüm~\ref{chp:guven_araliklari}'deki güven aralıkları, bu bölümdeki testlerin çift yüzü.
+
+\textbf{Nereye gidiyoruz:} Bölüm~\ref{chp:dogrusal_modeller}'de regresyon modellerinde $\beta$ katsayıları için $t$ ve $F$ testleri, bu bölümün doğrudan uygulamasıdır.
+\end{kopru}
+
+%% ============================================================
+%% ALISTIRMALAR
+%% ============================================================
+
+\cozumlualistirmalar
+
+\begin{alistirma}[Al.14.1]{A}{Tek örneklem $t$-testi}
+$n=25$, $\bar{x}=3.8$, $s=1.2$. $H_0:\mu=4$ vs $H_1:\mu<4$. $\alpha=0.05$ düzeyinde test yap ve $p$-değerini hesapla.
+\end{alistirma}
+\alcozum{%
+$T=(3.8-4)/(1.2/5)=-0.2/0.24=-0.833$. $t_{24}$ altında $p=\Prob(T<-0.833)\approx0.206$. $p>0.05$: $H_0$ reddedilemez.%
+}
+
+\begin{alistirma}[Al.14.2]{B}{NP lemması uygulaması}
+$X\sim\Normal(\mu,1)$, tek gözlem. $H_0:\mu=0$ vs $H_1:\mu=2$. $\alpha=0.05$ için NP testini bul ve gücü hesapla.
+\end{alistirma}
+\alcozum{%
+$\Lambda(x)=\exp(2x-2)>k\iff x>c$. $\Prob_0(X>c)=0.05\Rightarrow c=1.645$. Güç: $\Prob_2(X>1.645)=\Prob(\Normal(2,1)>1.645)=\Phi(0.355)\approx0.639$.%
+}
+
+\alistirmalar
+
+\begin{alistirma}[Al.14.3]{A}{$\chi^2$ varyans testi}
+$n=20$ gözlem; $s^2=18.5$. $H_0:\sigma^2=15$ vs $H_1:\sigma^2>15$. $\alpha=0.05$ için $Q$ hesapla ve karar ver.
+\end{alistirma}
+\alcozum{%
+$Q=19\cdot18.5/15=23.43$. $\chi^2_{19,0.05}=30.14$. $Q<30.14$: $H_0$ reddedilemez.%
+}
+
+\begin{alistirma}[Al.14.4]{B}{Olabilirlik oran testi — Poisson}
+$X_1,\ldots,X_{20}\iid\Pois(\lambda)$, $\sum x_i=38$. $H_0:\lambda=1.5$ vs $H_1:\lambda\neq1.5$ için ORT'yi hesapla ve Wilks yaklaşımıyla $p$-değerini bul.
+\end{alistirma}
+\alcozum{%
+$\MLE\lambda=\bar{x}=1.9$. $-2\log\Lambda=-2[20(\log1.5-\log1.9)+20(1.9-1.5)]=2[20\log(1.9/1.5)-8]=2[20\cdot0.2357-8]=2[4.714-8]=-2(-3.286)=6.57$. Wilks: $\chi^2_1$; $p=\Prob(\chi^2_1>6.57)\approx0.010$. $H_0$ reddedilir.%
+}
+
+\begin{alistirma}[Al.14.5]{B}{Güç analizi}
+$X_1,\ldots,X_n\iid\Normal(\mu,4)$. $H_0:\mu=0$ vs $H_1:\mu=1$; $\alpha=0.05$. Gücü \%80'e çıkarmak için kaç gözlem gerekli?
+\end{alistirma}
+\alcozum{%
+Güç $=\Phi(\sqrt{n}\cdot1/2-z_{0.05})=\Phi(\sqrt{n}/2-1.645)$. \%80 için $\Phi^{-1}(0.80)=0.842$: $\sqrt{n}/2-1.645=0.842\Rightarrow\sqrt{n}=4.974\Rightarrow n=24.74\Rightarrow n=25$.%
+}
+
+\begin{alistirma}[Al.14.6]{C}{UMP yokluğu — iki yönlü}
+$X_1,\ldots,X_n\iid\Normal(\mu,1)$. $H_0:\mu=0$ vs $H_1:\mu\neq0$. UMP testin var olmadığını göster. \textit{(İpucu: $\mu=\delta>0$ için NP ve $\mu=-\delta$ için NP farklı red bölgesi gerektirir.)}
+\end{alistirma}
+\alcozum{%
+$H_1:\mu=\delta>0$ için NP red bölgesi $\bar{X}>c$ (sağ kuyruk). $H_1:\mu=-\delta<0$ için NP $\bar{X}<-c$ (sol kuyruk). Bu iki bölge farklı; tek bir $\phi$ her ikisi için UMP olamaz. Dolayısıyla $H_1:\mu\neq0$ için UMP test yoktur.%
+}
+
+\begin{alistirma}[Al.14.7]{C}{Bonferroni vs BH}
+$m=10$ hipotez testi, $p$-değerleri: $0.001, 0.008, 0.039, 0.041, 0.042, 0.06, 0.1, 0.12, 0.3, 0.8$. $\alpha=0.05$ için (a) Bonferroni ve (b) BH yöntemiyle kaç hipotez reddedilir?
+\end{alistirma}
+\alcozum{%
+(a) Bonferroni: $0.05/10=0.005$; sadece $p=0.001$ ve $p=0.008$ bu eşiğin altında; 2 red. (b) BH: $p_{(k)}\leq k\cdot0.05/10=0.005k$. $k=1:0.001\leq0.005$\checkmark; $k=2:0.008\leq0.010$\checkmark; $k=3:0.039\leq0.015$ — hayır. $k^*=2$; 2 red. (Bu örnekte eşit sonuç; genel olarak BH daha fazla reddeder.)%
+}
