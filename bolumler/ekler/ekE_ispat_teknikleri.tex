@@ -1,0 +1,118 @@
+%% ============================================================
+%% EK E — Sık Kullanılan İspat Teknikleri
+%% Olasılık Teorisi ve Matematiksel İstatistik
+%% ============================================================
+\chapter{Sık Kullanılan İspat Teknikleri}
+\label{app:ispat_teknikleri}
+
+Bu ek, olasılık teorisi ve matematiksel istatistikte sıkça başvurulan ispat tekniklerini özetler. Her teknik için kısa açıklama ve kitaptaki somut uygulamalar verilir.
+
+%% ============================================================
+\section{Sınır Geçirme: MYT, Fatou, BYT}
+\label{app:sinir_gecirme}
+%% ============================================================
+
+Sınır geçirme argümanları, $\lim$ ile $\int$'ı değiştirmek için kullanılır.
+
+\begin{itemize}
+  \item \textbf{MYT (Monoton Yakınsama):} $f_n\uparrow f$, $f_n\geq0$ ise $\int f_n\uparrow\int f$.
+  \item \textbf{Fatou:} $f_n\geq0$ ise $\int\liminf f_n\leq\liminf\int f_n$.
+  \item \textbf{BYT (Baskınlıklı):} $f_n\to f$, $|f_n|\leq g$, $\int g<\infty$ ise $\int f_n\to\int f$.
+\end{itemize}
+
+\noindent\textbf{Uygulama:} Karakteristik fonksiyon türevi, Fisher bilgisi türetimi.
+
+%% ============================================================
+\section{$\pi$-$\lambda$ (Dynkin) Argümanı}
+\label{app:pi_lambda}
+%% ============================================================
+
+Bir özelliğin tüm olaylar üzerinde geçerli olduğunu kanıtlamak için:
+\begin{enumerate}
+  \item Özelliğin $\pi$-sistem (kesişim altında kapalı koleksiyon) üzerinde geçerli olduğunu göster.
+  \item Özelliği taşıyan kümelerin $\lambda$-sistem (monoton sınıflara kapalı) oluşturduğunu göster.
+  \item Dynkin: $\pi$-sistemin ürettiği $\sigma$-cebir, $\lambda$-sistemde.
+\end{enumerate}
+
+\noindent\textbf{Uygulama:} Kolmogorov 0-1 Kanunu (Böl.~\ref{chp:buyuk_sayilar}), bağımsızlığın $\sigma$-cebiri karakterizasyonu.
+
+%% ============================================================
+\section{Kırpma Yöntemi}
+\label{app:kirpma}
+%% ============================================================
+
+$X$ rasgele değişken, $c>0$: $X^{(c)} = X\mathbf{1}[|X|\leq c]$ (kırpılmış). Strateji:
+\begin{enumerate}
+  \item Kırpılmış $X^{(c)}$ için sonucu kanıtla (sınırlı değişken, kolay).
+  \item $c\to\infty$ alarak orijinal değişkene geç (Fatou/BYT).
+\end{enumerate}
+
+\noindent\textbf{Uygulama:} Genel ZBSK (Böl.~\ref{chp:buyuk_sayilar}), MLE tutarlılık ispatı.
+
+%% ============================================================
+\section{Cauchy-Schwarz ve Jensen Kullanımı}
+\label{app:cs_jensen}
+%% ============================================================
+
+\begin{itemize}
+  \item \textbf{Cauchy-Schwarz:} $[\Cov(X,Y)]^2\leq\Var(X)\Var(Y)$. Cramér-Rao ispatının kalbi.
+  \item \textbf{Jensen ($f$ konveks):} $f(\Beklenti[X])\leq\Beklenti[f(X)]$. Markov eşitsizliğinin üreteci; entropide bilgi eşitsizliği.
+\end{itemize}
+
+%% ============================================================
+\section{Moment Üretici Fonksiyon (MÜF) Argümanı}
+\label{app:muf_arguman}
+%% ============================================================
+
+$M_X(t)=\Beklenti[e^{tX}]$ bir çevresinde sonlu ise dağılımı yegâne belirler. MÜF/KF çarpım özelliği bağımsız toplamların dağılımını verir.
+
+\noindent\textbf{Uygulama:} Binom$\to$Poisson limiti, çarpım yapısı ispatları.
+
+%% ============================================================
+\section{Slütseva Teoremi}
+\label{app:slutseva}
+%% ============================================================
+
+$X_n\dto X$ ve $Y_n\pto c$ (sabit) ise:
+\[
+  X_n+Y_n\dto X+c, \quad X_nY_n\dto cX, \quad X_n/Y_n\dto X/c \;(c\neq0).
+\]
+
+\noindent\textbf{Uygulama:} Her asimptotik normallik ispatında ($\hat\sigma\to\sigma$), $t$-istatistiği asimptotiği.
+
+%% ============================================================
+\section{Varyans Ayrışımı}
+\label{app:varyans_ayrisim}
+%% ============================================================
+
+$\Var(Y) = \Beklenti[\Var(Y\mid X)] + \Var(\Beklenti[Y\mid X])$.
+
+\noindent\textbf{Uygulama:} Rao-Blackwell teoremi, karışık modellerde varyans bileşenleri.
+
+%% ============================================================
+\section{Simetri Argümanı}
+\label{app:simetri}
+%% ============================================================
+
+Bir rasgele değişken simetrisi ve değişim argümanı:
+\begin{itemize}
+  \item $X\overset{d}{=}-X$ ise $\Beklenti[X]=0$ (varsa).
+  \item İzotropik dağılımlar: $\mathbf{X}\overset{d}{=}O\mathbf{X}$ her ortogonal $O$ için.
+\end{itemize}
+
+\noindent\textbf{Uygulama:} Normal popülasyon teoremi (ortogonal dönüşüm invariansı), işaret testi argümanları.
+
+%% ============================================================
+\section{Karakteristik Fonksiyon İspatı Akışı}
+\label{app:kf_ispat_akisi}
+%% ============================================================
+
+MLT'nin KF ispatı şu adımları izler:
+\begin{enumerate}
+  \item $\varphi_{\bar{X}_n}(t) = [\varphi_{X_1}(t/\sqrt{n})]^n$ (bağımsız toplam KF çarpım özelliği).
+  \item Taylor: $\varphi_{X_1}(u) = 1 - \sigma^2 u^2/2 + o(u^2)$ ($u\to0$).
+  \item $[1-\sigma^2t^2/(2n)+o(1/n)]^n\to e^{-\sigma^2t^2/2}$ ($n\to\infty$).
+  \item Levy süreklilik teoremi: $\Normal(0,\sigma^2)$'ye yakınsama.
+\end{enumerate}
+
+Bu akış Bölüm~\ref{chp:merkezi_limit}'te tam detayla sunulmuştur.

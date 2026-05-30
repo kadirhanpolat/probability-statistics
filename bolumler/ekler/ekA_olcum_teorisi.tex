@@ -1,0 +1,77 @@
+%% ============================================================
+%% EK A — Ölçüm Teorisi Temelleri
+%% Olasılık Teorisi ve Matematiksel İstatistik
+%% ============================================================
+\chapter{Ölçüm Teorisi Temelleri}
+\label{app:olcum_teorisi}
+
+Bu ek, kitap boyunca kullanılan ölçüm ve integral teorisinin temel sonuçlarını özetlemektedir. İspatsız verilen lemma ve teoremlerin referansları Billingsley (1995) ve Klenke (2014)'dedir.
+
+%% ============================================================
+\section{Sigma-Cebirler ve Ölçüler}
+\label{app:sigma_olcu}
+%% ============================================================
+
+\begin{tanim}[Halka ve cebir]\label{app:def:halka}
+$\mathcal{R}\subseteq 2^\Omega$: eğer $A,B\in\mathcal{R}\Rightarrow A\cup B, A\setminus B\in\mathcal{R}$ ise \textbf{halka} \emph{(ring)}. Boşluk içeriyorsa \textbf{cebir} \emph{(algebra)}.
+\end{tanim}
+
+\begin{tanim}[$\sigma$-cebiri ve ölçü uzayı]
+$\mathcal{F}\subseteq 2^\Omega$, $\sigma$-cebiri: $\Omega\in\mathcal{F}$; $A\in\mathcal{F}\Rightarrow A^c\in\mathcal{F}$; sayılabilir birleşim altında kapalı. $(\Omega,\mathcal{F})$ \textbf{ölçülebilir uzay} \emph{(measurable space)}. $\mu:\mathcal{F}\to[0,\infty]$ sonlu-eklenebilir ve $\sigma$-eklenebilir ise \textbf{ölçü} \emph{(measure)}.
+\end{tanim}
+
+\begin{teorem}[Caratheodory genişletme — özet]\label{app:thm:caratheodory}
+$\mu_0$ halka üzerinde $\sigma$-sonlu ön-ölçü ise $\sigma(\mathcal{R})$ üzerinde yegâne ölçü $\mu$ ile $\mu\big|_\mathcal{R}=\mu_0$.
+\end{teorem}
+
+\begin{teorem}[Lebesgue ölçüsü]\label{app:thm:lebesgue_olcu}
+$(\mathbb{R},\mathcal{B}(\mathbb{R}),\lambda)$ Lebesgue ölçü uzayı: $\lambda([a,b])=b-a$; Caratheodory genişletmesiyle yegâne belirlenir.
+\end{teorem}
+
+%% ============================================================
+\section{Ölçülebilir Fonksiyonlar ve Lebesgue İntegrali}
+\label{app:lebesgue_integral}
+%% ============================================================
+
+\begin{teorem}[Basit fonksiyon yakınsama]\label{app:thm:basit_yakin}
+$f\geq0$ ölçülebilir ise $f_n\uparrow f$ n.k.\ ($f_n$ basit) olan artan basit fonksiyon dizisi vardır.
+\end{teorem}
+
+\begin{teorem}[Monoton Yakınsama Teoremi]\label{app:thm:myt}
+$0\leq f_n\uparrow f$ n.k.\ ise $\int f_n\,d\mu\uparrow\int f\,d\mu$.
+\end{teorem}
+
+\begin{teorem}[Fatou Lemması]\label{app:thm:fatou}
+$f_n\geq0$ ise $\int\liminf f_n\,d\mu\leq\liminf\int f_n\,d\mu$.
+\end{teorem}
+
+\begin{teorem}[Baskınlıklı Yakınsama Teoremi]\label{app:thm:byt}
+$f_n\to f$ n.k., $|f_n|\leq g$, $\int g<\infty$: $\int|f_n-f|\,d\mu\to0$ ve $\int f_n\,d\mu\to\int f\,d\mu$.
+\end{teorem}
+
+\begin{teorem}[Fubini-Tonelli]\label{app:thm:fubini}
+$(\Omega_1\times\Omega_2,\mathcal{F}_1\otimes\mathcal{F}_2,\mu_1\otimes\mu_2)$ çarpım uzayı. $f\geq0$ veya $\int|f|<\infty$ ise yinelenen integraller eşit:
+\[
+  \iint f\,d(\mu_1\otimes\mu_2) = \int\!\left(\int f\,d\mu_1\right)d\mu_2 = \int\!\left(\int f\,d\mu_2\right)d\mu_1.
+\]
+\end{teorem}
+
+\begin{teorem}[Radon-Nikodym]\label{app:thm:radon_nikodym}
+$\nu\ll\mu$ ($\nu$ mutlak sürekli $\mu$'ya göre). Yegâne $f\geq0$ ölçülebilir ile $\nu(A)=\int_A f\,d\mu$. $f = d\nu/d\mu$ \textbf{Radon-Nikodym türevi}.
+\end{teorem}
+
+%% ============================================================
+\section{Karakteristik Fonksiyon Sonuçları}
+\label{app:kf_sonuclar}
+%% ============================================================
+
+\begin{teorem}[Tersim formülü]\label{app:thm:tersim}
+$\varphi_X$ karakteristik fonksiyon, $F_X$ KDF. Süreklilik noktalarında:
+\[
+  F_X(b) - F_X(a) = \lim_{T\to\infty}\frac{1}{2\pi}\int_{-T}^T\frac{e^{-ita}-e^{-itb}}{it}\varphi_X(t)\,dt.
+\]
+\end{teorem}
+
+\begin{teorem}[Levy süreklilik teoremi]\label{app:thm:levy_sureklilk}
+$X_n\dto X \iff \varphi_{X_n}(t)\to\varphi_X(t)$ her $t$ için; ve $\varphi_X$ $t=0$'da sürekli.
+\end{teorem}
