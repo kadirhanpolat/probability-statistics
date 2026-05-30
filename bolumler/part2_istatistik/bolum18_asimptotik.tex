@@ -1,0 +1,263 @@
+%% ============================================================
+%% BÖLÜM 18 — Asimptotik İstatistik  [OPSİYONEL]
+%% Olasılık Teorisi ve Matematiksel İstatistik
+%% ============================================================
+\chapter{Asimptotik İstatistik}
+\label{chp:asimptotik}
+
+\bolumalinti{%
+  The virtue of the asymptotic approach is generality; its vice is the possibility
+  that the approximation may be poor for the sample sizes encountered in practice.
+}{Peter Bickel \& Kjell Doksum}
+
+\begin{kazanimlar}
+Bu bölümün sonunda okuyucu:
+\begin{itemize}
+  \item $\sqrt{n}$-tutarlılık ve asimptotik normallik kavramlarını tanımlar; delta yöntemiyle türetir.
+  \item Fonksiyonel merkezi limit teoremini (Donsker) sezgisel olarak açıklar.
+  \item Le Cam'ın yerel yakınsama yaklaşımını (LAN) tanımlar ve LAN ailelerinde optimum testi betimler.
+  \item U-istatistiklerini tanımlar ve asimptotik dağılımlarını Hoeffding projeksiyonuyla hesaplar.
+  \item M-tahmin edicilerinin (MLE, momentler, robust) genel asimptotik normalliğini uygular.
+  \item Semiparametrik modellerde verimlilik sınırını kavramsal olarak açıklar.
+\end{itemize}
+\end{kazanimlar}
+
+\begin{motivasyon}
+Sonlu örneklem istatistiği genellikle analitik olarak çözülemez. Asimptotik teori, büyük örneklem davranışını betimleyen güçlü araçlar sunar; modern istatistiğin matematiksel temeli budur.
+
+\medskip
+\noindent\textbf{Köprü:} Bölüm~\ref{chp:merkezi_limit}'teki MLT ve delta yöntemi, burada fonksiyonel ve çok boyutlu versiyonlara genişletilir.
+\end{motivasyon}
+
+%% ============================================================
+\section{$\sqrt{n}$-Tutarlılık ve Asimptotik Normallik}
+\label{sec:asimptotik_normallik}
+%% ============================================================
+
+\begin{tanim}[$\sqrt{n}$-tutarlılık]\label{def:sqrtn_tutarli}
+$T_n$ tahmin edici, $\sqrt{n}(T_n-\theta) = O_P(1)$ ise \textbf{$\sqrt{n}$-tutarlı} adını alır; yani her $\varepsilon>0$ için $M$ ve $n_0$ seçilebilir: $n\geq n_0 \Rightarrow \Prob(|\sqrt{n}(T_n-\theta)|>M)<\varepsilon$.
+\end{tanim}
+
+\begin{tanim}[Asimptotik normallik]\label{def:asimptotik_normal}
+$T_n$ \textbf{asimptotik normal}, $\sigma^2(\theta)$ \textbf{asimptotik varyans}: $\sqrt{n}(T_n-\theta)\dto\Normal(0,\sigma^2(\theta))$.
+\end{tanim}
+
+\begin{teorem}[Çok boyutlu delta yöntemi]\label{thm:delta_cok}
+$\sqrt{n}(\mathbf{T}_n-\boldsymbol{\theta})\dto\Normal_p(\mathbf{0},\Sigma)$ ve $g:\mathbb{R}^p\to\mathbb{R}^q$ $\boldsymbol{\theta}$'da türevlenebilir ($J_g$ Jacobian). O zaman:
+\[
+  \sqrt{n}(g(\mathbf{T}_n)-g(\boldsymbol{\theta}))\dto\Normal_q(\mathbf{0},J_g\Sigma J_g^\top).
+\]
+\end{teorem}
+
+\begin{proof}
+Taylor: $g(\mathbf{T}_n) - g(\boldsymbol{\theta}) = J_g(\boldsymbol{\theta})(\mathbf{T}_n-\boldsymbol{\theta}) + o(\|\mathbf{T}_n-\boldsymbol{\theta}\|)$. $\sqrt{n}\cdot o(\|\mathbf{T}_n-\boldsymbol{\theta}\|)\pto0$ (çünkü $\sqrt{n}(\mathbf{T}_n-\boldsymbol{\theta})=O_P(1)$ ve $\|\mathbf{T}_n-\boldsymbol{\theta}\|=O_P(1/\sqrt{n})$). Slütseva + sürekli harita teoremi.
+\end{proof}
+
+%% ============================================================
+\section{M-Tahmin Edicileri}
+\label{sec:m_tahmin}
+%% ============================================================
+
+\begin{tanim}[M-tahmin edici]\label{def:m_tahmin}
+$\rho:\mathcal{X}\times\Theta\to\mathbb{R}$ kayıp fonksiyonu. \textbf{M-tahmin edici}:
+\[
+  \hat\theta_n = \arg\min_{\theta\in\Theta} \frac{1}{n}\sum_{i=1}^n\rho(X_i,\theta).
+\]
+$\rho(x,\theta)=-\log f(x;\theta)$ seçimi MLE verir.
+\end{tanim}
+
+\begin{teorem}[M-tahmin edicinin asimptotik normalliği]\label{thm:m_asimptotik}
+Regularity koşulları ($\rho$ türevlenebilir, $\psi=\partial\rho/\partial\theta$) altında:
+\[
+  \sqrt{n}(\hat\theta_n-\theta_0)\dto\Normal\!\left(0, \frac{\Beklenti[\psi^2(X,\theta_0)]}{[\Beklenti[\dot\psi(X,\theta_0)]]^2}\right),
+\]
+$\dot\psi = \partial\psi/\partial\theta$.
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+Skor denklemi $\frac{1}{n}\sum\psi(X_i,\hat\theta_n)=0$'ı $\theta_0$ çevresinde Taylor:
+\[
+  0 = \frac{1}{n}\sum\psi(X_i,\theta_0) + (\hat\theta_n-\theta_0)\frac{1}{n}\sum\dot\psi(X_i,\theta^*).
+\]
+GBSK: $\frac{1}{n}\sum\dot\psi\asto\Beklenti[\dot\psi]$. MLT: $\frac{1}{\sqrt{n}}\sum\psi\dto\Normal(0,\Beklenti[\psi^2])$. Çöz: $\sqrt{n}(\hat\theta_n-\theta_0)\dto\Normal(0,\Beklenti[\psi^2]/\Beklenti[\dot\psi]^2)$.
+\end{proof}
+
+\begin{ornek}[Robust M-tahmin: Huber kaybı]\label{ex:huber}
+Huber kaybı:
+\[
+  \rho_c(x,\theta) = \begin{cases}(x-\theta)^2/2 & |x-\theta|\leq c \\ c|x-\theta|-c^2/2 & |x-\theta|>c\end{cases}
+\]
+Bu MLE ve medyan arasında köprü; aykırı değerlere karşı sağlam.
+\end{ornek}
+
+%% ============================================================
+\section{U-İstatistikleri}
+\label{sec:u_istatistikleri}
+%% ============================================================
+
+\begin{tanim}[U-istatistiği]\label{def:u_istatistik}
+$h(x_1,\ldots,x_m)$ simetrik çekirdek, $\theta = \Beklenti[h(X_1,\ldots,X_m)]$. \textbf{U-istatistiği}:
+\[
+  U_n = \binom{n}{m}^{-1}\sum_{1\leq i_1<\cdots<i_m\leq n}h(X_{i_1},\ldots,X_{i_m}).
+\]
+\end{tanim}
+
+\begin{ornek}[U-istatistik örnekleri]
+\begin{itemize}
+  \item $m=1$, $h(x)=x$: $U_n=\bar{X}_n$.
+  \item $m=2$, $h(x,y)=(x-y)^2/2$: $U_n=S^2$ (örneklem varyansı).
+  \item $m=2$, $h(x,y)=\mathbf{1}[x+y>0]$: Wilcoxon işaret-sıra bağlantısı.
+\end{itemize}
+\end{ornek}
+
+\begin{teorem}[Hoeffding projeksiyon]\label{thm:hoeffding}
+$h_1(x) = \Beklenti[h(x,X_2,\ldots,X_m)] - \theta$ (birinci dereceden Hoeffding projeksiyon). O zaman:
+\[
+  \sqrt{n}(U_n - \theta) \dto \Normal(0, m^2\sigma_1^2)
+\]
+$\sigma_1^2 = \Var(h_1(X_1))$ ile.
+\end{teorem}
+
+\begin{ispatiskele}
+$U_n - \theta = \frac{m}{n}\sum_{i=1}^n h_1(X_i) + R_n$ ayrışımı. $R_n = o_P(1/\sqrt{n})$ gösterilir (yüksek dereceli terimler). MLT: birinci terim $\sqrt{n}$-normalliği verir.
+\end{ispatiskele}
+
+%% ============================================================
+\section{Fonksiyonel Merkezi Limit Teoremi}
+\label{sec:fonksiyonel_mlt}
+%% ============================================================
+
+\begin{tanim}[Ampirik süreç]\label{def:ampirik_surec}
+$X_1,\ldots,X_n\iid F$. \textbf{Ampirik süreç}:
+\[
+  \mathbb{G}_n(t) = \sqrt{n}(F_n(t) - F(t)), \quad t\in\mathbb{R}.
+\]
+\end{tanim}
+
+\begin{teorem}[Donsker]\label{thm:donsker}
+$U_i = F(X_i)\iid\Uniform[0,1]$ olsun. O zaman $\mathbb{G}_n \dto \mathbb{B}$ \emph{(fonksiyonel yakınsama)}, $\mathbb{B}$ \textbf{Brownian köprü} \emph{(Brownian bridge)}:
+\begin{itemize}
+  \item $\mathbb{B}(0)=\mathbb{B}(1)=0$.
+  \item $\Beklenti[\mathbb{B}(s)\mathbb{B}(t)] = \min(s,t) - st$.
+\end{itemize}
+\end{teorem}
+
+\begin{ispatiskele}
+Yarı-metrik uzayda zayıf yakınsama. $D[0,1]$ Skorokhod uzayında sıkılık (tightness) ve finansal boyutsal yakınsama (MLT her sabit $t$'de) yeterli. Kolmogorov-Smirnov istatistiği $D_n=\|\mathbb{G}_n\|_\infty\dto\|\mathbb{B}\|_\infty$ = Kolmogorov dağılımı. Detay: van der Vaart (1998) Bölüm 19.
+\end{ispatiskele}
+
+%% ============================================================
+\section{Yerel Asimptotik Normallik (LAN)}
+\label{sec:lan}
+%% ============================================================
+
+\begin{tanim}[LAN koşulu]\label{def:lan}
+$\{P_{\theta+h/\sqrt{n}}^{(n)}\}$ dizi model. \textbf{Yerel asimptotik normallik (LAN)} şartı: her $h\in\mathbb{R}$ için
+\[
+  \log\frac{dP_{\theta+h/\sqrt{n}}^{(n)}}{dP_\theta^{(n)}} = h\Delta_n(\theta) - \frac{h^2}{2}\mathcal{I}(\theta) + o_{P_\theta}(1)
+\]
+$\Delta_n(\theta)\dto\Normal(0,\mathcal{I}(\theta))$ altında $P_\theta^{(n)}$.
+\end{tanim}
+
+\begin{teorem}[Optimum test — LAN modeli]\label{thm:lan_optimum}
+LAN koşulu altında $H_0:\theta=\theta_0$ vs $H_n:\theta=\theta_0+h/\sqrt{n}$. Yerel olarak en güçlü test: $\Delta_n(\theta_0)>z_\alpha$ (skor testi).
+\end{teorem}
+
+\begin{teorem}[Convolution teoremi]\label{thm:convolution}
+LAN modeli, $\sqrt{n}$-tutarlı $T_n$. O zaman $\sqrt{n}(T_n-\theta)$'nın asimptotik dağılımı $\Normal(0,1/\mathcal{I}(\theta))*\nu$ biçimindedir ($*$ konvolüsyon; $\nu$ dağılım). Dolayısıyla asimptotik varyans $\geq 1/\mathcal{I}(\theta)$ — Cramér-Rao'nun asimptotik versiyonu.
+\end{teorem}
+
+%% ============================================================
+\section{Asimptotik Göreli Verimlilik}
+\label{sec:asimptotik_verimlilik}
+%% ============================================================
+
+\begin{tanim}[ARE]\label{def:are}
+$T_n$ ve $T_n'$ asimptotik varyansları sırasıyla $\sigma^2$ ve $\sigma'^2$ olan iki tutarlı tahmin edici. \textbf{Asimptotik göreli verimlilik}:
+\[
+  \mathrm{ARE}(T_n,T_n') = \frac{\sigma'^2}{\sigma^2}.
+\]
+$\mathrm{ARE}>1$ ise $T_n$ daha verimli.
+\end{tanim}
+
+\begin{ornek}[Ortalama vs medyan — Normal]
+$X_i\iid\Normal(\mu,\sigma^2)$. $\bar{X}_n$: asimptotik varyans $\sigma^2$. Medyan $\tilde{X}_n$: asimptotik varyans $\pi\sigma^2/2$ (Normal yoğunluğu medyanda $1/(\sigma\sqrt{2\pi})$; medyan asimptotik varyans $= 1/(4f(m)^2)$). ARE$($ medyan, ortalama$) = \sigma^2/(\pi\sigma^2/2) = 2/\pi \approx 0.637$.
+
+Normal'de ortalama medyandan \%57 daha verimli. Ağır kuyrukta (Cauchy) ARE tersine döner.
+\end{ornek}
+
+\begin{teorem}[Pitman ARE — Wilcoxon vs $t$]\label{thm:pitman_are}
+Simetrik sürekli dağılımda Wilcoxon testinin $t$-testine karşı Pitman ARE'si:
+\[
+  \mathrm{ARE}(W,t) = 12\sigma^2\left[\int f^2(x)\,dx\right]^2.
+\]
+Normal'de $\mathrm{ARE}=3/\pi\approx0.955$; Logistik'te $=1$; Cauchy'de $\to\infty$.
+\end{teorem}
+
+\begin{ispatiskele}
+Her iki test asimptotik olarak normal; güç fonksiyonları $1-\beta=\Phi(c\cdot\mathrm{drift}/\sigma_T)$ biçimli. Eşit güç için gereken $n_W/n_t$ oranı $\mathrm{ARE}$'yi tanımlar. Detay: Lehmann (1975) §3.
+\end{ispatiskele}
+
+%% ============================================================
+
+\begin{mikroozet}
+\begin{itemize}
+  \item M-tahmin edicileri genel asimptotik normallik sağlar; paydaki oran Cramér-Rao'ya indirgenir.
+  \item U-istatistikleri: Hoeffding projeksiyonu $\sqrt{n}$-normalliği birinci dereceli projeksiyona indirir.
+  \item Donsker: ampirik süreç Brownian köprüye; KS'nin asimptotiği buradan gelir.
+  \item LAN + convolution: asimptotik Cramér-Rao sınırı, MLE optimalliğini kesinleştirir.
+\end{itemize}
+\end{mikroozet}
+
+\begin{ozyansima}
+Sonlu örneklem verimliliği ile asimptotik verimlilik çelişebilir mi? Hangi durumlarda asimptotik yaklaşım yanıltıcıdır?
+\end{ozyansima}
+
+\begin{kopru}
+\textbf{Nereden geldik:} Bölüm~\ref{chp:buyuk_sayilar} ve~\ref{chp:merkezi_limit}'teki yakınsama araçları bu bölümün analitik temeli.
+
+\textbf{Nereye gidiyoruz:} Bu kitabın kapsamı dışında kalan semiparametrik etkinlik (skor teoremi, varyans azaltma sınırları) için van der Vaart \emph{Asymptotic Statistics} (1998) kapsamlı referans.
+\end{kopru}
+
+%% ============================================================
+%% ALISTIRMALAR
+%% ============================================================
+
+\cozumlualistirmalar
+
+\begin{alistirma}[Al.18.1]{B}{Delta yöntemi — lognormal}
+$X_1,\ldots,X_n\iid\mathrm{LogNormal}(\mu,\sigma^2)$ ($\log X_i\sim\Normal(\mu,\sigma^2)$). $\Beklenti[X]=e^{\mu+\sigma^2/2}$ için MLE asimptotik dağılımını delta yöntemiyle bul.
+\end{alistirma}
+\alcozum{%
+MLE: $\hat\mu=\bar{Y}$, $\hat\sigma^2=\frac{1}{n}\sum(Y_i-\bar{Y})^2$ ($Y_i=\log X_i$). $\widehat{\Beklenti[X]}=\exp(\hat\mu+\hat\sigma^2/2)$. Delta yöntemi: $g(\mu,\sigma^2)=e^{\mu+\sigma^2/2}$; $\nabla g=(e^{\mu+\sigma^2/2}, e^{\mu+\sigma^2/2}/2)$. Asimptotik varyans: $(\Beklenti[X])^2(\sigma^2+\sigma^4/2)/n$ (Fisher bilgisi kullanılır).%
+}
+
+\begin{alistirma}[Al.18.2]{B}{U-istatistiği beklenti ve varyans}
+$h(x,y) = (x-y)^2/2$ çekirdeğiyle $m=2$ U-istatistiği. (a) $\theta=\Beklenti[h]=\Var(X)$ olduğunu göster. (b) Hoeffding projeksiyon $h_1(x)$'i hesapla. (c) Asimptotik varyansı bul.
+\end{alistirma}
+\alcozum{%
+(a) $\Beklenti[(X-Y)^2/2]=\Beklenti[(X-\mu)^2+(Y-\mu)^2]/2=\sigma^2$ ($X,Y$ bağımsız). (b) $h_1(x)=\Beklenti[h(x,X_2)]-\sigma^2=\Beklenti[(x-X_2)^2/2]-\sigma^2=(x-\mu)^2/2+\sigma^2/2-\sigma^2=(x-\mu)^2/2-\sigma^2/2$. (c) $\sigma_1^2=\Var((X-\mu)^2/2-\sigma^2/2)=\Var((X-\mu)^2)/4=(\mu_4-\sigma^4)/4$ ($\mu_4$=4. merkezi moment). Asimptotik varyans $4\sigma_1^2/n=(\mu_4-\sigma^4)/n$.%
+}
+
+\alistirmalar
+
+\begin{alistirma}[Al.18.3]{B}{M-tahmin: medyan asimptotik varyansı}
+$X_i\iid F$ sürekli, yoğunluk $f$. $\rho(x,\theta)=|x-\theta|$ seçimiyle M-tahmin edicinin $\hat\theta_n = $ medyan olduğunu ve asimptotik varyansının $1/(4f(m)^2)$ olduğunu göster.
+\end{alistirma}
+\alcozum{%
+$\psi(x,\theta)=\mathrm{sgn}(x-\theta)$; $\Beklenti[\psi^2]=1$. $\dot\psi(x,\theta)=-2\delta(x-\theta)$; $\Beklenti[\dot\psi]=-2f(\theta)$. M-tahmin formülü: asimptotik varyans $=1/(4f(\theta_0)^2)$. $\theta_0=m$ medyan.%
+}
+
+\begin{alistirma}[Al.18.4]{C}{ARE: Double-Exponential dağılımı}
+$X_i\iid\mathrm{DE}(\theta)=\frac{1}{2}e^{-|x-\theta|}$. Ortalama ve medyanın ARE'sini hesapla. Hangi tahmin edici daha verimli?
+\end{alistirma}
+\alcozum{%
+$f(x)=\frac12 e^{-|x|}$; $\sigma^2=2$ (DE varyansı). Ortalama asimptotik varyans: $2/n$. Medyan: $f(0)=1/2$; asimptotik varyans $1/(4\cdot(1/2)^2)=1$. ARE(medyan,ortalama)$=2/1=2$. DE'de medyan ortalamadan iki kat daha verimli (ağır kuyruk etkisi).%
+}
+
+\begin{alistirma}[Al.18.5]{C}{LAN koşulunu doğrula}
+$X_1,\ldots,X_n\iid\Normal(\theta,1)$. LAN koşulunun sağlandığını göster ve $\Delta_n(\theta)$'yı, $\mathcal{I}(\theta)$'yı belirle.
+\end{alistirma}
+\alcozum{%
+$\log\frac{dP_{\theta+h/\sqrt n}^{(n)}}{dP_\theta^{(n)}}=\frac{h}{\sqrt n}\sum(X_i-\theta)-\frac{h^2}{2}$. $\Delta_n(\theta)=\frac{1}{\sqrt{n}}\sum(X_i-\theta)\dto\Normal(0,1)=\Normal(0,\mathcal{I})$ ($\mathcal{I}(\theta)=1$). Kalan terim $o_P(1)$: LAN sağlanır.%
+}
