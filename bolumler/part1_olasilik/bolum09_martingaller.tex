@@ -361,6 +361,91 @@ $A\in\mathcal{F}$; $M_n = \Prob(A\mid\mathcal{F}_n)$. Kule özelliğinden martin
 \textbf{Finans:} Martingal fiyatlama — etkin piyasada hisse senedi fiyatı martingal. Opsiyon fiyatlaması: risksiz ölçü altında indirgenmiş fiyat martingal. \textbf{Sıralı istatistik:} İsteğe bağlı durma ile SPRT (Wald sıralı olabilirlik oranı testi). \textbf{Enformasyon teorisi:} Olabilirlik oranı martingali, iki model arasındaki ayrışmayı ölçer.
 \end{disiplinlerarasibaglan}
 
+% =====================================================================
+\section{Doob'un Ayrışım Teoremi}
+\label{sec:doob_ayrisim}
+% =====================================================================
+
+\begin{teorem}[Doob Ayrışımı]
+\label{thm:doob_ayrisim}
+Her $(X_n)_{n\geq0}$ altmartingal, tek türlü olarak
+\[
+  X_n = M_n + A_n
+\]
+şeklinde ayrışır; burada $(M_n)$ martingal ve $(A_n)$ \textbf{öngörülebilir}
+(predictable, yani $A_n$ $\mathcal{F}_{n-1}$-ölçülebilir), $A_0 = 0$ ve
+$A_n$ monoton artan dizidir.
+\end{teorem}
+
+\begin{proof}
+$A_0 = 0$ ve $A_{n+1} - A_n = E[X_{n+1}\mid\mathcal{F}_n] - X_n \geq 0$ (altmartingal)
+tanımlansın. $M_n = X_n - A_n$.
+$E[M_{n+1}\mid\mathcal{F}_n] = E[X_{n+1}\mid\mathcal{F}_n] - A_{n+1}
+= E[X_{n+1}\mid\mathcal{F}_n] - (E[X_{n+1}\mid\mathcal{F}_n] - X_n + A_n) = X_n - A_n = M_n$.
+Dolayısıyla $M_n$ martingal. Teklik: her iki ayrışım $X = M'+A'$ verilse $M-M' = A'-A$;
+sol taraf martingal, sağ taraf öngörülebilir; bu yalnızca $M=M'$, $A=A'$ ile mümkün.
+\end{proof}
+
+\begin{ornek}[Doob Ayrışımı — Rassal Yürüyüş]
+$S_n = \sum_{i=1}^n \xi_i$ ($E[\xi_i] = \mu > 0$, $\mathrm{Var}(\xi_i) = \sigma^2$).
+$S_n$ altmartingal (artan eğilim). Doob ayrışımı:
+$A_n = n\mu$ (öngörülebilir drift), $M_n = S_n - n\mu = \sum(\xi_i-\mu)$ martingal.
+Bu, trend-sıfırlama (detrending) işleminin martingal teorisi anlatımıdır.
+\end{ornek}
+
+\begin{ornek}[Kare İşlemi]
+$(M_n)$ martingal, $E[M_n^2]<\infty$. $M_n^2$ altmartingal; Doob ayrışımı:
+$M_n^2 = \widetilde{M}_n + \langle M\rangle_n$,
+burada $\langle M\rangle_n = \sum_{k=1}^n E[(M_k-M_{k-1})^2\mid\mathcal{F}_{k-1}]$: \textbf{öngörülebilir kare değişim süreci}.
+$E[\langle M\rangle_n] = E[M_n^2] - E[M_0^2]$.
+\end{ornek}
+
+\begin{sonuc}[Öngörülebilir Kare Değişim]
+$\langle M \rangle_n$, martingal $M$'nin "kümülatif belirsizliğini" ölçer.
+$X_i$ i.i.d., $E[X_i^2]=\sigma^2$: $S_n = \sum X_i$ için $\langle S\rangle_n = n\sigma^2$.
+Sürekli zamanlı analogi: Itô'nun kare değişim $\langle W\rangle_t = t$ (Wiener süreci).
+\end{sonuc}
+
+% =====================================================================
+\section{Azami Ortogonallik ve Martingal Farkları}
+\label{sec:martingal_farklari}
+% =====================================================================
+
+\begin{tanim}[Martingal Fark Dizisi]
+$(d_n)_{n\geq1}$ \textbf{martingal fark dizisi} (MFD): her $n\geq1$ için
+$E[d_n\mid\mathcal{F}_{n-1}] = 0$ ve $d_n$ $\mathcal{F}_n$-ölçülebilir.
+$S_n = \sum_{k=1}^n d_k$ martingal.
+\end{tanim}
+
+\begin{onerme}[MFD Ortogonalliği]
+$(d_n)$ MFD ve $E[d_n^2]<\infty$. O zaman $d_m \perp d_n$ ($m\neq n$, $L^2$ iç çarpımı):
+$E[d_m d_n] = 0$.
+\end{onerme}
+
+\begin{proof}
+$m < n$ WLOG. $E[d_m d_n] = E[d_m E[d_n\mid\mathcal{F}_{n-1}]] = E[d_m \cdot 0] = 0$.
+($d_m$ $\mathcal{F}_m \subseteq \mathcal{F}_{n-1}$-ölçülebilir; kule özelliği.)
+\end{proof}
+
+\begin{teorem}[MFD ile Varyans]
+$(d_n)$ MFD, $E[d_n^2]<\infty$. $S_n = \sum_{k=1}^n d_k$:
+\[
+  E[S_n^2] = \sum_{k=1}^n E[d_k^2].
+\]
+Özellikle: $\mathrm{Var}(S_n) = \sum_{k=1}^n \mathrm{Var}(d_k)$ (bağımsız değil ama ortogonal).
+\end{teorem}
+
+\begin{proof}
+$S_n^2 = (\sum d_k)^2 = \sum d_k^2 + 2\sum_{j<k} d_j d_k$.
+Çapraz terimlerin beklentisi ortogonallikten sıfır: $E[S_n^2] = \sum E[d_k^2]$.
+\end{proof}
+
+\begin{ornek}[Bağımlı Dizilerde Varyans]
+$X_i$ bağımlı ama MFD oluşturuyor ($E[X_i\mid\mathcal{F}_{i-1}]=0$).
+$\sum_{k=1}^n E[X_k^2]$ varyans formülü; standart bağımsızlık yaklaşımı gerekmez.
+Bu, zaman serisi analizinde koşullu heteroskedastisite modellerinin temelidir.
+\end{ornek}
+
 % ---- Öz-Yansıtma ----
 \begin{ozyansima}
 \begin{itemize}[leftmargin=1.8em]
