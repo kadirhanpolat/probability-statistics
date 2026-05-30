@@ -209,6 +209,10 @@ $T_n = \sqrt{n}(\bar{X}_n-\mu)/S \xrightarrow{d} \Normal(0,1)$ (Slutsky).
 $n$ gözlemden elde edilen tüm bilgi için $T(X_1,\ldots,X_n)$'yi hesaplamak yeterli mi?
 Yani $T$'yi bilince, orijinal veriyi $\theta$ hakkında daha fazla bilgi için kullanabilir miyiz?
 Yanıt "hayır" ise $T$ yeterli istatistik adını alır.
+\kesifcevap{Fisher-Neyman çarpanlanma teoremi: $T$ yeterli $\Leftrightarrow$
+  $f(\mathbf{x};\theta)=g(T(\mathbf{x});\theta)\cdot h(\mathbf{x})$.
+  Yeterli istatistik, $\theta$'ya bağlı tüm bilgiyi içinde taşır;
+  kalan veri $\theta$ için ek bilgi vermez. Normal'de $(\bar X, S^2)$ yeterlidir.}
 \end{kesif}
 
 \begin{tanimgerekce}
@@ -486,6 +490,10 @@ $T$ yeterli ve $V$ herhangi bir istatistik. Eğer $\Prob_\theta(V\leq v\mid T=t)
 
 \begin{kesif}
 Frekansçı istatistikte $\theta$ sabit (bilinmeyen) bir değerdir; Bayesçi istatistikte ise $\theta$ da rasgele bir değişkendir ve ona dair önsel (prior) inancımızı bir olasılık dağılımı olarak ifade ederiz.
+\kesifcevap{Frekansçı: $\theta\in\Theta$ sabit; olasılık büyük örneklem frekansıdır.
+  Bayesçi: $\theta\sim\pi(\theta)$; veriyi görerek $\pi(\theta|\mathbf{x})\propto L(\theta;\mathbf{x})\pi(\theta)$.
+  Temel fark: parametrenin ontolojik statüsü — sabit mi, rasgele mi?
+  İkisi farklı hedefler seçer; güven aralığı $\neq$ credible interval.}
 \end{kesif}
 
 \begin{tanim}[Bayes teoremi — istatistik]\label{def:bayes_istatistik}

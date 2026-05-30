@@ -372,6 +372,10 @@ Cox modelinde $\hat\beta$ kısmi olabilirlik MLE'si; $\lambda_0$ tahmin edilmeks
 
 \begin{kesif}
 $n<p$ durumunda (gözlem sayısı parametre sayısından az) EKK çözümü belirsiz; $\hat{\boldsymbol\beta}=(\mathbf{X}^\top\mathbf{X})^{-1}\mathbf{X}^\top\mathbf{Y}$ yoktur. Hangi araçlar gerekli?
+\kesifcevap{$n<p$'de $\mathbf{X}^\top\mathbf{X}$ tekil: EKK çözümü belirsiz.
+  Ridge: $(\mathbf{X}^\top\mathbf{X}+\lambda I)^{-1}\mathbf{X}^\top\mathbf{Y}$ ($L_2$ düzenleme).
+  Lasso: $L_1$ ceza ile değişken seçimi + büzme. Elastik ağ: ikisinin konveks karışımı.
+  Seçim kriteri: çapraz doğrulama ile $\lambda$ ayarı.}
 \end{kesif}
 
 \begin{tanim}[Seyreklik varsayımı]\label{def:seyreklik}

@@ -150,15 +150,38 @@
 
 % =====================================================================
 % 13) OGRENCI YAZMA / KARALAMA ALANI (entegre defter)
-%     \ogrencialani[yukseklik]  (varsayilan 3cm), cizgili zemin
+%     \ogrencialani[yukseklik]  (varsayilan 3cm), kareli defter zemini
 % =====================================================================
+\definecolor{maIzgara}{HTML}{BBDEFB}   % acik mavi izgara rengi
+
 \newcommand{\ogrencialani}[1][3cm]{%
   \par\vspace{1mm}%
-  \begin{tcolorbox}[enhanced, breakable, colback=white, colframe=black!25,
-      boxrule=0.4pt, sharp corners, height=#1,
-      interior style={pattern=horizontal lines, pattern color=black!8}]
-  \mbox{}
+  \begin{tcolorbox}[enhanced, breakable, colback=white, colframe=maIzgara!80!blue,
+      boxrule=0.5pt, sharp corners, height=#1, left=0mm, right=0mm, top=0mm, bottom=0mm,
+      underlay={%
+        \begin{tcbclipinterior}
+          \fill[white] (interior.south west) rectangle (interior.north east);
+          \draw[maIzgara, step=5mm, very thin]
+            (interior.south west) grid (interior.north east);
+          \draw[blue!40, step=25mm, thin]
+            (interior.south west) grid (interior.north east);
+        \end{tcbclipinterior}%
+      }]
   \end{tcolorbox}\par\vspace{1mm}}
+
+% ---- Kesif yazma alani: ogrencide izgara, egitmende cevap kutusu ----
+%  \kesifcevap{beklenen yanit metni}
+\newcommand{\kesifcevap}[1]{%
+  \ifmaarifcozum
+    \par\noindent
+    \begin{tcolorbox}[maarif@base, colframe=maKesif!75!black,
+        colback=maKesif!7, colbacktitle=maKesif!80!black,
+        title={Beklenen Yanıt}]
+      #1
+    \end{tcolorbox}
+  \else
+    \ogrencialani[4cm]%
+  \fi}
 
 % =====================================================================
 % 14) NOTEBOOK / DIJITAL KATMAN BAGLANTISI

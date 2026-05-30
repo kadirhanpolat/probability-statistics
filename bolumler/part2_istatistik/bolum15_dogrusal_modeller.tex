@@ -303,6 +303,10 @@ Yüksek leverage ($h_{ii}$ büyük) mutlaka etkili nokta olmayabilir: $x_i$ uç 
 
 \begin{kesif}
 Normal hata varsayımını kaldıralım: ikili yanıt (0/1), sayma verisi (Poisson), süre (Gama). Bu yanıtlar için doğrusal model uygun değildir — bağlantı fonksiyonu (link function) devreye girer.
+\kesifcevap{GLM: $g(E[Y])=\mathbf{x}^\top\boldsymbol\beta$ (bağlantı fonksiyonu $g$).
+  Lojistik regresyon: $g=\mathrm{logit}$, $Y\sim\mathrm{Bernoulli}$.
+  Poisson regresyon: $g=\log$, $Y\sim\mathrm{Poisson}$.
+  Üstel aile üyeleri olduğu için MLE'ye IRLS (yinelemeli ağırlıklı EKK) uygulanır.}
 \end{kesif}
 
 \begin{tanim}[GLM]\label{def:glm}

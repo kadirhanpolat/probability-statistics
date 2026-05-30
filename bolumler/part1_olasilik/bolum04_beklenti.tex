@@ -56,6 +56,9 @@ $\frac{1}{6}(1+2+3+4+5+6) = 3.5$.
 Bu hesap $\sum_x x \cdot P(X=x)$ formülünü izliyor.
 Peki ya sürekli dağılımlar? Ya da karma dağılımlar?
 Tüm bu durumları kapsayan tek bir tanım mümkün müdür?
+\kesifcevap{Lebesgue integrali tüm durumları kapsar: $E[X]=\int_\Omega X\,dP$.
+  Ayrık: $\sum_x x P(X=x)$; sürekli: $\int_{-\infty}^\infty x f(x)\,dx$;
+  karma: $\int x\,dF_X(x)$ (Lebesgue-Stieltjes). Tek tanım, üç görünüm.}
 \end{kesif}
 
 \begin{tanimgerekce}
@@ -353,6 +356,10 @@ Genel: $E[(X-\mu)^{2k}] = (2k-1)!! \cdot \sigma^{2k}$ (çift momentler formülü
 \begin{kesif}
 Bir rasgele değişkenin tüm momentlerini ($E[X], E[X^2], E[X^3], \ldots$) tek bir
 fonksiyona kodlayabilir miyiz? Ve bu fonksiyon dağılımı tam olarak belirler mi?
+\kesifcevap{MGF: $M_X(t)=E[e^{tX}]$; karakteristik fonksiyon: $\varphi_X(t)=E[e^{itX}]$.
+  $M_X^{(k)}(0)=E[X^k]$ ile tüm momentler kodlanır. Karakteristik fonksiyon
+  her zaman var olur; Lévy ters dönüşüm teoremi ile dağılımı biricik belirler.
+  İki rasgele değişkenin KF'leri eşitse dağılımları özdeştir.}
 \end{kesif}
 
 \begin{tanim}[Moment Üreten Fonksiyon]
@@ -554,6 +561,10 @@ $X$'in değerini bildiğimizde $Y$ için en iyi tahminimiz nedir?
 Sezgisel olarak $E[Y \mid X = x] = 2x$ diyoruz.
 Peki ya $X$ yerine bir olay $\mathcal{G}$ verildiğinde?
 "En iyi tahmin" kavramını nasıl soyutlarız?
+\kesifcevap{$E[Y|\mathcal{G}]$ — $\mathcal{G}$-ölçülebilir ve $L^2$-dik izdüşümü:
+  $E[(Y-E[Y|\mathcal{G}])Z]=0$ her $\mathcal{G}$-ölçülebilir $Z$ için.
+  $\mathcal{G}=\sigma(X)$ seçilince $E[Y|X=x]$ klasik tanıma döner.
+  Bu soyutlama martingal teorisi ve filtrasyon yapısının temelidir.}
 \end{kesif}
 
 \begin{tanim}[Koşullu Beklenti — Elemanter]

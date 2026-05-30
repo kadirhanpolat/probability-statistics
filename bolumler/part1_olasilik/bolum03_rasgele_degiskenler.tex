@@ -61,6 +61,9 @@ Eğer $A = \{1\} \subset \mathbb{R}$ ise $\{X \in A\} = \{T\}$ olayı
 olasılık uzayında tanımlı olmalı — yani $\mathcal{F}$'ye ait olmalıdır.
 Peki ya $A = (0.5, 1.5)$ veya $A = \emptyset$ için?
 Tüm Borel kümelerine bu özelliği istiyorsak ne elde ederiz?
+\kesifcevap{$X$ rasgele değişken olmak için $\forall A \in \mathcal{B}(\mathbb{R}): X^{-1}(A) \in \mathcal{F}$ gerekir.
+  $A=(0.5,1.5)$: $X^{-1}(A)=\{T\}\in\mathcal{F}$. $A=\emptyset$: $X^{-1}(\emptyset)=\emptyset\in\mathcal{F}$.
+  Tüm Borel kümelerine bu özelliği istemek $\mathcal{B}(\mathbb{R})$/$\mathcal{F}$-ölçülebilirliği tanımlar.}
 \end{kesif}
 
 \begin{tanimgerekce}
@@ -173,6 +176,9 @@ $X$ bir rasgele değişken. $P(X \leq 1.5)$, $P(X \leq 3.7)$ gibi değerleri
 biliyorsak $X$ hakkında ne kadar bilgi sahibi oluruz?
 Eğer tüm $c \in \mathbb{R}$ için $P(X \leq c)$ değerlerini biliyorsak,
 bu yeterli midir — yani bu değerler $X$'in dağılımını tamamen belirler mi?
+\kesifcevap{Evet. $F_X(c)=P(X\leq c)$ tüm $c\in\mathbb{R}$ için bilinirse,
+  her yarı-kapalı aralığın ve dolayısıyla her Borel kümesinin olasılığı
+  türetilir. Dağılım fonksiyonu, olasılık ölçüsünü $\mathbb{R}$ üzerinde biricik olarak belirler.}
 \end{kesif}
 
 \begin{tanim}[Kümülatif Dağılım Fonksiyonu]
@@ -308,6 +314,10 @@ Bir terazi ibresi [0,1] aralığında rasgele bir değere işaret ediyor.
 $P(X = 0.5) = ?$ — sonsuz çok nokta var, her birinin olasılığı sıfır olmalı.
 Peki $P(0.3 \leq X \leq 0.7) = ?$ Bu sıfır değil.
 Nasıl bir kavramla olasılıkları hesaplayabiliriz?
+\kesifcevap{Sürekli dağılımlarda $P(X=c)=0$ her $c$ için. Yoğunluk $f_X\geq 0$ ile
+  $P(a\leq X\leq b)=\int_a^b f_X(x)\,dx$. Uniform $[0,1]$'de $f_X\equiv 1$ ve
+  $P(0.3\leq X\leq 0.7)=0.4$. Yoğunluk, tekil noktalarda değil aralıklarda
+  olasılık hesabını mümkün kılar.}
 \end{kesif}
 
 \begin{tanimgerekce}

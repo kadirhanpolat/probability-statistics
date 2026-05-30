@@ -36,6 +36,9 @@ Normal dağılım varsayımı zaman zaman geçersizdir: çarpık dağılımlar, 
 
 \begin{kesif}
 Sürekli dağılım medyanı $m$ için $X_i>m$ veya $X_i<m$ ikili bilgisi kullanılabilir. $H_0:m=m_0$ altında bu ikili değerlerin dağılımı nedir?
+\kesifcevap{$H_0:m=m_0$ altında $S=\sum\mathbf{1}(X_i>m_0)\sim\mathrm{Binom}(n,1/2)$.
+  Test: $p=2\min(P(S\leq s_\text{obs}),P(S\geq s_\text{obs}))$ iki yönlü.
+  Güç düşük ama tam dağılımdan bağımsız (distribution-free) ve süreklilik gerekmez.}
 \end{kesif}
 
 \begin{tanim}[İşaret testi]\label{def:isaret_testi}
@@ -286,6 +289,10 @@ Sonuç: Wilcoxon normalliği hiçbir zaman çok fazla kaybetmez; ağır kuyrukta
 
 \begin{kesif}
 Tahmin edicimizin standart hatasını analitik olarak hesaplayamıyorsak ne yaparız? Bootstrap fikri: gerçek popülasyondan örnekleme yerine, elimizdeki veriyi popülasyon gibi kullan ve yeniden örnekle.
+\kesifcevap{Nonparametrik bootstrap: $\hat{F}_n$'den geri koyarak $B$ tekrar örnekle.
+  Her tekrarda $T^*=T(X_1^*,\ldots,X_n^*)$ hesapla; kantilleri GA için kullan.
+  Parametrik bootstrap: $\hat\theta$'dan model simüle eder.
+  Kural: $B\geq 1000$ yeterli; BCa (bias-corrected) CI daha güvenilir.}
 \end{kesif}
 
 \begin{tanim}[Bootstrap]\label{def:bootstrap}
@@ -373,6 +380,10 @@ Spearman $r_S$ ve Kendall $\tau$ her zaman aynı işareti verir; fakat değerler
 
 \begin{kesif}
 Bir histogramın kutu genişliği (bin width) yoğunluk tahminini etkiler. Daha pürüzsüz bir alternatif: her gözlemin çevresine küçük bir çekirdek (kernel) yerleştir; bu çekirdeklerin toplamı yoğunluk tahmini olur.
+\kesifcevap{$\hat{f}_h(x)=\frac{1}{nh}\sum_{i=1}^n K\!\left(\frac{x-X_i}{h}\right)$.
+  Bant genişliği $h$: küçük → yüksek varyans, büyük → aşırı düzleştirme.
+  Silverman kuralı: $h=1.06\hat\sigma n^{-1/5}$ Normal çekirdeği için optimal.
+  $L_2$ risk minimizasyonu cross-validation ile $h$ seçimini verir.}
 \end{kesif}
 
 \begin{tanim}[Çekirdek yoğunluk tahmincisi]\label{def:kde}

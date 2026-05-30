@@ -35,6 +35,9 @@ Bu bölümün sonunda okuyucu:
 
 \begin{kesif}
 $X_1,\ldots,X_n \sim \Normal(\mu,\sigma^2)$ i.i.d.\ olsun. $\mu$'yü nasıl tahmin ederiz? Doğal yanıt $\overline{X}_n$'dir. Peki neden bu iyi bir seçim? Başka seçenekler var mı?
+\kesifcevap{$\overline{X}_n$ yansız ($E[\overline{X}_n]=\mu$), tutarlı ($\overline{X}_n\xrightarrow{P}\mu$)
+  ve Normal ailede UMVUE'dur. Alternatifler: medyan (sağlam, Normal'de $\%86$ etkin),
+  kırpılmış ortalama (sağlamlık-etkinlik dengesi). MLE her zaman $\overline{X}_n$'i seçer.}
 \end{kesif}
 
 \begin{tanim}[Tahmin edici]\label{def:tahmin_edici}
@@ -135,6 +138,10 @@ Chebyshev eşitsizliğinden: $\Prob(|W_n-\theta|>\varepsilon) \leq \mathrm{OKH}(
 
 \begin{kesif}
 Yansız tahmin ediciler arasında en küçük varyanslısını bulmak istiyoruz. Varyansın ne kadar küçük olabileceğine dair evrensel bir alt sınır var mıdır?
+\kesifcevap{Cramér-Rao alt sınırı: $\mathrm{Var}(\hat\theta)\geq 1/(nI(\theta))$.
+  Fisher bilgisi $I(\theta)=E[(\partial\log f/\partial\theta)^2]$.
+  Yansız $\hat\theta$ bu sınıra ulaşırsa etkin (efficient) denir.
+  Normal'de $\overline{X}_n$ $\mu$ için, $S^2$ $\sigma^2$ için sınıra ulaşır.}
 \end{kesif}
 
 \subsection{Fisher Bilgi Miktarı}
@@ -360,6 +367,10 @@ GBSK'dan $m_k \asto \mu_k'(\theta_0)$. $g(\mu_1',\ldots,\mu_p')=\theta$ düzgün
 
 \begin{kesif}
 MLE'de $\theta$ sabit ama bilinmeyen parametre idi. Bayes yaklaşımında $\theta$'yı da bir rasgele değişken olarak modelleriz: tahmin öncesinde $\theta$ hakkında bir \emph{önsel} (\emph{prior}) dağılımımız var, veriyi gördükten sonra \emph{sonsal} (\emph{posterior}) dağılıma geçiyoruz.
+\kesifcevap{Önsel $\pi(\theta)$ + olabilirlik $L(\theta;\mathbf{x})$ $\Rightarrow$ sonsal
+  $\pi(\theta|\mathbf{x})\propto L(\theta;\mathbf{x})\pi(\theta)$.
+  Bayes tahmini: kare kayıpta sonsal ortalama, mutlak kayıpta sonsal medyan, MAP ise sonsal mod.
+  Konjugat önsel seçimi ($\pi$ ve sonsal aynı aile) hesabı kapalı formda verir.}
 \end{kesif}
 
 \begin{tanim}[Önsel ve sonsal dağılım]\label{def:onsel_sonsal}
@@ -504,6 +515,10 @@ Cramér-Rao: $\Var(\hat\mu)\geq\sigma^2/n$, $\Var(\hat\sigma^2)\geq2\sigma^4/n$ 
 
 \begin{kesif}
 Bir tahmin edici ne zaman \emph{iyi}dir? Yansızlık tek ölçüt değildir. Karar teorisi, bir \emph{kayıp fonksiyonu} $L(\theta,d)$ aracılığıyla tahmin hatasının maliyetini sayısallaştırır.
+\kesifcevap{Risk: $R(\theta,d)=E_\theta[L(\theta,d(X))]$.
+  Kabul edilebilirlik: $d$'yi tüm $\theta$'da dominate eden $d'$ yoktur.
+  Bayes risk minimizasyonu genellikle kabul edilebilir tahmin ediciler üretir.
+  Stein paradoksu: $n\geq 3$'te $\bar{X}$ kare kayıpta kabul edilemezdir.}
 \end{kesif}
 
 \begin{tanim}[Kayıp fonksiyonu ve risk]\label{def:kayip_risk}

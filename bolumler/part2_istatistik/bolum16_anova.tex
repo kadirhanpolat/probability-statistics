@@ -103,6 +103,10 @@ MSE yansız ($\Beklenti[\mathrm{SSE}]=(N-k)\sigma^2$). MSA: $\Beklenti[\mathrm{S
 
 \begin{kesif}
 $F$-testi $H_0$'ı reddedince hangi grupların farklı olduğunu söylemez. Post-hoc testler bu soruyu yanıtlar ama FWER kontrolü gereklidir.
+\kesifcevap{Bonferroni: $\alpha/k$ düzeltmesi (muhafazakâr, her koşula uygun).
+  Tukey HSD: tüm ikili karşılaştırmalar için kesin FWER=$\alpha$ (dengeli tasarım).
+  Scheffe: her doğrusal kontrast için geçerli, en muhafazakâr.
+  FWER=aile hata oranı; FDR (Benjamini-Hochberg) çok karşılaştırmada daha güçlü.}
 \end{kesif}
 
 \begin{tanim}[Tukey HSD]\label{def:tukey}

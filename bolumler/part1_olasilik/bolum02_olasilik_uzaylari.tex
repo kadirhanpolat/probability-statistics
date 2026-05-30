@@ -242,7 +242,9 @@ Lebesgue ölçüm uzayı tam; Borel kümeler üzerinde Lebesgue ölçüsü tam d
 \begin{kesif}[Koşullu olasılık sezgisi]
 Adil bir zar atılıyor. ``Çift sayı geldi'' ($B$) bilgisiyle, ``6 geldi'' ($A$)
 olayının olasılığı nedir? Sezginizi yazın, ardından Tanım~\ref{def:kos_olasilik}'i okuyun.
-\ogrencialani[1.5cm]
+\kesifcevap{$P(A \mid B) = \dfrac{P(A \cap B)}{P(B)} = \dfrac{1/6}{3/6} = \dfrac{1}{3}$.
+  ``Çift geldi'' bilgisi örneklem uzayını $\{2,4,6\}$'ya daraltır; 6 bu kümenin
+  $1/3$'üdür. Genel kural: $P(A \mid B) = P(A \cap B)/P(B)$.}
 \end{kesif}
 
 \begin{tanimgerekce}
@@ -403,7 +405,10 @@ hepsi aynı formülün görünümleri.
 ``$A$ gerçekleşmesinin $B$'ye etkisi yoktur'' ne demektir?
 $\Prob(A \mid B) = \Prob(A)$ formülü bunu yakalar; ama $\Prob(B)=0$ durumunda
 bu yazılamaz. Bundan bağımsız bir tanım olasını düşünün.
-\ogrencialani[1.5cm]
+\kesifcevap{Bağımsızlık tanımı: $P(A \cap B) = P(A) \cdot P(B)$.
+  Bu, $P(B)=0$ durumunda da anlamlıdır ve $P(A \mid B)=P(A)$'nın
+  tam genellemesidir. ``$B$ bilgisi $A$'nın olasılığını değiştirmez''
+  sezgisini $P(B)>0$ olmaksızın ifade eder.}
 \end{kesif}
 
 \begin{tanim}[Bağımsız Olaylar]\label{def:bagimsiz_olay}

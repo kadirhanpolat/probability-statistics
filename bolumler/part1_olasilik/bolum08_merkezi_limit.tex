@@ -141,6 +141,10 @@ MLT'den türetilen ifadeler:
 i.i.d.\ koşulunu kaldırırsak ne olur? $X_i$'lerin farklı dağılımları olsa bile
 toplamları normale yakınsar mı? Hangi koşul "hiçbir terim baskın değil"
 sezgisini matematiksel olarak yakalar?
+\kesifcevap{Lindeberg koşulu: $\frac{1}{s_n^2}\sum_{k=1}^n E[X_k^2\,\mathbf{1}_{|X_k|>\varepsilon s_n}]\to 0$.
+  ``Hiçbir terim baskın değil'' sezgisini yakalar.
+  Sağlanırsa $\frac{S_n-\mu_n}{s_n}\xrightarrow{d}N(0,1)$.
+  i.i.d.\ durumda Lindeberg koşulu otomatik sağlanır (Lyapunov'dan zayıf).}
 \end{kesif}
 
 \begin{tanim}[Lindeberg Koşulu]

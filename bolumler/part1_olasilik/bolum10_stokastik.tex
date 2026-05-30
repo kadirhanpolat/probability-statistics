@@ -52,6 +52,9 @@ $\xi_1,\xi_2,\ldots\iid$ ile $\Prob(\xi_i=+1)=p$, $\Prob(\xi_i=-1)=1-p$. $S_0=0$
 
 \begin{kesif}
 Basit rasgele yürüyüşte $S_{n+1}$'in dağılımı, tüm geçmiş $S_0,S_1,\ldots,S_n$ yerine yalnızca $S_n$'e bağlıdır. Bu "geçmişten bağımsızlık" özelliği Markov zincirlerin özüdür.
+\kesifcevap{Markov özelliği: $P(X_{n+1}=j\mid X_0,\ldots,X_n)=P(X_{n+1}=j\mid X_n)=P_{ij}$.
+  Geçiş matrisi $P=(P_{ij})$ tüm dinamiği belirler.
+  Geçmiş bilgisi yalnızca mevcut durum üzerinden etkilidir; gereksiz bilgi depolanmaz.}
 \end{kesif}
 
 \begin{tanim}[Markov zinciri]\label{def:markov_zinciri}
@@ -294,6 +297,10 @@ Denge denklemi $\lambda\pi_{i-1}=\mu\pi_i$ (akış denge koşulu). Yinelemeli ç
 
 \begin{kesif}
 Brownian hareketin türevsiz yolları nedeniyle klasik Riemann-Stieltjes integrali $\int g(t)\,dW(t)$ tanımlanamaz. Itô integral yeni bir tanım gerektirir.
+\kesifcevap{Brownian yollar n.k.\ her yerde türevsizdir (Hölder $<1/2$).
+  Itô integrali: $\int_0^T H_s\,dW_s = L^2\text{-}\lim \sum H_{t_k}(W_{t_{k+1}}-W_{t_k})$
+  (sol uç yaklaşımı). Riemann-Stieltjes'ten farkı: ikinci mertebe terim sıfırlanmaz;
+  bu Itô formülünde $\frac{1}{2}f''(X_t)\,dt$ düzeltmesini doğurur.}
 \end{kesif}
 
 \begin{tanim}[Itô integrali]\label{def:ito_integral}
@@ -376,6 +383,10 @@ OU süreci "ortalamaya dönüş" gösterir — başlangıçtan uzaklaştığınd
 
 \begin{kesif}
 Bir yoğunluk $\pi(x)$'den örnekleme yapmak istiyoruz; normalleştirme sabiti $Z=\int\pi(x)dx$ hesaplanamıyor. Fikir: durağan dağılımı $\pi$ olan bir Markov zinciri kur; uzun vadede zincirin yolu $\pi$'den örnekler üretir.
+\kesifcevap{Metropolis-Hastings: öneri $q(y|x)$'den aday $y$ üret;
+  $\alpha=\min\!\left(1,\tfrac{\pi(y)q(x|y)}{\pi(x)q(y|x)}\right)$ oranıyla kabul et.
+  Normalleştirme sabitine gerek kalmaz ($\pi$ çarpımsal olarak bilinmesi yeterli).
+  Zincir ayrıntılı denge ($\pi_{ij}=\pi_{ji}$) koşuluyla $\pi$'ye yakınsar.}
 \end{kesif}
 
 \begin{tanim}[Ayrıntılı denge]\label{def:ayrintili_denge}
