@@ -24,7 +24,7 @@ Bölüm~3 (rasgele değişkenler).
 % ─── KAZANIMLAR ────────────────────────────────────────────────────
 \begin{kazanimlar}
 Bu bölümün sonunda öğrenci:
-\begin{itemize}[leftmargin=1.8em, itemsep=2pt]
+\begin{itemize}
   \item Küme cebiri işlemlerini (birleşim, kesişim, fark, tümleyen) hem
         sonlu hem sayılabilir hem de keyfi indis kümeleri üzerinde
         uygulayabilmeli ve De~Morgan yasalarını ispatlayabilmeli,
@@ -405,15 +405,13 @@ ama her tekil küme $\{x\}$ sonludur.
 \end{notkutu}
 
 % Disiplinlerarası bağlantı — TYMM gereksinimi
-\begin{tcolorbox}[maarif@base, colframe=maKopru, colback=maKopru!4,
-    colbacktitle=maKopru,
-    title={Disiplinlerarası bağlantı --- Bilgisayar bilimi ve hesaplanabilirlik}]
+\begin{disiplinlerarasibaglan}[Bilgisayar bilimi ve hesaplanabilirlik]
 Sayılabilirlik kavramı bilgisayar biliminde merkezi bir rol oynar.
 Herhangi bir programlama dilinde yazılabilen tüm programlar kümesi sayılabilirdir
 (her program sonlu bir karakter dizisidir). Buna karşın $\R \to \R$
 fonksiyonları kümesi sayılamazdır. Dolayısıyla ``hesaplanamaz fonksiyonlar'' vardır;
 bu Turing'in durma problemi ile doğrudan bağlantılıdır.
-\end{tcolorbox}
+\end{disiplinlerarasibaglan}
 
 \begin{mikroozet}[§0.3 özeti]
 Sayılabilirlik, bir kümenin $\N$ ile eşleştirilebilmesi anlamına gelir.
@@ -688,10 +686,8 @@ ikisi eşittir. Bu dil Bölüm~7'deki Borel-Cantelli lemmalarının tam dilidir.
 \section*{Bölüm Özeti}
 \addcontentsline{toc}{section}{Bölüm Özeti}
 
-\noindent
-\begin{tcolorbox}[maarif@base, colframe=maOzet, colback=maOzet!4,
-    colbacktitle=maOzet, title={Bölüm 0 --- Temel Sonuçlar}]
-\begin{itemize}[leftmargin=1.8em, itemsep=3pt]
+\begin{bolumozeti}[Bölüm 0 --- Temel Sonuçlar]
+\begin{itemize}
   \item \textbf{De~Morgan:}
         $\left(\bigcup_n A_n\right)^c = \bigcap_n A_n^c$ ve
         $\left(\bigcap_n A_n\right)^c = \bigcup_n A_n^c$.
@@ -709,7 +705,7 @@ ikisi eşittir. Bu dil Bölüm~7'deki Borel-Cantelli lemmalarının tam dilidir.
 \end{itemize}
 
 \medskip\noindent\textbf{Notasyon özeti:}
-\begin{itemize}[leftmargin=1.8em, itemsep=2pt, label={--}]
+\begin{itemize}
   \item $A^c$: tümleyen;\quad $A \triangle B$: simetrik fark;\quad $\powerset{\Omega}$: kuvvet kümesi
   \item $f^{-1}(B)$: ters görüntü
   \item $\sup A$, $\inf A$: üst/alt kenar değer;\quad
@@ -717,12 +713,12 @@ ikisi eşittir. Bu dil Bölüm~7'deki Borel-Cantelli lemmalarının tam dilidir.
   \item $\limsup_n A_n = \bigcap_n \bigcup_{k \geq n} A_k$;\quad
         $\liminf_n A_n = \bigcup_n \bigcap_{k \geq n} A_k$
 \end{itemize}
-\end{tcolorbox}
+\end{bolumozeti}
 
 % ─── ÖZ-YANSITMA ──────────────────────────────────────────────────
 \begin{ozyansima}
 Bu bölümü tamamladıktan sonra kendinize şu soruları sorun:
-\begin{itemize}[leftmargin=1.8em, itemsep=3pt]
+\begin{itemize}
   \item De~Morgan yasasını kaynağa bakmadan ispatlayabilir misiniz?
   \item Ters görüntünün neden tümlemeyi koruduğunu, bir arkadaşınıza sözlü
         açıklayabilir misiniz?

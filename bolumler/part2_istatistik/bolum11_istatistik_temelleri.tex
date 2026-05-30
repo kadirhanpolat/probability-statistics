@@ -236,13 +236,13 @@ ayrışımı mevcut ise; burada $g$ yalnızca $T(\mathbf{x})$ ve $\theta$'ya, $h
 \end{teorem}
 
 \begin{proof}
-\textbf{Kesikli durum (⇐):}
+\textbf{Kesikli durum ($\Leftarrow$):}
 $P_\theta(\mathbf{X}=\mathbf{x} \mid T(\mathbf{X})=t) = \frac{P_\theta(\mathbf{X}=\mathbf{x},\, T(\mathbf{X})=t)}{P_\theta(T(\mathbf{X})=t)}$.
 $T(\mathbf{x})=t$ ise pay $= f(\mathbf{x}|\theta) = g(t,\theta)h(\mathbf{x})$.
 Payda $= \sum_{\mathbf{x}': T(\mathbf{x}')=t} g(t,\theta)h(\mathbf{x}') = g(t,\theta)\sum_{\mathbf{x}':T=t}h(\mathbf{x}')$.
 Oran $= h(\mathbf{x})/\sum_{\mathbf{x}':T=t}h(\mathbf{x}')$ — $\theta$'dan bağımsız. $\Rightarrow$ $T$ yeterli.
 
-\textbf{(⇒):} $T$ yeterli olsun.
+\textbf{($\Rightarrow$):} $T$ yeterli olsun.
 $f(\mathbf{x}|\theta) = P_\theta(\mathbf{X}=\mathbf{x}, T=T(\mathbf{x}))
 = P_\theta(\mathbf{X}=\mathbf{x}|T=T(\mathbf{x})) \cdot P_\theta(T=T(\mathbf{x}))$.
 $P_\theta(\mathbf{X}=\mathbf{x}|T=T(\mathbf{x})) =: h(\mathbf{x})$ ($\theta$'dan bağımsız).
@@ -343,7 +343,7 @@ En az yeterli istatistik, veriyi mümkün olan en yoğun biçimde özetler.
 $f(\mathbf{x}|\theta)/f(\mathbf{y}|\theta)$ oranının $\theta$'dan bağımsız olması
 $\mathbf{x}$ ve $\mathbf{y}$'nin aynı $T$ değerini vermesiyle eşdeğer ise,
 $T$ en az yeterlidir.
-\end{tanim}
+\end{teorem}
 
 \begin{ornek}[Normal — En Az Yeterlilik]
 $X_i \sim \Normal(\mu, \sigma^2)$.

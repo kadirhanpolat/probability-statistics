@@ -22,7 +22,7 @@ Bölüm~7 (büyük sayılar).
 
 \begin{kazanimlar}
 Bu bölümün sonunda öğrenci:
-\begin{itemize}[leftmargin=1.8em, itemsep=2pt]
+\begin{itemize}
   \item Kolmogorov aksiyomlarını ifade edebilmeli ve bu aksiyomlardan
         olasılığın temel özelliklerini (monotonluk, alt-toplamsallık,
         Poincaré formülü) türetebilmeli,
@@ -379,16 +379,14 @@ hesaba katılmadan $\Prob(E \mid \text{Suçsuz})$'u mahkûmiyet gerekçesi yapma
 Bayes teoremini göz ardı etmektir.
 \end{hataanalizi}
 
-\begin{tcolorbox}[maarif@base, colframe=maKopru, colback=maKopru!4,
-    colbacktitle=maKopru,
-    title={Disiplinlerarası bağlantı --- Makine öğrenmesi ve Naive Bayes}]
+\begin{disiplinlerarasibaglan}[Makine öğrenmesi ve Naive Bayes]
 Bayes teoremi makine öğrenmesinde metin sınıflandırmanın temelini oluşturur.
 \emph{Naive Bayes sınıflandırıcısı}, her özelliğin (kelime) bağımsız olduğunu
 varsayarak bir belgenin hangi sınıfa ait olduğunu sınıflandırır:
 $\Prob(\text{sınıf} \mid \text{kelimeler}) \propto \Prob(\text{sınıf}) \prod_i \Prob(\text{kelime}_i \mid \text{sınıf})$.
 ``Naive'' (saf) adı bağımsızlık varsayımının kaba olmasından gelir; ama pratikte
-놀랍도록 iyi çalışır.
-\end{tcolorbox}
+şaşırtıcı biçimde iyi çalışır.
+\end{disiplinlerarasibaglan}
 
 \begin{mikroozet}[§2.4 özeti]
 Bayes teoremi: sonsal $\propto$ olabilirlik $\times$ önsel.
@@ -547,7 +545,7 @@ sayısı $\binom{n}{2} \approx n^2/2$'dir.
 Üç kapının arkasında: bir araba, iki keçi. Bir kapı seçtiniz; sunucu (keçi
 olan) başka bir kapıyı açıyor ve değiştirmenizi öneriyor. Değişmeli misiniz?
 
-$B_k$: arabанın $k$'inci kapıda olması, $k=1,2,3$.
+$B_k$: arabanın $k$'inci kapıda olması, $k=1,2,3$.
 Siz 1'i seçtiniz; sunucu 3'ü açtı.
 
 $\Prob(B_1 \mid \text{3 açıldı}) = \Prob(\text{3 açıldı} \mid B_1)\Prob(B_1) / \Prob(\text{3 açıldı})$.
@@ -596,9 +594,8 @@ Hat çekme: sıranın önemi yok.
 \section*{Bölüm Özeti}
 \addcontentsline{toc}{section}{Bölüm Özeti}
 
-\begin{tcolorbox}[maarif@base, colframe=maOzet, colback=maOzet!4,
-    colbacktitle=maOzet, title={Bölüm 2 --- Temel Sonuçlar}]
-\begin{itemize}[leftmargin=1.8em, itemsep=3pt]
+\begin{bolumozeti}[Bölüm 2 --- Temel Sonuçlar]
+\begin{itemize}
   \item \textbf{Olasılık uzayı:} $(\Omega,\mathcal{F},\Prob)$; (K1) $\Prob \geq 0$;
         (K2) $\Prob(\Omega)=1$; (K3) $\sigma$-toplamsallık.
   \item \textbf{Poincaré:} $\Prob(\bigcup_k A_k) = \sum|I|(-1)^{|I|-1}\Prob(\bigcap_{i\in I}A_i)$.
@@ -614,15 +611,15 @@ Hat çekme: sıranın önemi yok.
 \end{itemize}
 
 \medskip\noindent\textbf{Notasyon özeti:}
-\begin{itemize}[leftmargin=1.8em, itemsep=2pt, label={--}]
+\begin{itemize}
   \item $\Prob(A|B)$: koşullu olasılık;\quad $\Prob(B_k|A)$: sonsal
   \item $\Prob(B_k)$: önsel;\quad $\Prob(A|B_k)$: olabilirlik
   \item $\binom{n}{k}$: kombinasyon;\quad $n!$: permütasyon
 \end{itemize}
-\end{tcolorbox}
+\end{bolumozeti}
 
 \begin{ozyansima}
-\begin{itemize}[leftmargin=1.8em, itemsep=3pt]
+\begin{itemize}
   \item Kolmogorov aksiyomlarından tüm temel özellikleri türetebilir misiniz
         (tümleme, monotonluk, Poincaré)?
   \item Koşullu olasılığın neden bir olasılık ölçüsü olduğunu üç aksiyomu

@@ -10,10 +10,14 @@
 % =====================================================================
 
 \RequirePackage{xcolor}
-\RequirePackage[most]{tcolorbox}
+\RequirePackage[skins,breakable,theorems]{tcolorbox}
 \RequirePackage{amssymb}
-\RequirePackage{enumitem}
+\RequirePackage[shortlabels]{enumitem}
 \usetikzlibrary{patterns,arrows.meta,positioning}
+
+% Genel liste varsayılanları
+\setlist[itemize]{leftmargin=1.8em, itemsep=2pt}
+\setlist[enumerate]{leftmargin=1.8em}
 
 % ---- Surum anahtari: ogrenci (bos) vs cozumler (cevapli/ogretmen) ----
 \newif\ifmaarifcozum
@@ -220,10 +224,9 @@
 
 \newenvironment{alistirma}[3][]{%
   % #1: opsiyonel etiket (örn. Al.2.3), #2: seviye (A/B/C), #3: başlık
-  \def\maarif@alev{#2}%
-  \ifx\maarif@alev A\def\maarif@alcol{maAlistirmaA}\fi
-  \ifx\maarif@alev B\def\maarif@alcol{maAlistirmaB}\fi
-  \ifx\maarif@alev C\def\maarif@alcol{maAlistirmaC}\fi
+  \def\maarif@alcol{maAlistirmaB}%  varsayılan
+  \if A#2\def\maarif@alcol{maAlistirmaA}\fi
+  \if C#2\def\maarif@alcol{maAlistirmaC}\fi
   \par\noindent
   \begin{tcolorbox}[maarif@base, colframe=\maarif@alcol,
       colback=\maarif@alcol!4, colbacktitle=\maarif@alcol,
@@ -255,7 +258,25 @@
   \vspace{4mm}}
 
 % =====================================================================
-% 20) BOLUM SONU ALISTIRMA BLOKLARI
+% 20) DİSİPLİNLERARASI BAĞLANTI KUTUSU (TYMM gereksinimi)
+%     Her bölümde en az bir disiplinlerarası bağlantı
+% =====================================================================
+\definecolor{maDisipl}{HTML}{1F5F99}   % koyu mavi
+
+\newtcolorbox{disiplinlerarasibaglan}[1][]{maarif@base, colframe=maDisipl,
+  colback=maDisipl!4, colbacktitle=maDisipl,
+  title={Disiplinlerarası Bağlantı\maarif@suffix{#1}}}
+
+% =====================================================================
+% 21) BOLUM OZETI  (bolum sonu "Temel Sonuçlar" kutusu)
+%     \begin{bolumozeti}[Bölüm N --- Temel Sonuçlar] ... \end{bolumozeti}
+% =====================================================================
+\newtcolorbox{bolumozeti}[1][Bölüm Özeti]{maarif@base, colframe=maOzet,
+  colback=maOzet!4, colbacktitle=maOzet,
+  title={#1}}
+
+% =====================================================================
+% 22) BOLUM SONU ALISTIRMA BLOKLARI
 %     \cozumlualıstirmalar  — çözümlü alıştırmalar başlığı
 %     \alistirmalar         — çözümsüz alıştırmalar başlığı
 % =====================================================================

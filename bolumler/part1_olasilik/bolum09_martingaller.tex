@@ -42,7 +42,7 @@ Martingal yakınsaması, Güçlü BSK'nın zarif bir genellemesidir.
 \label{def:filtrasyon}
 $(\Omega,\mathcal{F},P)$ olasılık uzayı üzerinde \textbf{filtrasyon}
 $\mathbb{F} = (\mathcal{F}_n)_{n\geq0}$; $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \cdots \subseteq \mathcal{F}$
-artan σ-cebirleri dizisi. $\mathcal{F}_n$, zaman $n$'deki bilgiyi temsil eder.
+artan $\sigma$-cebirleri dizisi. $\mathcal{F}_n$, zaman $n$'deki bilgiyi temsil eder.
 
 Dizi $(X_n)_{n\geq0}$ filtrasyona \textbf{uyumlu} (adapted) dır:
 her $n$ için $X_n$ $\mathcal{F}_n$-ölçülebilir.
@@ -247,7 +247,7 @@ $S_n$ simetrik rassal yürüyüş ($\xi_i = \pm1$, $\sigma^2=1$). $M_n = S_n^2 -
 \end{alistirma}
 \alcozum{%
 (a) $E[M_{n+1}\mid\mathcal{F}_n] = E[(S_n+\xi_{n+1})^2 - (n+1)\mid\mathcal{F}_n]
-= S_n^2 + 2S_n E[\xi_{n+1}] + E[\xi_{n+1}^2] - n - 1 = S_n^2 - n = M_n$. ✓\\
+= S_n^2 + 2S_n E[\xi_{n+1}] + E[\xi_{n+1}^2] - n - 1 = S_n^2 - n = M_n$. $\checkmark$\\
 (b) IBD ($\tau$ sınırsız ama Koşul (iii) çalışır — artışlar $\leq 1+1+1$):
 $E[M_\tau] = E[S_\tau^2 - \tau] = E[M_0] = 0$.
 $S_\tau = a$ (emici bariyer): $a^2 - E[\tau] = 0$. $E[\tau] = a^2$.}
