@@ -173,7 +173,7 @@ Bölüm-kaynak eşlemesi: `02_KAYNAK_ANALIZI.md §8`
 
 ## Mevcut Durum (2026-05-30)
 
-**TÜM BÖLÜMLER TAMAMLANDI — KİTAP YAZIM AŞAMASI BİTTİ**
+**TÜM BÖLÜMLER TAMAMLANDI — KİTAP YAZIM VE DERLEME AŞAMASI BİTTİ**
 
 **Tamamlananlar:**
 - Tasarım belgeleri v1.0 (7 belge)
@@ -181,9 +181,15 @@ Bölüm-kaynak eşlemesi: `02_KAYNAK_ANALIZI.md §8`
 - Part I: Böl.0–8 (zorunlu) + Böl.9*, Böl.10* (opsiyonel) — 11 bölüm
 - Part II: Böl.11–16 (zorunlu) + Böl.17*, Böl.18* (opsiyonel) — 8 bölüm
 - Ekler A–F: ölçüm teorisi, dağılım tabloları, istatistik tabloları, terminoloji, ispat teknikleri, kaynakça
+- **LaTeX derleme: TAMAMLANDI** — `main-ogrenci.pdf` (168 sayfa, 0 hata) + `main-egitmen.pdf` (192 sayfa, 0 hata)
+
+**Çözülen derleme sorunları (commit 4ee4d2a):**
+- `bolumler/bblopts.cfg` eklendi — arabi paketinin enumitem'a müdahalesi önlendi
+- `maarif.sty`: `shortlabels` seçeneği, `bolumozeti` ortamı, `\if` düzeltmesi
+- Unicode karakterler LaTeX komutlarıyla değiştirildi (σ, ✓, −, ⇒, η, →)
+- 3 yanlış eşleştirilmiş ortam kapanışı düzeltildi (bolum06, bolum11, bolum13)
 
 **Sonraki olası adımlar:**
-- LaTeX derleme testi (`pdflatex main-ogrenci.tex`)
 - Dipnot/çapraz referans (`\ref`, `\label`) tutarlılık kontrolü
 - Alıştırma numaralandırma gözden geçirme
 - Dizin (`\index`) ekleme

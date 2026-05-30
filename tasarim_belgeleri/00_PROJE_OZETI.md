@@ -1,6 +1,6 @@
 # Olasılık Teorisi ve Matematiksel İstatistik — Proje Özeti
 
-> **Yazım Durumu:** TÜM BÖLÜMLER VE EKLER TAMAMLANDI (2026-05-30) — LaTeX derleme aşamasına hazır.
+> **Yazım Durumu:** TÜM BÖLÜMLER, EKLER VE DERLEME TAMAMLANDI (2026-05-30) — `main-ogrenci.pdf` (168 s.) + `main-egitmen.pdf` (192 s.), sıfır hata.
 
 ## Kitabın Kimliği
 
