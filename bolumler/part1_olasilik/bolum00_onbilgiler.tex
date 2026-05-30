@@ -827,10 +827,87 @@ Cauchy kriteriyle tanımlanan Banach uzayı yapısına dayanır.\\
 Teoremi'nin integral analoji'sidir.
 \end{disiplinlerarasibaglan}
 
+% =====================================================================
+\section{Metrik Uzaylar ve Topolojik Kavramlar}
+\label{sec:metrik_uzaylar}
+% =====================================================================
+
+\begin{tanim}[Metrik uzay]\label{def:metrik_uzay}
+$(X,d)$ \emph{metrik uzay}: $d:X\times X\to[0,\infty)$ ile
+\begin{enumerate}[(M1)]
+  \item $d(x,y)=0\iff x=y$;
+  \item $d(x,y)=d(y,x)$;
+  \item $d(x,z)\leq d(x,y)+d(y,z)$ (üçgen eşitsizliği).
+\end{enumerate}
+\end{tanim}
+
+\begin{ornek}[Temel metrik uzaylar]\label{ex:metrikler}
+\begin{enumerate}
+  \item $(\mathbb{R}^n, d_2)$: $d_2(x,y)=\sqrt{\sum(x_i-y_i)^2}$ Öklid metriği.
+  \item $(\mathbb{R}^n, d_\infty)$: $d_\infty(x,y)=\max_i|x_i-y_i|$ supremum metriği.
+  \item $(C[a,b],d_\infty)$: sürekli fonksiyonlar, $d_\infty(f,g)=\sup_{x\in[a,b]}|f(x)-g(x)|$ — düzgün yakınsama metriği.
+  \item Kesikli metrik: $d(x,y)=\mathbf{1}[x\neq y]$.
+\end{enumerate}
+\end{ornek}
+
+\begin{tanim}[Açık ve kapalı kümeler]\label{def:acik_kapali}
+$B(x,r)=\{y:d(x,y)<r\}$: $x$ merkezi, $r$ yarıçaplı açık top.
+$A\subset X$ \emph{açık}: her $a\in A$ için $\exists r>0$, $B(a,r)\subset A$.
+$A$ \emph{kapalı}: $A^c$ açık $\iff$ her limit noktası $A$'da.
+\end{tanim}
+
+\begin{teorem}[Banach sabit nokta teoremi]\label{thm:banach_sabit}
+$(X,d)$ tam metrik uzay, $T:X\to X$ büzülme (\emph{contraction}): $d(Tx,Ty)\leq\lambda d(x,y)$, $\lambda<1$. O zaman $T$'nin tek sabit noktası $x^*\in X$ var: $Tx^*=x^*$.
+
+Yinelemeli yakınsama: $x_{n+1}=Tx_n$, $d(x_n,x^*)\leq\lambda^n d(x_0,x^*)/(1-\lambda)$.
+\end{teorem}
+
+\begin{proof}[Proof (taslak)]
+$\{x_n\}=\{T^nx_0\}$ Cauchy: $d(x_{n+k},x_n)\leq\frac{\lambda^n}{1-\lambda}d(x_1,x_0)\to0$. Tam uzayda Cauchy dizisi yakınsar: $x^*=\lim x_n$. Süreklilik: $x^*=\lim Tx_n=T(\lim x_n)=Tx^*$.
+\end{proof}
+
+\begin{disiplinlerarasibaglan}
+\textbf{Nümerik Analiz:} Banach sabit nokta teoremi, Newton yöntemi ve iteratif denklem çözümlerinin yakınsamasının matematiksel temelidir ($|T'(x^*)|<1$ koşulu).
+
+\textbf{Olasılık:} Markov zincirinin durağan dağılımı, Perron-Frobenius teoremi ile sabit noktadır; büzülme koşulu $\lambda<1$ karıştırma hızını belirler.
+\end{disiplinlerarasibaglan}
+
+% =====================================================================
+\section{İnce Analiz: $\limsup/\liminf$ ve Barbalat Lemması}
+\label{sec:ince_analiz}
+% =====================================================================
+
+\begin{tanim}[$\limsup/\liminf$ — sayılar için]\label{def:limsup_sayi}
+$(a_n)\subset\mathbb{R}$:
+\[
+  \limsup_{n\to\infty}a_n = \lim_{n\to\infty}\sup_{k\geq n}a_k,\quad
+  \liminf_{n\to\infty}a_n = \lim_{n\to\infty}\inf_{k\geq n}a_k.
+\]
+Her dizi için $\liminf\leq\limsup$; eşitlik $\iff$ $\lim a_n$ mevcut.
+\end{tanim}
+
+\begin{teorem}[Bolzano-Weierstrass]\label{thm:bolzano}
+Her sınırlı dizi yakınsak alt diziye sahiptir. Özellikle: her sınırlı $(a_n)$ için $\limsup a_n=\sup\{L:\text{bir alt dizi }L\text{'ye yakınsar}\}$.
+\end{teorem}
+
+\begin{teorem}[Barbalat lemması]\label{thm:barbalat}
+$f:[0,\infty)\to\mathbb{R}$ düzgün sürekli ve $\int_0^\infty f(t)dt$ sonlu. O zaman $f(t)\to0$ ($t\to\infty$).
+\end{teorem}
+
+\begin{proof}
+Çelişki: $f(t_k)\geq\varepsilon$ sonsuz çok $t_k$ için. Düzgün süreklilik: $|f(t)-f(t_k)|<\varepsilon/2$ her $|t-t_k|<\delta$ için. Bu aralıklarda $f\geq\varepsilon/2$: $\int_0^\infty f(t)dt\geq\sum_k(\varepsilon/2)\delta=\infty$. Çelişki.
+\end{proof}
+
+\begin{ornek}[Barbalat ve GBSK]\label{ex:barbalat_gbsk}
+$X_1,X_2,\ldots\iid$ $E[X]=\mu$, $E[X^2]<\infty$. $f(n)=E[(\bar X_n-\mu)^2]=\sigma^2/n\to0$: Barbalat'ın topolojik sezgisi ile uyumlu. GBSK bunu n.k.\ yakınsama olarak güçlendirir.
+\end{ornek}
+
 \begin{mikroozet}
 Süreklilik: $\varepsilon$-$\delta$; düzgün süreklilik: tek $\delta$ herkese.
 Düzgün yakınsama: $\sup|f_n - f| \to 0$; sürekliliği miras bırakır.
 Nokta yakınsama: sürekliliği miras bırakmaz ($x^n$ örneği).
+Metrik uzay: tam $+$ büzülme $\Rightarrow$ Banach sabit nokta.
+$\limsup/\liminf$: Bolzano-Weierstrass; Barbalat: integrallenebilir düzgün sürekli fonksiyon sıfıra gider.
 \end{mikroozet}
 
 % =====================================================================
